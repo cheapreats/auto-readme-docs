@@ -31,5 +31,21 @@ module.exports = {
     // This may lead to more verbose code, but being able to easily see that a variable is
     // coming from props makes code more readable imo.
     'react/destructuring-assignment': 0,
+    // Prevent "unable to resolve file path" errors with Typescript files.
+    // https://github.com/benmosher/eslint-plugin-import/issues/1615#issuecomment-577500405
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      { ts: 'never', tsx: 'never' },
+    ],
+  },
+  settings: {
+    // Prevent "unable to resolve file path" errors with Typescript files.
+    // https://github.com/benmosher/eslint-plugin-import/issues/1615#issuecomment-577500405
+    'import/resolver': {
+      node: {
+        extensions: ['.ts', '.tsx'],
+      },
+    },
   },
 };
