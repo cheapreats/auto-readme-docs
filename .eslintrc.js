@@ -5,6 +5,8 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
     'airbnb',
   ],
   globals: {
@@ -24,5 +26,10 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    // Lets us write JSX in .tsx files.
+    'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
+    // This may lead to more verbose code, but being able to easily see that a variable is
+    // coming from props makes code more readable imo.
+    'react/destructuring-assignment': 0,
   },
 };
