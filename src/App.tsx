@@ -17,7 +17,9 @@ const Input: React.FC = () => {
         <MarkDownDisplay>
             <MarkDownTextDisplay>
                 <MarkDownTextContainerLight>
-                    <MarkDownText>📂📄 Lorem Ipmsum</MarkDownText>
+                    <MarkDownTextWrapper>
+                        <MarkDownText>📂📄 Lorem Ipmsum</MarkDownText>
+                    </MarkDownTextWrapper>
                     <DeleteContainer />
                 </MarkDownTextContainerLight>
             </MarkDownTextDisplay>
@@ -32,6 +34,10 @@ const Input: React.FC = () => {
 };
 
 export default App;
+
+const MarkDownTextWrapper = styled.div`
+  display: inline;
+`;
 
 const MarkDownText = styled.p`
   font-family: Arial;
@@ -86,6 +92,7 @@ const MarkDownDisplay = styled.div`
 
 const MarkDownTextDisplay = styled.div`
     padding: 5px 0;
+    flex: 1 0;
 `;
 
 const Copy = styled.div`
