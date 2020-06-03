@@ -17,6 +17,12 @@ const ripOutPaths = (responseBody: GithubAPIResponseBody): string[] => responseB
     [], // Initial value for the reducer
   );
 
+// formatDirName returns a Markdown relative link for the provided path, and sticks a folder emoji
+// at the beginning of the provided dirname.
+//
+// Helper func for generateTree().
+const formatDirName = (path: string, dirName: string): string => `📂 [${dirName}](./${path})`;
+
 const symbols = {
   branch: '├── ',
   vertical: '│   ',
@@ -34,7 +40,7 @@ const generateTree = (paths: string[]): string => {
     // any │ or ├── symbols
     if (curDepth === 0) {
       // Add a folder emoji before the directory name
-      outputAsLines.push(`📂 ${path}`);
+      outputAsLines.push(formatDirName(path, path));
       return;
     }
 
@@ -46,11 +52,9 @@ const generateTree = (paths: string[]): string => {
     }
     // Add a ├── symbol
     curLine += symbols.branch;
-    // Add a folder emoji before the directory name
-    curLine += '📂 ';
     // Add the name of the deepest directory
     const deepestDirName = path.substring(path.lastIndexOf('/') + 1);
-    curLine += deepestDirName;
+    curLine += formatDirName(path, deepestDirName);
 
     outputAsLines.push(curLine);
   });
