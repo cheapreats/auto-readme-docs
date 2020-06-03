@@ -16,7 +16,10 @@ const Input: React.FC = () => {
       <input type="text" value={url} onChange={handleChange} />
         <MarkDownDisplay>
             <MarkDownTextDisplay>
-                <MarkDownText>📂📄 Lorem Ipmsum</MarkDownText>
+                <MarkDownTextContainerLight>
+                    <MarkDownText>📂📄 Lorem Ipmsum</MarkDownText>
+                    <DeleteContainer />
+                </MarkDownTextContainerLight>
             </MarkDownTextDisplay>
             <Copy>
                 <CopyButton>
@@ -32,11 +35,45 @@ export default App;
 
 const MarkDownText = styled.p`
   font-family: Arial;
-  font-size: 22px;
+  font-size: 16px;
+`;
+
+
+const MarkDownTextContainer = styled.div`
+  height: 25px;
+  padding: 0 5px;
+  flex: 1 0;
+  flex-direction: row;
+  justify-content: space-between;
+  
+  &:hover {
+    background-color: saddlebrown;
+  }
+`;
+
+const MarkDownTextContainerLight = styled(MarkDownTextContainer)`
+  background-color: white;
+`;
+
+const MarkDownTextContainerDark = styled(MarkDownTextContainer)`
+  background-color: red;
+`;
+
+const DeleteContainer = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 500px;
+  background-color: red;
+  float: right;
+  display: none;
+  ${MarkDownTextContainer}:hover & {
+    display: flex;
+  }
 `;
 
 const Container = styled.div`
     background-color: aquamarine;
+    flex: 1 0;
 `;
 
 const MarkDownDisplay = styled.div`
@@ -48,7 +85,7 @@ const MarkDownDisplay = styled.div`
 `;
 
 const MarkDownTextDisplay = styled.div`
-  padding: 5px;
+    padding: 5px 0;
 `;
 
 const Copy = styled.div`
