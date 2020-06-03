@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import MarkdownDisplayLine from './MarkdownDisplayLine';
 
 // Styles
@@ -24,6 +25,9 @@ const MarkdownDisplay: React.FC<Props> = (props: Props) => (
         <MarkdownDisplayLine isOddNumberedLine={i % 2 === 1} content={line} />
       ))
     }
+    <CopyToClipboard text={props.content.join('\n')}>
+      <button type="submit">Copy to Clipboard</button>
+    </CopyToClipboard>
   </Card>
 );
 
