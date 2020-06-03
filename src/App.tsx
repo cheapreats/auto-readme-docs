@@ -15,7 +15,9 @@ const Input: React.FC = () => {
       <h1>SWEGGG</h1>
       <input type="text" value={url} onChange={handleChange} />
         <MarkDownDisplay>
-            <MarkDownText>Lorem Ipmsum</MarkDownText>
+            <MarkDownTextDisplay>
+                <MarkDownText>📂📄 Lorem Ipmsum</MarkDownText>
+            </MarkDownTextDisplay>
             <Copy>
                 <CopyButton>
                     <CopyText>Copy</CopyText>
@@ -30,7 +32,7 @@ export default App;
 
 const MarkDownText = styled.p`
   font-family: Arial;
-  font-size: 24px;
+  font-size: 22px;
 `;
 
 const Container = styled.div`
@@ -45,6 +47,10 @@ const MarkDownDisplay = styled.div`
     border-radius: 7px;
 `;
 
+const MarkDownTextDisplay = styled.div`
+  padding: 5px;
+`;
+
 const Copy = styled.div`
   height: 25px;
   background-color: dimgrey;
@@ -55,13 +61,13 @@ const CopyButton = styled.div`
   height: 25px;
   margin-left: auto;
   background-color: darkgray;
-  text-align: center;
   width: 50px;
   border-bottom-right-radius: 7px;
 `;
 
 const CopyText = styled.p`
+  text-align: center;
   font-family: Arial;
-  font-size: 20px;
+  font-size: 16px;
   color: white;
 `;
