@@ -33,7 +33,8 @@ const generateTree = (paths: string[]): string => {
     // of the project. We don't have to decorate this line of the output with
     // any │ or ├── symbols
     if (curDepth === 0) {
-      outputAsLines.push(path);
+      // Add a folder emoji before the directory name
+      outputAsLines.push(`📂 ${path}`);
       return;
     }
 
@@ -45,6 +46,8 @@ const generateTree = (paths: string[]): string => {
     }
     // Add a ├── symbol
     curLine += symbols.branch;
+    // Add a folder emoji before the directory name
+    curLine += '📂 ';
     // Add the name of the deepest directory
     const deepestDirName = path.substring(path.lastIndexOf('/') + 1);
     curLine += deepestDirName;
