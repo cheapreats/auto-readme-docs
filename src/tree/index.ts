@@ -28,9 +28,9 @@ const symbols = {
   vertical: '│   ',
 };
 
-// generateTree returns a string representing the "tree printout" of a file system made up of the
-// provided paths.
-const generateTree = (paths: string[]): string => {
+// generateTree returns a list of strings --- one string for each line of the output ---
+// representing the "tree printout" of a file system made up of the provided paths.
+const generateTree = (paths: string[]): string[] => {
   const outputAsLines: string[] = [];
   paths.forEach((path) => {
     // Find the number of '/' chars in the path
@@ -59,7 +59,7 @@ const generateTree = (paths: string[]): string => {
     outputAsLines.push(curLine);
   });
 
-  return outputAsLines.join('\n');
+  return outputAsLines;
 };
 
 export { ripOutPaths, generateTree };
