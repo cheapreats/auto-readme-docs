@@ -4,6 +4,7 @@ import { GithubAPIResponseBody } from './tree/types';
 import styled from 'styled-components';
 import MarkdownDisplay from './components/MarkdownDisplay';
 import BadgesSection from "./components/BadgesSection";
+import CustomButton from './components/reusable/CustomButton';
 
 // Styles
 
@@ -55,8 +56,9 @@ const App: React.FC = () => {
     <Container>
       <Column>
         <h1>SWEGGG</h1>
-        <BadgesSection repoName={repoName}/>
-        <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed}/>
+        <BadgesSection repoName={repoName} />
+        <CustomButton value="testing" />
+        <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed} />
         <MarkdownDisplay content={markdownDisplayContent} />
       </Column>
     </Container>
