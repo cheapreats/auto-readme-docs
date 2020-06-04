@@ -5,23 +5,7 @@ import styled from 'styled-components';
 import MarkdownDisplay from './components/MarkdownDisplay';
 import BadgesSection from "./components/BadgesSection";
 import CustomButton from './components/reusable/CustomButton';
-
-// Styles
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Column = styled.div`
-  flex-direction: column;
-`;
-
-// Components
+import URLBox from './components/URLBox';
 
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState('react-ui');
@@ -30,16 +14,14 @@ const App: React.FC = () => {
 
   const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) => setURL(e.target.value);
 
-  const handleKeyPressed = async event => {
-    if (event.key === 'Enter') {
-      // Expecting a URL like 'https://github.com/${owner}/${repo}'
-      let pathArray = url.split('/');
-      let owner = pathArray[3];
-      let repo = pathArray[4];
-      setRepoName(repo);
-      await makeRequest(owner, repo);
-    }
-  }
+  const handleGoButtonPress = async (event: MouseEvent) => {
+    // Expecting a URL like 'https://github.com/${owner}/${repo}'
+    const pathArray = url.split('/');
+    const owner = pathArray[3];
+    const repo = pathArray[4];
+    setRepoName(repo);
+    await makeRequest(owner, repo);
+  };
 
   const makeRequest = async (owner: String, repo: String) => {
     try {
@@ -54,15 +36,12 @@ const App: React.FC = () => {
     }
   }
   return (
-    <Container>
-      <Column>
-        <h1>SWEGGG</h1>
-        <BadgesSection repoName={repoName} />
-        <CustomButton value="testing" />
-        <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed} />
-        <MarkdownDisplay content={markdownDisplayContent} />
-      </Column>
-    </Container>
+    <div className="container">
+      <URLBox value={url} onChange={handleURLChange} onClick={handleGoButtonPress} />
+      <BadgesSection repoName={repoName} />
+      {/* <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed} /> */}
+      <MarkdownDisplay content={markdownDisplayContent} />
+    </div>
   );
 };
 

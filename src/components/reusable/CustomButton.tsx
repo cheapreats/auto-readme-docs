@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const CustomButton = styled.input.attrs((props) => ({
   type: 'submit',
   value: props.value,
+  onclick: props.onClick,
 }))`
 
   position: relative;
@@ -24,7 +25,7 @@ const CustomButton = styled.input.attrs((props) => ({
     box-shadow: 0px 4px 0px -2px #212428, 0px 8px 0px -4px #fdce03;
   }
  
-  $:active {
+  &:active {
     top: 0;
     box-shadow: none;
   }
