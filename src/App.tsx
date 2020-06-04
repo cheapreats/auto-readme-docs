@@ -25,6 +25,8 @@ const App: React.FC = () => {
   };
 
   const makeRequest = async (owner: String, repo: String) => {
+
+    // npm badges
     try {
       const npmPackagesResponse = await fetch(`https://api.npms.io/v2/search?q=${repo}`);
       const npmPackagesResponseJSON = await npmPackagesResponse.json() as NpmsResponseBody;
@@ -36,6 +38,8 @@ const App: React.FC = () => {
     } catch (e) {
       setNpmBadgeVisible(false);
     }
+
+    // Tree structure
     try {
       const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits/master`);
       const resJSON = await res.json();
@@ -43,6 +47,24 @@ const App: React.FC = () => {
       const treeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSHA}?recursive=true`);
       const treeJSON = await treeRes.json();
       setMarkdownDisplayContent(generateTree(ripOutPaths(treeJSON as GithubAPIResponseBody)));
+    } catch (error) {
+      alert('Error' + error);
+    }
+
+    // Languages
+    try {
+      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/languages`);
+      const resJSON = await res.json();
+      console.log(resJSON);
+    } catch (error) {
+      alert('Error' + error);
+    }
+
+    // Contributors
+    try {
+      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contributors`);
+      const resJSON = await res.json();
+      console.log(resJSON);
     } catch (error) {
       alert('Error' + error);
     }
