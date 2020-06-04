@@ -36,6 +36,7 @@ const App: React.FC = () => {
       let pathArray = url.split('/');
       let owner = pathArray[3];
       let repo = pathArray[4];
+      setRepoName(repo);
       await makeRequest(owner, repo);
     }
   }
