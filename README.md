@@ -1,44 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Automatic Project Structures for README's
 
-## Available Scripts
+## Description
+Head to [URL](www.404.com) and type in your Github Project URL and watch a MarkDown Accessible README with pre-filled descriptions appear!
+With a one-click Copy/Paste you can update your README with the best MarkDown Project Structure README's you've ever seen!
+```Example Github Project URL: https://github.com/MLH-Fellowship/0.2.1-readme-dirs```
 
-In the project directory, you can run:
+### WHY
+We built this tool two solve two major issues and two minor issues:
+#### Major Issues
+1) README's don't contain project structures which make it difficult for contributors to understand where everything is and how what's happening inside the repository.
+2) Existing Project Structures don't have hyperlinks making the UX of a project structure a bit difficult to navigate with excessive scrolling or third party plugins to extend the functionality. This requires no third-party software and can be done right in Github natively!
+#### Minor Issues
+1) You can plug in any repo you want to contribute to and completely understand what every folder does thanks to auto generated documentation!
 
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Technologies
+- [JavaScript (ES6)](https://www.javascript.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Styled Components (CSS-IN-JS)](http://styled-components.com/)
+- [HTML]()
+- [CSS](https://www.w3schools.com/css/)
+- [Babel](https://babeljs.io/)
