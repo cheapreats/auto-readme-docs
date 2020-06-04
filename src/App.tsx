@@ -6,23 +6,6 @@ import MarkdownDisplay from './components/MarkdownDisplay';
 import BadgesSection from "./components/BadgesSection";
 import CustomButton from './components/reusable/CustomButton';
 
-// Styles
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Column = styled.div`
-  flex-direction: column;
-`;
-
-// Components
-
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState('react-ui');
   const [url, setURL] = useState('');
@@ -54,15 +37,13 @@ const App: React.FC = () => {
     }
   }
   return (
-    <Container>
-      <Column>
-        <h1>SWEGGG</h1>
-        <BadgesSection repoName={repoName} />
-        <CustomButton value="testing" />
-        <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed} />
-        <MarkdownDisplay content={markdownDisplayContent} />
-      </Column>
-    </Container>
+    <div className="container">
+      <h1>SWEGGG</h1>
+      <BadgesSection repoName={repoName} />
+      <CustomButton value="testing" />
+      <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed} />
+      <MarkdownDisplay content={markdownDisplayContent} />
+    </div>
   );
 };
 
