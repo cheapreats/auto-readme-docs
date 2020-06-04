@@ -16,7 +16,7 @@ We built this tool two solve two major issues and two minor issues:
 # Technologies
 - [JavaScript (ES6)](https://www.javascript.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Styled Components (CSS-IN-JS)](http://styled-components.com/)
-- [HTML]()
+- [Styled Components (CSS-IN-JS Framework)](http://styled-components.com/)
+- [HTML](https://www.w3schools.com/html/html_intro.asp)
 - [CSS](https://www.w3schools.com/css/)
 - [Babel](https://babeljs.io/)
