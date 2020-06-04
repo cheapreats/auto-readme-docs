@@ -11,6 +11,8 @@ const CustomButton = styled.input.attrs((props) => ({
 
   color: #212428;
   background: #fdce03;
+  font-family: 'Muli';
+  font-size: 1rem;
   border: none;
 
   transition: all 200ms;
