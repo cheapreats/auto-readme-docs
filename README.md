@@ -18,7 +18,9 @@ We built this tool two solve two major issues and two minor issues:
 2) You can attach Badges to your repository to help people find the correct NPM Package your repository references!
 
 # Technologies
-- [JavaScript (ES6)](https://www.javascript.com/)
+- [React](https://reactjs.org/) - To Build out the front-end application
+- [Github V3 REST API](https://developer.github.com/v3/) - To pull Tree Structures from Github Repositories
+- [JavaScript (ES6)](https://www.javascript.com/) - To execute API Requests
 - [TypeScript](https://www.typescriptlang.org/)
 - [Styled Components (CSS-IN-JS Framework)](http://styled-components.com/)
 - [HTML](https://www.w3schools.com/html/html_intro.asp)
