@@ -3,6 +3,7 @@ import { ripOutPaths, generateTree } from './tree'
 import { GithubAPIResponseBody } from './tree/types';
 import styled from 'styled-components';
 import MarkdownDisplay from './components/MarkdownDisplay';
+import BadgesSection from "./components/BadgesSection";
 
 // Styles
 
@@ -22,6 +23,7 @@ const Column = styled.div`
 // Components
 
 const App: React.FC = () => {
+  const [repoName, setRepoName] = useState('react-ui');
   const [url, setURL] = useState('');
   const [markdownDisplayContent, setMarkdownDisplayContent] = useState(['public', 'src']);
 
@@ -53,6 +55,7 @@ const App: React.FC = () => {
     <Container>
       <Column>
         <h1>SWEGGG</h1>
+        <BadgesSection repoName={repoName}/>
         <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed}/>
         <MarkdownDisplay content={markdownDisplayContent} />
       </Column>
