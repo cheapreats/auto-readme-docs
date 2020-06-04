@@ -12,3 +12,7 @@ export interface GithubAPIResponseBody {
   url: string;
   tree: GithubAPIFileObject[];
 }
+
+export interface NpmsResponseBody {
+  total: number;
+}

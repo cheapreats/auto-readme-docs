@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ripOutPaths, generateTree } from './tree'
-import { GithubAPIResponseBody } from './tree/types';
+import {GithubAPIResponseBody, NpmsResponseBody} from './tree/types';
 import styled from 'styled-components';
 import MarkdownDisplay from './components/MarkdownDisplay';
 import BadgesSection from "./components/BadgesSection";
@@ -9,6 +9,7 @@ import URLBox from './components/URLBox';
 
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState('');
+  const [isNpmBadgeVisible, setNpmBadgeVisible] = useState(false);
   const [url, setURL] = useState('');
   const [markdownDisplayContent, setMarkdownDisplayContent] = useState<string[]>([]);
 
@@ -25,6 +26,17 @@ const App: React.FC = () => {
 
   const makeRequest = async (owner: String, repo: String) => {
     try {
+      const npmPackagesResponse = await fetch(`https://api.npms.io/v2/search?q=${repo}`);
+      const npmPackagesResponseJSON = await npmPackagesResponse.json() as NpmsResponseBody;
+      if (npmPackagesResponseJSON.total === 0) {
+        setNpmBadgeVisible(false);
+      } else {
+        setNpmBadgeVisible(true);
+      }
+    } catch (e) {
+      setNpmBadgeVisible(false);
+    }
+    try {
       const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits/master`);
       const resJSON = await res.json();
       const treeSHA = resJSON["commit"]["tree"]["sha"]
@@ -38,7 +50,7 @@ const App: React.FC = () => {
   return (
     <div className="container container-small">
       <URLBox value={url} onChange={handleURLChange} onClick={handleGoButtonPress} />
-      {repoName !== '' &&
+      {repoName !== '' && isNpmBadgeVisible &&
         <BadgesSection repoName={repoName} />
       }
       {markdownDisplayContent.length !== 0 &&
