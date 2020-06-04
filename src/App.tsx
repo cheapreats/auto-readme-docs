@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import MarkdownDisplay from './components/MarkdownDisplay';
+import BadgesSection from "./components/BadgesSection";
 
 // Styles
 
@@ -21,6 +22,7 @@ const Column = styled.div`
 
 const App: React.FC = () => {
   const [url, setURL] = useState('Enter a Github Repo');
+  const [repoName, setRepoName] = useState('react-ui');
   const [markdownDisplayContent, setMarkdownDisplayContent] = useState(['public', 'src']);
 
   const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) => setURL(e.target.value);
@@ -30,6 +32,7 @@ const App: React.FC = () => {
       <Column>
         <h1>SWEGGG</h1>
         <input type="text" value={url} onChange={handleURLChange} />
+        <BadgesSection repoName={repoName}/>
         <MarkdownDisplay content={markdownDisplayContent} />
       </Column>
     </Container>
