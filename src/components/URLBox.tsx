@@ -3,7 +3,13 @@ import Card from './reusable/Card';
 import Input from './reusable/Input';
 import CustomButton from './reusable/CustomButton';
 
-const URLBox: React.FC = () => (
+interface Props {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: (e: MouseEvent) => void;
+}
+
+const URLBox: React.FC<Props> = (props: Props) => (
   <Card>
     <div className="row">
       <div className="col">
@@ -12,8 +18,8 @@ const URLBox: React.FC = () => (
     </div>
     <div className="row">
       <div className="col" style={{ textAlign: 'center' }}>
-        <Input placeholder="Enter a public GitHub URL" />
-        <CustomButton value="Go" />
+        <Input placeholder="Enter a public GitHub URL" value={props.value} onChange={props.onChange} />
+        <CustomButton value="Go" onClick={props.onClick} />
       </div>
     </div>
   </Card>

@@ -4,7 +4,7 @@ const Input = styled.input.attrs((props) => ({
   type: 'text',
   placeholder: props.placeholder,
   value: props.value,
-  onChange: () => props.onChange(),
+  onChange: props.onChange,
 }))`
   color: white;
   border: none;

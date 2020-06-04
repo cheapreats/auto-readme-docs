@@ -14,16 +14,14 @@ const App: React.FC = () => {
 
   const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) => setURL(e.target.value);
 
-  const handleKeyPressed = async event => {
-    if (event.key === 'Enter') {
-      // Expecting a URL like 'https://github.com/${owner}/${repo}'
-      let pathArray = url.split('/');
-      let owner = pathArray[3];
-      let repo = pathArray[4];
-      setRepoName(repo);
-      await makeRequest(owner, repo);
-    }
-  }
+  const handleGoButtonPress = async (event: MouseEvent) => {
+    // Expecting a URL like 'https://github.com/${owner}/${repo}'
+    const pathArray = url.split('/');
+    const owner = pathArray[3];
+    const repo = pathArray[4];
+    setRepoName(repo);
+    await makeRequest(owner, repo);
+  };
 
   const makeRequest = async (owner: String, repo: String) => {
     try {
@@ -39,9 +37,9 @@ const App: React.FC = () => {
   }
   return (
     <div className="container">
-      <URLBox />
+      <URLBox value={url} onChange={handleURLChange} onClick={handleGoButtonPress} />
       <BadgesSection repoName={repoName} />
-      <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed} />
+      {/* <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed} /> */}
       <MarkdownDisplay content={markdownDisplayContent} />
     </div>
   );
