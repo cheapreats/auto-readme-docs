@@ -1,4 +1,5 @@
-import { GithubAPIResponseBody, GithubAPIFileObject } from "./types";
+import { GithubAPIResponseBody, GithubAPIFileObject } from './types';
+import { symbols, commonDirComments } from './constants';
 
 // ripOutPaths condenses the response body from a Github API call to a list of directory paths.
 const ripOutPaths = (responseBody: GithubAPIResponseBody): string[] => responseBody.tree
@@ -21,11 +22,13 @@ const ripOutPaths = (responseBody: GithubAPIResponseBody): string[] => responseB
 // at the beginning of the provided dirname.
 //
 // Helper func for generateTree().
-const formatDirName = (path: string, dirName: string): string => `📂 [${dirName}](./${path})`;
+const formatDirName = (path: string, dirName: string): string => {
+  let output = `📂 [${dirName}](./${path})`;
+  if (commonDirComments.hasOwnProperty(path)) {
+    output += ` ${commonDirComments[path]}`;
+  }
 
-const symbols = {
-  branch: '├── ',
-  vertical: '│   ',
+  return output;
 };
 
 // generateTree returns a list of strings --- one string for each line of the output ---
