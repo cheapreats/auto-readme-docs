@@ -4,7 +4,7 @@
 A web application that helps automate README creation
 
 ## How it Works
-Head to [URL](www.404.com) and type in your Github Project URL and watch a MarkDown Accessible README with pre-filled descriptions appear!
+Head to [URL](https://project-structure-readme.netlify.app/) and type in your Github Project URL and watch a MarkDown Accessible README with pre-filled descriptions appear!
 With a one-click Copy/Paste you can update your README with the best MarkDown Project Structure README's you've ever seen!
 ```Example Github Project URL: https://github.com/MLH-Fellowship/0.2.1-readme-dirs```
 
