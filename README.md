@@ -15,6 +15,7 @@ We built this tool two solve two major issues and two minor issues:
 2) Existing Project Structures don't have hyperlinks making the UX of a project structure a bit difficult to navigate with excessive scrolling or third party plugins to extend the functionality. This requires no third-party software and can be done right in Github natively!
 #### Minor Issues
 1) You can plug in any repo you want to contribute to and completely understand what every folder does thanks to auto generated documentation!
+2) You can attach Badges to your repository to help people find the correct NPM Package your repository references!
 
 # Technologies
 - [JavaScript (ES6)](https://www.javascript.com/)
