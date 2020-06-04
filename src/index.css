@@ -6,15 +6,42 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background: aquamarine;
+  color: #b3c3d3;
+  background: #9aa2b2;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat';
   color: white;
+  margin-bottom: 1rem;
 }
 
 h1 {
   font-family: 3rem;
+}
+
+h1, h2 {
   text-align: center;
+}
+
+/* Grid-based Styles */
+
+@media (min-width: 768px) {
+  .container-small {
+      width: 500px;
+  }
+} 
+@media (min-width: 992px) {
+  .container-small {
+      width: 650px;
+  }
+} 
+@media (min-width: 1200px) {
+  .container-small {
+      width: 800px;
+  }
+}
+
+.container-small {
+  max-width: 100%;
 }

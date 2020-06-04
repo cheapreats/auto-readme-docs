@@ -8,10 +8,11 @@ const Input = styled.input.attrs((props) => ({
 }))`
   color: white;
   border: none;
+  flex: auto;
 
   margin: 0rem 1rem;
   padding: 1rem;
-  min-width: 500px;
+  // min-width: 500px;
 
   background: none;
   box-shadow: inset 0px -2px 0 #414959;

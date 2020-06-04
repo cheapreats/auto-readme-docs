@@ -17,7 +17,16 @@ const URLBox: React.FC<Props> = (props: Props) => (
       </div>
     </div>
     <div className="row">
-      <div className="col" style={{ textAlign: 'center' }}>
+      <div
+        className="col"
+        style={{
+          textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'row',
+          paddingLeft: '4rem',
+          paddingRight: '4rem',
+        }}
+      >
         <Input placeholder="Enter a public GitHub URL" value={props.value} onChange={props.onChange} />
         <CustomButton value="Go" onClick={props.onClick} />
       </div>
