@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import CustomButton from './reusable/CustomButton';
 import MarkdownDisplayLine from './MarkdownDisplayLine';
 
 // Styles
@@ -26,7 +27,7 @@ const MarkdownDisplay: React.FC<Props> = (props: Props) => (
       ))
     }
     <CopyToClipboard text={props.content.join('\n')}>
-      <button type="submit">Copy to Clipboard</button>
+      <CustomButton type="submit" value="Copy to Clipboard" />
     </CopyToClipboard>
   </Card>
 );
