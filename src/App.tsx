@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import MarkdownDisplay from './components/MarkdownDisplay';
 import BadgesSection from "./components/BadgesSection";
 import CustomButton from './components/reusable/CustomButton';
+import URLBox from './components/URLBox';
 
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState('react-ui');
@@ -38,9 +39,8 @@ const App: React.FC = () => {
   }
   return (
     <div className="container">
-      <h1>SWEGGG</h1>
+      <URLBox />
       <BadgesSection repoName={repoName} />
-      <CustomButton value="testing" />
       <input placeholder="Enter a Github URL" type="text" value={url} onChange={handleURLChange} onKeyDown={handleKeyPressed} />
       <MarkdownDisplay content={markdownDisplayContent} />
     </div>
