@@ -13,7 +13,7 @@ const MarkdownDisplay: React.FC<Props> = (props: Props) => (
   <Card>
     <div className="row">
       <div className="col">
-        <h2>Tree</h2>
+        <h2>Generated Tree</h2>
       </div>
     </div>
     <div className="row">

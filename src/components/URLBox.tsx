@@ -13,7 +13,7 @@ const URLBox: React.FC<Props> = (props: Props) => (
   <Card>
     <div className="row">
       <div className="col">
-        <h1>Swegg App Title</h1>
+        <h1>Tree-o-Tron™</h1>
       </div>
     </div>
     <div className="row">
