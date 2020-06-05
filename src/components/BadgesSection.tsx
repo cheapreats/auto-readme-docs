@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Card from './reusable/Card';
 import CenteredCol from './reusable/CenteredCol';
-import CustomButton from './reusable/CustomButton';
+import CustomSecondaryButton from './reusable/CustomSecondaryButton';
 import { repoToMarkDownBadge } from '../utils/repoToBadge';
 
 // Styles
@@ -37,7 +37,7 @@ const BadgesSection: React.FC<Props> = ({ repoName }: Props) => (
     <div className="row">
       <CenteredCol className="col">
         <CopyToClipboard text={repoToMarkDownBadge(repoName)}>
-          <CustomButton type="submit" value="Copy to Clipboard" />
+          <CustomSecondaryButton type="submit" value="Copy to Clipboard" />
         </CopyToClipboard>
       </CenteredCol>
     </div>
