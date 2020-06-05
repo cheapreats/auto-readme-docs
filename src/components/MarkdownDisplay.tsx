@@ -27,7 +27,7 @@ const MarkdownDisplay: React.FC<Props> = (props: Props) => (
     </div>
     <div className="row">
       <CenteredCol className="col">
-        <CopyToClipboard text={props.content.join('  \n')}>
+        <CopyToClipboard text={`<big><pre>\n${props.content.join('\n')}\n</pre></big>}`}>
           <CustomButton type="submit" value="Copy to Clipboard" />
         </CopyToClipboard>
       </CenteredCol>
