@@ -8,6 +8,8 @@ Head to [URL](https://project-structure-readme.netlify.app/) and type in your Gi
 With a one-click Copy/Paste you can update your README with the best MarkDown Project Structure README's you've ever seen!
 ```Example Github Project URL: https://github.com/MLH-Fellowship/0.2.1-readme-dirs```
 
+![Project demo](./src/images/Demo.gif)
+
 ### WHY
 We built this tool two solve two major issues and two minor issues:
 #### Major Issues
