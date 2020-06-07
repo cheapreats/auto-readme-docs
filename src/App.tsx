@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ripOutPaths, generateTree } from './tree'
-import {GithubAPIResponseBody, NpmsResponseBody} from './tree/types';
+import { GithubAPIResponseBody, NpmsResponseBody } from './tree/types';
 import styled from 'styled-components';
 import MarkdownDisplay from './components/MarkdownDisplay';
 import BadgesSection from "./components/BadgesSection";
@@ -23,6 +23,16 @@ const App: React.FC = () => {
     setRepoName(repo);
     await makeRequest(owner, repo);
   };
+
+  const handleKeyPress = async (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      const pathArray = url.split('/');
+      const owner = pathArray[3];
+      const repo = pathArray[4];
+      setRepoName(repo);
+      await makeRequest(owner, repo);
+    }
+  }
 
   const makeRequest = async (owner: String, repo: String) => {
 
@@ -71,7 +81,7 @@ const App: React.FC = () => {
   }
   return (
     <div className="container container-small">
-      <URLBox value={url} onChange={handleURLChange} onClick={handleGoButtonPress} />
+      <URLBox value={url} onChange={handleURLChange} onClick={handleGoButtonPress} onKeyPress={handleKeyPress}/>
       {repoName !== '' && isNpmBadgeVisible &&
         <BadgesSection repoName={repoName} />
       }

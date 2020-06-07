@@ -19,11 +19,11 @@ const ripOutPaths = (responseBody: GithubAPIResponseBody): TreeCore[] => respons
     },
     [], // Initial value for the reducer
   )
-  .map((line) => ({
-    text: line,
-    depthLevel: line.split('/').length,
+  .map((path: string) => ({
+    text: path,
+    depthLevel: path.split('/').length,
     fileType: FileType.FOLDER,
-    comment: ` ${commonDirComments[line] ?? ''}`,
+    comment: ` ${commonDirComments[path] ?? ''}`,
   }));
 
 // formatDirName returns a Markdown relative link for the provided path, and sticks a folder emoji
@@ -39,11 +39,13 @@ const formatDirName = (path: string, dirName: string, comment: string): string =
 // representing the "tree printout" of a file system made up of the provided paths.
 const generateTree = (paths: TreeCore[]): string[] => {
   const outputAsLines: string[] = [];
-  paths.forEach((core) => {
+  paths.forEach((core: TreeCore) => {
     const path = core.text;
     const { comment } = core;
+
     // Find the number of '/' chars in the path
     const curDepth = path.match(/\//g)?.length ?? 0;
+
     // If there are no '/' chars in the path, then this directory is at the root
     // of the project. We don't have to decorate this line of the output with
     // any │ or ├── symbols
@@ -55,12 +57,15 @@ const generateTree = (paths: TreeCore[]): string[] => {
 
     // Build the current line in the overall output
     let curLine = '';
+
     // For all nested "levels" except for the deepest one, add a │ vertical bar
     for (let i = 0; i < curDepth - 1; i += 1) {
       curLine += symbols.vertical;
     }
+
     // Add a ├── symbol
     curLine += symbols.branch;
+
     // Add the name of the deepest directory
     const deepestDirName = path.substring(path.lastIndexOf('/') + 1);
     curLine += formatDirName(path, deepestDirName, comment);

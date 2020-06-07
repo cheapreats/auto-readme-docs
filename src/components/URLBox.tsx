@@ -7,6 +7,7 @@ interface Props {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: (e: MouseEvent) => void;
+  onKeyPress: (e: KeyboardEvent) =>  void;
 }
 
 const URLBox: React.FC<Props> = (props: Props) => (
@@ -27,7 +28,7 @@ const URLBox: React.FC<Props> = (props: Props) => (
           paddingRight: '4rem',
         }}
       >
-        <Input placeholder="Enter a public GitHub URL" value={props.value} onChange={props.onChange} />
+        <Input placeholder="Enter a public GitHub URL" value={props.value} onChange={props.onChange} onKeyPress={props.onKeyPress} />
         <CustomButton value="Go" onClick={props.onClick} />
       </div>
     </div>
