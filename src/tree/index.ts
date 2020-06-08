@@ -3,6 +3,18 @@ import {
 } from './types';
 import { symbols, commonDirComments } from './constants';
 
+const collapse = (core :TreeCore[], indexToCollapse: number): TreeCore[] => {
+  const depth: Number = core[indexToCollapse].depthLevel;
+  for (let index = indexToCollapse + 1; index < core.length; index++) {
+    if (core[index].depthLevel > depth) {
+      core[index].fileType = (core[index].fileType === FileType.HIDDEN_FILE ? FileType.FOLDER : FileType.HIDDEN_FILE);
+    } else {
+      break;
+    }
+  }
+  return core;
+}
+
 // ripOutPaths condenses the response body from a Github API call to a list of directory paths.
 const ripOutPaths = (responseBody: GithubAPIResponseBody): TreeCore[] => responseBody.tree
   .map((file: GithubAPIFileObject) => file.path) // Isolate the path from each object
@@ -76,4 +88,4 @@ const generateTree = (paths: TreeCore[]): string[] => {
   return outputAsLines;
 };
 
-export { ripOutPaths, generateTree };
+export { ripOutPaths, generateTree , collapse};

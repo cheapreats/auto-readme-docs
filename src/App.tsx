@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ripOutPaths, generateTree } from './tree'
-import { GithubAPIResponseBody, NpmsResponseBody } from './tree/types';
+import { ripOutPaths, generateTree, collapse } from './tree'
+import { GithubAPIResponseBody, NpmsResponseBody, TreeCore } from './tree/types';
 import styled from 'styled-components';
 import MarkdownDisplay from './components/MarkdownDisplay';
 import BadgesSection from "./components/BadgesSection";
@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const [isNpmBadgeVisible, setNpmBadgeVisible] = useState(false);
   const [url, setURL] = useState('');
   const [markdownDisplayContent, setMarkdownDisplayContent] = useState<string[]>([]);
+  const [markdownTree, setMarkdownTree] = useState<TreeCore[]>([]);
 
   const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) => setURL(e.target.value);
 
@@ -56,6 +57,7 @@ const App: React.FC = () => {
       const treeSHA = resJSON["commit"]["tree"]["sha"]
       const treeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSHA}?recursive=true`);
       const treeJSON = await treeRes.json();
+      setMarkdownTree(ripOutPaths(treeJSON as GithubAPIResponseBody));
       setMarkdownDisplayContent(generateTree(ripOutPaths(treeJSON as GithubAPIResponseBody)));
     } catch (error) {
       alert('Error' + error);
@@ -79,15 +81,17 @@ const App: React.FC = () => {
       alert('Error' + error);
     }
   }
+
+  const collapseWrapper = (index: number) => {
+    setMarkdownTree(collapse(markdownTree, index));
+    setMarkdownDisplayContent(generateTree(markdownTree));
+  }
+  
   return (
     <div className="container container-small">
       <URLBox value={url} onChange={handleURLChange} onClick={handleGoButtonPress} onKeyPress={handleKeyPress}/>
-      {repoName !== '' && isNpmBadgeVisible &&
-        <BadgesSection repoName={repoName} />
-      }
-      {markdownDisplayContent.length !== 0 &&
-        <MarkdownDisplay content={markdownDisplayContent} />
-      }
+      {repoName !== '' && isNpmBadgeVisible && <BadgesSection repoName={repoName} />}
+      {markdownDisplayContent.length !== 0 && <MarkdownDisplay tree={markdownTree} content={markdownDisplayContent} collapse={collapseWrapper}/> }
     </div>
   );
 };

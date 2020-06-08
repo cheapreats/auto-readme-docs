@@ -4,9 +4,12 @@ import Card from './reusable/Card';
 import CenteredCol from './reusable/CenteredCol';
 import CustomSecondaryButton from './reusable/CustomSecondaryButton';
 import MarkdownDisplayLine from './MarkdownDisplayLine';
+import { TreeCore, FileType } from '../tree/types';
 
 interface Props {
+  collapse: (index: number) => void;
   content: string[];
+  tree: TreeCore[];
 }
 
 const MarkdownDisplay: React.FC<Props> = (props: Props) => (
@@ -20,7 +23,7 @@ const MarkdownDisplay: React.FC<Props> = (props: Props) => (
       <div className="col">
         {
           props.content.map((line, i) => (
-            <MarkdownDisplayLine isOddNumberedLine={i % 2 === 1} content={line} />
+            <MarkdownDisplayLine isOddNumberedLine={i % 2 === 1} content={line} index={i} collapse={props.collapse} isDisplayed={props.tree[i].fileType !== FileType.HIDDEN_FILE} />
           ))
         }
       </div>

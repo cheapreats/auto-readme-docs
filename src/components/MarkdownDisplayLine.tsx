@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+// import { collapse } from '../tree';
+// import { TreeCore } from '../tree/types';
 
 // Styles
 
@@ -19,23 +21,29 @@ const DarkBGColor = styled.div`
 // Components
 
 interface Props {
+  collapse: (index: number) => void;
   isOddNumberedLine: boolean;
   content: string;
+  index: number;
+  isDisplayed: boolean;
 }
 
 const MarkdownDisplayLine: React.FC<Props> = (props: Props) => {
+  const handleClick = (event: MouseEvent) => {
+    props.collapse(props.index);
+  }
   if (props.isOddNumberedLine) {
     return (
-      <DarkBGColor>
-        {props.content}
+      <DarkBGColor onClick={handleClick}>
+        {props.isDisplayed ? props.content : null}
       </DarkBGColor>
     );
   }
-  return (
-    <LightBGColor>
-      {props.content}
+  return (props.isDisplayed ? (
+    <LightBGColor onClick={handleClick}>
+      {props.isDisplayed ? props.content : null}
     </LightBGColor>
-  );
+  ) : <div>{null}</div>);
 };
 
 export default MarkdownDisplayLine;
