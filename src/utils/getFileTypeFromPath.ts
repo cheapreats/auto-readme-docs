@@ -2,8 +2,9 @@ import { FileType } from "../tree/types";
 
 /**
  * @function
- * @param {string} path
+ * @param path string
  * @returns FileType
+ * @description using inputted relative GitHub path, find the FileType depending on how many dots are found in the path
  */
 
 export const getFileTypeFromPath = (path: string): FileType => {
