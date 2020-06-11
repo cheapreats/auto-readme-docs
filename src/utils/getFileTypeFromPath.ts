@@ -11,9 +11,9 @@ export const getFileTypeFromPath = (path: string): FileType => {
   // Count amount of periods assuming the path is relative and starts with "./"
   const numberOfDotsInPath = (path.match(/\./g) || []).length;
 
-  const configNumberOfDots = 3;
-  const fileNumberOfDots = 2;
-  const folderNumberOfDots = 1;
+  const configNumberOfDots = 3; // number of dots in a config file path
+  const fileNumberOfDots = 2;   // number of dots in a regular file path
+  const folderNumberOfDots = 1; // number of dots in a folder path
 
   if (numberOfDotsInPath == configNumberOfDots) {
     // Length of 3 means 2 dots in the file name -- config file
