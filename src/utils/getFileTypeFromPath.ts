@@ -9,19 +9,15 @@ import { FileType } from "../tree/types";
 
 export const getFileTypeFromPath = (path: string): FileType => {
   // Count amount of periods assuming the path is relative and starts with "./"
-  const numberOfDots = (path.match(/\./g) || []).length;
+  const numberOfDotsInPath = (path.match(/\./g) || []).length;
 
-  const configNumberOfDots = 3;
-  const fileNumberOfDots = 2;
-  const folderNumberOfDots = 1;
-
-  if (numberOfDots == configNumberOfDots) {
+  if (numberOfDotsInPath == 3) {
     // Length of 3 means 2 dots in the file name -- config file
     return FileType.CONFIG_FILE;
-  } else if (numberOfDots == fileNumberOfDots) {
+  } else if (numberOfDotsInPath == 2) {
     // Length of 2 means 1 dot in the file name -- regular file
     return FileType.FILE;
-  } else if (numberOfDots == folderNumberOfDots) {
+  } else if (numberOfDotsInPath == 1) {
     // Length of 1 means there are no file names in path -- folder */
     return FileType.FOLDER;
   } else {
