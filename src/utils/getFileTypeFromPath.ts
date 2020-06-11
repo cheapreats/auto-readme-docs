@@ -1,5 +1,11 @@
 import { FileType } from "../tree/types";
 
+/**
+ * @function
+ * @param {string} path
+ * @returns FileType
+ */
+
 export const getFileTypeFromPath = (path: string): FileType => {
   // Count amount of periods assuming the path is relative and starts with "./"
   const numberOfDots = (path.match(/\./g) || []).length;
