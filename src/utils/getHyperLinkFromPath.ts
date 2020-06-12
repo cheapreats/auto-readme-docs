@@ -11,3 +11,5 @@ export const getHyperLinkFromPath = (path: string): string => {
   const hyperLink = `[${deepestDirName}](./${path})`;
   return hyperLink;
 };
+
+export default getHyperLinkFromPath;
