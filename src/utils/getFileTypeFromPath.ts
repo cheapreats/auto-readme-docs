@@ -22,7 +22,7 @@ export const getFileTypeFromPath = (path: string): FileType => {
     // Length of 2 means 1 dot in the file name -- regular file
     return FileType.FILE;
   } else if (numberOfDotsInPath == folderNumberOfDots) {
-    // Length of 1 means there are no file names in path -- folder */
+    // Length of 1 means there are no file names in path -- folder
     return FileType.FOLDER;
   } else {
     // 0 dots or more than 3 dots means either the path or file invalid
