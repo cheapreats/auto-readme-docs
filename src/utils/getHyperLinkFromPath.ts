@@ -1,5 +1,5 @@
 /** generates the clickable link to a specific folder
- * @param {string} path  The path of a specific folder like "src/components/reusable"
+ * @param {string} path - The path of a specific folder like "src/components/reusable"
  * @returns {string} the hyperLink like "[reusable](./src/components/reusable)"
  */
 
