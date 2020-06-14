@@ -14,6 +14,8 @@ export const getFileTypeFromPath = (path: string): FileType => {
   const fileNumberOfDots = 2; // number of dots in a regular file path
   const folderNumberOfDots = 1; // number of dots in a folder path
 
+  // const filteredPath = path.split('./');
+
   if (numberOfDotsInPath === configNumberOfDots) {
     // Length of 3 means 2 dots in the file name -- config file
     return FileType.CONFIG_FILE;
