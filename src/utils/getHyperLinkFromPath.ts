@@ -1,6 +1,10 @@
 /** generates the clickable link to a specific folder
  * @param {string} path - The path of a specific folder like "src/components/reusable"
+<<<<<<< HEAD
  * @returns {string} - the hyperLink like "[reusable](./src/components/reusable)"
+=======
+ * @returns {string} the hyperLink like "[reusable](./src/components/reusable)"
+>>>>>>> 10f55dc000e9d27b603dc6fed60889db2bec699e
  */
 
 export const getHyperLinkFromPath = (path: string): string => {
