@@ -6,15 +6,24 @@ import { TreeCore } from "../tree/types";
  * @returns {void}
  */
 
-export const setCommentForPath = (treeCore:TreeCore, path: string, comment: string): void => {
-    treeCore.forEach((core) => {
-        if (path=core.text) {
-            core.comment=comment;
-        }
+export const setCommentForPath = (
+  treeCore: TreeCore[],
+  path: string,
+  comment: string
+): void => {
+  const pattern = /^((?![<>:"/\\|?* .])(([a-z0-9\s_@\-^!#$%&+={}\[\].]*)([/]?)))+[^/.]$/i;
+  if (pattern.test(path)) {
+    const index = treeCore.findIndex((address) => address.text === path);
+
+    if (index > -1) {
+      treeCore[index].comment = " # " + comment;
+      console.log("INSIDE", treeCore);
+    } else {
+      throw new Error("Path is not available!");
     }
-    // Or Core:the target core & no need for path
-    //    core.forEach((core) => {
-    //        core.comment=comment; }
+  } else {
+    throw new Error("Invalid Path!");
+  }
 };
 
 export default setCommentForPath;
