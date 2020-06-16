@@ -7,24 +7,47 @@ import { FileType } from '../tree/types';
  */
 
 export const getFileTypeFromPath = (path: string): FileType => {
-  // Count amount of periods assuming the path is relative and starts with "./"
+  // Count amount of periods in the path
   const numberOfDotsInPath = (path.match(/\./g) || []).length;
+  const forwardSlashPathFilter = path.split('/');
 
-  const configNumberOfDots = 3; // number of dots in a config file path
-  const fileNumberOfDots = 2; // number of dots in a regular file path
-  const folderNumberOfDots = 1; // number of dots in a folder path
+  const configNumberOfDots = 2; // number of dots in a config file path
+  const fileNumberOfDots = 1; // number of dots in a regular file path
+  const folderNumberOfDots = 0; // number of dots in a folder path
 
-  // const filteredPath = path.split('./');
+  if (
+    numberOfDotsInPath >= folderNumberOfDots
+    && numberOfDotsInPath <= configNumberOfDots
+  ) {
+    for ( // Traverse through the forwardSlashPathFilter array to look for invalid path
+      let filteredPathIndex = 0;
+      filteredPathIndex < forwardSlashPathFilter.length;
+      filteredPathIndex++
+    ) {
+      if (
+        forwardSlashPathFilter[filteredPathIndex] === '.'
+        || (forwardSlashPathFilter[filteredPathIndex] === ''
+        && filteredPathIndex < forwardSlashPathFilter.length - 1)
+        || forwardSlashPathFilter[filteredPathIndex].charAt(
+          forwardSlashPathFilter[filteredPathIndex].length - 1,
+        ) === '.'
+      ) {
+        throw new Error('Path/file is invalid!');
+      }
+    }
 
-  if (numberOfDotsInPath === configNumberOfDots) {
-    // Length of 3 means 2 dots in the file name -- config file
-    return FileType.CONFIG_FILE;
-  } if (numberOfDotsInPath === fileNumberOfDots) {
-    // Length of 2 means 1 dot in the file name -- regular file
-    return FileType.FILE;
-  } if (numberOfDotsInPath === folderNumberOfDots) {
-    // Length of 1 means there are no file names in path -- folder
-    return FileType.FOLDER;
+    if (numberOfDotsInPath === configNumberOfDots) {
+      // Length of 2 means 2 dots in the file name -- config file
+      return FileType.CONFIG_FILE;
+    }
+    if (numberOfDotsInPath === fileNumberOfDots) {
+      // Length of 1 means 1 dot in the file name -- regular file
+      return FileType.FILE;
+    }
+    if (numberOfDotsInPath === folderNumberOfDots) {
+      // Length of 0 means there are no file names in path -- folder
+      return FileType.FOLDER;
+    }
   }
 
   throw new Error('Path/file is invalid!');
