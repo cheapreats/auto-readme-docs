@@ -8,6 +8,7 @@ import { FileType } from '../tree/types';
 export const getFileTypeFromPath = (path: string): FileType => {
   // Count amount of periods in the path
   const numberOfDotsInPath = (path.match(/\./g) || []).length;
+  // Breaks the path up at the forward slashes
   const forwardSlashPathFilter = path.split('/');
 
   const configNumberOfDots = 2; // number of dots in a config file path
@@ -18,7 +19,8 @@ export const getFileTypeFromPath = (path: string): FileType => {
     numberOfDotsInPath >= folderNumberOfDots
     && numberOfDotsInPath <= configNumberOfDots
   ) {
-    for ( // Traverse through the forwardSlashPathFilter array to look for invalid path
+    for (
+      /* Traverse through the forwardSlashPathFilter array to look for invalid path */
       let filteredPathIndex = 0;
       filteredPathIndex < forwardSlashPathFilter.length;
       filteredPathIndex++
