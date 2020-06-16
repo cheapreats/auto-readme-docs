@@ -3,7 +3,6 @@ import { FileType } from '../tree/types';
 /** Outputs the file type of a certain path
  * @param {string} path the path of a specific file or folder
  * @returns {FileType} file type such as .FILE, .CONFIG_FILE, or .FOLDER
- * @description using inputted relative GitHub path, get file type of path
  */
 
 export const getFileTypeFromPath = (path: string): FileType => {
