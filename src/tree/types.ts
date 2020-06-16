@@ -21,6 +21,7 @@ export enum FileType {
   FOLDER = 'FOLDER',
   FILE = 'FILE',
   HIDDEN_FILE = 'HIDDEN_FILE',
+  CONFIG_FILE = 'CONFIG_FILE',
 }
 
 export interface TreeCore {
