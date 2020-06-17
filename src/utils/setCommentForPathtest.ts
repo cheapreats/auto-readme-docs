@@ -4,22 +4,31 @@ import { FileType } from "../tree/types";
 
 const treeCore = [
   {
-    text: "src/utils",
-    depthLevel: 2,
-    fileType: FileType.FOLDER,
+    path: "src/utils",
+    deletedOrder: -1,
     comment: " ",
+    treeCore: [],
   },
   {
-    text: "src",
-    depthLevel: 1,
-    fileType: FileType.FOLDER,
+    path: "src",
+    deletedOrder: -1,
+    treeCore: [
+      { path: "src/utils", deletedOrder: -1, comment: " ", treeCore: [] },
+
+      {
+        path: "src/components",
+        deletedOrder: -1,
+        comment: " # ss",
+        treeCore: [],
+      },
+    ],
     comment: " # Source files",
   },
   {
-    text: "src/components",
-    depthLevel: 2,
-    fileType: FileType.FOLDER,
+    path: "src/components",
+    deletedOrder: -1,
     comment: " # ss",
+    treeCore: [],
   },
 ];
 
@@ -35,6 +44,7 @@ describe("setCommentForPath Function", () => {
       "NEW COMMENT!"
     );
     expect(newTreeCore[2].comment).to.equal(" # NEW COMMENT!");
+    expect(newTreeCore[1].treeCore[1].comment).to.equal(" # NEW COMMENT!");
   });
   it("folder with no comment", () => {
     const newTreeCore = setCommentForPath(
@@ -51,11 +61,6 @@ describe("setCommentForPath Function", () => {
   it("Invalid address", () => {
     expect(() =>
       setCommentForPath(treeCore, "///ds//", "NEW COMMENT!")
-    ).to.throw();
-  });
-  it("Wrong address", () => {
-    expect(() =>
-      setCommentForPath(treeCore, "src/components/wrongfolder", "NEW COMMENT!")
     ).to.throw();
   });
 });

@@ -1,4 +1,3 @@
-import { TreeCore } from "../tree/types";
 /**  Replaces the existing comment by a given string
  * @param {TreeCore} treeCore - the whole tree
  * @param {string} path - The path of a specific file
@@ -6,20 +5,31 @@ import { TreeCore } from "../tree/types";
  * @returns {TreeCore} - New treeCore with replaced comment
  */
 
+interface Core {
+  comment: string;
+  path: string;
+  deletedOrder: number;
+  treeCore: Core[];
+}
+
 export const setCommentForPath = (
-  treeCore: TreeCore[],
+  treeCore: Core[],
   path: string,
   comment: string
-): TreeCore[] => {
+): Core[] => {
   const pattern = /^((?![<>:"/\\|?* .])(([a-z0-9\s_@\-^!#$%&+={}\[\].]*)([/]?)))+[^/.]$/i;
+
   if (pattern.test(path)) {
-    const index = treeCore.findIndex((core) => core.text === path);
+    treeCore.forEach((core) => {
+      if (core.treeCore) {
+        core.treeCore = setCommentForPath(core.treeCore, path, comment);
+      }
+    });
+    const index = treeCore.findIndex((core) => core.path === path);
     if (index > -1) {
       treeCore[index].comment = comment ? " # " + comment : "";
-      return treeCore;
-    } else {
-      throw new Error("Path is not available!");
     }
+    return treeCore;
   } else {
     throw new Error("Invalid Path!");
   }
