@@ -24,7 +24,7 @@ export const getFileTypeFromPath = (path: string): FileType => {
       /* Traverse through the forwardSlashPathFilter array to look for invalid path */
       let filteredPathIndex = 0;
       filteredPathIndex < forwardSlashPathFilter.length;
-      filteredPathIndex++
+      filteredPathIndex += 1
     ) {
       if (
         forwardSlashPathFilter[filteredPathIndex] === '.'
