@@ -26,7 +26,7 @@ export enum FileType {
 
 export interface Core {
   path: string;
-  deletedOrder: number;
   comment: string;
+  deletedOrder: number;
   treeCore: Core[];
 }

@@ -13,14 +13,15 @@ import { Core } from '../tree/types';
   depth level exists in the treeCore -- meaning no such path was the
   largest */
 let largestPathLengthInLevel = 0;
+let maxDepthLevel = 0; // Deepness of entire treeCore
 
 export const getLargestPathLengthInLevel = (
   treeCore: Core[],
   depthLevel: number,
   depthLevelCounter = 0,
 ): number => {
-  // Depth level such that no other treeCore can be accessed after this level
-  let maxDepthLevel = 0;
+  // depthLevel is greater than maxDepthLevel of treeCore
+  const outOfBounds = -1;
 
   for (let index = 0; index < treeCore.length; index += 1) {
     if (depthLevel === depthLevelCounter) {
@@ -31,11 +32,13 @@ export const getLargestPathLengthInLevel = (
         current path length to largestPathLengthInLevel */
         largestPathLengthInLevel = treeCore[index].path.length;
       }
+      if (depthLevelCounter > maxDepthLevel) {
+        maxDepthLevel = depthLevel;
+      }
     } else {
       /* If depthLevel was not reached, add 1 to the maxDepthLevel as
       the function is recursively called to go one depthLevel deeper by
       adding 1 to the depthLevelCounter */
-      maxDepthLevel += 1;
       getLargestPathLengthInLevel(
         treeCore[index].treeCore,
         depthLevel,
@@ -44,10 +47,10 @@ export const getLargestPathLengthInLevel = (
     }
   }
   if (maxDepthLevel < depthLevel) {
-    /* If the tree ends (maxDepthLevel is achieved) before the depthLevel
-    is reached, then depthLevel is out outOfBounds -- treeCore is not as
-    deep */
-    return -1;
+    /* After traversing through the entire treeCore, if maxDepthLevel
+    doesn't match the desired depthLevel analysis -- depthLevel
+    doesn't exist in treeCore, return outOfBounds */
+    return outOfBounds;
   }
 
   return largestPathLengthInLevel;
