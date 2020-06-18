@@ -24,9 +24,9 @@ export enum FileType {
   CONFIG_FILE = 'CONFIG_FILE',
 }
 
-export interface TreeCore {
+export interface Core {
+  path: string;
+  deletedOrder: number;
   comment: string;
-  text: string;
-  depthLevel: number;
-  fileType: FileType;
+  treeCore: Core[];
 }

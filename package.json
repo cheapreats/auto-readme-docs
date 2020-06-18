@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha -r ts-node/register src/utils/test.ts",
+    "test": "mocha -r ts-node/register src/utils/getLargestPathLengthInLevelTest.ts",
     "eject": "react-scripts eject",
     "lint": "npx eslint './src/**/*.{ts, tsx}' --quiet --fix"
   },
