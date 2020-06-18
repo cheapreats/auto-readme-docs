@@ -1,4 +1,4 @@
-import { Core } from "../tree/types";
+import { Core } from '../tree/types';
 
 /**
  * @param {Core[]} treeCore - entire tree that is input for analysis
