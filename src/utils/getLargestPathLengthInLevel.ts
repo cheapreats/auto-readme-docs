@@ -1,12 +1,13 @@
 import { Core } from '../tree/types';
 
-/** Finds the largest path length for a inputted depthLevel in given
- * treeCore so that comments can be aligned accordingly
+/** Recursively traverses through a treeCore to find the largest path length
+ * for an inputted depthLevel so that comments can be aligned accordingly
  * @param {Core[]} treeCore - entire tree that is input for analysis
  * @param {number} depthLevel - level of nesting in the treeCore
  * @param {number} depthLevelCounter - set to 0 by default meaning root
  * treeCore
- * @returns {number} - the largest path length in the level
+ * @returns {number} - the largest path length in the level or -1 if the depth
+ * level inputted was greater than the max depth level of the treeCore
  */
 
 /* Default largestPathLengthInLevel is set to 0 indicating no such
@@ -36,9 +37,8 @@ export const getLargestPathLengthInLevel = (
         maxDepthLevel = depthLevel;
       }
     } else {
-      /* If depthLevel was not reached, add 1 to the maxDepthLevel as
-      the function is recursively called to go one depthLevel deeper by
-      adding 1 to the depthLevelCounter */
+      /* If depthLevel was not reached, recursively call function to
+      go one depthLevel deeper by adding 1 to the depthLevelCounter */
       getLargestPathLengthInLevel(
         treeCore[index].treeCore,
         depthLevel,
@@ -47,9 +47,6 @@ export const getLargestPathLengthInLevel = (
     }
   }
   if (maxDepthLevel < depthLevel) {
-    /* After traversing through the entire treeCore, if maxDepthLevel
-    doesn't match the desired depthLevel analysis -- depthLevel
-    doesn't exist in treeCore, return outOfBounds */
     return outOfBounds;
   }
 
