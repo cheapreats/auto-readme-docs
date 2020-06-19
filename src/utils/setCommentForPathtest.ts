@@ -58,6 +58,11 @@ describe("setCommentForPath Function", () => {
     const newTreeCore = setCommentForPath(treeCore, "src/utils", "");
     expect(newTreeCore[0].comment).to.equal("");
   });
+  it("non Existing Path", () => {
+    expect(() =>
+      setCommentForPath(treeCore, "src/utils/wrongfolder", "NEW COMMENT!")
+    ).to.throw();
+  });
   it("Invalid address", () => {
     expect(() =>
       setCommentForPath(treeCore, "///ds//", "NEW COMMENT!")

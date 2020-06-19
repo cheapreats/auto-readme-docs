@@ -12,6 +12,23 @@ interface Core {
   treeCore: Core[];
 }
 
+const searchRecursiveCore = (
+  treeCore: Core[],
+  path: string,
+  comment: string
+): Core[] => {
+  treeCore.forEach((core) => {
+    if (core.treeCore) {
+      core.treeCore = searchRecursiveCore(core.treeCore, path, comment);
+    }
+  });
+  const index = treeCore.findIndex((core) => core.path === path);
+  if (index > -1) {
+    treeCore[index].comment = comment ? " # " + comment : "";
+  }
+  return treeCore;
+};
+
 export const setCommentForPath = (
   treeCore: Core[],
   path: string,
@@ -22,12 +39,14 @@ export const setCommentForPath = (
   if (pattern.test(path)) {
     treeCore.forEach((core) => {
       if (core.treeCore) {
-        core.treeCore = setCommentForPath(core.treeCore, path, comment);
+        core.treeCore = searchRecursiveCore(core.treeCore, path, comment);
       }
     });
     const index = treeCore.findIndex((core) => core.path === path);
     if (index > -1) {
       treeCore[index].comment = comment ? " # " + comment : "";
+    } else {
+      throw new Error("Path Doesn't Exist!");
     }
     return treeCore;
   } else {
