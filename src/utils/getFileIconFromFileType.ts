@@ -6,16 +6,23 @@ import { FileType } from '../tree/types';
  * or FileType.CONFIG_FILE
  * @returns {Icon} - an emoji passed into a string depending on which file
  * type was found (FILE, CONFIG_FILE, or FOLDER)
-*/
+ */
 
 export enum Icon {
-  /* Added one space after emoji so that it doesn't stick together
-  with the next phrase or delete a character */
-  FOLDER = '📂 ',
-  FILE = '📄 ',
-  CONFIG_FILE = '📜 ',
+  FOLDER = '📂',
+  FILE = '📄',
+  CONFIG_FILE = '📜',
 }
 
-export const getFileIconFromFileType = (fileType: FileType): Icon => Icon[fileType];
+const formatEmojiString = (icon: Icon): Icon => {
+  /* Function to add one space after emoji so that it doesn't stick together
+  with the next phrase or delete a character */
+  const formattedEmojiString = `${icon} `;
+  const newEmoji: Icon = formattedEmojiString as Icon;
+  return newEmoji;
+};
+
+export const getFileIconFromFileType = (fileType: FileType):
+Icon => formatEmojiString(Icon[fileType]);
 
 export default getFileIconFromFileType;
