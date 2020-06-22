@@ -23,15 +23,6 @@ export enum FileType {
   HIDDEN_FILE = 'HIDDEN_FILE',
   CONFIG_FILE = 'CONFIG_FILE',
 }
-
-export enum Icon {
-  /* Added one space after emoji so that it doesn't stick together
-  with the next phrase or delete a character */
-  FOLDER = '📂 ',
-  FILE = '📄 ',
-  CONFIG_FILE = '📜 ',
-}
-
 export interface Core {
   path: string;
   comment: string;
