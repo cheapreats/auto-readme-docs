@@ -18,8 +18,8 @@ const formatEmojiString = (icon: Icon): Icon => {
   /* Function to add one space after emoji so that it doesn't stick together
   with the next phrase or delete a character */
   const formattedEmojiString = `${icon} `;
-  const newEmoji: Icon = formattedEmojiString as Icon;
-  return newEmoji;
+  const formatEmojiToIcon: Icon = formattedEmojiString as Icon;
+  return formatEmojiToIcon;
 };
 
 export const getFileIconFromFileType = (fileType: FileType):
