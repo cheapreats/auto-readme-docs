@@ -23,7 +23,6 @@ export enum FileType {
   HIDDEN_FILE = 'HIDDEN_FILE',
   CONFIG_FILE = 'CONFIG_FILE',
 }
-
 export interface Core {
   path: string;
   comment: string;
