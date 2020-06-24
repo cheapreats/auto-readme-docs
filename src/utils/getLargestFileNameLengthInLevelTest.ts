@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { getLargestPathLengthInLevel } from './getLargestPathLengthInLevel';
+import { getLargestFileNameLengthInLevel } from './getLargestFileNameLengthInLevel';
 import 'mocha';
 
 const treeCore = [
