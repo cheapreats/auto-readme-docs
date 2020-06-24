@@ -22,6 +22,7 @@ export enum FileType {
   FILE = 'FILE',
   HIDDEN_FILE = 'HIDDEN_FILE',
   CONFIG_FILE = 'CONFIG_FILE',
+  LICENSE = 'LICENSE',
 }
 export interface Core {
   path: string;
