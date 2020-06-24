@@ -71,11 +71,11 @@ const treeCore = [
 
 describe('Finds the largest path length in a treeCore given the depth level wanted for analysis', () => {
   // Test for depthLevel 2
-  it('should return 18 for "public/favicon.ico"', () => {
+  it('should return 11 for "public/favicon.ico"', () => {
     expect(getLargestFileNameLengthInLevel(treeCore, 2)).to.equal(11);
   });
   // Test for depthLevel 3
-  it('should return 19 for "src/images/Demo.gif"', () => {
+  it('should return 8 for "src/images/Demo.gif"', () => {
     expect(getLargestFileNameLengthInLevel(treeCore, 3)).to.equal(8);
   });
   // Test for depthLevel 1
