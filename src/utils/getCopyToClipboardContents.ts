@@ -6,11 +6,13 @@ import { Core } from "../tree/types";
  * @returns {string} the MarkDownTree without the deletedCore's
  */
 
+const NOT_DELETED = -1;
+
 const generateTreeCore = (treeCore: Core[]): Core[] => {
   const visibleCoresAsLines: Core[] = [];
 
   treeCore.forEach((core) => {
-    if (core.deletedOrder === -1) {
+    if (core.deletedOrder === NOT_DELETED) {
       if (core.treeCore) {
         core.treeCore = generateTreeCore(core.treeCore);
       }
