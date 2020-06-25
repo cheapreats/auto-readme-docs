@@ -67,7 +67,7 @@ const treeCore = [
   },
 ];
 
+deleteFileFromPath(treeCore, 'src');
+console.log(treeCore[0].treeCore[0]);
 deleteFileFromPath(treeCore, 'public/index.html');
-deleteFileFromPath(treeCore, 'public/favicon.ico');
 console.log(treeCore[0].treeCore[1].treeCore[1]);
-console.log(treeCore[0].treeCore[1].treeCore[0]);
