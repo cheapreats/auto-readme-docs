@@ -16,9 +16,10 @@ const BadgeDisplay = styled.div`
 
 interface Props {
   repoName: string;
+  ownerName: string;
 }
 
-const BadgesSection: React.FC<Props> = ({ repoName }: Props) => (
+const BadgesSection: React.FC<Props> = ({ repoName, ownerName }: Props) => (
   <Card>
     <div className="row">
       <div className="col">
@@ -28,8 +29,8 @@ const BadgesSection: React.FC<Props> = ({ repoName }: Props) => (
     <div className="row">
       <div className="col">
         <BadgeDisplay>
-          <a href={`https://badge.fury.io/js/${repoName}`}>
-            <img src={`https://badge.fury.io/js/${repoName}.svg`} alt="npm version" height="18" />
+          <a href={`https://badge.fury.io/js/${ownerName}/${repoName}`}>
+            <img src={`https://badge.fury.io/js/${ownerName}/${repoName}.svg`} alt="npm version" height="18" />
           </a>
         </BadgeDisplay>
       </div>
