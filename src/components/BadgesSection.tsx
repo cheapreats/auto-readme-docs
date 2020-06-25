@@ -37,7 +37,7 @@ const BadgesSection: React.FC<Props> = ({ repoName, ownerName }: Props) => (
     </div>
     <div className="row">
       <CenteredCol className="col">
-        <CopyToClipboard text={repoToMarkDownBadge(repoName)}>
+        <CopyToClipboard text={repoToMarkDownBadge(repoName, ownerName)}>
           <CustomSecondaryButton type="submit" value="Copy to Clipboard" />
         </CopyToClipboard>
       </CenteredCol>
