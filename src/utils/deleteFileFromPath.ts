@@ -2,6 +2,13 @@ import { generateMarkDownTree } from './generateMarkDownTree';
 import { getFileTypeFromPath } from './getFileTypeFromPath';
 import { Core, FileType } from '../tree/types';
 
+/** Given a path, delete the element required and generate the tree again
+ * @param {Core[]} treeCore - entire that is inputted for analysis
+ * @param {string} path - the path of element that needs to be deleted
+ * @returns {void} - doesn't return anything, simply does the action of
+ * deleting an element
+*/
+
 let lastDeletedOrder = -1;
 
 const recursivelySetDeletedOrder = (
