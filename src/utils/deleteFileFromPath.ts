@@ -1,25 +1,8 @@
-// import { generateMarkDownTree } from './generateMarkDownTree';
-import { getLargestFileNameLengthInLevel } from './getLargestFileNameLengthInLevel';
+import { generateMarkDownTree } from './generateMarkDownTree';
 import { getFileTypeFromPath } from './getFileTypeFromPath';
 import { Core, FileType } from '../tree/types';
 
-let pathDepthLevel = 0;
 let lastDeletedOrder = -1;
-
-const searchForDepthLevel = (
-  treeCore: Core[],
-  path: string,
-  depthLevelCounter = 0,
-): number => {
-  for (let index = 0; index < treeCore.length; index += 1) {
-    if (treeCore[index].path === path) {
-      pathDepthLevel = depthLevelCounter;
-    }
-    searchForDepthLevel(treeCore[index].treeCore, path, depthLevelCounter + 1);
-  }
-
-  return pathDepthLevel;
-};
 
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
@@ -35,21 +18,9 @@ const recursivelySetDeletedOrder = (
 };
 
 export const deleteFileFromPath = (treeCore: Core[], path: string): void => {
-  const largestFileNameLengthInLevel = getLargestFileNameLengthInLevel(
-    treeCore,
-    searchForDepthLevel(treeCore, path),
-  );
   for (let index = 0; index < treeCore.length; index += 1) {
-    /* if (
-      path.split('/')[path.split('/').length - 1].length
-      >= largestFileNameLengthInLevel
-    ) {
-      generateMarkDownTree(treeCore);
-    } */
     if (
       treeCore[index].path === path
-      && path.split('/')[path.split('/').length - 1].length
-        < largestFileNameLengthInLevel
       && getFileTypeFromPath(path) !== FileType.FOLDER
     ) {
       lastDeletedOrder += 1;
@@ -57,8 +28,6 @@ export const deleteFileFromPath = (treeCore: Core[], path: string): void => {
     }
     if (
       treeCore[index].path === path
-      && path.split('/')[path.split('/').length - 1].length
-        < largestFileNameLengthInLevel
       && getFileTypeFromPath(path) === FileType.FOLDER
     ) {
       lastDeletedOrder += 1;
@@ -67,6 +36,8 @@ export const deleteFileFromPath = (treeCore: Core[], path: string): void => {
     }
     deleteFileFromPath(treeCore[index].treeCore, path);
   }
+
+  generateMarkDownTree(treeCore);
 };
 
 export default deleteFileFromPath;

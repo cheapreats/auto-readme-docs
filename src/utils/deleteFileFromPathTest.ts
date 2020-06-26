@@ -1,8 +1,10 @@
+import { expect } from 'chai';
 import { deleteFileFromPath } from './deleteFileFromPath';
+import 'mocha';
 
 const treeCore = [
   {
-    path: '',
+    path: 'treeCore',
     deletedOrder: -1,
     comment: '',
     treeCore: [
@@ -14,18 +16,18 @@ const treeCore = [
           {
             path: 'src/components',
             deletedOrder: -1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
           {
             path: 'src/images',
             deletedOrder: -1,
-            comment: "",
+            comment: '',
             treeCore: [
               {
                 path: 'src/images/Demo.gif',
                 deletedOrder: -1,
-                comment: "",
+                comment: '',
                 treeCore: [],
               },
             ],
@@ -33,13 +35,13 @@ const treeCore = [
           {
             path: 'src/tree',
             deletedOrder: -1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
           {
             path: 'src/utils',
             deletedOrder: -1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
         ],
@@ -52,7 +54,7 @@ const treeCore = [
           {
             path: 'public/favicon.ico',
             deletedOrder: -1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
           {
@@ -67,7 +69,18 @@ const treeCore = [
   },
 ];
 
-deleteFileFromPath(treeCore, 'src');
-console.log(treeCore[0].treeCore[0]);
-deleteFileFromPath(treeCore, 'public/index.html');
-console.log(treeCore[0].treeCore[1].treeCore[1]);
+describe('Deletes elements from treeCore', () => {
+  // Test for deletion of file with no comment
+  it('should delete src/images/Demo.gif by setting deleted order to 0', () => {
+    deleteFileFromPath(treeCore, 'src/images/Demo.gif');
+    expect(treeCore[0].treeCore[0].treeCore[1].treeCore[0].deletedOrder).to.equal(0);
+  });
+  // Test for deletion of a folder with no comment
+  it('should delete public by setting deleted order to 1', () => {
+    deleteFileFromPath(treeCore, 'public');
+    console.log('')
+    expect(treeCore[0].treeCore[1].deletedOrder).to.equal(1);
+    expect(treeCore[0].treeCore[1].treeCore[0].deletedOrder).to.equal(1);
+    expect(treeCore[0].treeCore[1].treeCore[1].deletedOrder).to.equal(1);
+  });
+});
