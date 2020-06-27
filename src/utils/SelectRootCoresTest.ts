@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import { expect } from "chai";
-import SelectRootCores from "./SelectRootCores";
+import selectRootCores from "./SelectRootCores";
 
 const treeCore = [
   {
@@ -75,9 +75,9 @@ const result = [
   "📂 [doc2](./doc2) ",
 ];
 
-describe("SelectRootCores", () => {
+describe("selectRootCores", () => {
   it("shows only the Cores on the root address", () => {
-    const newTreeCore = SelectRootCores(treeCore);
+    const newTreeCore = selectRootCores(treeCore);
     expect(newTreeCore.toString).to.equal(result.toString);
   });
 });
