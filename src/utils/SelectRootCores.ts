@@ -6,7 +6,7 @@ import { Core } from "../tree/types";
  * @returns {string} the MarkDownTree without the deletedCore's
  */
 
-export const SelectRootCores = (treeCore: Core[]): string[] => {
+export const selectRootCores = (treeCore: Core[]): string[] => {
   const rootCores: Core[] = [];
   treeCore.forEach((core) => {
     if (core.treeCore) {
@@ -17,4 +17,4 @@ export const SelectRootCores = (treeCore: Core[]): string[] => {
   const output = generateMarkDownTree(rootCores);
   return output;
 };
-export default SelectRootCores;
+export default selectRootCores;
