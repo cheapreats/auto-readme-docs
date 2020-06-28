@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import mocha from 'mocha';
+import 'mocha';
 import { getFileIconFromFileType } from './getFileIconFromFileType';
 import { FileType } from '../tree/types';
 
