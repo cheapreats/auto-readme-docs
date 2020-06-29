@@ -19,7 +19,6 @@ const BadgeDisplay = styled.div`
 interface Props {
   url: string;
 }
-const ownerAndRepo = getOwnerAndRepoFromUrl(this.url)
 
 const BadgesSection: React.FC<Props> = ({ url }: Props) => (
   <Card>
@@ -31,15 +30,15 @@ const BadgesSection: React.FC<Props> = ({ url }: Props) => (
     <div className="row">
       <div className="col">
         <BadgeDisplay>
-          <a href={getNpmLinkFromOwnerAndRepo(ownerAndRepo)}>
-            <img src={getNpmLinkFromOwnerAndRepo(ownerAndRepo)} alt="npm version" height="18" />
+          <a href={getNpmLinkFromOwnerAndRepo(getOwnerAndRepoFromUrl(url))}>
+            <img src={getNpmLinkFromOwnerAndRepo(getOwnerAndRepoFromUrl(url))} alt="npm version" height="18" />
           </a>
         </BadgeDisplay>
       </div>
     </div>
     <div className="row">
       <CenteredCol className="col">
-        <CopyToClipboard text={repoToMarkDownBadge(ownerAndRepo)}>
+        <CopyToClipboard text={repoToMarkDownBadge(getOwnerAndRepoFromUrl(url))}>
           <CustomSecondaryButton type="submit" value="Copy to Clipboard" />
         </CopyToClipboard>
       </CenteredCol>
