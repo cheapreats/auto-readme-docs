@@ -1,4 +1,4 @@
-export const repoToMarkDownBadge = (repoName: string, ownerName: string): string => {
-    const badgeDisplay = `[![npm version](https://badge.fury.io/js/${ownerName}/${repoName}.svg)](https://badge.fury.io/js/${ownerName}/${repoName})`;
+export const repoToMarkDownBadge = ( ownerAndRepo: string[]): string => {
+    const badgeDisplay = `[![npm version](https://badge.fury.io/js/${ownerAndRepo[0]}/${ownerAndRepo[1]}.svg)](https://badge.fury.io/js/${ownerAndRepo[0]}/${ownerAndRepo[1]})`;
     return badgeDisplay;
 }

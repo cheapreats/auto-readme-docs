@@ -68,14 +68,14 @@ const App: React.FC = () => {
       const resJSON = await res.json();
       console.log(resJSON);
     } catch (error) {
-      alert('Error' + error);
+      alert('Error' + error);  
     }
   }
   return (
     <div className="container container-small">
       <URLBox value={url} onChange={handleURLChange} onClick={handleGoButtonPress} />
       {repoName !== '' && isNpmBadgeVisible &&
-        <BadgesSection repoName={repoName} ownerName={ownerName}/>
+        <BadgesSection url={url}/>
       }
       {markdownDisplayContent.length !== 0 &&
         <MarkdownDisplay content={markdownDisplayContent} />

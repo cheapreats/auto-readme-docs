@@ -4,6 +4,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Card from './reusable/Card';
 import CenteredCol from './reusable/CenteredCol';
 import CustomSecondaryButton from './reusable/CustomSecondaryButton';
+import { getOwnerAndRepoFromUrl } from '../utils/getOwnerAndRepoFromUrl'
+import { getNpmLinkFromOwnerAndRepo } from '../utils/createNpmFormatting'
 import { repoToMarkDownBadge } from '../utils/repoToBadge';
 
 // Styles
@@ -15,11 +17,10 @@ const BadgeDisplay = styled.div`
 // Components
 
 interface Props {
-  repoName: string;
-  ownerName: string;
+  url: string;
 }
 
-const BadgesSection: React.FC<Props> = ({ repoName, ownerName }: Props) => (
+const BadgesSection: React.FC<Props> = ({ url }: Props) => (
   <Card>
     <div className="row">
       <div className="col">
@@ -29,15 +30,15 @@ const BadgesSection: React.FC<Props> = ({ repoName, ownerName }: Props) => (
     <div className="row">
       <div className="col">
         <BadgeDisplay>
-          <a href={`https://badge.fury.io/js/${ownerName}/${repoName}`}>
-            <img src={`https://badge.fury.io/js/${ownerName}/${repoName}.svg`} alt="npm version" height="18" />
+          <a href={getNpmLinkFromOwnerAndRepo(getOwnerAndRepoFromUrl(url))}>
+            <img src={} alt="npm version" height="18" />
           </a>
         </BadgeDisplay>
       </div>
     </div>
     <div className="row">
       <CenteredCol className="col">
-        <CopyToClipboard text={repoToMarkDownBadge(repoName, ownerName)}>
+        <CopyToClipboard text={repoToMarkDownBadge(getOwnerAndRepoFromUrl(url))}>
           <CustomSecondaryButton type="submit" value="Copy to Clipboard" />
         </CopyToClipboard>
       </CenteredCol>
