@@ -5,13 +5,14 @@ import { Core } from "../tree/types";
  * @param {Core[]} treeCore  The whole MarkDownTree
  * @returns {Core[]} the MarkDownTree with only Folders
  */
+const typeToShow="FOLDER";
 
 const generateTreeCore = (treeCore: Core[]): Core[] => {
   const foldersOnlyAsLines: Core[] = [];
 
   treeCore.forEach((core) => {
     const coreType = getFileTypeFromPath(core.path);
-    if (coreType === "FOLDER") {
+    if (coreType === typeToShow) {
       if (core.treeCore) {
         core.treeCore = generateTreeCore(core.treeCore);
       }
