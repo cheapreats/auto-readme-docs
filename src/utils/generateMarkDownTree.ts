@@ -21,7 +21,6 @@ export const generateMarkDownTree = (
   if (filter) {
     treeCore = filter(treeCore);
   }
-
   treeCore.forEach((core) => {
     const { path } = core;
     const comment = core.comment
