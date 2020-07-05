@@ -1,6 +1,9 @@
 /* eslint-disable quotes */
 import { expect } from "chai";
 import generateMarkDownTree from "./generateMarkDownTree";
+import selectFoldersOnly from "./selectFoldersOnly";
+import selectRootCores from "./SelectRootCores";
+
 
 const treeCore = [
   {
@@ -81,7 +84,7 @@ const treeCore = [
   },
 ];
 
-const result = [
+const resultwhole = [
   "📂 [ex](./ex)     # just a comment",
   "├── 📂 [aaa7](./ex/aaa7) # just a comment",
   "📂 [src](./src)    # Source files",
@@ -96,10 +99,39 @@ const result = [
   "📂 [doc222](./doc222) # testing",
 ];
 
+const resultfoldersonly = [
+  "📂 [ex](./ex)     # just a comment",
+  "├── 📂 [aaa7](./ex/aaa7) # just a comment",
+  "📂 [src](./src)    # Source files",
+  "├── 📂 [utils](./src/utils)      # just a comment",
+  "├── 📂 [components](./src/components) # another comment",
+  "│   ├── 📂 [reusable](./src/components/reusable) ",
+  "📂 [doc](./doc)    # Documentation files",
+  "📂 [doc2](./doc2) ",
+  "├── 📂 [knives](./doc2/knives) # John",
+  "├── 📂 [out](./doc2/out)    # Mellencamp",
+  "📂 [doc222](./doc222) # testing",
+];
+
+const resultrootsonly = [
+  "📂 [ex](./ex)     # just a comment",
+  "📂 [src](./src)    # Source files",
+  "📂 [doc](./doc)    # Documentation files",
+  "📂 [doc2](./doc2) ",
+  "📂 [doc222](./doc222) # testing",
+];
+
 describe("Generate Tree", () => {
   it(" a tree containing file,folder,3 levels,deleted folders with comment and no comments ", () => {
     const newTreeCore = generateMarkDownTree(treeCore);
-    // console.log(result);
-    expect(newTreeCore.toString()).to.equal(result.toString());
+    expect(newTreeCore.toString).to.equal(resultwhole.toString);
+  });
+  it("folders only ", () => {
+    const newTreeCore = generateMarkDownTree(treeCore, selectFoldersOnly);
+    expect(newTreeCore.toString).to.equal(resultfoldersonly.toString);
+  });
+  it("Root only ", () => {
+    const newTreeCore = generateMarkDownTree(treeCore, selectRootCores);
+    expect(newTreeCore.toString).to.equal(resultrootsonly.toString);
   });
 });
