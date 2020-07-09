@@ -2,7 +2,14 @@ import { Core, FileType } from '../tree/types';
 import { generateMarkDownTree } from './generateMarkDownTree';
 import { getFileTypeFromPath } from './getFileTypeFromPath';
 
-let lastDeletedOrder = 1;
+/** Undoes the deletion of one deleted order in a given tree, unless
+ * given an undoNumber
+ * @param {Core[]} treeCore - entire tree that is inputted for analysis
+ * @param {number} undoNumber - by default it is set to 1, indicates how many
+ * deletions are to be undone
+*/
+
+let lastDeletedOrder = -1;
 
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
@@ -18,7 +25,19 @@ const recursivelySetDeletedOrder = (
   }
 };
 
+const countLastDeletedOrder = (treeCore: Core[]): void => {
+  // counts lastDeletedOrder of a tree and updates the value of lastDeletedOrder
+  for (let index = 0; index < treeCore.length; index += 1) {
+    if (treeCore[index].deletedOrder > lastDeletedOrder) {
+      lastDeletedOrder = treeCore[index].deletedOrder;
+    } else {
+      countLastDeletedOrder(treeCore[index].treeCore);
+    }
+  }
+};
+
 export const undoDeletions = (treeCore: Core[], undoNumber = 1): void => {
+  countLastDeletedOrder(treeCore);
   const resetDeletedOrder = -1;
   const range = [] as number[];
   const newDeletedOrder = lastDeletedOrder - undoNumber;
@@ -39,6 +58,7 @@ export const undoDeletions = (treeCore: Core[], undoNumber = 1): void => {
         treeCore[y].deletedOrder === range[x]
         && getFileTypeFromPath(treeCore[y].path) === FileType.FOLDER
       ) {
+        treeCore[y].deletedOrder = resetDeletedOrder;
         recursivelySetDeletedOrder(treeCore[y].treeCore, range[x]);
       }
       undoDeletions(treeCore[y].treeCore, undoNumber);
