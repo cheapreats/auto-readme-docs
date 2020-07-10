@@ -5,14 +5,18 @@ import { Core } from "../tree/types";
  * @returns {Core[]} the treeCore of only root
  */
 
-export const selectRootCores = (treeCore: Core[]): Core[] => {
-  const rootCores: Core[] = [];
-  treeCore.forEach((core) => {
-    if (core.treeCore) {
-      core.treeCore = [];
-    }
-    rootCores.push(core);
-  });
-  return rootCores;
+export const selectRootCores = (treeCore: Core[]): Core[] | null => {
+  if (treeCore) {
+    const rootCores: Core[] = [];
+    treeCore.forEach((core) => {
+      if (core.treeCore) {
+        core.treeCore = [];
+      }
+      rootCores.push(core);
+    });
+    return rootCores;
+  } else {
+    return null;
+  }
 };
 export default selectRootCores;

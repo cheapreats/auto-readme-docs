@@ -5,7 +5,9 @@ import { Core, FileType } from "../tree/types";
  * @param {Core[]} treeCore  The whole MarkDownTree
  * @returns {Core[]} the MarkDownTree with only Folders
  */
-const typeToShow=FileType.FOLDER;
+
+const typeToShow = FileType.FOLDER;
+
 
 const generateTreeCore = (treeCore: Core[]): Core[] => {
   const foldersOnlyAsLines: Core[] = [];
@@ -22,8 +24,13 @@ const generateTreeCore = (treeCore: Core[]): Core[] => {
   return foldersOnlyAsLines;
 };
 
-export const selectFoldersOnly = (treeCore: Core[]): Core[] => {
-  const foldersOnly: Core[] = generateTreeCore(treeCore);
-  return foldersOnly;
+export const selectFoldersOnly = (treeCore: Core[]): Core[] | null => {
+  if (treeCore) {
+    const foldersOnly: Core[] = generateTreeCore(treeCore);
+    return foldersOnly;
+  } else {
+    return null;
+  }
+
 };
 export default selectFoldersOnly;
