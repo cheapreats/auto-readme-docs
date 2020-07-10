@@ -8,6 +8,7 @@ import { Core, FileType } from "../tree/types";
 
 const typeToShow = FileType.FOLDER;
 
+
 const generateTreeCore = (treeCore: Core[]): Core[] => {
   const foldersOnlyAsLines: Core[] = [];
 
@@ -30,5 +31,6 @@ export const selectFoldersOnly = (treeCore: Core[]): Core[] | null => {
   } else {
     return null;
   }
+
 };
 export default selectFoldersOnly;
