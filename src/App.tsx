@@ -9,6 +9,7 @@ import URLBox from './components/URLBox';
 
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState('');
+  const [ownerName, setOwnerName] = useState('');
   const [isNpmBadgeVisible, setNpmBadgeVisible] = useState(false);
   const [url, setURL] = useState('');
   const [markdownDisplayContent, setMarkdownDisplayContent] = useState<string[]>([]);
@@ -21,6 +22,7 @@ const App: React.FC = () => {
     const owner = pathArray[3];
     const repo = pathArray[4];
     setRepoName(repo);
+    setOwnerName(owner);
     await makeRequest(owner, repo);
   };
 
@@ -66,14 +68,14 @@ const App: React.FC = () => {
       const resJSON = await res.json();
       console.log(resJSON);
     } catch (error) {
-      alert('Error' + error);
+      alert('Error' + error);  
     }
   }
   return (
     <div className="container container-small">
       <URLBox value={url} onChange={handleURLChange} onClick={handleGoButtonPress} />
       {repoName !== '' && isNpmBadgeVisible &&
-        <BadgesSection repoName={repoName} />
+        <BadgesSection url={url}/>
       }
       {markdownDisplayContent.length !== 0 &&
         <MarkdownDisplay content={markdownDisplayContent} />

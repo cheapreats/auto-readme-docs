@@ -16,4 +16,7 @@ describe('Given a file type, the function returns an emoji passed into a string 
   it('should return 📂  since fileType is a FOLDER', () => {
     expect(getFileIconFromFileType(FileType.FOLDER)).to.equal('📂 ');
   });
-});
+  it('should return ⚖️  since fileType is a LICENSE', () => {
+    expect(getFileIconFromFileType(FileType.LICENSE)).to.equal('⚖️ ');
+  });
+  });

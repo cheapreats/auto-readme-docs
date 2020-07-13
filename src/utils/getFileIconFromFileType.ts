@@ -12,6 +12,7 @@ export enum Icon {
   FOLDER = '📂',
   FILE = '📄',
   CONFIG_FILE = '📜',
+  LICENSE = '⚖️',
 }
 
 const formatEmojiString = (icon: Icon): Icon => {
