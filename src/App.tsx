@@ -94,7 +94,7 @@ const App: React.FC = () => {
       {repoName !== "" && isNpmBadgeVisible && (
         <BadgesSection repoName={repoName} />
       )}
-      {treeCore.length !== 0 && <MarkdownDisplay content={treeCore} />}
+      {treeCore.length !== 0 && <MarkdownDisplay treeCore={treeCore} />}
     </div>
   );
 };

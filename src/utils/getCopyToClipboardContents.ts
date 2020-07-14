@@ -8,7 +8,7 @@ import { Core } from "../tree/types";
 
 const NOT_DELETED = -1;
 
-const generateTreeCore = (treeCore: Core[]): Core[] => {
+export const generateTreeCore = (treeCore: Core[]): Core[] => {
   const visibleCoresAsLines: Core[] = [];
 
   treeCore.forEach((core) => {
@@ -24,7 +24,6 @@ const generateTreeCore = (treeCore: Core[]): Core[] => {
 
 export const getCopyToClipboardContents = (treeCore: Core[]): string[] => {
   const visibleTreeCore: Core[] = generateTreeCore(treeCore);
-
   const copyToClipboardContents = generateMarkDownTree(visibleTreeCore);
   return copyToClipboardContents;
 };
