@@ -6,6 +6,7 @@ import getFileIconFromFileType from "./getFileIconFromFileType";
 import getFileTypeFromPath from "./getFileTypeFromPath";
 import { symbols } from "../tree/constants";
 import { Core } from "../tree/types";
+import { deepCopyFunction } from "./deepCopyFunction";
 
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore  The whole MarkDownTree
@@ -17,11 +18,12 @@ export const generateMarkDownTree = (
   treeCore: Core[],
   filter: Function | null = null
 ): string[] => {
+  let deepClonedTreeCore = deepCopyFunction(treeCore);
   const outputAsLines: string[] = [];
   if (filter) {
-    treeCore = filter(treeCore);
+    deepClonedTreeCore = filter(deepClonedTreeCore);
   }
-  treeCore.forEach((core) => {
+  deepClonedTreeCore.forEach((core) => {
     const { path } = core;
     const comment = core.comment
       ? core.comment
