@@ -51,6 +51,7 @@ const result = [
 describe("selectRootOnly Function", () => {
   it("generates a tree with only folders (not the files)", () => {
     const newTreeCore = selectFoldersOnly(treeCore);
+    // @ts-ignore
     expect(newTreeCore.toString).to.equal(result.toString);
   });
 });
