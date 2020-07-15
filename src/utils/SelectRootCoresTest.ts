@@ -78,6 +78,7 @@ const result = [
 describe("SelectRootCores", () => {
   it("shows only the Cores on the root address", () => {
     const newTreeCore = SelectRootCores(treeCore);
+    // @ts-ignore
     expect(newTreeCore.toString).to.equal(result.toString);
   });
 });

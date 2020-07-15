@@ -52,7 +52,7 @@ export const generateMarkDownTree = (
 
     const spaces = longestFileName - deepestDirName.length;
     const commentAlignment = comment ? " ".repeat(spaces) : "";
-    curLine += `${icon}${hyperLink}${commentAlignment} ${comment}`;
+    curLine += `${icon}${hyperLink}${commentAlignment}${comment}`;
     outputAsLines.push(curLine);
     if (core.treeCore) {
       const childrenTree = generateMarkDownTree(core.treeCore);
