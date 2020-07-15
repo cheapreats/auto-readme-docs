@@ -92,7 +92,7 @@ const App: React.FC = () => {
         onClick={handleGoButtonPress}
       />
       {repoName !== "" && isNpmBadgeVisible && (
-        <BadgesSection repoName={repoName} />
+        <BadgesSection url={repoName} />
       )}
       {treeCore.length !== 0 && <MarkdownDisplay treeCore={treeCore} />}
     </div>
