@@ -1,9 +1,9 @@
 export const websiteLinkIcon = '🔗';
 
 const typescriptLink = `https://www.typescriptlang.org/`;
-const htmlLink = `https://www.typescriptlang.org/`;
-const javascriptLink = `https://www.typescriptlang.org/`;
-const cssLink = `https://www.typescriptlang.org/`;
+const htmlLink = `https://developer.mozilla.org/en-US/docs/Web/HTML`;
+const javascriptLink = `https://www.javascript.com/`;
+const cssLink = `https://developer.mozilla.org/en-US/docs/Web/CSS`;
 
 /*
   The Keys are written the way Github returns them.
