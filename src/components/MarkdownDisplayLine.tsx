@@ -46,12 +46,28 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   onChange = (): void => {},
 }) => {
   const path = (hyperLink: string): string => {
-    const startOfAddress = content.indexOf("(./") + 3;
+    // like [folder](./folder/file)
+    const rightBeforeAddressStarts = "(./";
+    const rightAfterAddressEnds = ")";
+    //  [folder](./*(here)*folder/file)
+    const startOfAddress =
+      content.indexOf(rightBeforeAddressStarts) +
+      rightBeforeAddressStarts.length;
+    const rightBeforeFileNameStarts = "[";
+    const rightAfterFileNameEnds = "]";
+    // like folder in [folder](./folder/file)
     const fileName = content.substring(
-      content.indexOf("[") + 1,
-      content.indexOf("]", startOfAddress - 4)
+      content.indexOf(rightBeforeFileNameStarts) + 1,
+      content.indexOf(
+        rightAfterFileNameEnds,
+        startOfAddress - rightBeforeAddressStarts.length - 1
+      )
     );
-    const endOfAddress = content.indexOf(fileName + ")", startOfAddress);
+    // [folder](./folder/file)*(here)
+    const endOfAddress = content.indexOf(
+      fileName + rightAfterAddressEnds,
+      startOfAddress
+    );
     return content.substring(startOfAddress, endOfAddress + fileName.length);
   };
 
