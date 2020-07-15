@@ -1,5 +1,6 @@
 import generateMarkDownTree from "./generateMarkDownTree";
 import { Core } from "../tree/types";
+import { deepCopyFunction } from "./deepCopyFunction";
 
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore  The whole MarkDownTree
@@ -8,10 +9,10 @@ import { Core } from "../tree/types";
 
 const NOT_DELETED = -1;
 
-export const generateTreeCore = (treeCore: Core[]): Core[] => {
+export const generateTreeCore = (deepClonedTreeCore: Core[]): Core[] => {
   const visibleCoresAsLines: Core[] = [];
 
-  treeCore.forEach((core) => {
+  deepClonedTreeCore.forEach((core) => {
     if (core.deletedOrder === NOT_DELETED) {
       if (core.treeCore) {
         core.treeCore = generateTreeCore(core.treeCore);
@@ -23,7 +24,8 @@ export const generateTreeCore = (treeCore: Core[]): Core[] => {
 };
 
 export const getCopyToClipboardContents = (treeCore: Core[]): string[] => {
-  const visibleTreeCore: Core[] = generateTreeCore(treeCore);
+  const deepClonedTreeCore = deepCopyFunction(treeCore);
+  const visibleTreeCore: Core[] = generateTreeCore(deepClonedTreeCore);
   const copyToClipboardContents = generateMarkDownTree(visibleTreeCore);
   return copyToClipboardContents;
 };
