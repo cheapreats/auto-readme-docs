@@ -7,6 +7,7 @@ interface Props {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: (e: MouseEvent) => void;
+  onDefaultClick: () => void;
 }
 
 const URLBox: React.FC<Props> = (props: Props) => (
@@ -31,6 +32,19 @@ const URLBox: React.FC<Props> = (props: Props) => (
         <CustomButton value="Go" onClick={props.onClick} />
       </div>
     </div>
+      <div className="row">
+          <div
+              className="col"
+              style={{
+                  justifyContent: 'center',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  marginTop: '2rem',
+              }}
+          >
+              <CustomButton value="Visualize an Example" onClick={props.onDefaultClick} />
+          </div>
+      </div>
   </Card>
 );
 
