@@ -31,6 +31,15 @@ const App: React.FC = () => {
     string[]
   >([]);
 
+  const handleExampleGoButtonPress = async () => {
+    const url = "https://github.com/cheapreats/auto-readme-docs";
+    const pathArray = url.split("/");
+    const owner = pathArray[3];
+    const repo = pathArray[4];
+    setRepoName(repo);
+    await makeRequest(owner, repo);
+  };
+
   const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setURL(e.target.value);
 
@@ -103,6 +112,7 @@ const App: React.FC = () => {
         value={url}
         onChange={handleURLChange}
         onClick={handleGoButtonPress}
+        onDefaultClick={handleExampleGoButtonPress}
       />
       {repoName !== "" && isNpmBadgeVisible && (
         <BadgesSection url={repoName} />
