@@ -132,7 +132,7 @@ const App: React.FC = () => {
             <div className="row">
               <CenteredCol className="col">
                 <CopyToClipboard
-                    text={`<big><pre>\n${clipboardContent.join("\n")}\n</pre></big>`}
+                    text={`<big><pre>\n${repoLanguages.join("\n")}\n</pre></big>`}
                 >
                   <CustomSecondaryButton type="submit" value="Copy to Clipboard" />
                 </CopyToClipboard>
