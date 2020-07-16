@@ -26,7 +26,7 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // Update the document title using the browser API
     setClipboardContent(
       getCopyToClipboardContents(treeCore, filtering(filter))
