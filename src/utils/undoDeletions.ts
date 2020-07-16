@@ -7,9 +7,11 @@ import { getFileTypeFromPath } from './getFileTypeFromPath';
  * @param {Core[]} treeCore - entire tree that is inputted for analysis
  * @param {number} undoNumber - by default it is set to 1, indicates how many
  * deletions are to be undone
+ * @returns {void} - doesn't return anything, simply undoes the deletions as
+ * per undoNumber provided
  */
 
-let lastDeletedOrder = -1;
+let highestDeletedOrder = -1;
 
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
@@ -28,8 +30,8 @@ const recursivelySetDeletedOrder = (
 const countLastDeletedOrder = (treeCore: Core[]): void => {
   // counts lastDeletedOrder of a tree and updates the value of lastDeletedOrder
   for (let index = 0; index < treeCore.length; index += 1) {
-    if (treeCore[index].deletedOrder > lastDeletedOrder) {
-      lastDeletedOrder = treeCore[index].deletedOrder;
+    if (treeCore[index].deletedOrder > highestDeletedOrder) {
+      highestDeletedOrder = treeCore[index].deletedOrder;
     } else {
       countLastDeletedOrder(treeCore[index].treeCore);
     }
@@ -40,9 +42,9 @@ export const undoDeletions = (treeCore: Core[], undoNumber = 1): void => {
   countLastDeletedOrder(treeCore);
   const resetDeletedOrder = -1;
   const rangeOfDeletionOrders = [] as number[];
-  const newDeletedOrder = lastDeletedOrder - undoNumber;
+  const newDeletedOrder = highestDeletedOrder - undoNumber;
 
-  for (let i = lastDeletedOrder; i > newDeletedOrder; i -= 1) {
+  for (let i = highestDeletedOrder; i > newDeletedOrder; i -= 1) {
     rangeOfDeletionOrders.push(i);
   }
 
