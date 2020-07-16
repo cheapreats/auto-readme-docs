@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import generateMarkDownTree from "./generateMarkDownTree";
 import selectFoldersOnly from "./selectFoldersOnly";
-import selectRootCores from "./SelectRootCores";
+import selectRootCores from './selectRootCores';
 
 
 const treeCore = [

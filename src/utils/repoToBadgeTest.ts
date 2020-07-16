@@ -1,4 +1,5 @@
 import {  repoToMarkDownBadge } from './repoToBadge'
+import { expect } from "chai";
 
 describe('creates an npm link using the given owner and repository name (for badge)', () => {
     it(`should return [![npm version](https://badge.fury.io/js/cheapreats/react-ui-library.svg)](https://badge.fury.io/js/cheapreats/react-ui-library)`, () => {
