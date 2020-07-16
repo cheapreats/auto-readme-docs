@@ -1,6 +1,5 @@
 // @ts-nocheck
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -69,43 +68,42 @@ const Cover = styled.div`
   }
 `;
 
-export class Switch extends Component {
-  state = { value: this.props.value };
-  toggleState = () => this.setState(({ value }) => ({ value: !value }));
-
-  componentDidUpdate({ value }) {
-    if (value !== this.props.value) {
-      this.setState({ value: this.props.value });
-    }
-  }
-
-  render() {
-    const { value } = this.state;
-    const { className, size = 26, name, disabled, onChange } = this.props;
-    return (
-      <Container size={size} className={className}>
-        <Checkbox
-          size={size}
-          name={name}
-          checked={value}
-          type="checkbox"
-          onChange={onChange}
-          onClick={this.toggleState}
-          disabled={disabled}
-        />
-        <Cover size={size} disabled={disabled} checked={value} />
-      </Container>
-    );
-  }
+interface Props {
+  className?: string;
+  size?: number;
+  onChange?: Function;
+  name?: string;
+  value?: boolean;
+  disabled?: boolean;
 }
 
-// @ts-ignore
-Switch.propTypes = {
-  className: PropTypes.string,
-  size: PropTypes.number,
-  onChange: PropTypes.func,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.bool,
-  disabled: PropTypes.bool,
+export const Switch: React.FC<Props> = ({
+  className,
+  size,
+  name,
+  onChange = (): void => {},
+  value,
+  disabled,
+}) => {
+  const [theValue, setTheValue] = useState(value);
+  const toggleState = () => {
+    setTheValue(!theValue);
+  };
+
+  return (
+    <Container size={size} className={className}>
+      <Checkbox
+        size={size}
+        name={name}
+        checked={theValue}
+        type="checkbox"
+        onChange={onChange}
+        onClick={toggleState}
+        disabled={disabled}
+      />
+      <Cover size={size} disabled={disabled} checked={theValue} />
+    </Container>
+  );
 };
+
 export default Switch;
