@@ -41,7 +41,7 @@ const Cover = styled.div`
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  background-color: #e6e6e6;
+  background-color: #2b303b;
   transition: background-color 300ms ease-in-out, disabled 300ms ease-in-out;
   ${({ disabled }) =>
     disabled
@@ -57,7 +57,12 @@ const Cover = styled.div`
             margin: ${size / 10}px;
         `}
     border-radius: 999px;
-    background-color: white;
+    ${({ checked }) =>
+      checked
+        ? `
+      background-color: yellow;
+    `
+        : `background-color: #9aa2b2;`}
     position: absolute;
     transform: translate3d(0, 0, 0);
     transition: transform 300ms ease-in-out;
@@ -88,7 +93,7 @@ export class Switch extends Component {
           onClick={this.toggleState}
           disabled={disabled}
         />
-        <Cover size={size} disabled={disabled} />
+        <Cover size={size} disabled={disabled} checked={value} />
       </Container>
     );
   }

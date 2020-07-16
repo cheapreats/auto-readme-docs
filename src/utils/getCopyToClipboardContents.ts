@@ -23,10 +23,13 @@ export const generateTreeCore = (deepClonedTreeCore: Core[]): Core[] => {
   return visibleCoresAsLines;
 };
 
-export const getCopyToClipboardContents = (treeCore: Core[]): string[] => {
+export const getCopyToClipboardContents = (
+  treeCore: Core[],
+  filter: Function | null = null
+): string[] => {
   const deepClonedTreeCore = deepCopyFunction(treeCore);
   const visibleTreeCore: Core[] = generateTreeCore(deepClonedTreeCore);
-  const copyToClipboardContents = generateMarkDownTree(visibleTreeCore);
+  const copyToClipboardContents = generateMarkDownTree(visibleTreeCore, filter);
   return copyToClipboardContents;
 };
 export default getCopyToClipboardContents;

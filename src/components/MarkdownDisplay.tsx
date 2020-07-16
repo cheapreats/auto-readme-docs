@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useLayoutEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Card from "./reusable/Card";
 import CenteredCol from "./reusable/CenteredCol";
 import CustomSecondaryButton from "./reusable/CustomSecondaryButton";
 import MarkdownDisplayLine from "./MarkdownDisplayLine";
 import getCopyToClipboardContents from "../utils/getCopyToClipboardContents";
-import generateMarkDownTree from "../utils/generateMarkDownTree";
 import undoDeletions from "../utils/undoDeletions";
+import { Switch } from "../utils/Switch";
+import filterChange from "../utils/filterChange";
+import { selectRootCores } from "../utils/selectRootCores";
 
 import { Core } from "../tree/types";
 
@@ -15,11 +17,24 @@ interface Props {
 }
 
 const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
-  const [markDownTree, setMarkDownTree] = useState<string[]>(
-    generateMarkDownTree(treeCore)
-  );
+  const [filter, setFilter] = useState<string | null>(null);
+  const filtering = (filter): Function | null => {
+    if (filter === "ROOT_ONLY") {
+      return selectRootCores;
+    } else {
+      return null;
+    }
+  };
+
+  useLayoutEffect(() => {
+    // Update the document title using the browser API
+    setClipboardContent(
+      getCopyToClipboardContents(treeCore, filtering(filter))
+    );
+  }, [filter]);
+
   const [clipboardContent, setClipboardContent] = useState<string[]>(
-    getCopyToClipboardContents(treeCore)
+    getCopyToClipboardContents(treeCore, filtering(filter))
   );
 
   return (
@@ -32,11 +47,31 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
       <div className="row">
         <div className="col">
           <h2>
+            <h5>Roots Only</h5>
+          </h2>
+        </div>
+      </div>
+
+      <div className="col" style={{ margin: "-30px 0px 10px 0px" }}>
+        <CenteredCol>
+          <Switch
+            checked={true}
+            onChange={({ target }) => {
+              setFilter(filterChange(target));
+            }}
+          />
+        </CenteredCol>
+      </div>
+      <div className="row">
+        <div className="col">
+          <h2>
             <CustomSecondaryButton
               onClick={() => {
                 undoDeletions(treeCore);
-                setMarkDownTree(generateMarkDownTree(treeCore));
-                setClipboardContent(getCopyToClipboardContents(treeCore));
+
+                setClipboardContent(
+                  getCopyToClipboardContents(treeCore, filtering(filter))
+                );
               }}
               type="submit"
               value="Undo"
@@ -50,11 +85,9 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
             <MarkdownDisplayLine
               key={line + i}
               onChange={() => {
-                // setTreeCore(treeCore);
-                console.log(treeCore);
-                // console.log(markDownTree);
-                // setMarkDownTree(generateMarkDownTree(treeCore));
-                setClipboardContent(getCopyToClipboardContents(treeCore));
+                setClipboardContent(
+                  getCopyToClipboardContents(treeCore, filtering(filter))
+                );
               }}
               isOddNumberedLine={i % 2 === 1}
               content={line}
