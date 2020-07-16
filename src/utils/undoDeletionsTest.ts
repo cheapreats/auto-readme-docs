@@ -99,4 +99,16 @@ describe('Undoes the deletion of elements from treeCore', () => {
     expect(treeCore[0].treeCore[1].treeCore[0].deletedOrder).to.equal(-1);
     expect(treeCore[0].treeCore[1].treeCore[1].deletedOrder).to.equal(-1);
   });
+  // Test for undo deletion of file and folder
+  it('should undo the deletion of public by setting deleted order to -1', () => {
+    deleteFileFromPath(treeCore, 'src/images/Demo.gif');
+    deleteFileFromPath(treeCore, 'public');
+    undoDeletions(treeCore);
+    expect(
+      treeCore[0].treeCore[0].treeCore[1].treeCore[0].deletedOrder,
+    ).to.not.equal(-1);
+    expect(treeCore[0].treeCore[1].deletedOrder).to.equal(-1);
+    expect(treeCore[0].treeCore[1].treeCore[0].deletedOrder).to.equal(-1);
+    expect(treeCore[0].treeCore[1].treeCore[1].deletedOrder).to.equal(-1);
+  });
 });
