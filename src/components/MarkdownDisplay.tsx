@@ -10,16 +10,16 @@ import { Switch } from "../utils/Switch";
 import filterChange from "../utils/filterChange";
 import { selectRootCores } from "../utils/selectRootCores";
 
-import { Core } from "../tree/types";
+import { Core, FilterType } from "../tree/types";
 
 interface Props {
   treeCore: Core[];
 }
 
 const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
-  const [filter, setFilter] = useState<string | null>(null);
-  const filtering = (filter): Function | null => {
-    if (filter === "ROOT_ONLY") {
+  const [filter, setFilter] = useState<FilterType>(FilterType.NULL);
+  const filtering = (filter: FilterType): Function | null => {
+    if (filter === FilterType.ROOT_ONLY) {
       return selectRootCores;
     } else {
       return null;

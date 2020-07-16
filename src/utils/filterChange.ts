@@ -1,15 +1,15 @@
-import { selectRootCores } from "./selectRootCores";
+import { FilterType } from "../tree/types";
 
 /**  Will be the MarkDownTree with only Folders
  * @param {Event} target  The whole MarkDownTree
  * @returns {Function|null} the Function used for filter
  */
 
-export const filterChange = (target: any): string | null => {
+export const filterChange = (target: any): FilterType => {
   if (target.checked) {
-    return "ROOT_ONLY";
+    return FilterType.ROOT_ONLY;
   } else {
-    return null;
+    return FilterType.NULL;
   }
 };
 
