@@ -55,7 +55,7 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
       <div className="col" style={{ margin: "-30px 0px 10px 0px" }}>
         <CenteredCol>
           <Switch
-            checked={true}
+            size={20}
             onChange={({ target }) => {
               setFilter(filterChange(target));
             }}
