@@ -1,4 +1,4 @@
-import { FileType } from '../tree/types';
+import { FileType } from '../../tree/types';
 
 /** Given an inputted path: filters dots, forward slashes, and
  *  analyzes position of them to return the file type of the path

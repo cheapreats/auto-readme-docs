@@ -1,6 +1,6 @@
-import { generateMarkDownTree } from "./generateMarkDownTree";
-import { getFileTypeFromPath } from "./getFileTypeFromPath";
-import { Core, FileType } from "../tree/types";
+import { generateMarkDownTree } from "../generateMarkDownTree/generateMarkDownTree";
+import { getFileTypeFromPath } from "../getFileTypeFromPath/getFileTypeFromPath";
+import { Core, FileType } from "../../tree/types";
 
 /** Given a path, delete the element required and generate the tree again
  * @param {Core[]} treeCore - entire that is inputted for analysis

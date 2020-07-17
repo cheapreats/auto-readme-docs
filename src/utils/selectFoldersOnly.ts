@@ -1,4 +1,4 @@
-import getFileTypeFromPath from "./getFileTypeFromPath";
+import getFileTypeFromPath from "./getFileTypeFromPath/getFileTypeFromPath";
 import { Core, FileType } from "../tree/types";
 
 /**  Will be the MarkDownTree with only Folders

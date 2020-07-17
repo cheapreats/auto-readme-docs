@@ -4,8 +4,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Card from './reusable/Card';
 import CenteredCol from './reusable/CenteredCol';
 import CustomSecondaryButton from './reusable/CustomSecondaryButton';
-import { getOwnerAndRepoFromUrl } from '../utils/getOwnerAndRepoFromUrl'
-import { getNpmLinkFromOwnerAndRepo } from '../utils/createNpmFormatting'
+import { getOwnerAndRepoFromUrl } from '../utils/getOwnerAndRepoFromUrl';
+import { getNpmLinkFromOwnerAndRepo } from '../utils/createNpmFormatting/createNpmFormatting';
 import { repoToMarkDownBadge } from '../utils/repoToBadge';
 
 // Styles

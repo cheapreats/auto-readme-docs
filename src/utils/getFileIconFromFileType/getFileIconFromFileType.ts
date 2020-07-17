@@ -1,4 +1,4 @@
-import { FileType } from '../tree/types';
+import { FileType } from '../../tree/types';
 
 /** 1-to-1 maps a given file type to an Icon type, returning an emoji that
  * corresponds to the specific file type

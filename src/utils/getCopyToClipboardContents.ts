@@ -1,4 +1,4 @@
-import generateMarkDownTree from "./generateMarkDownTree";
+import generateMarkDownTree from "./generateMarkDownTree/generateMarkDownTree";
 import { Core } from "../tree/types";
 import { deepCopyFunction } from "./deepCopyFunction";
 

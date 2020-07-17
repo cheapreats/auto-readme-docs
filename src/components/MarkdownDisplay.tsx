@@ -5,7 +5,7 @@ import CenteredCol from "./reusable/CenteredCol";
 import CustomSecondaryButton from "./reusable/CustomSecondaryButton";
 import MarkdownDisplayLine from "./MarkdownDisplayLine";
 import getCopyToClipboardContents from "../utils/getCopyToClipboardContents";
-import generateMarkDownTree from "../utils/generateMarkDownTree";
+import generateMarkDownTree from "../utils/generateMarkDownTree/generateMarkDownTree";
 import undoDeletions from "../utils/undoDeletions";
 
 import { Core } from "../tree/types";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Core } from "../tree/types";
-import deleteFileFromPath from "../utils/deleteFileFromPath";
+import deleteFileFromPath from "../utils/deleteFileFromPath/deleteFileFromPath";
 // Styles
 
 const LightBGColor = styled.div`

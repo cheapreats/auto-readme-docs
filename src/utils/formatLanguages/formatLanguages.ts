@@ -1,4 +1,4 @@
-import getWebsiteForLanguage from "./getWebsiteForLanguage";
+import getWebsiteForLanguage from "../getWebsiteForLanguage";
 
 export const formatLanguages = (languages: object): string[] => {
     const formattedLanguages: string[] = [];

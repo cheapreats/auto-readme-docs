@@ -1,4 +1,4 @@
-import { commonDirComments } from "../tree/constants";
+import { commonDirComments } from "../../tree/constants";
 
 /** Retrieves the auto generated comments for common folders
  * @param {string} path path of the specific folder like src

@@ -1,8 +1,8 @@
 /* eslint-disable quotes */
 import { expect } from "chai";
 import generateMarkDownTree from "./generateMarkDownTree";
-import selectFoldersOnly from "./selectFoldersOnly";
-import selectRootCores from './selectRootCores';
+import selectFoldersOnly from "../selectFoldersOnly";
+import selectRootCores from '../selectRootCores';
 
 
 const treeCore = [
