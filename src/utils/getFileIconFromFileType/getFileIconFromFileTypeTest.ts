@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 import { getFileIconFromFileType } from './getFileIconFromFileType';
-import { FileType } from '../tree/types';
+import { FileType } from '../../tree/types';
 
 describe('Given a file type, the function returns an emoji passed into a string matching the type of file', () => {
   // Test for config file

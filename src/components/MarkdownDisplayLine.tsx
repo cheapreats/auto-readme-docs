@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Core } from "../tree/types";
-import deleteFileFromPath from "../utils/deleteFileFromPath";
-import setCommentForPath from "../utils/setCommentForPath";
+import deleteFileFromPath from "../utils/deleteFileFromPath/deleteFileFromPath";
+import setCommentForPath from "../utils/setCommentForPath/setCommentForPath";
 import CommentSection from "./CommentSection";
 // Styles
 

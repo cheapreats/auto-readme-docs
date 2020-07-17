@@ -4,11 +4,12 @@ import Card from "./reusable/Card";
 import CenteredCol from "./reusable/CenteredCol";
 import CustomSecondaryButton from "./reusable/CustomSecondaryButton";
 import MarkdownDisplayLine from "./MarkdownDisplayLine";
-import getCopyToClipboardContents from "../utils/getCopyToClipboardContents";
-import undoDeletions from "../utils/undoDeletions";
+import getCopyToClipboardContents from "../utils/getCopyToClipboardContents/getCopyToClipboardContents";
+import generateMarkDownTree from "../utils/generateMarkDownTree/generateMarkDownTree";
+import undoDeletions from "../utils/undoDeletions/undoDeletions";
 import { Switch } from "../utils/Switch";
 import filterChange from "../utils/filterChange";
-import { selectRootCores } from "../utils/selectRootCores";
+import { selectRootCores } from "../utils/selectRootCores/selectRootCores";
 
 import { Core, FilterType } from "../tree/types";
 

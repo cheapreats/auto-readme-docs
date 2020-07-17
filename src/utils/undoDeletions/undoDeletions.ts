@@ -1,6 +1,6 @@
-import { Core, FileType } from "../tree/types";
-import { generateMarkDownTree } from "./generateMarkDownTree";
-import { getFileTypeFromPath } from "./getFileTypeFromPath";
+import { Core, FileType } from '../../tree/types';
+import { generateMarkDownTree } from '../generateMarkDownTree/generateMarkDownTree';
+import { getFileTypeFromPath } from '../getFileTypeFromPath/getFileTypeFromPath';
 
 /** Undoes the deletion of one deleted order in a given tree, unless
  * given an undoNumber
@@ -16,7 +16,7 @@ let highestDeletedOrder = -1;
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
   deletedOrder: number,
-  originalDeletedOrder = -1
+  originalDeletedOrder = -1,
 ): void => {
   for (let index = 0; index < treeCore.length; index += 1) {
     if (treeCore[index].deletedOrder === deletedOrder) {

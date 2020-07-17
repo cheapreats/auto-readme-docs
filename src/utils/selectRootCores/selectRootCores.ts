@@ -1,4 +1,4 @@
-import { Core } from "../tree/types";
+import { Core } from "../../tree/types";
 
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore  The whole MarkDownTree

@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { generateTreeCore } from "./getCopyToClipboardContents";
+import { generateTreeCore } from "./getCopyToClipboardContents/getCopyToClipboardContents";
 
 const treeCore = [
   {

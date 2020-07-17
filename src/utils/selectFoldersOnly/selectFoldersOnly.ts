@@ -1,5 +1,5 @@
-import getFileTypeFromPath from "./getFileTypeFromPath";
-import { Core, FileType } from "../tree/types";
+import getFileTypeFromPath from "../getFileTypeFromPath/getFileTypeFromPath";
+import { Core, FileType } from "../../tree/types";
 
 /**  Will be the MarkDownTree with only Folders
  * @param {Core[]} treeCore  The whole MarkDownTree
