@@ -9,7 +9,7 @@ import generateMarkDownTree from "../utils/generateMarkDownTree/generateMarkDown
 import undoDeletions from "../utils/undoDeletions/undoDeletions";
 import { Switch } from "../utils/Switch";
 import filterChange from "../utils/filterChange";
-import { selectRootCores } from "../utils/selectRootCores";
+import { selectRootCores } from "../utils/selectRootCores/selectRootCores";
 
 import { Core, FilterType } from "../tree/types";
 

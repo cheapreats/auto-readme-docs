@@ -1,5 +1,5 @@
-import { selectRootCores } from "../utils/selectRootCores";
-import { selectFoldersOnly } from "../utils/selectFoldersOnly";
+import { selectRootCores } from "../utils/../utils/selectRootCores/selectRootCores";
+import { selectFoldersOnly } from "../utils/selectFoldersOnly/selectFoldersOnly";
 
 export interface GithubAPIFileObject {
   path: string;
