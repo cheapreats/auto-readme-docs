@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import { deleteFileFromPath } from './deleteFileFromPath/deleteFileFromPath';
+import { deleteFileFromPath } from '../deleteFileFromPath/deleteFileFromPath';
 import { undoDeletions } from './undoDeletions';
 
 const treeCore = [

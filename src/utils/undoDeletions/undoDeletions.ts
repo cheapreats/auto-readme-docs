@@ -1,6 +1,6 @@
-import { Core, FileType } from '../tree/types';
-import { generateMarkDownTree } from './generateMarkDownTree/generateMarkDownTree';
-import { getFileTypeFromPath } from './getFileTypeFromPath/getFileTypeFromPath';
+import { Core, FileType } from '../../tree/types';
+import { generateMarkDownTree } from '../generateMarkDownTree/generateMarkDownTree';
+import { getFileTypeFromPath } from '../getFileTypeFromPath/getFileTypeFromPath';
 
 /** Undoes the deletion of one deleted order in a given tree, unless
  * given an undoNumber

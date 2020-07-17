@@ -1,4 +1,4 @@
-import { Core } from '../tree/types';
+import { Core } from '../../tree/types';
 
 /** Recursively traverses through a treeCore to find the largest file name
  * length for an inputted depthLevel so that comments can be aligned accordingly

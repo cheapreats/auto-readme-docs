@@ -1,4 +1,4 @@
-import { selectRootCores } from "./selectRootCores";
+import { selectRootCores } from "./selectRootCores/selectRootCores";
 import { Core, FileType } from "../tree/types";
 
 /**  Will be the MarkDownTree with only Folders

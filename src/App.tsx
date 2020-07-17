@@ -9,8 +9,8 @@ import generateMarkDownTree from "./utils/generateMarkDownTree/generateMarkDownT
 import { Core } from "./tree/types";
 import {formatLanguages} from "./utils/formatLanguages/formatLanguages";
 import CustomSecondaryButton from "./components/reusable/CustomSecondaryButton";
-import undoDeletions from "./utils/undoDeletions";
-import getCopyToClipboardContents from "./utils/getCopyToClipboardContents";
+import undoDeletions from "./utils/undoDeletions/undoDeletions";
+import getCopyToClipboardContents from "./utils/getCopyToClipboardContents/getCopyToClipboardContents";
 import MarkdownDisplayLine from "./components/MarkdownDisplayLine";
 import CenteredCol from "./components/reusable/CenteredCol";
 import Card from "./components/reusable/Card";

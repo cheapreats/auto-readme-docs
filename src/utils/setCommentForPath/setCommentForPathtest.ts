@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import setCommentForPath from "./setCommentForPath";
-import { FileType } from "../tree/types";
+import { FileType } from "../../tree/types";
 
 const treeCore = [
   {
