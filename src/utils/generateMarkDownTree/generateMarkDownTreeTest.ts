@@ -1,136 +1,135 @@
 /* eslint-disable quotes */
-import { expect } from "chai";
-import generateMarkDownTree from "./generateMarkDownTree";
-import selectFoldersOnly from "../selectFoldersOnly/selectFoldersOnly";
+import { expect } from 'chai';
+import generateMarkDownTree from './generateMarkDownTree';
+import selectFoldersOnly from '../selectFoldersOnly/selectFoldersOnly';
 import selectRootCores from '../selectRootCores/selectRootCores';
-
 
 const treeCore = [
   {
-    path: "ex",
+    path: 'ex',
     deletedOrder: -1,
-    comment: "# just a comment",
+    comment: '# just a comment',
     treeCore: [
       {
-        path: "ex/aaa7",
+        path: 'ex/aaa7',
         deletedOrder: 1,
-        comment: "# just a comment",
+        comment: '# just a comment',
         treeCore: [],
       },
     ],
   },
   {
-    path: "src",
+    path: 'src',
     deletedOrder: -1,
     treeCore: [
       {
-        path: "src/utils",
+        path: 'src/utils',
         deletedOrder: -1,
-        comment: "# just a comment",
+        comment: '# just a comment',
         treeCore: [],
       },
       {
-        path: "src/components",
+        path: 'src/components',
         deletedOrder: -1,
-        comment: "# another comment",
+        comment: '# another comment',
         treeCore: [
           {
-            path: "src/components/reusable",
+            path: 'src/components/reusable',
             deletedOrder: -1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
         ],
       },
       {
-        path: "src/test.jpg",
+        path: 'src/test.jpg',
         deletedOrder: -1,
-        comment: "",
+        comment: '',
         treeCore: [],
       },
     ],
-    comment: "",
+    comment: '',
   },
   {
-    path: "doc",
+    path: 'doc',
     deletedOrder: -1,
-    comment: "",
+    comment: '',
     treeCore: [],
   },
   {
-    path: "doc2",
+    path: 'doc2',
     deletedOrder: -1,
-    comment: "",
+    comment: '',
     treeCore: [
       {
-        path: "doc2/knives",
+        path: 'doc2/knives',
         deletedOrder: -1,
-        comment: "# John",
+        comment: '# John',
         treeCore: [],
       },
       {
-        path: "doc2/out",
+        path: 'doc2/out',
         deletedOrder: -1,
-        comment: "# Mellencamp",
+        comment: '# Mellencamp',
         treeCore: [],
       },
     ],
   },
   {
-    path: "doc222",
+    path: 'doc222',
     deletedOrder: -1,
-    comment: "# testing",
+    comment: '# testing',
     treeCore: [],
   },
 ];
 
 const resultwhole = [
-  "📂 [ex](./ex)     # just a comment",
-  "├── 📂 [aaa7](./ex/aaa7) # just a comment",
-  "📂 [src](./src)    # Source files",
-  "├── 📂 [utils](./src/utils)      # just a comment",
-  "├── 📂 [components](./src/components) # another comment",
-  "│   ├── 📂 [reusable](./src/components/reusable) ",
-  "├── 📄 [test.jpg](./src/test.jpg) ",
-  "📂 [doc](./doc)    # Documentation files",
-  "📂 [doc2](./doc2) ",
-  "├── 📂 [knives](./doc2/knives) # John",
-  "├── 📂 [out](./doc2/out)    # Mellencamp",
-  "📂 [doc222](./doc222) # testing",
+  '📂 [ex](./ex)     # just a comment',
+  '├── 📂 [aaa7](./ex/aaa7) # just a comment',
+  '📂 [src](./src)    # Source files',
+  '├── 📂 [utils](./src/utils)      # just a comment',
+  '├── 📂 [components](./src/components) # another comment',
+  '│   ├── 📂 [reusable](./src/components/reusable) ',
+  '├── 📄 [test.jpg](./src/test.jpg) ',
+  '📂 [doc](./doc)    # Documentation files',
+  '📂 [doc2](./doc2) ',
+  '├── 📂 [knives](./doc2/knives) # John',
+  '├── 📂 [out](./doc2/out)    # Mellencamp',
+  '📂 [doc222](./doc222) # testing',
 ];
 
 const resultfoldersonly = [
-  "📂 [ex](./ex)     # just a comment",
-  "├── 📂 [aaa7](./ex/aaa7) # just a comment",
-  "📂 [src](./src)    # Source files",
-  "├── 📂 [utils](./src/utils)      # just a comment",
-  "├── 📂 [components](./src/components) # another comment",
-  "│   ├── 📂 [reusable](./src/components/reusable) ",
-  "📂 [doc](./doc)    # Documentation files",
-  "📂 [doc2](./doc2) ",
-  "├── 📂 [knives](./doc2/knives) # John",
-  "├── 📂 [out](./doc2/out)    # Mellencamp",
-  "📂 [doc222](./doc222) # testing",
+  '📂 [ex](./ex)     # just a comment',
+  '├── 📂 [aaa7](./ex/aaa7) # just a comment',
+  '📂 [src](./src)    # Source files',
+  '├── 📂 [utils](./src/utils)      # just a comment',
+  '├── 📂 [components](./src/components) # another comment',
+  '│   ├── 📂 [reusable](./src/components/reusable) ',
+  '📂 [doc](./doc)    # Documentation files',
+  '📂 [doc2](./doc2) ',
+  '├── 📂 [knives](./doc2/knives) # John',
+  '├── 📂 [out](./doc2/out)    # Mellencamp',
+  '📂 [doc222](./doc222) # testing',
 ];
 
 const resultrootsonly = [
-  "📂 [ex](./ex)     # just a comment",
-  "📂 [src](./src)    # Source files",
-  "📂 [doc](./doc)    # Documentation files",
-  "📂 [doc2](./doc2) ",
-  "📂 [doc222](./doc222) # testing",
+  '📂 [ex](./ex)     # just a comment',
+  '📂 [src](./src)    # Source files',
+  '📂 [doc](./doc)    # Documentation files',
+  '📂 [doc2](./doc2) ',
+  '📂 [doc222](./doc222) # testing',
 ];
 
-describe("Generate Tree", () => {
-  it(" a tree containing file,folder,3 levels,deleted folders with comment and no comments ", () => {
+describe('Generate Tree', () => {
+  it(' a tree containing file,folder,3 levels,deleted folders with comment and no comments ', () => {
     const newTreeCore = generateMarkDownTree(treeCore);
     expect(newTreeCore.toString).to.equal(resultwhole.toString);
   });
-  it("folders only ", () => {
+  it('folders only ', () => {
     const newTreeCore = generateMarkDownTree(treeCore, selectFoldersOnly);
     expect(newTreeCore.toString).to.equal(resultfoldersonly.toString);
   });
-  it("Root only ", () => {
+  it('Root only ', () => {
     const newTreeCore = generateMarkDownTree(treeCore, selectRootCores);
     expect(newTreeCore.toString).to.equal(resultrootsonly.toString);
   });
