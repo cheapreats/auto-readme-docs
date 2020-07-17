@@ -1,3 +1,9 @@
+<big><pre>
+📜 [.eslintrc.js](./.eslintrc.js) # New Comment
+📄 [.github](./.github)      # Changed Comment
+📂 [public](./public)      # Supplemental assets or resources, or static files
+</pre></big>
+
 # Automatic Project Structures for README's
 
 ## Description
