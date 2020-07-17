@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Core } from "../tree/types";
 import deleteFileFromPath from "../utils/deleteFileFromPath";
@@ -131,7 +131,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
             ></CommentSection>
           </div>
         </div>
-        <div>
+        <div style={{ display: "flex" }}>
           <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
           <EditButton onClick={() => setCommentVisibility(!commentVisibilty)}>
             {editIcon}
@@ -153,7 +153,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
           ></CommentSection>
         </div>
       </div>
-      <div>
+      <div style={{ display: "flex" }}>
         <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
         <EditButton onClick={() => setCommentVisibility(!commentVisibilty)}>
           {editIcon}
