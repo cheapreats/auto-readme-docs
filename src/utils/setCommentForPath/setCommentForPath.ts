@@ -34,7 +34,7 @@ export const setCommentForPath = (
   path: string,
   comment: string
 ): Core[] => {
-  const pattern = /^((?![<>:"/\\|?* .])(([a-z0-9\s_@\-^!#$%&+={}\[\].]*)([/]?)))+[^/.]$/i;
+  const pattern = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\[\].]*)([/]?)))+[^/.]$/i;
 
   if (pattern.test(path)) {
     treeCore.forEach((core) => {
@@ -45,8 +45,6 @@ export const setCommentForPath = (
     const index = treeCore.findIndex((core) => core.path === path);
     if (index > -1) {
       treeCore[index].comment = comment ? " # " + comment : "";
-    } else {
-      throw new Error("Path Doesn't Exist!");
     }
     return treeCore;
   } else {

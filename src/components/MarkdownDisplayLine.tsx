@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Core } from "../tree/types";
 import deleteFileFromPath from "../utils/deleteFileFromPath/deleteFileFromPath";
+import setCommentForPath from "../utils/setCommentForPath/setCommentForPath";
+import CommentSection from "./CommentSection";
 // Styles
 
 const LightBGColor = styled.div`
@@ -21,9 +23,13 @@ const DarkBGColor = styled.div`
   font-family: "Source Code Pro", monospace;
 `;
 
-const ContentSection = styled.div``;
-
-const DeletionButton = styled.button<Props>`
+const DeletionButton = styled.button`
+  background: none;
+  border: none;
+  font-family: "Source Code Pro", monospace;
+  color: #b3c3d3;
+`;
+const EditButton = styled.button`
   background: none;
   border: none;
   font-family: "Source Code Pro", monospace;
@@ -38,6 +44,7 @@ interface Props {
   onChange: Function;
   treeCore: Core[];
 }
+const editIcon = "✏";
 
 const MarkdownDisplayLine: React.FC<Props> = ({
   isOddNumberedLine,
@@ -45,7 +52,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   treeCore,
   onChange = (): void => {},
 }) => {
-  const path = (hyperLink: string): string => {
+  const splitParts = (hyperLink: string): Object => {
     // like [folder](./folder/file)
     const rightBeforeAddressStarts = "(./";
     const rightAfterAddressEnds = ")";
@@ -68,9 +75,44 @@ const MarkdownDisplayLine: React.FC<Props> = ({
       fileName + rightAfterAddressEnds,
       startOfAddress
     );
-    return content.substring(startOfAddress, endOfAddress + fileName.length);
+    return {
+      startOfAddress: startOfAddress,
+      endOfAddress: endOfAddress,
+      fileName: fileName,
+    };
+  };
+  const path = (hyperLink: string): string => {
+    const parts = splitParts(hyperLink);
+    return content.substring(
+      parts["startOfAddress"],
+      parts["endOfAddress"] + parts["fileName"].length
+    );
   };
 
+  const getComment = (hyperLink: string): string => {
+    const commentSquare = "# ";
+    const parts = splitParts(hyperLink);
+    const oneCharAfterLastParathisis =
+      parts["endOfAddress"] + parts["fileName"].length + 1;
+    const linkEnds = content.substring(
+      oneCharAfterLastParathisis,
+      hyperLink.length
+    );
+    const withoutSpaces = linkEnds.trimStart();
+    const currentComment = withoutSpaces.substring(commentSquare.length);
+    return currentComment;
+  };
+  const [comment, setComment] = useState(getComment(content));
+  const [commentVisibilty, setCommentVisibility] = useState(false);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setComment(event.currentTarget.value);
+  };
+  const handleClick = (): void => {
+    setCommentForPath(treeCore, path(content), comment);
+
+    setCommentVisibility(!commentVisibilty);
+    onChange(treeCore);
+  };
   const handleDeletion = () => {
     deleteFileFromPath(treeCore, path(content));
     onChange(treeCore);
@@ -78,15 +120,45 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   if (isOddNumberedLine) {
     return (
       <DarkBGColor>
-        <ContentSection>{content}</ContentSection>
-        <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
+        <div style={{ width: "100%" }}>
+          {content}
+          <div style={{ width: "100%", position: "relative", left: "-12px" }}>
+            <CommentSection
+              visible={commentVisibilty}
+              value={comment}
+              onChange={(e) => handleChange(e)}
+              onClick={() => handleClick()}
+            ></CommentSection>
+          </div>
+        </div>
+        <div style={{ display: "flex" }}>
+          <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
+          <EditButton onClick={() => setCommentVisibility(!commentVisibilty)}>
+            {editIcon}
+          </EditButton>
+        </div>
       </DarkBGColor>
     );
   }
   return (
     <LightBGColor>
-      <ContentSection>{content}</ContentSection>
-      <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
+      <div style={{ width: "100%" }}>
+        {content}
+        <div style={{ width: "100%", position: "relative", left: "-12px" }}>
+          <CommentSection
+            visible={commentVisibilty}
+            value={comment}
+            onChange={(e) => handleChange(e)}
+            onClick={() => handleClick()}
+          ></CommentSection>
+        </div>
+      </div>
+      <div style={{ display: "flex" }}>
+        <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
+        <EditButton onClick={() => setCommentVisibility(!commentVisibilty)}>
+          {editIcon}
+        </EditButton>
+      </div>
     </LightBGColor>
   );
 };
