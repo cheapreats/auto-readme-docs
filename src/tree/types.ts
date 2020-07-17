@@ -1,3 +1,6 @@
+import { selectRootCores } from "../utils/selectRootCores";
+import { selectFoldersOnly } from "../utils/selectFoldersOnly";
+
 export interface GithubAPIFileObject {
   path: string;
   mode: string;
@@ -18,15 +21,22 @@ export interface NpmsResponseBody {
 }
 
 export enum FileType {
-  FOLDER = 'FOLDER',
-  FILE = 'FILE',
-  HIDDEN_FILE = 'HIDDEN_FILE',
-  CONFIG_FILE = 'CONFIG_FILE',
-  LICENSE = 'LICENSE',
+  FOLDER = "FOLDER",
+  FILE = "FILE",
+  HIDDEN_FILE = "HIDDEN_FILE",
+  CONFIG_FILE = "CONFIG_FILE",
+  LICENSE = "LICENSE",
 }
+
 export interface Core {
   path: string;
   comment: string;
   deletedOrder: number;
   treeCore: Core[];
+}
+
+export enum FilterType {
+  NULL,
+  ROOT_ONLY,
+  FOLDER_ONLY,
 }

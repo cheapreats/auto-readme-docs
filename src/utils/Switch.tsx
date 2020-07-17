@@ -1,6 +1,5 @@
 // @ts-nocheck
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -41,7 +40,7 @@ const Cover = styled.div`
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  background-color: #e6e6e6;
+  background-color: #2b303b;
   transition: background-color 300ms ease-in-out, disabled 300ms ease-in-out;
   ${({ disabled }) =>
     disabled
@@ -57,50 +56,54 @@ const Cover = styled.div`
             margin: ${size / 10}px;
         `}
     border-radius: 999px;
-    background-color: white;
+    ${({ checked }) =>
+      checked
+        ? `
+      background-color: yellow;
+    `
+        : `background-color: #9aa2b2;`}
     position: absolute;
     transform: translate3d(0, 0, 0);
     transition: transform 300ms ease-in-out;
   }
 `;
 
-export class Switch extends Component {
-  state = { value: this.props.value };
-  toggleState = () => this.setState(({ value }) => ({ value: !value }));
-
-  componentDidUpdate({ value }) {
-    if (value !== this.props.value) {
-      this.setState({ value: this.props.value });
-    }
-  }
-
-  render() {
-    const { value } = this.state;
-    const { className, size = 26, name, disabled, onChange } = this.props;
-    return (
-      <Container size={size} className={className}>
-        <Checkbox
-          size={size}
-          name={name}
-          checked={value}
-          type="checkbox"
-          onChange={onChange}
-          onClick={this.toggleState}
-          disabled={disabled}
-        />
-        <Cover size={size} disabled={disabled} />
-      </Container>
-    );
-  }
+interface Props {
+  className?: string;
+  size?: number;
+  onChange?: Function;
+  name?: string;
+  value?: boolean;
+  disabled?: boolean;
 }
 
-// @ts-ignore
-Switch.propTypes = {
-  className: PropTypes.string,
-  size: PropTypes.number,
-  onChange: PropTypes.func,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.bool,
-  disabled: PropTypes.bool,
+export const Switch: React.FC<Props> = ({
+  className,
+  size,
+  name,
+  onChange = (): void => {},
+  value,
+  disabled,
+}) => {
+  const [theValue, setTheValue] = useState(value);
+  const toggleState = () => {
+    setTheValue(!theValue);
+  };
+
+  return (
+    <Container size={size} className={className}>
+      <Checkbox
+        size={size}
+        name={name}
+        checked={theValue}
+        type="checkbox"
+        onChange={onChange}
+        onClick={toggleState}
+        disabled={disabled}
+      />
+      <Cover size={size} disabled={disabled} checked={theValue} />
+    </Container>
+  );
 };
+
 export default Switch;
