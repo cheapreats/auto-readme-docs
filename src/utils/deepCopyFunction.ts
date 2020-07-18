@@ -1,12 +1,9 @@
 export const deepCopyFunction = (inObject) => {
-  let outObject, value, key;
+  let value; let key;
 
-  if (typeof inObject !== "object" || inObject === null) {
+  if (typeof inObject !== 'object' || inObject === null) {
     return inObject; // Return the value if inObject is not an object
   }
-
-  // Create an array or object to hold the values
-  outObject = Array.isArray(inObject) ? [] : {};
 
   for (key in inObject) {
     value = inObject[key];
@@ -17,3 +14,5 @@ export const deepCopyFunction = (inObject) => {
 
   return outObject;
 };
+
+export default deepCopyFunction;
