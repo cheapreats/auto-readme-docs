@@ -1,6 +1,6 @@
-import generateMarkDownTree from "../generateMarkDownTree/generateMarkDownTree";
-import { Core } from "../../tree/types";
-import { deepCopyFunction } from "../deepCopyFunction";
+import generateMarkDownTree from '../generateMarkDownTree/generateMarkDownTree';
+import { Core } from '../../tree/types';
+import { deepCopyFunction } from '../deepCopyFunction';
 
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore  The whole MarkDownTree
@@ -25,7 +25,7 @@ export const generateTreeCore = (deepClonedTreeCore: Core[]): Core[] => {
 
 export const getCopyToClipboardContents = (
   treeCore: Core[],
-  filter: Function | null = null
+  filter: Function | null = null,
 ): string[] => {
   const deepClonedTreeCore = deepCopyFunction(treeCore);
   const visibleTreeCore: Core[] = generateTreeCore(deepClonedTreeCore);
