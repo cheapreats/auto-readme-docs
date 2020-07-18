@@ -9,7 +9,7 @@ import { getFileTypeFromPath } from '../getFileTypeFromPath/getFileTypeFromPath'
  * deletions are to be undone
  * @returns {void} - doesn't return anything, simply undoes the deletions as
  * per undoNumber provided
- */
+*/
 
 let highestDeletedOrder = -1;
 
