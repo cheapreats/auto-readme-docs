@@ -1,66 +1,66 @@
-import { expect } from "chai";
-import "mocha";
-import { generateTreeCore } from "./getCopyToClipboardContents/getCopyToClipboardContents";
+import { expect } from 'chai';
+import 'mocha';
+import { generateTreeCore } from './getCopyToClipboardContents/getCopyToClipboardContents';
 
 const treeCore = [
   {
-    path: "treeCore",
+    path: 'treeCore',
     deletedOrder: -1,
-    comment: "",
+    comment: '',
     treeCore: [
       {
-        path: "src",
+        path: 'src',
         deletedOrder: 1,
-        comment: "",
+        comment: '',
         treeCore: [
           {
-            path: "src/components",
+            path: 'src/components',
             deletedOrder: 1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
           {
-            path: "src/images",
+            path: 'src/images',
             deletedOrder: 1,
-            comment: "",
+            comment: '',
             treeCore: [
               {
-                path: "src/images/Demo.gif",
+                path: 'src/images/Demo.gif',
                 deletedOrder: 1,
-                comment: "",
+                comment: '',
                 treeCore: [],
               },
             ],
           },
           {
-            path: "src/tree",
+            path: 'src/tree',
             deletedOrder: 1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
           {
-            path: "src/utils",
+            path: 'src/utils',
             deletedOrder: 1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
         ],
       },
       {
-        path: "public",
+        path: 'public',
         deletedOrder: -1,
-        comment: "",
+        comment: '',
         treeCore: [
           {
-            path: "public/favicon.ico",
+            path: 'public/favicon.ico',
             deletedOrder: 1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
           {
-            path: "public/index.html",
+            path: 'public/index.html',
             deletedOrder: -1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
         ],
@@ -69,13 +69,13 @@ const treeCore = [
   },
 ];
 
-describe("generates a treeCore without deleted Cores ", () => {
+describe('generates a treeCore without deleted Cores ', () => {
   // Test for undo deletion of file
-  it("Treecore without deleted Cores", () => {
+  it('TreeCore without deleted Cores', () => {
     const newTreeCore = generateTreeCore(treeCore);
     console.log(newTreeCore);
     expect(treeCore[0].treeCore[0].treeCore[0].path).to.equal(
-      "public/index.html"
+      'public/index.html',
     );
   });
 });
