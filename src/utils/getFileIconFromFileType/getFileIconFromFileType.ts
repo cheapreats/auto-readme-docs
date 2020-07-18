@@ -6,7 +6,7 @@ import { FileType } from '../../tree/types';
  * or FileType.CONFIG_FILE
  * @returns {Icon} - an emoji passed into a string depending on which file
  * type was found (FILE, CONFIG_FILE, or FOLDER)
- */
+*/
 
 export enum Icon {
   FOLDER = '📂',

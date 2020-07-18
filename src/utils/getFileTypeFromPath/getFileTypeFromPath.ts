@@ -4,7 +4,7 @@ import { FileType } from '../../tree/types';
  *  analyzes position of them to return the file type of the path
  * @param {string} path the path of a specific file or folder
  * @returns {FileType} file type such as .FILE, .CONFIG_FILE, or .FOLDER
- */
+*/
 
 export const getFileTypeFromPath = (path: string): FileType => {
   // Count amount of periods in the path
