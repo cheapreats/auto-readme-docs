@@ -11,6 +11,7 @@ const NOT_DELETED = -1;
 
 export const generateTreeCore = (deepClonedTreeCore: Core[]): Core[] => {
   const visibleCoresAsLines: Core[] = [];
+
   deepClonedTreeCore.forEach((core) => {
     if (core.deletedOrder === NOT_DELETED) {
       if (core.treeCore) {
@@ -19,6 +20,7 @@ export const generateTreeCore = (deepClonedTreeCore: Core[]): Core[] => {
       visibleCoresAsLines.push(core);
     }
   });
+
   return visibleCoresAsLines;
 };
 
@@ -29,6 +31,7 @@ export const getCopyToClipboardContents = (
   const deepClonedTreeCore = deepCopyFunction(treeCore);
   const visibleTreeCore: Core[] = generateTreeCore(deepClonedTreeCore);
   const copyToClipboardContents = generateMarkDownTree(visibleTreeCore, filter);
+
   return copyToClipboardContents;
 };
 

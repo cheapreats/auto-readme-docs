@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import { expect } from 'chai';
 import getCopyToClipboardContents from './getCopyToClipboardContents';
 
@@ -70,7 +69,7 @@ const result = [
 ];
 
 describe('generate a tree without deleted items', () => {
-  it(' a tree containing file,folder,3 levels,deleted folders in each level', () => {
+  it(' a tree containing file, folder, 3 levels, deleted folders in each level', () => {
     const newTreeCore = getCopyToClipboardContents(treeCore);
     expect(newTreeCore.toString()).to.equal(result.toString());
   });
