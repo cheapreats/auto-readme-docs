@@ -1,8 +1,6 @@
-/* eslint-disable quotes */
 import { expect } from 'chai';
 import generateMarkDownTree from './generateMarkDownTree';
-import selectFoldersOnly from '../selectFoldersOnly/selectFoldersOnly';
-import selectRootCores from '../selectRootCores/selectRootCores';
+import { FilterType } from '../../tree/types';
 
 const treeCore = [
   {
@@ -126,11 +124,11 @@ describe('Generate Tree', () => {
     expect(newTreeCore.toString).to.equal(resultwhole.toString);
   });
   it('folders only ', () => {
-    const newTreeCore = generateMarkDownTree(treeCore, selectFoldersOnly);
+    const newTreeCore = generateMarkDownTree(treeCore, FilterType.FOLDER_ONLY);
     expect(newTreeCore.toString).to.equal(resultfoldersonly.toString);
   });
   it('Root only ', () => {
-    const newTreeCore = generateMarkDownTree(treeCore, selectRootCores);
+    const newTreeCore = generateMarkDownTree(treeCore, FilterType.ROOT_ONLY);
     expect(newTreeCore.toString).to.equal(resultrootsonly.toString);
   });
 });
