@@ -12,7 +12,8 @@ import selectRootCores from '../selectRootCores/selectRootCores';
  * @param {Core[]} treeCore  The whole MarkDownTree
  * @param {Function} filter  Extra Filters
  * @returns {string} the MarkDownTree without the deletedCore's
- */
+*/
+
 export const generateMarkDownTree = (
   treeCore: Core[],
   filter: FilterType = FilterType.NULL,
@@ -59,6 +60,8 @@ export const generateMarkDownTree = (
       });
     }
   });
+
   return outputAsLines;
 };
+
 export default generateMarkDownTree;
