@@ -16,31 +16,43 @@ const recursivelySetDeletedOrder = (
 ): void => {
   for (let index = 0; index < treeCore.length; index += 1) {
     if (treeCore[index].deletedOrder === -1) {
-      treeCore[index].deletedOrder = newDeletedOrder;
+      treeCore[index].deletedOrder = newDeletedOrder + 1;
     } else {
-      recursivelySetDeletedOrder(treeCore[index].treeCore, newDeletedOrder);
+      recursivelySetDeletedOrder(treeCore[index].treeCore, newDeletedOrder + 1);
+    }
+  }
+};
+
+const countLastDeletedOrder = (treeCore: Core[]): void => {
+  // counts lastDeletedOrder of a tree and updates the value of lastDeletedOrder
+  for (let index = 0; index < treeCore.length; index += 1) {
+    if (treeCore[index].deletedOrder > lastDeletedOrder) {
+      lastDeletedOrder = treeCore[index].deletedOrder;
+    } else {
+      countLastDeletedOrder(treeCore[index].treeCore);
     }
   }
 };
 
 export const deleteFileFromPath = (treeCore: Core[], path: string): void => {
+  countLastDeletedOrder(treeCore);
+
   for (let index = 0; index < treeCore.length; index += 1) {
     if (
       treeCore[index].path === path
       && getFileTypeFromPath(path) !== FileType.FOLDER
     ) {
-      lastDeletedOrder += 1;
-      treeCore[index].deletedOrder = lastDeletedOrder;
+      treeCore[index].deletedOrder = lastDeletedOrder + 1;
     }
     if (
       treeCore[index].path === path
       && getFileTypeFromPath(path) === FileType.FOLDER
     ) {
-      lastDeletedOrder += 1;
-      treeCore[index].deletedOrder = lastDeletedOrder;
+      treeCore[index].deletedOrder = lastDeletedOrder + 1;
       recursivelySetDeletedOrder(treeCore[index].treeCore, lastDeletedOrder);
+    } else {
+      deleteFileFromPath(treeCore[index].treeCore, path);
     }
-    deleteFileFromPath(treeCore[index].treeCore, path);
   }
 };
 
