@@ -26,7 +26,7 @@ export const generateTreeCore = (deepClonedTreeCore: Core[]): Core[] => {
 
 export const getCopyToClipboardContents = (
   treeCore: Core[],
-  filter: FilterType = FilterType.NULL
+  filter: FilterType = FilterType.NULL,
 ): string[] => {
   const deepClonedTreeCore = deepCopyFunction(treeCore);
   const visibleTreeCore: Core[] = generateTreeCore(deepClonedTreeCore);
