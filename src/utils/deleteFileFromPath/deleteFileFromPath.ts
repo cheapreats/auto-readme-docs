@@ -6,7 +6,7 @@ import { Core, FileType } from '../../tree/types';
  * @param {string} path - the path of element that needs to be deleted
  * @returns {void} - doesn't return anything, simply does the action of
  * deleting an element
- */
+*/
 
 let lastDeletedOrder = -1;
 
