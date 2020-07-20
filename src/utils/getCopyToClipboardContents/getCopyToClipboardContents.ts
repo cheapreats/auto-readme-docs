@@ -3,9 +3,9 @@ import { Core, FilterType } from '../../tree/types';
 import { deepCopyFunction } from '../deepCopyFunction';
 
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
- * @param {Core[]} treeCore  The whole MarkDownTree
- * @param {FilterType} filter The type of the filter to generate the tree
- * @returns {string} the MarkDownTree without the deletedCore's
+ * @param {Core[]} treeCore - the whole MarkDownTree
+ * @param {FilterType} filter - the type of the filter to generate the tree
+ * @returns {string} - the MarkDownTree without the deletedCore's
 */
 
 const NOT_DELETED = -1;
