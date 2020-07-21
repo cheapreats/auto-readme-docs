@@ -106,7 +106,7 @@ describe('Undoes the deletion of elements from treeCore', () => {
     undoDeletions(treeCore);
     expect(
       treeCore[0].treeCore[0].treeCore[1].treeCore[0].deletedOrder,
-    ).to.not.equal(-1);
+    ).to.equal(1);
     expect(treeCore[0].treeCore[1].deletedOrder).to.equal(-1);
     expect(treeCore[0].treeCore[1].treeCore[0].deletedOrder).to.equal(-1);
     expect(treeCore[0].treeCore[1].treeCore[1].deletedOrder).to.equal(-1);

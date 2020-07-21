@@ -4,12 +4,16 @@ export const formatLanguages = (
   languages: Record<string, unknown>,
 ): string[] => {
   const formattedLanguages: string[] = [];
-  for (const [key] of Object.entries(languages)) {
+
+  Object.keys(languages).map((key) => {
     const formattedLanguage = getWebsiteForLanguage(key);
     console.log('ll', key, formattedLanguages);
     formattedLanguages.push(formattedLanguage);
-  }
-  return formattedLanguages;
+
+    return formattedLanguages;
+  });
+
+  throw new Error('The function did not work as intended.');
 };
 
 export default formatLanguages;
