@@ -6,9 +6,10 @@ import { Core, FileType } from '../../tree/types';
  * @param {string} path - the path of element that needs to be deleted
  * @returns {void} - doesn't return anything, simply does the action of
  * deleting an element
-*/
+ */
 
 let lastDeletedOrder = -1;
+const DELETION_INCREMENT = 1;
 
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
@@ -16,9 +17,12 @@ const recursivelySetDeletedOrder = (
 ): void => {
   for (let index = 0; index < treeCore.length; index += 1) {
     if (treeCore[index].deletedOrder === -1) {
-      treeCore[index].deletedOrder = newDeletedOrder + 1;
+      treeCore[index].deletedOrder = newDeletedOrder + DELETION_INCREMENT;
     } else {
-      recursivelySetDeletedOrder(treeCore[index].treeCore, newDeletedOrder + 1);
+      recursivelySetDeletedOrder(
+        treeCore[index].treeCore,
+        newDeletedOrder + DELETION_INCREMENT,
+      );
     }
   }
 };
@@ -42,13 +46,13 @@ export const deleteFileFromPath = (treeCore: Core[], path: string): void => {
       treeCore[index].path === path
       && getFileTypeFromPath(path) !== FileType.FOLDER
     ) {
-      treeCore[index].deletedOrder = lastDeletedOrder + 1;
+      treeCore[index].deletedOrder = lastDeletedOrder + DELETION_INCREMENT;
     }
     if (
       treeCore[index].path === path
       && getFileTypeFromPath(path) === FileType.FOLDER
     ) {
-      treeCore[index].deletedOrder = lastDeletedOrder + 1;
+      treeCore[index].deletedOrder = lastDeletedOrder + DELETION_INCREMENT;
       recursivelySetDeletedOrder(treeCore[index].treeCore, lastDeletedOrder);
     } else {
       deleteFileFromPath(treeCore[index].treeCore, path);
