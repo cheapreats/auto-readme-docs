@@ -13,7 +13,7 @@ export const formatLanguages = (
     return formattedLanguages;
   });
 
-  throw new Error('The function did not work as intended.');
+  return formattedLanguages;
 };
 
 export default formatLanguages;
