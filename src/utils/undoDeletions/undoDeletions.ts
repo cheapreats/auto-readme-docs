@@ -12,15 +12,15 @@ import { getFileTypeFromPath } from '../getFileTypeFromPath/getFileTypeFromPath'
 */
 
 let highestDeletedOrder = -1;
+const resetDeletedOrder = -1;
 
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
   deletedOrder: number,
-  originalDeletedOrder = -1,
 ): void => {
   for (let index = 0; index < treeCore.length; index += 1) {
     if (treeCore[index].deletedOrder === deletedOrder) {
-      treeCore[index].deletedOrder = originalDeletedOrder;
+      treeCore[index].deletedOrder = resetDeletedOrder;
     } else {
       recursivelySetDeletedOrder(treeCore[index].treeCore, deletedOrder);
     }
@@ -40,7 +40,6 @@ const countLastDeletedOrder = (treeCore: Core[]): void => {
 
 export const undoDeletions = (treeCore: Core[], undoNumber = 1): void => {
   countLastDeletedOrder(treeCore);
-  const resetDeletedOrder = -1;
   const rangeOfDeletionOrders = [] as number[];
   const newDeletedOrder = highestDeletedOrder - undoNumber;
 
@@ -70,6 +69,8 @@ export const undoDeletions = (treeCore: Core[], undoNumber = 1): void => {
       }
     }
   }
+
+  highestDeletedOrder = resetDeletedOrder;
 
   generateMarkDownTree(treeCore);
 };
