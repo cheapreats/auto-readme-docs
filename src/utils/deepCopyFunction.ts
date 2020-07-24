@@ -1,26 +1,25 @@
 import { Core } from '../tree/types';
 
-/**  Will be the MarkDownTree without the deletedCore's (Any core with
- * deletedOrder > -1)
- * @param {Core[]|Core} inObject - the whole MarkDownTree or a Core
- * @returns {Core[]} - deep clone of the MarkDownTree
- */
+/**  Will return the Deep Clone of the TreeCore
+ * @param {Core[]|Core} inObject  The whole MarkDownTree or a Core
+ * @returns {Core[]} deep clone of the MarkDownTree
+*/
 
 export const deepCopyFunction = (inObject: Core[] | Core): Core[] => {
+  let value: Core;
+  let key: string;
+
   // Create an array or object to hold the values
-  const outObject: Core[] = [];
+  const outObject = [];
 
   if (typeof inObject !== 'object' || inObject === null) {
     return inObject; // Return the value if inObject is not an object
   }
 
-  if (typeof inObject === 'object') {
-    outObject.push(Object.assign(inObject));
-  } else {
-    (inObject as Core[]).forEach((objectKey: Core) => {
-      // Recursively (deep) copy for nested objects, including arrays
-      outObject.push(...deepCopyFunction(objectKey));
-    });
+  for (key in inObject) {
+    value = inObject[key];
+    // Recursively (deep) copy for nested objects, including arrays
+    outObject[key] = deepCopyFunction(value);
   }
 
   return outObject;
