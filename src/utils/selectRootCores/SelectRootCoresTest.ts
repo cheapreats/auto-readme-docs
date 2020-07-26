@@ -1,67 +1,66 @@
-/* eslint-disable quotes */
-import { expect } from "chai";
-import SelectRootCores from "./selectRootCores";
+import { expect } from 'chai';
+import SelectRootCores from './selectRootCores';
 
 const treeCore = [
   {
-    path: "src",
+    path: 'src',
     deletedOrder: -1,
     treeCore: [
       {
-        path: "src/utils",
+        path: 'src/utils',
         deletedOrder: 1,
-        comment: "# just a comment",
+        comment: '# just a comment',
         treeCore: [],
       },
       {
-        path: "src/components",
+        path: 'src/components',
         deletedOrder: -1,
-        comment: "# another comment",
+        comment: '# another comment',
         treeCore: [
           {
-            path: "src/components/reusable",
+            path: 'src/components/reusable',
             deletedOrder: 1,
-            comment: "",
+            comment: '',
             treeCore: [],
           },
         ],
       },
       {
-        path: "src/test.jpg",
+        path: 'src/test.jpg',
         deletedOrder: -1,
-        comment: "",
+        comment: '',
         treeCore: [],
       },
     ],
-    comment: "",
+    comment: '',
   },
   {
-    path: "doc",
+    path: 'doc',
     deletedOrder: -1,
-    comment: "",
+    comment: '',
     treeCore: [],
   },
   {
-    path: "file.jpg",
+    path: 'file.jpg',
     deletedOrder: -1,
-    comment: "",
+    comment: '',
     treeCore: [],
   },
   {
-    path: "doc2",
+    path: 'doc2',
     deletedOrder: 1,
-    comment: "",
+    comment: '',
     treeCore: [
       {
-        path: "doc2/knives",
+        path: 'doc2/knives',
         deletedOrder: -1,
-        comment: "# John",
+        comment: '# John',
         treeCore: [],
       },
       {
-        path: "doc2/out",
+        path: 'doc2/out',
         deletedOrder: -1,
-        comment: "# Mellencamp",
+        comment: '# Mellencamp',
         treeCore: [],
       },
     ],
@@ -69,14 +68,14 @@ const treeCore = [
 ];
 
 const result = [
-  "📂 [src](./src)      # Source files",
-  "📂 [doc](./doc)      # Documentation files",
-  "📄 [file.jpg](./file.jpg) ",
-  "📂 [doc2](./doc2) ",
+  '📂 [src](./src)      # Source files',
+  '📂 [doc](./doc)      # Documentation files',
+  '📄 [file.jpg](./file.jpg) ',
+  '📂 [doc2](./doc2) ',
 ];
 
-describe("SelectRootCores", () => {
-  it("shows only the Cores on the root address", () => {
+describe('SelectRootCores', () => {
+  it('shows only the Cores on the root address', () => {
     const newTreeCore = SelectRootCores(treeCore);
     // @ts-ignore
     expect(newTreeCore.toString).to.equal(result.toString);

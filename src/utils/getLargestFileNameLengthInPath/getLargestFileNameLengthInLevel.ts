@@ -8,7 +8,7 @@ import { Core } from '../../tree/types';
  * depth level inputted was greater than the max depth level of the treeCore
 */
 
-let maxDepthLevel = 0; // Deepness of entire treeCore
+let maxDepthLevel = 0;
 
 const traverseThroughTree = (
   /* Recursively traverses through the treeCore and adds paths
@@ -20,10 +20,8 @@ const traverseThroughTree = (
 ): void => {
   for (let index = 0; index < treeCore.length; index += 1) {
     if (depthLevel === depthLevelCounter) {
-      // Add path to array if in depthLevel
       arrayOfPaths.push(treeCore[index].path);
       if (depthLevelCounter > maxDepthLevel) {
-        // Set the max depth level reached during traversal of tree
         maxDepthLevel = depthLevel;
       }
     } else {
@@ -43,9 +41,6 @@ export const getLargestFileNameLengthInLevel = (
   treeCore: Core[],
   depthLevel: number,
 ): number => {
-  /* Default largestFileNameLengthInLevel is set to 0 indicating no such
-  depth level exists in the treeCore -- meaning no such file name was the
-  largest */
   let largestFileNameLengthInLevel = 0;
   // depthLevel is greater than maxDepthLevel of treeCore
   const outOfBounds = -1;
@@ -61,9 +56,6 @@ export const getLargestFileNameLengthInLevel = (
       filteredPath[filteredPath.length - 1].length
       > largestFileNameLengthInLevel
     ) {
-      /* If the file name length in the current treeCore is larger than
-        the previously set largestFileNameLengthInLevel, reassign the
-        current file name length to largestFileNameLengthInLevel */
       largestFileNameLengthInLevel = filteredPath[filteredPath.length - 1].length;
     }
   }

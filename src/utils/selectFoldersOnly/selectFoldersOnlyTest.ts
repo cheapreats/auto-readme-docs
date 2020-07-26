@@ -1,55 +1,54 @@
-/* eslint-disable quotes */
-import { expect } from "chai";
-import selectFoldersOnly from "./selectFoldersOnly";
+import { expect } from 'chai';
+import selectFoldersOnly from './selectFoldersOnly';
 
 const treeCore = [
   {
-    path: "src",
+    path: 'src',
     deletedOrder: -1,
     treeCore: [
       {
-        path: "src/components",
+        path: 'src/components',
         deletedOrder: -1,
-        comment: "# another comment",
+        comment: '# another comment',
         treeCore: [],
       },
       {
-        path: "src/test.jpg",
+        path: 'src/test.jpg',
         deletedOrder: -1,
-        comment: "",
+        comment: '',
         treeCore: [],
       },
     ],
-    comment: "",
+    comment: '',
   },
   {
-    path: "doc",
+    path: 'doc',
     deletedOrder: -1,
-    comment: "",
+    comment: '',
     treeCore: [],
   },
   {
-    path: "file.jpg",
+    path: 'file.jpg',
     deletedOrder: -1,
-    comment: "",
+    comment: '',
     treeCore: [],
   },
   {
-    path: "doc2.jpg",
+    path: 'doc2.jpg',
     deletedOrder: -1,
-    comment: "",
+    comment: '',
     treeCore: [],
   },
 ];
 
 const result = [
-  "📂 [src](./src) # Source files",
-  "├── 📂 [components](./src/components) # another comment",
-  "📂 [doc](./doc) # Documentation files",
+  '📂 [src](./src) # Source files',
+  '├── 📂 [components](./src/components) # another comment',
+  '📂 [doc](./doc) # Documentation files',
 ];
 
-describe("selectRootOnly Function", () => {
-  it("generates a tree with only folders (not the files)", () => {
+describe('selectRootOnly Function', () => {
+  it('generates a tree with only folders (not the files)', () => {
     const newTreeCore = selectFoldersOnly(treeCore);
     // @ts-ignore
     expect(newTreeCore.toString).to.equal(result.toString);

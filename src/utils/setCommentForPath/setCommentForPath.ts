@@ -3,7 +3,7 @@
  * @param {string} path - The path of a specific file
  * @param {string} comment - any string
  * @returns {TreeCore} - New treeCore with replaced comment
- */
+*/
 
 interface Core {
   comment: string;
@@ -15,7 +15,7 @@ interface Core {
 const searchRecursiveCore = (
   treeCore: Core[],
   path: string,
-  comment: string
+  comment: string,
 ): Core[] => {
   treeCore.forEach((core) => {
     if (core.treeCore) {
@@ -24,7 +24,7 @@ const searchRecursiveCore = (
   });
   const index = treeCore.findIndex((core) => core.path === path);
   if (index > -1) {
-    treeCore[index].comment = comment ? " # " + comment : "";
+    treeCore[index].comment = comment ? ` # ${comment}` : '';
   }
   return treeCore;
 };
@@ -32,9 +32,9 @@ const searchRecursiveCore = (
 export const setCommentForPath = (
   treeCore: Core[],
   path: string,
-  comment: string
+  comment: string,
 ): Core[] => {
-  const pattern = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\[\].]*)([/]?)))+[^/.]$/i;
+  const pattern = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\\[\].]*)([/]?)))+[^/.]$/i;
 
   if (pattern.test(path)) {
     treeCore.forEach((core) => {
@@ -44,12 +44,11 @@ export const setCommentForPath = (
     });
     const index = treeCore.findIndex((core) => core.path === path);
     if (index > -1) {
-      treeCore[index].comment = comment ? " # " + comment : "";
+      treeCore[index].comment = comment ? ` # ${comment}` : '';
     }
     return treeCore;
-  } else {
-    throw new Error("Invalid Path!");
   }
+  throw new Error('Invalid Path!');
 };
 
 export default setCommentForPath;
