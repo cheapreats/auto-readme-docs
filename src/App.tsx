@@ -3,19 +3,20 @@ import { ripOutPaths } from "./tree";
 import { GithubAPIResponseBody, NpmsResponseBody } from "./tree/types";
 import MarkdownDisplay from "./components/MarkdownDisplay";
 import BadgesSection from "./components/BadgesSection";
-import CustomButton from "./components/reusable/CustomButton";
 import URLBox from "./components/URLBox";
-import generateMarkDownTree from "./utils/generateMarkDownTree/generateMarkDownTree";
 import { Core } from "./tree/types";
-import {formatLanguages} from "./utils/formatLanguages/formatLanguages";
+import { formatLanguages } from "./utils/formatLanguages/formatLanguages";
 import CustomSecondaryButton from "./components/reusable/CustomSecondaryButton";
-import undoDeletions from "./utils/undoDeletions/undoDeletions";
-import getCopyToClipboardContents from "./utils/getCopyToClipboardContents/getCopyToClipboardContents";
-import MarkdownDisplayLine from "./components/MarkdownDisplayLine";
 import CenteredCol from "./components/reusable/CenteredCol";
 import Card from "./components/reusable/Card";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import styled from "styled-components";
+import getPreviousTree from "./utils/getPreviousTree";
+
+interface oldTree {
+  path: string | undefined;
+  comment: string | undefined;
+}
 
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState("");
@@ -23,13 +24,7 @@ const App: React.FC = () => {
   const [isNpmBadgeVisible, setNpmBadgeVisible] = useState(false);
   const [url, setURL] = useState("");
   const [treeCore, setTreeCore] = useState<Core[]>([]);
-
-  const [clipboardContent, setClipboardContent] = useState<string[]>(
-      getCopyToClipboardContents(treeCore)
-  );
-  const [markdownDisplayContent, setMarkdownDisplayContent] = useState<
-    string[]
-  >([]);
+  // const [oldTree, setOldTree] = useState<oldTree[] | null>(null);
 
   const handleExampleGoButtonPress = async () => {
     const url = "https://github.com/cheapreats/auto-readme-docs";
@@ -49,10 +44,42 @@ const App: React.FC = () => {
     const owner = pathArray[3];
     const repo = pathArray[4];
     setRepoName(repo);
+    // await getOldTree(owner, repo);
+    // if (oldTree) {
     await makeRequest(owner, repo);
+    // }
   };
 
   const makeRequest = async (owner: String, repo: String) => {
+    let oldTree: oldTree[] | null = null;
+
+    // Previous Comments
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/contents`
+      );
+      const resJSON = await res.json();
+
+      for (const key in resJSON) {
+        const file = resJSON[key];
+        if (file["path"] === "README.md") {
+          const SHA = file["sha"];
+          const blobs = await fetch(
+            `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
+          );
+          const blobsJSON = await blobs.json();
+          const decodedBlobs = atob(blobsJSON["content"]);
+          const haveComments = decodedBlobs.match(
+            /((\[.+)\]\(\.\/.+\)\s+# .+)/g
+          );
+
+          oldTree = getPreviousTree(haveComments);
+        }
+      }
+    } catch (error) {
+      alert("Error" + error);
+    }
+
     // npm badges
     try {
       const npmPackagesResponse = await fetch(
@@ -79,7 +106,7 @@ const App: React.FC = () => {
         `https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSHA}?recursive=true`
       );
       const treeJSON = await treeRes.json();
-      setTreeCore(ripOutPaths(treeJSON as GithubAPIResponseBody));
+      setTreeCore(ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree));
     } catch (error) {
       alert("Error" + error);
     }
@@ -106,6 +133,7 @@ const App: React.FC = () => {
       alert("Error" + error);
     }
   };
+
   return (
     <div className="container container-small">
       <URLBox
@@ -114,41 +142,42 @@ const App: React.FC = () => {
         onClick={handleGoButtonPress}
         onDefaultClick={handleExampleGoButtonPress}
       />
-      {repoName !== "" && isNpmBadgeVisible && (
-        <BadgesSection url={repoName} />
-      )}
+      {repoName !== "" && isNpmBadgeVisible && <BadgesSection url={repoName} />}
       {repoLanguages.length !== 0 && (
-          <Card>
-            <div className="row">
-              <div className="col">
-                <h2>Languages</h2>
-              </div>
+        <Card>
+          <div className="row">
+            <div className="col">
+              <h2>Languages</h2>
             </div>
-            <div className="row">
-              <div className="col">
-                {repoLanguages.map((line, i) => (
-                  i % 2 === 1 ? (
-                    <DarkBGColor>
+          </div>
+          <div className="row">
+            <div className="col">
+              {repoLanguages.map((line, i) =>
+                i % 2 === 1 ? (
+                  <DarkBGColor>
                     <ContentSection>{line}</ContentSection>
-                    </DarkBGColor>
-                  ) : (
-                    <LightBGColor>
+                  </DarkBGColor>
+                ) : (
+                  <LightBGColor>
                     <ContentSection>{line}</ContentSection>
-                    </LightBGColor>
-                  )
-                ))}
-              </div>
+                  </LightBGColor>
+                )
+              )}
             </div>
-            <div className="row">
-              <CenteredCol className="col">
-                <CopyToClipboard
-                    text={`<big><pre>\n${repoLanguages.join("\n")}\n</pre></big>`}
-                >
-                  <CustomSecondaryButton type="submit" value="Copy to Clipboard" />
-                </CopyToClipboard>
-              </CenteredCol>
-            </div>
-          </Card>
+          </div>
+          <div className="row">
+            <CenteredCol className="col">
+              <CopyToClipboard
+                text={`<big><pre>\n${repoLanguages.join("\n")}\n</pre></big>`}
+              >
+                <CustomSecondaryButton
+                  type="submit"
+                  value="Copy to Clipboard"
+                />
+              </CopyToClipboard>
+            </CenteredCol>
+          </div>
+        </Card>
       )}
       {treeCore.length !== 0 && <MarkdownDisplay treeCore={treeCore} />}
     </div>
