@@ -30,7 +30,7 @@ const ripOutPaths = (
     if (found) {
       return "# " + found.comment;
     } else {
-      return " ";
+      return "";
     }
   };
 
