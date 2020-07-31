@@ -20,10 +20,13 @@ export const generateMarkDownTree = (
   withAutoComments: boolean = true
 ): string[] => {
   let deepClonedTreeCore: Core[] | null = deepCopyFunction(treeCore);
+  let isFile = false;
   const outputAsLines: string[] = [];
+
   if (filter === FilterType.ROOT_ONLY) {
     deepClonedTreeCore = selectRootCores(deepClonedTreeCore);
   }
+
   if (deepClonedTreeCore) {
     deepClonedTreeCore.forEach(
       (core: { comment: string; treeCore: Core[]; path: string }) => {
@@ -38,7 +41,16 @@ export const generateMarkDownTree = (
             comment = "";
           }
         }
-        const isFile = core.treeCore.length ? false : true;
+
+        if (
+          treeCore.find((motherCore) => motherCore.path == core.path)?.treeCore
+            .length
+        ) {
+          isFile = false;
+        } else {
+          isFile = true;
+        }
+
         const hyperLink = getHyperLinkFromPath(path);
         const icon = getFileIconFromFileType(getFileTypeFromPath(path, isFile));
         // Find the number of '/' chars in the path
