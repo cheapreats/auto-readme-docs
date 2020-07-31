@@ -19,19 +19,13 @@ const recursivelySetDeletedOrder = (
   deletedOrder: number
 ): void => {
   for (let index = 0; index < treeCore.length; index += 1) {
-    if (
-      treeCore[index].deletedOrder === deletedOrder &&
-      getFileTypeFromPath(treeCore[index].path, !treeCore[index].treeCore) !==
-        FileType.FOLDER
-    ) {
+    if (treeCore[index].deletedOrder === deletedOrder) {
       treeCore[index].deletedOrder = RESET_DELETE_ORDER;
     }
     if (
-      treeCore[index].deletedOrder === deletedOrder &&
       getFileTypeFromPath(treeCore[index].path, !treeCore[index].treeCore) ===
-        FileType.FOLDER
+      FileType.FOLDER
     ) {
-      treeCore[index].deletedOrder = RESET_DELETE_ORDER;
       recursivelySetDeletedOrder(treeCore[index].treeCore, deletedOrder);
     }
   }
@@ -52,37 +46,12 @@ export const undoDeletions = (treeCore: Core[], undoNumber = 1): void => {
   countLastDeletedOrder(treeCore);
   const rangeOfDeletionOrders: number[] = [];
   const newDeletedOrder = highestDeletedOrder - undoNumber;
-
   for (let i = highestDeletedOrder; i > newDeletedOrder; i -= 1) {
     rangeOfDeletionOrders.push(i);
   }
 
   for (let x = 0; x < rangeOfDeletionOrders.length; x += 1) {
-    for (let y = 0; y < treeCore.length; y += 1) {
-      if (
-        treeCore[y].deletedOrder === rangeOfDeletionOrders[x] &&
-        getFileTypeFromPath(treeCore[y].path, !treeCore[y].treeCore) !==
-          FileType.FOLDER
-      ) {
-        treeCore[y].deletedOrder = RESET_DELETE_ORDER;
-      }
-      if (
-        treeCore[y].deletedOrder === rangeOfDeletionOrders[x] &&
-        getFileTypeFromPath(treeCore[y].path, !treeCore[y].treeCore) ===
-          FileType.FOLDER
-      ) {
-        treeCore[y].deletedOrder = RESET_DELETE_ORDER;
-        recursivelySetDeletedOrder(
-          treeCore[y].treeCore,
-          rangeOfDeletionOrders[x]
-        );
-      } else {
-        recursivelySetDeletedOrder(
-          treeCore[y].treeCore,
-          rangeOfDeletionOrders[x]
-        );
-      }
-    }
+    recursivelySetDeletedOrder(treeCore, rangeOfDeletionOrders[x]);
   }
 
   highestDeletedOrder = RESET_DELETE_ORDER;
