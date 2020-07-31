@@ -24,7 +24,6 @@ const App: React.FC = () => {
   const [isNpmBadgeVisible, setNpmBadgeVisible] = useState(false);
   const [url, setURL] = useState("");
   const [treeCore, setTreeCore] = useState<Core[]>([]);
-  // const [oldTree, setOldTree] = useState<oldTree[] | null>(null);
 
   const handleExampleGoButtonPress = async () => {
     const url = "https://github.com/cheapreats/auto-readme-docs";
@@ -44,34 +43,29 @@ const App: React.FC = () => {
     const owner = pathArray[3];
     const repo = pathArray[4];
     setRepoName(repo);
-    // await getOldTree(owner, repo);
-    // if (oldTree) {
     await makeRequest(owner, repo);
-    // }
   };
 
   const makeRequest = async (owner: String, repo: String) => {
     let oldTree: oldTree[] | null = null;
 
-    // Previous Comments
     try {
+      const README = "README.md";
       const res = await fetch(
         `https://api.github.com/repos/${owner}/${repo}/contents`
       );
       const resJSON = await res.json();
-
+      const commentsExistRegex = /((\[.+)\]\(\.\/.+\)\s+# .+)/g;
       for (const key in resJSON) {
         const file = resJSON[key];
-        if (file["path"] === "README.md") {
+        if (file["path"] === README) {
           const SHA = file["sha"];
           const blobs = await fetch(
             `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON["content"]);
-          const haveComments = decodedBlobs.match(
-            /((\[.+)\]\(\.\/.+\)\s+# .+)/g
-          );
+          const haveComments = decodedBlobs.match(commentsExistRegex);
 
           oldTree = getPreviousTree(haveComments);
         }
