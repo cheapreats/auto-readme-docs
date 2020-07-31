@@ -1,6 +1,6 @@
-import { Core, FileType } from '../../tree/types';
-import { generateMarkDownTree } from '../generateMarkDownTree/generateMarkDownTree';
-import { getFileTypeFromPath } from '../getFileTypeFromPath/getFileTypeFromPath';
+import { Core, FileType } from "../../tree/types";
+import { generateMarkDownTree } from "../generateMarkDownTree/generateMarkDownTree";
+import { getFileTypeFromPath } from "../getFileTypeFromPath/getFileTypeFromPath";
 
 /** Undoes the deletion of one deleted order in a given tree, unless
  * given an undoNumber
@@ -16,18 +16,20 @@ const RESET_DELETE_ORDER = -1;
 
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
-  deletedOrder: number,
+  deletedOrder: number
 ): void => {
   for (let index = 0; index < treeCore.length; index += 1) {
     if (
-      treeCore[index].deletedOrder === deletedOrder
-      && getFileTypeFromPath(treeCore[index].path) !== FileType.FOLDER
+      treeCore[index].deletedOrder === deletedOrder &&
+      getFileTypeFromPath(treeCore[index].path, !treeCore[index].treeCore) !==
+        FileType.FOLDER
     ) {
       treeCore[index].deletedOrder = RESET_DELETE_ORDER;
     }
     if (
-      treeCore[index].deletedOrder === deletedOrder
-      && getFileTypeFromPath(treeCore[index].path) === FileType.FOLDER
+      treeCore[index].deletedOrder === deletedOrder &&
+      getFileTypeFromPath(treeCore[index].path, !treeCore[index].treeCore) ===
+        FileType.FOLDER
     ) {
       treeCore[index].deletedOrder = RESET_DELETE_ORDER;
       recursivelySetDeletedOrder(treeCore[index].treeCore, deletedOrder);
@@ -59,23 +61,25 @@ export const undoDeletions = (treeCore: Core[], undoNumber = 1): void => {
     for (let y = 0; y < treeCore.length; y += 1) {
       if (
         treeCore[y].deletedOrder === rangeOfDeletionOrders[x] &&
-        getFileTypeFromPath(treeCore[y].path) !== FileType.FOLDER
+        getFileTypeFromPath(treeCore[y].path, !treeCore[y].treeCore) !==
+          FileType.FOLDER
       ) {
         treeCore[y].deletedOrder = RESET_DELETE_ORDER;
       }
       if (
         treeCore[y].deletedOrder === rangeOfDeletionOrders[x] &&
-        getFileTypeFromPath(treeCore[y].path) === FileType.FOLDER
+        getFileTypeFromPath(treeCore[y].path, !treeCore[y].treeCore) ===
+          FileType.FOLDER
       ) {
         treeCore[y].deletedOrder = RESET_DELETE_ORDER;
         recursivelySetDeletedOrder(
           treeCore[y].treeCore,
-          rangeOfDeletionOrders[x],
+          rangeOfDeletionOrders[x]
         );
       } else {
         recursivelySetDeletedOrder(
           treeCore[y].treeCore,
-          rangeOfDeletionOrders[x],
+          rangeOfDeletionOrders[x]
         );
       }
     }

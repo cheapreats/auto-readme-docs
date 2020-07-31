@@ -38,8 +38,9 @@ export const generateMarkDownTree = (
             comment = "";
           }
         }
+        const isFile = core.treeCore.length ? false : true;
         const hyperLink = getHyperLinkFromPath(path);
-        const icon = getFileIconFromFileType(getFileTypeFromPath(path));
+        const icon = getFileIconFromFileType(getFileTypeFromPath(path, isFile));
         // Find the number of '/' chars in the path
         const curDepth = path.match(/\//g)?.length ?? 0;
         const deepestDirName = curDepth
