@@ -1,7 +1,6 @@
 import { FileType } from "../../tree/types";
 
-/** Given an inputted path: filters dots, forward slashes, and
- *  analyzes position of them to return the file type of the path
+/** Given an inputted path: analyzes the file type of the path
  * @param {string} path the path of a specific file or folder
  * @param {boolean} isFile boolean to determine if target is folder or a file
  * @returns {FileType} file type such as .FILE, .CONFIG_FILE, or .FOLDER
