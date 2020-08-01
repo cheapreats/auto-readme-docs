@@ -35,12 +35,6 @@ const ripOutPaths = (
   };
 
   if (depth < max + 1) {
-    const item = responseBody.tree.map((file: GithubAPIFileObject) => {
-      console.log(file.path);
-    });
-  }
-
-  if (depth < max + 1) {
     const item = responseBody.tree
       .map((file: GithubAPIFileObject) => file.path) // Isolate the path from each object
       .filter((path: string) => path.split("/").length === depth) // Remove paths that are not in current depth
