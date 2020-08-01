@@ -10,13 +10,14 @@ import { Core, FileType } from "../../tree/types";
 
 let lastDeletedOrder = -1;
 const DELETION_INCREMENT = 1;
+const NOT_DELETED = -1;
 
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
   newDeletedOrder: number
 ): void => {
   for (let index = 0; index < treeCore.length; index += 1) {
-    if (treeCore[index].deletedOrder === -1) {
+    if (treeCore[index].deletedOrder === NOT_DELETED) {
       treeCore[index].deletedOrder = newDeletedOrder + DELETION_INCREMENT;
     } else {
       recursivelySetDeletedOrder(

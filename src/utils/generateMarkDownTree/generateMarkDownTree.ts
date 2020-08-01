@@ -7,22 +7,25 @@ import { symbols } from "../../tree/constants";
 import { Core, FilterType } from "../../tree/types";
 import { deepCopyFunction } from "../deepCopyFunction";
 import selectRootCores from "../selectRootCores/selectRootCores";
+import getCoreFromTree from "../getCoreFromTree";
 
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore - the whole MarkDownTree
  * @param {Function} filter - extra Filters
+ * @param {boolean} withAutoComments - if we want to produce automated comments or no
+ * @param {Core[]} motherCore - The whole Tree Core including what is not going to be shown in MarkdownTree
  * @returns {string} - the MarkDownTree without the deletedCore's
  */
 
 export const generateMarkDownTree = (
   treeCore: Core[],
   filter: FilterType = FilterType.NULL,
-  withAutoComments: boolean = true
+  withAutoComments: boolean = true,
+  motherCore: Core[] = treeCore
 ): string[] => {
   let deepClonedTreeCore: Core[] | null = deepCopyFunction(treeCore);
   let isFile = false;
   const outputAsLines: string[] = [];
-
   if (filter === FilterType.ROOT_ONLY) {
     deepClonedTreeCore = selectRootCores(deepClonedTreeCore);
   }
@@ -42,10 +45,8 @@ export const generateMarkDownTree = (
           }
         }
 
-        if (
-          treeCore.find((motherCore) => motherCore.path == core.path)?.treeCore
-            .length
-        ) {
+        // Check to see if the core had any other core inside it
+        if (getCoreFromTree(motherCore, core.path).treeCore.length) {
           isFile = false;
         } else {
           isFile = true;
@@ -77,7 +78,12 @@ export const generateMarkDownTree = (
         curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
         outputAsLines.push(curLine);
         if (core.treeCore) {
-          const childrenTree = generateMarkDownTree(core.treeCore);
+          const childrenTree = generateMarkDownTree(
+            core.treeCore,
+            filter,
+            withAutoComments,
+            motherCore
+          );
           childrenTree.forEach((childCore) => {
             outputAsLines.push(childCore);
           });

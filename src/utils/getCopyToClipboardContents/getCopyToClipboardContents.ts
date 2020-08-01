@@ -33,7 +33,8 @@ export const getCopyToClipboardContents = (
   const copyToClipboardContents = generateMarkDownTree(
     visibleTreeCore,
     filter,
-    false
+    false,
+    deepClonedTreeCore
   );
   return copyToClipboardContents;
 };
