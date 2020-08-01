@@ -34,7 +34,7 @@ export const getCopyToClipboardContents = (
     visibleTreeCore,
     filter,
     false,
-    deepClonedTreeCore
+    treeCore
   );
   return copyToClipboardContents;
 };
