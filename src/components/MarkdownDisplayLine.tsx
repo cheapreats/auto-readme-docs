@@ -124,7 +124,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
           {content}
           <div style={{ width: "100%", position: "relative", left: "-12px" }}>
             <CommentSection
-              visible={commentVisibilty}
+              isVisible={commentVisibilty}
               value={comment}
               onChange={(e) => handleChange(e)}
               onClick={() => handleClick()}
@@ -146,7 +146,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
         {content}
         <div style={{ width: "100%", position: "relative", left: "-12px" }}>
           <CommentSection
-            visible={commentVisibilty}
+            isVisible={commentVisibilty}
             value={comment}
             onChange={(e) => handleChange(e)}
             onClick={() => handleClick()}
