@@ -32,7 +32,6 @@ const recursivelySetDeletedOrder = (
 };
 
 const countLastDeletedOrder = (treeCore: Core[]): void => {
-  // counts lastDeletedOrder of a tree and updates the value of lastDeletedOrder
   for (let index = 0; index < treeCore.length; index += 1) {
     if (treeCore[index].deletedOrder > highestDeletedOrder) {
       highestDeletedOrder = treeCore[index].deletedOrder;

@@ -15,7 +15,6 @@ export const getFileTypeFromPath = (
     if (!isFile) {
       return FileType.FOLDER;
     } else {
-      // name of the file
       const curDepth = path.match(/\//g)?.length ?? 0;
       const deepestDirName = curDepth
         ? path.substring(path.lastIndexOf("/") + 1)

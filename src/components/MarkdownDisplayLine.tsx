@@ -4,7 +4,6 @@ import { Core } from "../tree/types";
 import deleteFileFromPath from "../utils/deleteFileFromPath/deleteFileFromPath";
 import setCommentForPath from "../utils/setCommentForPath/setCommentForPath";
 import CommentSection from "./CommentSection";
-// Styles
 
 const LightBGColor = styled.div`
   display: flex;
@@ -36,8 +35,6 @@ const EditButton = styled.button`
   color: #b3c3d3;
 `;
 
-// Components
-
 interface Props {
   isOddNumberedLine: boolean;
   content: string;
@@ -53,16 +50,13 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   onChange = (): void => {},
 }) => {
   const splitParts = (hyperLink: string): Object => {
-    // like [folder](./folder/file)
     const rightBeforeAddressStarts = "(./";
     const rightAfterAddressEnds = ")";
-    //  [folder](./*(here)*folder/file)
     const startOfAddress =
       content.indexOf(rightBeforeAddressStarts) +
       rightBeforeAddressStarts.length;
     const rightBeforeFileNameStarts = "[";
     const rightAfterFileNameEnds = "]";
-    // like folder in [folder](./folder/file)
     const fileName = content.substring(
       content.indexOf(rightBeforeFileNameStarts) + 1,
       content.indexOf(
@@ -70,7 +64,6 @@ const MarkdownDisplayLine: React.FC<Props> = ({
         startOfAddress - rightBeforeAddressStarts.length - 1
       )
     );
-    // [folder](./folder/file)*(here)
     const endOfAddress = content.indexOf(
       fileName + rightAfterAddressEnds,
       startOfAddress

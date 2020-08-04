@@ -45,7 +45,6 @@ export const generateMarkDownTree = (
           }
         }
 
-        // Check to see if the core had any other core inside it
         if (getCoreFromTree(motherCore, core.path).treeCore.length) {
           isFile = false;
         } else {
