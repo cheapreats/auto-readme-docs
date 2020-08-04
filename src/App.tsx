@@ -25,6 +25,9 @@ const App: React.FC = () => {
   const [url, setURL] = useState("");
   const [treeCore, setTreeCore] = useState<Core[]>([]);
 
+  const OWNERINURL = 3;
+  const REPOINURL = 4;
+
   const handleExampleGoButtonPress = async () => {
     const url = "https://github.com/cheapreats/auto-readme-docs";
     const pathArray = url.split("/");
@@ -40,8 +43,8 @@ const App: React.FC = () => {
   const handleGoButtonPress = async (event: MouseEvent) => {
     // Expecting a URL like 'https://github.com/${owner}/${repo}'
     const pathArray = url.split("/");
-    const owner = pathArray[3];
-    const repo = pathArray[4];
+    const owner = pathArray[OWNERINURL];
+    const repo = pathArray[REPOINURL];
     setRepoName(repo);
     await makeRequest(owner, repo);
   };
