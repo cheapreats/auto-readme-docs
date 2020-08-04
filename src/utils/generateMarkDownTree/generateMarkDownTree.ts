@@ -9,6 +9,12 @@ import { deepCopyFunction } from "../deepCopyFunction";
 import selectRootCores from "../selectRootCores/selectRootCores";
 import getCoreFromTree from "../getCoreFromTree";
 
+type IGetMarkDownTree = (
+  treeCore: Core[],
+  filter?: FilterType,
+  withAutoComments?: boolean,
+  motherCore?: Core[]
+) => string[];
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore - the whole MarkDownTree
  * @param {Function} filter - extra Filters
@@ -16,13 +22,13 @@ import getCoreFromTree from "../getCoreFromTree";
  * @param {Core[]} motherCore - The whole Tree Core including what is not going
  * to be shown in MarkdownTree
  * @returns {string} - the MarkDownTree without the deletedCore's
- */
-export const generateMarkDownTree = (
-  treeCore: Core[],
-  filter: FilterType = FilterType.NULL,
+*/
+export const generateMarkDownTree: IGetMarkDownTree = (
+  treeCore,
+  filter = FilterType.NULL,
   withAutoComments = true,
-  motherCore: Core[] = treeCore
-): string[] => {
+  motherCore = treeCore,
+) => {
   let deepClonedTreeCore: Core[] | null = deepCopyFunction(treeCore);
   let isFile = false;
   const outputAsLines: string[] = [];
@@ -86,13 +92,13 @@ export const generateMarkDownTree = (
             core.treeCore,
             filter,
             withAutoComments,
-            motherCore,
+            motherCore
           );
           childrenTree.forEach((childCore) => {
             outputAsLines.push(childCore);
           });
         }
-      },
+      }
     );
   }
 

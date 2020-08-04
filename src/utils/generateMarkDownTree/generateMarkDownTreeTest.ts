@@ -219,6 +219,48 @@ const newCore4 = [
   },
 ];
 
+const newCore5 = [
+  {
+    path: 'ex',
+    deletedOrder: -1,
+    comment: '',
+    treeCore: [
+      {
+        path: 'ex/rx',
+        deletedOrder: -1,
+        comment: '',
+        treeCore: [
+          {
+            path: 'ex/rx/tx',
+            deletedOrder: -1,
+            comment: '',
+            treeCore: [
+              {
+                path: 'ex/rx/tx/aaa.ts',
+                deletedOrder: -1,
+                comment: '',
+                treeCore: [],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'ex/aaa2.ts',
+        deletedOrder: -1,
+        comment: '',
+        treeCore: [],
+      },
+      {
+        path: 'ex/yx',
+        deletedOrder: -1,
+        comment: '',
+        treeCore: [],
+      },
+    ],
+  },
+];
+
 const resultwhole = [
   '📂 [ex](./ex)     # just a comment',
   '├── 📂 [aaa7](./ex/aaa7) # just a comment',
@@ -294,6 +336,20 @@ const newResult4 = [
   '</details>',
 ];
 
+const newResult5 = [
+  '<details> <summary>📂 [ex](./ex)</summary>',
+  '<details> <summary>📂 [rx](./ex/rx)</summary>',
+  '<details> <summary>📂 [tx](./ex/rx/tx)</summary>',
+  '',
+  '├── 📄 [aaa](./ex/rx/tx/aaa.ts)',
+  '</details>',
+  '</details>',
+  '',
+  '├── 📄 [aaa2](./ex/aaa2.ts)<br/>',
+  '├── 📂 [yx](./ex/yx)',
+  '</details>',
+];
+
 describe('Generate Tree', () => {
   it(' a tree containing file,folder,3 levels,deleted folders with comment and no comments ', () => {
     const newTreeCore = generateMarkDownTree(treeCore);
@@ -322,5 +378,9 @@ describe('Generate Tree', () => {
   it('2 Folders, 1 Folder Nested in Each, 1 File Nested in Each.', () => {
     const newTreeCore = generateMarkDownTree(newCore4);
     expect(newTreeCore.toString).to.equal(newResult4.toString);
+  });
+  it('File nested in a folder, nested in a folder, nested in a folder -- a file and folder nested in the first folder', () => {
+    const newTreeCore = generateMarkDownTree(newCore5);
+    expect(newTreeCore.toString).to.equal(newResult5.toString);
   });
 });
