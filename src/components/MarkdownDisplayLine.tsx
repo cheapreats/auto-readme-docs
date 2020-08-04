@@ -104,10 +104,10 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   };
   const [comment, setComment] = useState(getComment(content));
   const [commentVisibilty, setCommentVisibility] = useState(false);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const changeComment = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setComment(event.currentTarget.value);
   };
-  const handleClick = (): void => {
+  const setNewComment = (): void => {
     setCommentForPath(treeCore, path(content), comment);
 
     setCommentVisibility(!commentVisibilty);
@@ -126,8 +126,8 @@ const MarkdownDisplayLine: React.FC<Props> = ({
             <CommentSection
               isVisible={commentVisibilty}
               value={comment}
-              onChange={(e) => handleChange(e)}
-              onClick={() => handleClick()}
+              onChange={(e) => changeComment(e)}
+              onClick={() => setNewComment()}
             ></CommentSection>
           </div>
         </div>
@@ -148,8 +148,8 @@ const MarkdownDisplayLine: React.FC<Props> = ({
           <CommentSection
             isVisible={commentVisibilty}
             value={comment}
-            onChange={(e) => handleChange(e)}
-            onClick={() => handleClick()}
+            onChange={(e) => changeComment(e)}
+            onClick={() => setNewComment()}
           ></CommentSection>
         </div>
       </div>
