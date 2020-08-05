@@ -41,7 +41,8 @@ interface Props {
   onChange: Function;
   treeCore: Core[];
 }
-const editIcon = "✏";
+
+const EDIT_ICON = "✏";
 
 const MarkdownDisplayLine: React.FC<Props> = ({
   isOddNumberedLine,
@@ -50,22 +51,24 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   onChange = (): void => {},
 }) => {
   const splitParts = (hyperLink: string): Object => {
-    const rightBeforeAddressStarts = "(./";
-    const rightAfterAddressEnds = ")";
+    const RIGHT_BEFORE_ADDRESS_STARTS = "(./";
+    const RIGHT_AFTER_ADDRESS_ENDS = ")";
+
     const startOfAddress =
-      content.indexOf(rightBeforeAddressStarts) +
-      rightBeforeAddressStarts.length;
-    const rightBeforeFileNameStarts = "[";
-    const rightAfterFileNameEnds = "]";
+      content.indexOf(RIGHT_BEFORE_ADDRESS_STARTS) +
+      RIGHT_BEFORE_ADDRESS_STARTS.length;
+
+    const RIGHT_BEFORE_FILENAME_STARTS = "[";
+    const RIGHT_AFTER_FILENAME_ENDS = "]";
     const fileName = content.substring(
-      content.indexOf(rightBeforeFileNameStarts) + 1,
+      content.indexOf(RIGHT_BEFORE_FILENAME_STARTS) + 1,
       content.indexOf(
-        rightAfterFileNameEnds,
-        startOfAddress - rightBeforeAddressStarts.length - 1
+        RIGHT_AFTER_FILENAME_ENDS,
+        startOfAddress - RIGHT_BEFORE_ADDRESS_STARTS.length - 1
       )
     );
     const endOfAddress = content.indexOf(
-      fileName + rightAfterAddressEnds,
+      fileName + RIGHT_AFTER_ADDRESS_ENDS,
       startOfAddress
     );
     return {
@@ -74,6 +77,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
       fileName: fileName,
     };
   };
+
   const path = (hyperLink: string): string => {
     const parts = splitParts(hyperLink);
     return content.substring(
@@ -95,6 +99,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
     const currentComment = withoutSpaces.substring(commentSquare.length);
     return currentComment;
   };
+
   const [comment, setComment] = useState(getComment(content));
   const [commentVisibilty, setCommentVisibility] = useState(false);
   const changeComment = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -110,6 +115,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
     deleteFileFromPath(treeCore, path(content));
     onChange(treeCore);
   };
+
   if (isOddNumberedLine) {
     return (
       <DarkBGColor>
@@ -127,7 +133,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
         <div style={{ display: "flex" }}>
           <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
           <EditButton onClick={() => setCommentVisibility(!commentVisibilty)}>
-            {editIcon}
+            {EDIT_ICON}
           </EditButton>
         </div>
       </DarkBGColor>
@@ -149,7 +155,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
       <div style={{ display: "flex" }}>
         <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
         <EditButton onClick={() => setCommentVisibility(!commentVisibilty)}>
-          {editIcon}
+          {EDIT_ICON}
         </EditButton>
       </div>
     </LightBGColor>

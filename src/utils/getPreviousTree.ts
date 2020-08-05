@@ -6,20 +6,20 @@ interface oldTree {
   path: string | undefined;
   comment: string | undefined;
 }
-const wordsInsideParentheses = /(\(\.\/.+\))/g;
-const wordsAfterHashSymbol = /(# .+)/g;
+const WORDSINSIDEPARENTHESES = /(\(\.\/.+\))/g;
+const WORDSAFTERHASHSYMBOL = /(# .+)/g;
 export const getPreviousTree = (haveComments: string[] | null): oldTree[] => {
   if (haveComments === null) {
     return [];
   }
   const haveCommentsArray: oldTree[] = [];
   haveComments.map((line, key) => {
-    const firstHalf = line.match(wordsInsideParentheses)?.toString();
-    const secondHalf = line.match(wordsAfterHashSymbol)?.toString();
+    const firstHalf = line.match(WORDSINSIDEPARENTHESES)?.toString();
+    const secondHalf = line.match(WORDSAFTERHASHSYMBOL)?.toString();
     const path = firstHalf?.substring(1, firstHalf.length - 1);
     const comment = secondHalf?.substring(2, secondHalf.length);
-    const haveCommentsOBJ = { path, comment };
-    haveCommentsArray.push(haveCommentsOBJ);
+    const haveCommentsObject = { path, comment };
+    haveCommentsArray.push(haveCommentsObject);
   });
   return haveCommentsArray;
 };

@@ -43,7 +43,7 @@ export const getLargestFileNameLengthInLevel = (
 ): number => {
   let largestFileNameLengthInLevel = 0;
   // depthLevel is greater than maxDepthLevel of treeCore
-  const outOfBounds = -1;
+  const OUTOFBOUNDS = -1;
   const pathsInDepthLevel: string[] = [];
 
   traverseThroughTree(treeCore, depthLevel, 0, pathsInDepthLevel);
@@ -59,7 +59,7 @@ export const getLargestFileNameLengthInLevel = (
     }
   }
   if (maxDepthLevel < depthLevel) {
-    return outOfBounds;
+    return OUTOFBOUNDS;
   }
 
   return largestFileNameLengthInLevel;
