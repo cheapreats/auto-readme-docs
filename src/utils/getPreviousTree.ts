@@ -2,8 +2,8 @@ interface oldTree {
   path: string | undefined;
   comment: string | undefined;
 }
-const WORDSINSIDEPARENTHESES = /(\(\.\/.+\))/g;
-const WORDSAFTERHASHSYMBOL = /(# .+)/g;
+const PATH_SECTION_PATTERN = /(\(\.\/.+\))/g;
+const COMMENT_SECTION_PATTERN = /(# .+)/g;
 
 /**  Will Divide The treecore into path and comment
  * @param {string[]} haveComments  The exsiting treeCore in Readme File
@@ -15,8 +15,8 @@ export const getPreviousTree = (haveComments: string[] | null): oldTree[] => {
   }
   const haveCommentsArray: oldTree[] = [];
   haveComments.map((line, key) => {
-    const firstHalf = line.match(WORDSINSIDEPARENTHESES)?.toString();
-    const secondHalf = line.match(WORDSAFTERHASHSYMBOL)?.toString();
+    const firstHalf = line.match(PATH_SECTION_PATTERN)?.toString();
+    const secondHalf = line.match(COMMENT_SECTION_PATTERN)?.toString();
     const path = firstHalf?.substring(1, firstHalf.length - 1);
     const comment = secondHalf?.substring(2, secondHalf.length);
     const haveCommentsObject = { path, comment };

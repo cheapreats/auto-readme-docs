@@ -41,9 +41,9 @@ export const setCommentForPath = (
   path: string,
   comment: string
 ): Core[] => {
-  const PATTERN = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\\[\].]*)([/]?)))+[^/.]$/i;
+  const FILE_PATTERN = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\\[\].]*)([/]?)))+[^/.]$/i;
 
-  if (PATTERN.test(path)) {
+  if (FILE_PATTERN.test(path)) {
     treeCore.forEach((core) => {
       if (core.treeCore) {
         core.treeCore = searchRecursiveCore(core.treeCore, path, comment);

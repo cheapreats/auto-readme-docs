@@ -12,7 +12,6 @@ export const formatLanguages = (
 
   Object.keys(languages).map((key) => {
     const formattedLanguage = getWebsiteForLanguage(key);
-    console.log("ll", key, formattedLanguages);
     formattedLanguages.push(formattedLanguage);
 
     return formattedLanguages;

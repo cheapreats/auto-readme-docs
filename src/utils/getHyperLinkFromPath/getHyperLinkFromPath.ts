@@ -4,8 +4,8 @@
  */
 
 export const getHyperLinkFromPath = (path: string): string => {
-  const PATTERN = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\\[\].]*)([/]?)))+[^/.]$/i;
-  if (PATTERN.test(path)) {
+  const FILE_PATTERN = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\\[\].]*)([/]?)))+[^/.]$/i;
+  if (FILE_PATTERN.test(path)) {
     const curDepth = path.match(/\//g)?.length ?? 0;
     const deepestDirName = curDepth
       ? path.substring(path.lastIndexOf("/") + 1)
