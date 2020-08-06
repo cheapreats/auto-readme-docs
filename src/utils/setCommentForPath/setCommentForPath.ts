@@ -1,16 +1,16 @@
-/**  Replaces the existing comment by a given string
- * @param {TreeCore} treeCore - the whole tree
- * @param {string} path - The path of a specific file
- * @param {string} comment - any string
- * @returns {TreeCore} - New treeCore with replaced comment
- */
-
 interface Core {
   comment: string;
   path: string;
   deletedOrder: number;
   treeCore: Core[];
 }
+
+/**  Replaces the existing comment by a given string recusively
+ * @param {TreeCore} treeCore - the whole tree
+ * @param {string} path - The path of a specific file
+ * @param {string} comment - any string
+ * @returns {TreeCore} - New treeCore with replaced comment
+ */
 
 const searchRecursiveCore = (
   treeCore: Core[],
@@ -28,6 +28,13 @@ const searchRecursiveCore = (
   }
   return treeCore;
 };
+
+/**  Replaces the existing comment by a given string
+ * @param {TreeCore} treeCore - the whole tree
+ * @param {string} path - The path of a specific file
+ * @param {string} comment - any string
+ * @returns {TreeCore} - New treeCore with replaced comment
+ */
 
 export const setCommentForPath = (
   treeCore: Core[],

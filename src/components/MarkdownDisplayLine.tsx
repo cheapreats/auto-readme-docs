@@ -50,6 +50,10 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   treeCore,
   onChange = (): void => {},
 }) => {
+  /** Given a hyperlink, split the different parts of the input into different sections
+   * @param {string} hyperLink Hyperlink with pattern of [filename](./address/filename)
+   * @returns {Object} - Returns an Object of filename, and positions of start and end of the address
+   */
   const splitParts = (hyperLink: string): Object => {
     const RIGHT_BEFORE_ADDRESS_STARTS = "(./";
     const RIGHT_AFTER_ADDRESS_ENDS = ")";
@@ -78,6 +82,10 @@ const MarkdownDisplayLine: React.FC<Props> = ({
     };
   };
 
+  /** Given a hyperlink, using splitParts function rips out the path inside the link
+   * @param {string} hyperLink - Hyperlink with pattern of [filename](./address/filename)
+   * @returns {string} - Returns the path from hyperlink
+   */
   const path = (hyperLink: string): string => {
     const parts = splitParts(hyperLink);
     return content.substring(
@@ -86,6 +94,10 @@ const MarkdownDisplayLine: React.FC<Props> = ({
     );
   };
 
+  /** Given a hyperlink, returns the comment inside the string
+   * @param {string} hyperLink - Hyperlink with pattern of [filename](./address/filename)
+   * @returns {string} - Returns the path inside the hyperlink
+   */
   const getComment = (hyperLink: string): string => {
     const commentSquare = "# ";
     const parts = splitParts(hyperLink);

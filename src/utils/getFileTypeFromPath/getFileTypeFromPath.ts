@@ -10,8 +10,8 @@ export const getFileTypeFromPath = (
   path: string,
   isFile: boolean
 ): FileType => {
-  const pattern = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\\[\].]*)([/]?)))+[^/.]$/i;
-  if (pattern.test(path)) {
+  const PATTERN = /^((?![<>:"/\\|?* ])(([a-z0-9\s_@\-^!#$%&+={}\\[\].]*)([/]?)))+[^/.]$/i;
+  if (PATTERN.test(path)) {
     if (!isFile) {
       return FileType.FOLDER;
     } else {

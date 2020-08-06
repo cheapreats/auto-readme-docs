@@ -1,13 +1,14 @@
-/**  Will Divide The treecore into path and comment
- * @param {string[]} haveComments  The exsiting treeCore in Readme File
- * @returns {Object[]} Object array of path and comment
- */
 interface oldTree {
   path: string | undefined;
   comment: string | undefined;
 }
 const WORDSINSIDEPARENTHESES = /(\(\.\/.+\))/g;
 const WORDSAFTERHASHSYMBOL = /(# .+)/g;
+
+/**  Will Divide The treecore into path and comment
+ * @param {string[]} haveComments  The exsiting treeCore in Readme File
+ * @returns {Object[]} Object array of path and comment
+ */
 export const getPreviousTree = (haveComments: string[] | null): oldTree[] => {
   if (haveComments === null) {
     return [];
