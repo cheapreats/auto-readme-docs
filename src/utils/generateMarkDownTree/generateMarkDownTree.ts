@@ -22,12 +22,12 @@ type IGetMarkDownTree = (
  * @param {Core[]} motherCore - The whole Tree Core including what is not going
  * to be shown in MarkdownTree
  * @returns {string} - the MarkDownTree without the deletedCore's
-*/
+ */
 export const generateMarkDownTree: IGetMarkDownTree = (
   treeCore,
   filter = FilterType.NULL,
   withAutoComments = true,
-  motherCore = treeCore,
+  motherCore = treeCore
 ) => {
   let deepClonedTreeCore: Core[] | null = deepCopyFunction(treeCore);
   let isFile = false;
@@ -67,22 +67,19 @@ export const generateMarkDownTree: IGetMarkDownTree = (
         /* If no '/' chars in path, then this directory is at the root
     of the project. Don't have to decorate this line of the output with
     │ or ├── */
-        if (curDepth !== 0) {
-          // For all nested "levels" except for the deepest one, add a │ vertical bar
-          for (let i = 0; i < curDepth - 1; i += 1) {
-            curLine += symbols.vertical;
-          }
-          // Add a ├── symbol
-          curLine += symbols.branch;
-        }
         const spaces = longestFileName - deepestDirName.length;
         const commentAlignment = comment ? " ".repeat(spaces) : "";
-        if (isFile === false) {
-          curLine += `<details> <summary>${icon}${hyperLink} ${commentAlignment}${comment}</summary>`;
+        const PADDING_STYLE = 16;
+        if (isFile === false && core.treeCore.length > 0) {
+          curLine += `<details style="padding-left: ${
+            PADDING_STYLE * curDepth
+          }px"> <summary>${icon}${hyperLink} ${commentAlignment}${comment}</summary>`;
         } else {
-          curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
-          if () {
-            curLine += '</details>';
+          curLine += `&nbsp; ${icon}${hyperLink} ${commentAlignment}${comment}`;
+          if (deepClonedTreeCore && curDepth > 0) {
+            if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
+              curLine += '</details>';
+            }
           }
         }
         outputAsLines.push(curLine);
