@@ -5,13 +5,28 @@ interface oldTree {
   comment: string | undefined;
 }
 
-const findMaximumDepthLevel = (responseBody) => {
+const START_OF_PATH = "./";
+const START_OF_COMMENT = "# ";
+
+/** Given a responseBody, returns the maximum depth exist inside the tree
+ * @param {GithubAPIResponseBody} responseBody - Response from the api including all the information to make a treeCore
+ * @returns {number} - Maximum existing depth of the whole response body to stop the process when reaching the last depth
+ */
+const findMaximumDepthLevel = (responseBody: GithubAPIResponseBody): number => {
   const depthLevels = responseBody.tree.map(
     (file: GithubAPIFileObject) => file.path.split("/").length
   );
   return Math.max(...depthLevels);
 };
-// ripOutPaths condenses the response body from a Github API call to a list of directory paths.
+
+/** Given a response, rip outs the different parts of the response and make a treeCore
+ * @param {GithubAPIResponseBody} responseBody - Response from the api including all the information to make a treeCore
+ * @param {oldTree[] | null} oldTree - An array of path and comments of old treeCore if it already exists in readme file
+ * @param {string} root - String of root folder for recursive search through the response body
+ * @param {number} depth - Depth of the current input data for recursive search through the response body
+ * @param {number} maxDepthLevel - Maximum existing depth of the whole response body to stop the process when reaching the last depth
+ * @returns {Core[]} - Returns a Core array to be a part of Tree
+ */
 const ripOutPaths = (
   responseBody: GithubAPIResponseBody,
   oldTree: oldTree[] | null = null,
@@ -25,10 +40,10 @@ const ripOutPaths = (
 
   const setComment = (path) => {
     const found = oldTree
-      ? oldTree.find((item) => item.path == "./" + path)
+      ? oldTree.find((item) => item.path == START_OF_PATH + path)
       : null;
     if (found) {
-      return "# " + found.comment;
+      return START_OF_COMMENT + found.comment;
     } else {
       return "";
     }

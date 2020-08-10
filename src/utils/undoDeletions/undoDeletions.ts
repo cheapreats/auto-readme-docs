@@ -2,18 +2,15 @@ import { Core, FileType } from "../../tree/types";
 import { generateMarkDownTree } from "../generateMarkDownTree/generateMarkDownTree";
 import { getFileTypeFromPath } from "../getFileTypeFromPath/getFileTypeFromPath";
 
-/** Undoes the deletion of one deleted order in a given tree, unless
- * given an undoNumber
- * @param {Core[]} treeCore - entire tree that is inputted for analysis
- * @param {number} undoNumber - by default it is set to 1, indicates how many
- * deletions are to be undone
- * @returns {void} - doesn't return anything, simply undoes the deletions as
- * per undoNumber provided
- */
-
 let highestDeletedOrder = -1;
 const RESET_DELETE_ORDER = -1;
 
+/** Undoes the deletion of one deleted order in a given tree
+ * @param {Core[]} treeCore - TreeCore to find the deleted orders inside of it
+ * @param {number} deletedOrder - The Deletedorder of the deleted item
+ * @returns {void} - doesn't return anything, simply undoes the deletions as
+ * per undoNumber provided
+ */
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
   deletedOrder: number
@@ -31,8 +28,11 @@ const recursivelySetDeletedOrder = (
   }
 };
 
+/** Given a treeCore, counts the last deleted order inside it
+ * @param {Core[]} treeCore - TreeCore to find the last deleted order inside it
+ * @returns {void} - doesn't return anything, simply counts the last deleted order
+ */
 const countLastDeletedOrder = (treeCore: Core[]): void => {
-  // counts lastDeletedOrder of a tree and updates the value of lastDeletedOrder
   for (let index = 0; index < treeCore.length; index += 1) {
     if (treeCore[index].deletedOrder > highestDeletedOrder) {
       highestDeletedOrder = treeCore[index].deletedOrder;
@@ -41,6 +41,15 @@ const countLastDeletedOrder = (treeCore: Core[]): void => {
     }
   }
 };
+
+/** Undoes the deletion of one deleted order in a given tree, unless
+ * given an undoNumber
+ * @param {Core[]} treeCore - entire tree that is inputted for analysis
+ * @param {number} undoNumber - by default it is set to 1, indicates how many
+ * deletions are to be undone
+ * @returns {void} - doesn't return anything, simply undoes the deletions as
+ * per undoNumber provided
+ */
 
 export const undoDeletions = (treeCore: Core[], undoNumber = 1): void => {
   countLastDeletedOrder(treeCore);

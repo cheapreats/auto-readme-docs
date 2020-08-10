@@ -4,7 +4,6 @@ import { Core } from "../tree/types";
 import deleteFileFromPath from "../utils/deleteFileFromPath/deleteFileFromPath";
 import setCommentForPath from "../utils/setCommentForPath/setCommentForPath";
 import CommentSection from "./CommentSection";
-// Styles
 
 const LightBGColor = styled.div`
   display: flex;
@@ -36,15 +35,14 @@ const EditButton = styled.button`
   color: #b3c3d3;
 `;
 
-// Components
-
 interface Props {
   isOddNumberedLine: boolean;
   content: string;
   onChange: Function;
   treeCore: Core[];
 }
-const editIcon = "✏";
+
+const EDIT_ICON = "✏";
 
 const MarkdownDisplayLine: React.FC<Props> = ({
   isOddNumberedLine,
@@ -52,27 +50,29 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   treeCore,
   onChange = (): void => {},
 }) => {
+  /** Given a hyperlink, split the different parts of the input into different sections
+   * @param {string} hyperLink Hyperlink with pattern of [filename](./address/filename)
+   * @returns {Object} - Returns an Object of filename, and positions of start and end of the address
+   */
   const splitParts = (hyperLink: string): Object => {
-    // like [folder](./folder/file)
-    const rightBeforeAddressStarts = "(./";
-    const rightAfterAddressEnds = ")";
-    //  [folder](./*(here)*folder/file)
+    const RIGHT_BEFORE_ADDRESS_STARTS = "(./";
+    const RIGHT_AFTER_ADDRESS_ENDS = ")";
+
     const startOfAddress =
-      content.indexOf(rightBeforeAddressStarts) +
-      rightBeforeAddressStarts.length;
-    const rightBeforeFileNameStarts = "[";
-    const rightAfterFileNameEnds = "]";
-    // like folder in [folder](./folder/file)
+      content.indexOf(RIGHT_BEFORE_ADDRESS_STARTS) +
+      RIGHT_BEFORE_ADDRESS_STARTS.length;
+
+    const RIGHT_BEFORE_FILENAME_STARTS = "[";
+    const RIGHT_AFTER_FILENAME_ENDS = "]";
     const fileName = content.substring(
-      content.indexOf(rightBeforeFileNameStarts) + 1,
+      content.indexOf(RIGHT_BEFORE_FILENAME_STARTS) + 1,
       content.indexOf(
-        rightAfterFileNameEnds,
-        startOfAddress - rightBeforeAddressStarts.length - 1
+        RIGHT_AFTER_FILENAME_ENDS,
+        startOfAddress - RIGHT_BEFORE_ADDRESS_STARTS.length - 1
       )
     );
-    // [folder](./folder/file)*(here)
     const endOfAddress = content.indexOf(
-      fileName + rightAfterAddressEnds,
+      fileName + RIGHT_AFTER_ADDRESS_ENDS,
       startOfAddress
     );
     return {
@@ -81,6 +81,11 @@ const MarkdownDisplayLine: React.FC<Props> = ({
       fileName: fileName,
     };
   };
+
+  /** Given a hyperlink, using splitParts function rips out the path inside the link
+   * @param {string} hyperLink - Hyperlink with pattern of [filename](./address/filename)
+   * @returns {string} - Returns the path from hyperlink
+   */
   const path = (hyperLink: string): string => {
     const parts = splitParts(hyperLink);
     return content.substring(
@@ -89,6 +94,10 @@ const MarkdownDisplayLine: React.FC<Props> = ({
     );
   };
 
+  /** Given a hyperlink, returns the comment inside the string
+   * @param {string} hyperLink - Hyperlink with pattern of [filename](./address/filename)
+   * @returns {string} - Returns the path inside the hyperlink
+   */
   const getComment = (hyperLink: string): string => {
     const commentSquare = "# ";
     const parts = splitParts(hyperLink);
@@ -102,12 +111,13 @@ const MarkdownDisplayLine: React.FC<Props> = ({
     const currentComment = withoutSpaces.substring(commentSquare.length);
     return currentComment;
   };
+
   const [comment, setComment] = useState(getComment(content));
   const [commentVisibilty, setCommentVisibility] = useState(false);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const changeComment = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setComment(event.currentTarget.value);
   };
-  const handleClick = (): void => {
+  const setNewComment = (): void => {
     setCommentForPath(treeCore, path(content), comment);
 
     setCommentVisibility(!commentVisibilty);
@@ -117,6 +127,7 @@ const MarkdownDisplayLine: React.FC<Props> = ({
     deleteFileFromPath(treeCore, path(content));
     onChange(treeCore);
   };
+
   if (isOddNumberedLine) {
     return (
       <DarkBGColor>
@@ -124,17 +135,17 @@ const MarkdownDisplayLine: React.FC<Props> = ({
           {content}
           <div style={{ width: "100%", position: "relative", left: "-12px" }}>
             <CommentSection
-              visible={commentVisibilty}
+              isVisible={commentVisibilty}
               value={comment}
-              onChange={(e) => handleChange(e)}
-              onClick={() => handleClick()}
+              onChange={(e) => changeComment(e)}
+              onClick={() => setNewComment()}
             ></CommentSection>
           </div>
         </div>
         <div style={{ display: "flex" }}>
           <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
           <EditButton onClick={() => setCommentVisibility(!commentVisibilty)}>
-            {editIcon}
+            {EDIT_ICON}
           </EditButton>
         </div>
       </DarkBGColor>
@@ -146,17 +157,17 @@ const MarkdownDisplayLine: React.FC<Props> = ({
         {content}
         <div style={{ width: "100%", position: "relative", left: "-12px" }}>
           <CommentSection
-            visible={commentVisibilty}
+            isVisible={commentVisibilty}
             value={comment}
-            onChange={(e) => handleChange(e)}
-            onClick={() => handleClick()}
+            onChange={(e) => changeComment(e)}
+            onClick={() => setNewComment()}
           ></CommentSection>
         </div>
       </div>
       <div style={{ display: "flex" }}>
         <DeletionButton onClick={() => handleDeletion()}>X</DeletionButton>
         <EditButton onClick={() => setCommentVisibility(!commentVisibilty)}>
-          {editIcon}
+          {EDIT_ICON}
         </EditButton>
       </div>
     </LightBGColor>

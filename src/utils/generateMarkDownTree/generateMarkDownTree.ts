@@ -29,7 +29,6 @@ export const generateMarkDownTree = (
   if (filter === FilterType.ROOT_ONLY) {
     deepClonedTreeCore = selectRootCores(deepClonedTreeCore);
   }
-
   if (deepClonedTreeCore) {
     deepClonedTreeCore.forEach(
       (core: { comment: string; treeCore: Core[]; path: string }) => {
@@ -44,8 +43,6 @@ export const generateMarkDownTree = (
             comment = "";
           }
         }
-
-        // Check to see if the core had any other core inside it
         if (getCoreFromTree(motherCore, core.path).treeCore.length) {
           isFile = false;
         } else {
@@ -76,6 +73,23 @@ export const generateMarkDownTree = (
         const spaces = longestFileName - deepestDirName.length;
         const commentAlignment = comment ? " ".repeat(spaces) : "";
         curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
+
+        // let level = curDepth;
+        // if (deepClonedTreeCore) {
+        //   if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
+        //     do {
+        //       console.log(core);
+
+        //       level = level - 1;
+        //     } while (level);
+        //     console.log(
+        //       deepClonedTreeCore[deepClonedTreeCore.length - 1],
+        //       "is Last Item"
+        //     );
+        //   } else {
+        //     // console.log(core, "is not the last item");
+        //   }
+        // }
         outputAsLines.push(curLine);
         if (core.treeCore) {
           const childrenTree = generateMarkDownTree(
@@ -91,7 +105,6 @@ export const generateMarkDownTree = (
       }
     );
   }
-
   return outputAsLines;
 };
 

@@ -22,8 +22,8 @@ const Submit = styled.button`
 `;
 
 const CommentBox = styled.div<Props>`
-  ${({ visible }): string =>
-    visible
+  ${({ isVisible }): string =>
+    isVisible
       ? `
     display: block;
 `
@@ -31,7 +31,7 @@ const CommentBox = styled.div<Props>`
 `;
 
 interface Props {
-  visible: boolean;
+  isVisible: boolean;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: (e: MouseEvent) => void;
@@ -41,7 +41,7 @@ export const CommentSection: React.FC<Props> = (
   props: Props
 ): React.ReactElement => {
   return (
-    <CommentBox visible={props.visible}>
+    <CommentBox isVisible={props.isVisible}>
       <Input value={props.value} onChange={props.onChange}></Input>
       <Submit onClick={props.onClick}>✓</Submit>
     </CommentBox>

@@ -25,11 +25,14 @@ const App: React.FC = () => {
   const [url, setURL] = useState("");
   const [treeCore, setTreeCore] = useState<Core[]>([]);
 
+  const OWNER_IN_URL = 3;
+  const REPO_IN_URL = 4;
+
   const handleExampleGoButtonPress = async () => {
     const url = "https://github.com/cheapreats/auto-readme-docs";
     const pathArray = url.split("/");
-    const owner = pathArray[3];
-    const repo = pathArray[4];
+    const owner = pathArray[OWNER_IN_URL];
+    const repo = pathArray[REPO_IN_URL];
     setRepoName(repo);
     await makeRequest(owner, repo);
   };
@@ -40,8 +43,8 @@ const App: React.FC = () => {
   const handleGoButtonPress = async (event: MouseEvent) => {
     // Expecting a URL like 'https://github.com/${owner}/${repo}'
     const pathArray = url.split("/");
-    const owner = pathArray[3];
-    const repo = pathArray[4];
+    const owner = pathArray[OWNER_IN_URL];
+    const repo = pathArray[REPO_IN_URL];
     setRepoName(repo);
     await makeRequest(owner, repo);
   };
@@ -52,7 +55,12 @@ const App: React.FC = () => {
     try {
       const README = "README.md";
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/contents`
+        `https://api.github.com/repos/${owner}/${repo}/contents`,
+        {
+          headers: {
+            authorization: "token 977aec209319da58a965cee75eafbca4dce73fb8",
+          },
+        }
       );
       const resJSON = await res.json();
       const commentsExistRegex = /((\[.+)\]\(\.\/.+\)\s+# .+)/g;
@@ -61,7 +69,12 @@ const App: React.FC = () => {
         if (file["path"] === README) {
           const SHA = file["sha"];
           const blobs = await fetch(
-            `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
+            `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`,
+            {
+              headers: {
+                authorization: "token 977aec209319da58a965cee75eafbca4dce73fb8",
+              },
+            }
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON["content"]);
@@ -77,7 +90,12 @@ const App: React.FC = () => {
     // npm badges
     try {
       const npmPackagesResponse = await fetch(
-        `https://api.npms.io/v2/search?q=${repo}`
+        `https://api.npms.io/v2/search?q=${repo}`,
+        {
+          headers: {
+            authorization: "token 977aec209319da58a965cee75eafbca4dce73fb8",
+          },
+        }
       );
       const npmPackagesResponseJSON = (await npmPackagesResponse.json()) as NpmsResponseBody;
       if (npmPackagesResponseJSON.total === 0) {
@@ -92,12 +110,22 @@ const App: React.FC = () => {
     // Tree structure
     try {
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/commits/master`
+        `https://api.github.com/repos/${owner}/${repo}/commits/master`,
+        {
+          headers: {
+            authorization: "token 977aec209319da58a965cee75eafbca4dce73fb8",
+          },
+        }
       );
       const resJSON = await res.json();
       const treeSHA = resJSON["commit"]["tree"]["sha"];
       const treeRes = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSHA}?recursive=true`
+        `https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSHA}?recursive=true`,
+        {
+          headers: {
+            authorization: "token 977aec209319da58a965cee75eafbca4dce73fb8",
+          },
+        }
       );
       const treeJSON = await treeRes.json();
       setTreeCore(ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree));
@@ -108,7 +136,12 @@ const App: React.FC = () => {
     // Languages
     try {
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/languages`
+        `https://api.github.com/repos/${owner}/${repo}/languages`,
+        {
+          headers: {
+            authorization: "token 977aec209319da58a965cee75eafbca4dce73fb8",
+          },
+        }
       );
       const resJSON = await res.json();
       setRepoLanguages(formatLanguages(resJSON));
@@ -119,8 +152,14 @@ const App: React.FC = () => {
     // Contributors
     try {
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/contributors`
+        `https://api.github.com/repos/${owner}/${repo}/contributors`,
+        {
+          headers: {
+            authorization: "token 977aec209319da58a965cee75eafbca4dce73fb8",
+          },
+        }
       );
+
       const resJSON = await res.json();
       console.log(resJSON);
     } catch (error) {

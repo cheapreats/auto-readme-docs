@@ -1,17 +1,15 @@
 import { getFileTypeFromPath } from "../getFileTypeFromPath/getFileTypeFromPath";
 import { Core, FileType } from "../../tree/types";
 
-/** Given a path, delete the element required and generate the tree again
- * @param {Core[]} treeCore - entire that is inputted for analysis
- * @param {string} path - the path of element that needs to be deleted
- * @returns {void} - doesn't return anything, simply does the action of
- * deleting an element
- */
-
 let lastDeletedOrder = -1;
 const DELETION_INCREMENT = 1;
 const NOT_DELETED = -1;
 
+/** recursively Sets the Deleted Order inside the tree
+ * @param {Core[]} treeCore - treeCore to go through recursively
+ * @param {number} newDeletedOrder - The updated deleted order to be set to items
+ * @returns {void} - doesn't return anything, simply does the action of setting the deleted order
+ */
 const recursivelySetDeletedOrder = (
   treeCore: Core[],
   newDeletedOrder: number
@@ -28,8 +26,11 @@ const recursivelySetDeletedOrder = (
   }
 };
 
+/** Given a treeCore, counts lastDeletedOrder of a tree and updates the value of lastDeletedOrder
+ * @param {Core[]} treeCore - tree that is inputted for analysis
+ * @returns {void} - doesn't return anything, simply does the action of counting the lastdeletedorder and updates it
+ */
 const countLastDeletedOrder = (treeCore: Core[]): void => {
-  // counts lastDeletedOrder of a tree and updates the value of lastDeletedOrder
   for (let index = 0; index < treeCore.length; index += 1) {
     if (treeCore[index].deletedOrder > lastDeletedOrder) {
       lastDeletedOrder = treeCore[index].deletedOrder;
@@ -39,6 +40,12 @@ const countLastDeletedOrder = (treeCore: Core[]): void => {
   }
 };
 
+/** Given a path, delete the element required and generate the tree again
+ * @param {Core[]} treeCore - entire that is inputted for analysis
+ * @param {string} path - the path of element that needs to be deleted
+ * @returns {void} - doesn't return anything, simply does the action of
+ * deleting an element
+ */
 export const deleteFileFromPath = (treeCore: Core[], path: string): void => {
   countLastDeletedOrder(treeCore);
 
