@@ -11,7 +11,7 @@ interface Props {
   onDefaultClick: () => void;
 }
 
-const SAHAND_CLIENT_ID = "https://project-structure-readme.netlify.app/";
+const SAHAND_CLIENT_ID = "3c660b92abe8afa37870";
 const REDIRECT_URL = "https://project-structure-readme.netlify.app/";
 const AUTHORIZE_URL = "https://github.com/login/oauth/authorize?";
 
