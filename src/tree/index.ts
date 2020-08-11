@@ -1,4 +1,5 @@
 import { GithubAPIResponseBody, GithubAPIFileObject, Core } from "./types";
+import getBuiltinComment from "../utils/getBuiltinComment";
 
 interface oldTree {
   path: string | undefined;
@@ -30,6 +31,7 @@ const findMaximumDepthLevel = (responseBody: GithubAPIResponseBody): number => {
 const ripOutPaths = (
   responseBody: GithubAPIResponseBody,
   oldTree: oldTree[] | null = null,
+  builtinComments: oldTree[],
   root: string = "",
   depth: number = 1,
   maxDepthLevel: number = 0
@@ -38,14 +40,27 @@ const ripOutPaths = (
     ? maxDepthLevel
     : findMaximumDepthLevel(responseBody);
 
+  /** Given a path, searches through old Tree and Builtin Tree for the path and returns if any comment is placed there
+   * @param {string} path - path of the core
+   * @returns {string} - default comment for the core
+   */
   const setComment = (path) => {
-    const found = oldTree
-      ? oldTree.find((item) => item.path == START_OF_PATH + path)
-      : null;
-    if (found) {
-      return START_OF_COMMENT + found.comment;
+    let builtinComment = "";
+    const foundBuiltinItem = builtinComments.find((item) => item.path == path);
+    if (foundBuiltinItem?.comment) {
+      builtinComment = getBuiltinComment(foundBuiltinItem.comment);
+    }
+    if (builtinComment) {
+      return builtinComment;
     } else {
-      return "";
+      const foundOldItem = oldTree
+        ? oldTree.find((item) => item.path == START_OF_PATH + path)
+        : null;
+      if (foundOldItem) {
+        return START_OF_COMMENT + foundOldItem.comment;
+      } else {
+        return "";
+      }
     }
   };
 
@@ -56,7 +71,14 @@ const ripOutPaths = (
       .filter((path: string) => path.startsWith(root)) // Remove paths that doesn't begin with the current root folder
       .map((line) => ({
         path: line,
-        treeCore: ripOutPaths(responseBody, oldTree, line, depth + 1, max),
+        treeCore: ripOutPaths(
+          responseBody,
+          oldTree,
+          builtinComments,
+          line,
+          depth + 1,
+          max
+        ),
         deletedOrder: -1,
         comment: setComment(line),
       }));

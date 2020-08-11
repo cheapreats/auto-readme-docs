@@ -12,6 +12,7 @@ import Card from "./components/reusable/Card";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import styled from "styled-components";
 import getPreviousTree from "./utils/getPreviousTree";
+import getFileTypeFromPath from "./utils/getFileTypeFromPath/getFileTypeFromPath";
 
 interface oldTree {
   path: string | undefined;
@@ -51,6 +52,7 @@ const App: React.FC = () => {
 
   const makeRequest = async (owner: String, repo: String) => {
     let oldTree: oldTree[] | null = null;
+    let builtInComments: oldTree[] = [];
 
     try {
       const README = "README.md";
@@ -67,6 +69,7 @@ const App: React.FC = () => {
             `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
           );
           const blobsJSON = await blobs.json();
+          console.log(blobsJSON);
           const decodedBlobs = atob(blobsJSON["content"]);
           const haveComments = decodedBlobs.match(commentsExistRegex);
 
@@ -104,7 +107,29 @@ const App: React.FC = () => {
       );
       const treeJSON = await treeRes.json();
 
-      setTreeCore(ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree));
+      const allItems = treeJSON["tree"].length;
+
+      for (let index = 0; index < allItems; index += 1) {
+        const item = treeJSON["tree"][index];
+        if (item.type == "blob") {
+          const SHA = item.sha;
+          const blobs = await fetch(
+            `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
+          )
+            .then((blobs) => blobs.json())
+            .then((data) =>
+              builtInComments.push({
+                path: item.path,
+                comment: atob(data["content"]),
+              })
+            )
+            .catch((error) => alert("Error" + error));
+        }
+      }
+
+      setTreeCore(
+        ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree, builtInComments)
+      );
     } catch (error) {
       alert("Error" + error);
     }
