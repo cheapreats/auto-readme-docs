@@ -1,4 +1,4 @@
-interface oldTree {
+interface pathAndComment {
   path: string | undefined;
   comment: string | undefined;
 }
@@ -9,11 +9,13 @@ const COMMENT_SECTION_PATTERN = /(# .+)/g;
  * @param {string[]} haveComments  The exsiting treeCore in Readme File
  * @returns {Object[]} Object array of path and comment
  */
-export const getPreviousTree = (haveComments: string[] | null): oldTree[] => {
+export const getPreviousTree = (
+  haveComments: string[] | null
+): pathAndComment[] => {
   if (haveComments === null) {
     return [];
   }
-  const haveCommentsArray: oldTree[] = [];
+  const haveCommentsArray: pathAndComment[] = [];
   haveComments.map((line, key) => {
     const firstHalf = line.match(PATH_SECTION_PATTERN)?.toString();
     const secondHalf = line.match(COMMENT_SECTION_PATTERN)?.toString();

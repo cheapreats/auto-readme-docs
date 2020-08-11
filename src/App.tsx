@@ -12,9 +12,8 @@ import Card from "./components/reusable/Card";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import styled from "styled-components";
 import getPreviousTree from "./utils/getPreviousTree";
-import getFileTypeFromPath from "./utils/getFileTypeFromPath/getFileTypeFromPath";
 
-interface oldTree {
+interface pathAndComment {
   path: string | undefined;
   comment: string | undefined;
 }
@@ -51,8 +50,8 @@ const App: React.FC = () => {
   };
 
   const makeRequest = async (owner: String, repo: String) => {
-    let oldTree: oldTree[] | null = null;
-    let builtInComments: oldTree[] = [];
+    let oldTree: pathAndComment[] | null = null;
+    let builtInComments: pathAndComment[] = [];
 
     try {
       const README = "README.md";
@@ -69,7 +68,6 @@ const App: React.FC = () => {
             `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
           );
           const blobsJSON = await blobs.json();
-          console.log(blobsJSON);
           const decodedBlobs = atob(blobsJSON["content"]);
           const haveComments = decodedBlobs.match(commentsExistRegex);
 

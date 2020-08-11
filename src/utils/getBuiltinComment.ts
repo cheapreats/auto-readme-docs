@@ -1,5 +1,5 @@
-const START_COMMENT = "@Preview{";
-const END_COMMENT = "}";
+const BEG_OF_FILE_COMMENT_PATTERN = "@Preview{";
+const END_OF_FILE_COMMENT_PATTERN = "}";
 const START_COMMENT_IN_PROJECT = " # ";
 
 /**  Will get a builtin comment in format of @Preview{
@@ -8,11 +8,11 @@ const START_COMMENT_IN_PROJECT = " # ";
  * @returns {string} The comment
  */
 export const getBuiltinComment = (content: string): string => {
-  const startOFComment = content.indexOf(START_COMMENT);
-  const endOfComment = content.indexOf(END_COMMENT);
+  const startOFComment = content.indexOf(BEG_OF_FILE_COMMENT_PATTERN);
+  const endOfComment = content.indexOf(END_OF_FILE_COMMENT_PATTERN);
   if (startOFComment > -1 && endOfComment > -1) {
     const comment = content.substring(
-      startOFComment + START_COMMENT.length,
+      startOFComment + BEG_OF_FILE_COMMENT_PATTERN.length,
       endOfComment - 1
     );
     return START_COMMENT_IN_PROJECT + comment.trim();
