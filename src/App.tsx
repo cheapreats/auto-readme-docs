@@ -103,6 +103,7 @@ const App: React.FC = () => {
         `https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSHA}?recursive=true`
       );
       const treeJSON = await treeRes.json();
+
       setTreeCore(ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree));
     } catch (error) {
       alert("Error" + error);
