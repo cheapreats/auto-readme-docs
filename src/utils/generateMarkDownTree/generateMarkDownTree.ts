@@ -18,29 +18,31 @@ type IGetMarkDownTree = (
 let detailsToAdd = '';
 
 const addDetailsTag = (
+  motherTreeCore: Core[],
   treeCore: Core[],
   treePath: string,
 ): void => {
-  const brokenPath = treePath.split('/');
-  const lastFolder = brokenPath[brokenPath.length - 2];
+  const splitTreePath = treePath.split('/');
+  /* folder wrapping the the file/folder that need's to have </details> tag added on to */
+  const folderWrappingFile = splitTreePath[splitTreePath.length - 2];
 
   for (let i = 0; i < treeCore.length; i += 1) {
     if (
       treeCore[i].path.split("/")[treeCore[i].path.split("/").length - 1]
-      === lastFolder
+      === folderWrappingFile
     ) {
       if (
         treeCore[i].treeCore[treeCore[i].treeCore.length - 1].path.split('/')[
           treeCore[i].treeCore[treeCore[i].treeCore.length - 1].path.split('/').length - 1
-        ] === brokenPath[brokenPath.length - 1]
+        ] === splitTreePath[splitTreePath.length - 1]
       ) {
         detailsToAdd += '</details>';
-        addDetailsTag(treeCore, treeCore[i].path);
+        addDetailsTag(motherTreeCore, motherTreeCore, treeCore[i].path);
       } else {
         break;
       }
     } else {
-      addDetailsTag(treeCore[i].treeCore, treePath);
+      addDetailsTag(motherTreeCore, treeCore[i].treeCore, treePath);
     }
   }
 };
@@ -102,14 +104,14 @@ export const generateMarkDownTree: IGetMarkDownTree = (
             PADDING_STYLE * curDepth
           }px"> <summary>${icon}${hyperLink} ${commentAlignment}${comment}</summary>`;
         } else {
-          curLine += `&nbsp; ${icon}${hyperLink} ${commentAlignment}${comment}`;
+          curLine += `${icon}${hyperLink} ${commentAlignment}${comment}</br>`;
           if (deepClonedTreeCore && curDepth > 0) {
             if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
               addDetailsTag(
                 motherCore,
+                motherCore,
                 deepClonedTreeCore[deepClonedTreeCore.length - 1].path,
               );
-              console.log(detailsToAdd);
               curLine += detailsToAdd;
               detailsToAdd = '';
             }
