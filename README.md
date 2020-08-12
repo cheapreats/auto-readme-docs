@@ -1,4 +1,4 @@
-<big><div style="overflow: auto; overflow-wrap: initial;">
+<big><pre>
 📜 [.eslintrc.js](./.eslintrc.js) 
 <details> <summary>📂 [.github](./.github)           # Markdown files that GitHub looks for, like changelogs and issue templates</summary> <blockquote style="padding-bottom: 100px;">
           
@@ -138,7 +138,7 @@
 📄 [undoDeletionsTest.ts](./src/utils/undoDeletions/undoDeletionsTest.ts) </blockquote></details></details></details>
               
 📄 [tsconfig.json](./tsconfig.json) 
-</div></big>
+</pre></big>
 
 # Automatic Project Structures for README's
 
