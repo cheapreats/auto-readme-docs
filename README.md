@@ -11,130 +11,130 @@
 📄 [package.json](./package.json) </br>
 <details> <summary>📂 [public](./public)            # Supplemental assets or resources, or static files</summary> <br/> <blockquote>
           
-📄 [favicon.ico](./public/favicon.ico) 
+📄 [favicon.ico](./public/favicon.ico) </br>
 📄 [index.html](./public/index.html) </blockquote></details>
               
 <details> <summary>📂 [src](./src)               # Source files</summary> <br/> <blockquote>
           
-📄 [App.tsx](./src/App.tsx) 
+📄 [App.tsx](./src/App.tsx) </br>
 <details> <summary>📂 [components](./src/components) </summary> <br/> <blockquote>
           
-📄 [BadgesSection.tsx](./src/components/BadgesSection.tsx) 
-📄 [CommentSection.tsx](./src/components/CommentSection.tsx) 
-📄 [MarkdownDisplay.tsx](./src/components/MarkdownDisplay.tsx) 
-📄 [MarkdownDisplayLine.tsx](./src/components/MarkdownDisplayLine.tsx) 
-📄 [URLBox.tsx](./src/components/URLBox.tsx) 
+📄 [BadgesSection.tsx](./src/components/BadgesSection.tsx) </br>
+📄 [CommentSection.tsx](./src/components/CommentSection.tsx) </br>
+📄 [MarkdownDisplay.tsx](./src/components/MarkdownDisplay.tsx) </br>
+📄 [MarkdownDisplayLine.tsx](./src/components/MarkdownDisplayLine.tsx) </br>
+📄 [URLBox.tsx](./src/components/URLBox.tsx) </br>
 <details> <summary>📂 [reusable](./src/components/reusable) </summary> <br/> <blockquote>
           
-📄 [Card.tsx](./src/components/reusable/Card.tsx) 
-📄 [CenteredCol.tsx](./src/components/reusable/CenteredCol.tsx) 
-📄 [CustomButton.tsx](./src/components/reusable/CustomButton.tsx) 
-📄 [CustomSecondaryButton.tsx](./src/components/reusable/CustomSecondaryButton.tsx) 
-📄 [Input.tsx](./src/components/reusable/Input.tsx) 
+📄 [Card.tsx](./src/components/reusable/Card.tsx) </br>
+📄 [CenteredCol.tsx](./src/components/reusable/CenteredCol.tsx) </br>
+📄 [CustomButton.tsx](./src/components/reusable/CustomButton.tsx) </br>
+📄 [CustomSecondaryButton.tsx](./src/components/reusable/CustomSecondaryButton.tsx) </br>
+📄 [Input.tsx](./src/components/reusable/Input.tsx) </br>
 📄 [TextArea.tsx](./src/components/reusable/TextArea.tsx) </blockquote></details></details>
               
 <details> <summary>📂 [images](./src/images) </summary> <br/> <blockquote>
           
 📄 [Demo.gif](./src/images/Demo.gif) </blockquote></details>
               
-📄 [index.css](./src/index.css) 
-📄 [index.tsx](./src/index.tsx) 
-📄 [react-app-env.d.ts](./src/react-app-env.d.ts) 
+📄 [index.css](./src/index.css) </br>
+📄 [index.tsx](./src/index.tsx) </br>
+📄 [react-app-env.d.ts](./src/react-app-env.d.ts) </br>
 <details> <summary>📂 [tree](./src/tree) </summary> <br/> <blockquote>
           
-📄 [constants.ts](./src/tree/constants.ts) 
-📄 [index.ts](./src/tree/index.ts) 
-📄 [languageWebsites.ts](./src/tree/languageWebsites.ts) 
+📄 [constants.ts](./src/tree/constants.ts) </br>
+📄 [index.ts](./src/tree/index.ts) </br>
+📄 [languageWebsites.ts](./src/tree/languageWebsites.ts) </br>
 📄 [types.ts](./src/tree/types.ts) </blockquote></details>
               
 <details> <summary>📂 [utils](./src/utils) </summary> <br/> <blockquote>
           
-📄 [Switch.tsx](./src/utils/Switch.tsx) 
+📄 [Switch.tsx](./src/utils/Switch.tsx) </br>
 <details> <summary>📂 [createNpmFormatting](./src/utils/createNpmFormatting) </summary> <br/> <blockquote>
           
-📄 [createNpmFormatting.ts](./src/utils/createNpmFormatting/createNpmFormatting.ts) 
+📄 [createNpmFormatting.ts](./src/utils/createNpmFormatting/createNpmFormatting.ts) </br>
 📄 [createNpmFormattingTest.ts](./src/utils/createNpmFormatting/createNpmFormattingTest.ts) </blockquote></details>
               
-📄 [deepCopyFunction.ts](./src/utils/deepCopyFunction.ts) 
+📄 [deepCopyFunction.ts](./src/utils/deepCopyFunction.ts) </br>
 <details> <summary>📂 [deleteFileFromPath](./src/utils/deleteFileFromPath) </summary> <br/> <blockquote>
           
-📄 [deleteFileFromPath.ts](./src/utils/deleteFileFromPath/deleteFileFromPath.ts) 
+📄 [deleteFileFromPath.ts](./src/utils/deleteFileFromPath/deleteFileFromPath.ts) </br>
 📄 [deleteFileFromPathTest.ts](./src/utils/deleteFileFromPath/deleteFileFromPathTest.ts) </blockquote></details>
               
-📄 [filterChange.ts](./src/utils/filterChange.ts) 
+📄 [filterChange.ts](./src/utils/filterChange.ts) </br>
 <details> <summary>📂 [formatLanguages](./src/utils/formatLanguages) </summary> <br/> <blockquote>
           
-📄 [formatLanguages.ts](./src/utils/formatLanguages/formatLanguages.ts) 
+📄 [formatLanguages.ts](./src/utils/formatLanguages/formatLanguages.ts) </br>
 📄 [formatLanguagesTest.ts](./src/utils/formatLanguages/formatLanguagesTest.ts) </blockquote></details>
               
-📄 [generateCoreTest.ts](./src/utils/generateCoreTest.ts) 
+📄 [generateCoreTest.ts](./src/utils/generateCoreTest.ts) </br>
 <details> <summary>📂 [generateMarkDownTree](./src/utils/generateMarkDownTree) </summary> <br/> <blockquote>
           
-📄 [generateMarkDownTree.ts](./src/utils/generateMarkDownTree/generateMarkDownTree.ts) 
+📄 [generateMarkDownTree.ts](./src/utils/generateMarkDownTree/generateMarkDownTree.ts) </br>
 📄 [generateMarkDownTreeTest.ts](./src/utils/generateMarkDownTree/generateMarkDownTreeTest.ts) </blockquote></details>
               
 <details> <summary>📂 [getAutoGeneratedCommentForPath](./src/utils/getAutoGeneratedCommentForPath) </summary> <br/> <blockquote>
           
-📄 [getAutoGeneratedCommentForPath.ts](./src/utils/getAutoGeneratedCommentForPath/getAutoGeneratedCommentForPath.ts) 
+📄 [getAutoGeneratedCommentForPath.ts](./src/utils/getAutoGeneratedCommentForPath/getAutoGeneratedCommentForPath.ts) </br>
 📄 [getAutoGeneratedCommentForPathtest.ts](./src/utils/getAutoGeneratedCommentForPath/getAutoGeneratedCommentForPathtest.ts) </blockquote></details>
               
-📄 [getBuiltinComment.ts](./src/utils/getBuiltinComment.ts) 
+📄 [getBuiltinComment.ts](./src/utils/getBuiltinComment.ts) </br>
 <details> <summary>📂 [getCopyToClipboardContents](./src/utils/getCopyToClipboardContents) </summary> <br/> <blockquote>
           
-📄 [getCopyToClipboardContents.ts](./src/utils/getCopyToClipboardContents/getCopyToClipboardContents.ts) 
+📄 [getCopyToClipboardContents.ts](./src/utils/getCopyToClipboardContents/getCopyToClipboardContents.ts) </br>
 📄 [getCopyToClipboardContentsTest.ts](./src/utils/getCopyToClipboardContents/getCopyToClipboardContentsTest.ts) </blockquote></details>
               
-📄 [getCoreFromTree.ts](./src/utils/getCoreFromTree.ts) 
+📄 [getCoreFromTree.ts](./src/utils/getCoreFromTree.ts) </br>
 <details> <summary>📂 [getFileIconFromFileType](./src/utils/getFileIconFromFileType) </summary> <br/> <blockquote>
           
-📄 [getFileIconFromFileType.ts](./src/utils/getFileIconFromFileType/getFileIconFromFileType.ts) 
+📄 [getFileIconFromFileType.ts](./src/utils/getFileIconFromFileType/getFileIconFromFileType.ts) </br>
 📄 [getFileIconFromFileTypeTest.ts](./src/utils/getFileIconFromFileType/getFileIconFromFileTypeTest.ts) </blockquote></details>
               
 <details> <summary>📂 [getFileTypeFromPath](./src/utils/getFileTypeFromPath) </summary> <br/> <blockquote>
           
-📄 [getFileTypeFromPath.ts](./src/utils/getFileTypeFromPath/getFileTypeFromPath.ts) 
+📄 [getFileTypeFromPath.ts](./src/utils/getFileTypeFromPath/getFileTypeFromPath.ts) </br>
 📄 [getFileTypeFromPathTest.ts](./src/utils/getFileTypeFromPath/getFileTypeFromPathTest.ts) </blockquote></details>
               
 <details> <summary>📂 [getHyperLinkFromPath](./src/utils/getHyperLinkFromPath) </summary> <br/> <blockquote>
           
-📄 [getHyperLinkFromPath.ts](./src/utils/getHyperLinkFromPath/getHyperLinkFromPath.ts) 
+📄 [getHyperLinkFromPath.ts](./src/utils/getHyperLinkFromPath/getHyperLinkFromPath.ts) </br>
 📄 [getHyperLinkFromPathtest.ts](./src/utils/getHyperLinkFromPath/getHyperLinkFromPathtest.ts) </blockquote></details>
               
 <details> <summary>📂 [getLargestFileNameLengthInPath](./src/utils/getLargestFileNameLengthInPath) </summary> <br/> <blockquote>
           
-📄 [getLargestFileNameLengthInLevel.ts](./src/utils/getLargestFileNameLengthInPath/getLargestFileNameLengthInLevel.ts) 
+📄 [getLargestFileNameLengthInLevel.ts](./src/utils/getLargestFileNameLengthInPath/getLargestFileNameLengthInLevel.ts) </br>
 📄 [getLargestFileNameLengthInLevelTest.ts](./src/utils/getLargestFileNameLengthInPath/getLargestFileNameLengthInLevelTest.ts) </blockquote></details>
               
 <details> <summary>📂 [getOwnerAndRepoFromUrl](./src/utils/getOwnerAndRepoFromUrl) </summary> <br/> <blockquote>
           
-📄 [getOwnerAndRepoFromUrl.ts](./src/utils/getOwnerAndRepoFromUrl/getOwnerAndRepoFromUrl.ts) 
+📄 [getOwnerAndRepoFromUrl.ts](./src/utils/getOwnerAndRepoFromUrl/getOwnerAndRepoFromUrl.ts) </br>
 📄 [getOwnerAndRepoFromUrlTest.ts](./src/utils/getOwnerAndRepoFromUrl/getOwnerAndRepoFromUrlTest.ts) </blockquote></details>
               
-📄 [getPreviousTree.ts](./src/utils/getPreviousTree.ts) 
-📄 [getWebsiteForLanguage.ts](./src/utils/getWebsiteForLanguage.ts) 
+📄 [getPreviousTree.ts](./src/utils/getPreviousTree.ts) </br>
+📄 [getWebsiteForLanguage.ts](./src/utils/getWebsiteForLanguage.ts) </br>
 <details> <summary>📂 [repoToBadge](./src/utils/repoToBadge) </summary> <br/> <blockquote>
           
-📄 [repoToBadge.ts](./src/utils/repoToBadge/repoToBadge.ts) 
+📄 [repoToBadge.ts](./src/utils/repoToBadge/repoToBadge.ts) </br>
 📄 [repoToBadgeTest.ts](./src/utils/repoToBadge/repoToBadgeTest.ts) </blockquote></details>
               
 <details> <summary>📂 [selectFoldersOnly](./src/utils/selectFoldersOnly) </summary> <br/> <blockquote>
           
-📄 [selectFoldersOnly.ts](./src/utils/selectFoldersOnly/selectFoldersOnly.ts) 
+📄 [selectFoldersOnly.ts](./src/utils/selectFoldersOnly/selectFoldersOnly.ts) </br>
 📄 [selectFoldersOnlyTest.ts](./src/utils/selectFoldersOnly/selectFoldersOnlyTest.ts) </blockquote></details>
               
 <details> <summary>📂 [selectRootCores](./src/utils/selectRootCores) </summary> <br/> <blockquote>
           
-📄 [SelectRootCoresTest.ts](./src/utils/selectRootCores/SelectRootCoresTest.ts) 
+📄 [SelectRootCoresTest.ts](./src/utils/selectRootCores/SelectRootCoresTest.ts) </br>
 📄 [selectRootCores.ts](./src/utils/selectRootCores/selectRootCores.ts) </blockquote></details>
               
 <details> <summary>📂 [setCommentForPath](./src/utils/setCommentForPath) </summary> <br/> <blockquote>
           
-📄 [setCommentForPath.ts](./src/utils/setCommentForPath/setCommentForPath.ts) 
+📄 [setCommentForPath.ts](./src/utils/setCommentForPath/setCommentForPath.ts) </br>
 📄 [setCommentForPathtest.ts](./src/utils/setCommentForPath/setCommentForPathtest.ts) </blockquote></details>
               
 <details> <summary>📂 [undoDeletions](./src/utils/undoDeletions) </summary> <br/> <blockquote>
           
-📄 [undoDeletions.ts](./src/utils/undoDeletions/undoDeletions.ts) 
+📄 [undoDeletions.ts](./src/utils/undoDeletions/undoDeletions.ts) </br>
 📄 [undoDeletionsTest.ts](./src/utils/undoDeletions/undoDeletionsTest.ts) </blockquote></details></details></details>
               
 📄 [tsconfig.json](./tsconfig.json) </br>
