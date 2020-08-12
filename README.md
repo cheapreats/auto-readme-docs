@@ -1,14 +1,14 @@
 <big><div style="overflow: auto; overflow-wrap: initial;">
-📜 [.eslintrc.js](./.eslintrc.js) 
+📜 [.eslintrc.js](./.eslintrc.js) </br>
 <details> <summary>📂 [.github](./.github)           # Markdown files that GitHub looks for, like changelogs and issue templates</summary> <br/> <blockquote>
           
 📄 [FUNDING.yml](./.github/FUNDING.yml) </blockquote></details>
               
-📜 [.gitignore](./.gitignore) 
-📄 [LICENSE](./LICENSE) 
-📄 [README.md](./README.md) 
-📄 [package-lock.json](./package-lock.json) 
-📄 [package.json](./package.json) 
+📜 [.gitignore](./.gitignore) </br>
+📄 [LICENSE](./LICENSE) </br>
+📄 [README.md](./README.md) </br>
+📄 [package-lock.json](./package-lock.json) </br>
+📄 [package.json](./package.json) </br>
 <details> <summary>📂 [public](./public)            # Supplemental assets or resources, or static files</summary> <br/> <blockquote>
           
 📄 [favicon.ico](./public/favicon.ico) 
@@ -137,7 +137,7 @@
 📄 [undoDeletions.ts](./src/utils/undoDeletions/undoDeletions.ts) 
 📄 [undoDeletionsTest.ts](./src/utils/undoDeletions/undoDeletionsTest.ts) </blockquote></details></details></details>
               
-📄 [tsconfig.json](./tsconfig.json) 
+📄 [tsconfig.json](./tsconfig.json) </br>
 </div></big>
 
 # Automatic Project Structures for README's
