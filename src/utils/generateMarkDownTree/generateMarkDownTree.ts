@@ -102,9 +102,10 @@ export const generateMarkDownTree: IGetMarkDownTree = (
         if (isFile === false && core.treeCore.length > 0) {
           curLine += `<details style="padding-left: ${
             PADDING_STYLE * curDepth
-          }px"> <summary>${icon}${hyperLink} ${commentAlignment}${comment}</summary>`;
+          }px"> <summary>${icon}${hyperLink} ${commentAlignment}${comment}</summary>
+          `;
         } else {
-          curLine += `${icon}${hyperLink} ${commentAlignment}${comment}</br>`;
+          curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
           if (deepClonedTreeCore && curDepth > 0) {
             if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
               addDetailsTag(
@@ -112,10 +113,14 @@ export const generateMarkDownTree: IGetMarkDownTree = (
                 motherCore,
                 deepClonedTreeCore[deepClonedTreeCore.length - 1].path,
               );
-              curLine += detailsToAdd;
-              detailsToAdd = '';
+              curLine += `${detailsToAdd}
+              `;
             }
           }
+          if (detailsToAdd === '') {
+            curLine += '<br/>';
+          }
+          detailsToAdd = '';
         }
         outputAsLines.push(curLine);
         if (core.treeCore) {
