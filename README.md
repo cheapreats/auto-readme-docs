@@ -31,7 +31,7 @@
 📄 [CustomButton.tsx](./src/components/reusable/CustomButton.tsx) 
 📄 [CustomSecondaryButton.tsx](./src/components/reusable/CustomSecondaryButton.tsx) 
 📄 [Input.tsx](./src/components/reusable/Input.tsx) 
-📄 [TextArea.tsx](./src/components/reusable/TextArea.tsx) </blockquote></blockquote></details></details>
+📄 [TextArea.tsx](./src/components/reusable/TextArea.tsx) </blockquote></details></details>
               
 <details> <summary>📂 [images](./src/images) </summary> <blockquote>
           
@@ -135,7 +135,7 @@
 <details> <summary>📂 [undoDeletions](./src/utils/undoDeletions) </summary> <blockquote>
           
 📄 [undoDeletions.ts](./src/utils/undoDeletions/undoDeletions.ts) 
-📄 [undoDeletionsTest.ts](./src/utils/undoDeletions/undoDeletionsTest.ts) </blockquote></blockquote></blockquote></details></details></details>
+📄 [undoDeletionsTest.ts](./src/utils/undoDeletions/undoDeletionsTest.ts) </blockquote></details></details></details>
               
 📄 [tsconfig.json](./tsconfig.json) 
 </div></big>
