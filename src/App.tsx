@@ -13,7 +13,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import styled from "styled-components";
 import getPreviousTree from "./utils/getPreviousTree";
 
-interface oldTree {
+interface pathAndComment {
   path: string | undefined;
   comment: string | undefined;
 }
@@ -50,7 +50,8 @@ const App: React.FC = () => {
   };
 
   const makeRequest = async (owner: String, repo: String) => {
-    let oldTree: oldTree[] | null = null;
+    let oldTree: pathAndComment[] | null = null;
+    let builtInComments: pathAndComment[] = [];
 
     try {
       const README = "README.md";
@@ -104,7 +105,29 @@ const App: React.FC = () => {
       );
       const treeJSON = await treeRes.json();
 
-      setTreeCore(ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree));
+      const allItems = treeJSON["tree"].length;
+
+      for (let index = 0; index < allItems; index += 1) {
+        const item = treeJSON["tree"][index];
+        if (item.type == "blob") {
+          const SHA = item.sha;
+          const blobs = await fetch(
+            `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
+          )
+            .then((blobs) => blobs.json())
+            .then((data) =>
+              builtInComments.push({
+                path: item.path,
+                comment: atob(data["content"]),
+              })
+            )
+            .catch((error) => alert("Error" + error));
+        }
+      }
+
+      setTreeCore(
+        ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree, builtInComments)
+      );
     } catch (error) {
       alert("Error" + error);
     }

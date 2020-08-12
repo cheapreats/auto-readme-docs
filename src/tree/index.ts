@@ -1,6 +1,7 @@
 import { GithubAPIResponseBody, GithubAPIFileObject, Core } from "./types";
+import getBuiltinComment from "../utils/getBuiltinComment";
 
-interface oldTree {
+interface pathAndComment {
   path: string | undefined;
   comment: string | undefined;
 }
@@ -21,7 +22,7 @@ const findMaximumDepthLevel = (responseBody: GithubAPIResponseBody): number => {
 
 /** Given a response, rip outs the different parts of the response and make a treeCore
  * @param {GithubAPIResponseBody} responseBody - Response from the api including all the information to make a treeCore
- * @param {oldTree[] | null} oldTree - An array of path and comments of old treeCore if it already exists in readme file
+ * @param {pathAndComment[] | null} oldTree - An array of path and comments of old treeCore if it already exists in readme file
  * @param {string} root - String of root folder for recursive search through the response body
  * @param {number} depth - Depth of the current input data for recursive search through the response body
  * @param {number} maxDepthLevel - Maximum existing depth of the whole response body to stop the process when reaching the last depth
@@ -29,7 +30,8 @@ const findMaximumDepthLevel = (responseBody: GithubAPIResponseBody): number => {
  */
 const ripOutPaths = (
   responseBody: GithubAPIResponseBody,
-  oldTree: oldTree[] | null = null,
+  oldTree: pathAndComment[] | null = null,
+  builtinComments: pathAndComment[],
   root: string = "",
   depth: number = 1,
   maxDepthLevel: number = 0
@@ -38,14 +40,47 @@ const ripOutPaths = (
     ? maxDepthLevel
     : findMaximumDepthLevel(responseBody);
 
-  const setComment = (path) => {
-    const found = oldTree
+  /** Given a path, searches through Builtin comments for existing comments
+   * @param {string} path - Path of the core
+   * @returns {string} - Builtin comment for the core
+   */
+  const findBuiltinComment = (path) => {
+    let builtinComment = "";
+    const foundBuiltinItem = builtinComments.find((item) => item.path == path);
+    if (foundBuiltinItem?.comment) {
+      builtinComment = getBuiltinComment(foundBuiltinItem.comment);
+    }
+    return builtinComment;
+  };
+
+  /** Given a path, searches through old Tree for existing comments
+   * @param {string} path - Path of the core
+   * @returns {string} - Old comment for the core
+   */
+  const findOldComment = (path) => {
+    let oldComment = "";
+    const foundOldItem = oldTree
       ? oldTree.find((item) => item.path == START_OF_PATH + path)
       : null;
-    if (found) {
-      return START_OF_COMMENT + found.comment;
+    if (foundOldItem?.comment) {
+      oldComment = START_OF_COMMENT + foundOldItem.comment;
+    }
+    return oldComment;
+  };
+
+  /** Given a path, searches through old Tree and Builtin Tree for the path and returns if any comment is placed there
+   * @param {string} path - Path of the core
+   * @returns {string} - Default comment for the core
+   */
+  const setComment = (path) => {
+    if (findBuiltinComment(path)) {
+      return findBuiltinComment(path);
     } else {
-      return "";
+      if (findOldComment(path)) {
+        return findOldComment(path);
+      } else {
+        return "";
+      }
     }
   };
 
@@ -56,7 +91,14 @@ const ripOutPaths = (
       .filter((path: string) => path.startsWith(root)) // Remove paths that doesn't begin with the current root folder
       .map((line) => ({
         path: line,
-        treeCore: ripOutPaths(responseBody, oldTree, line, depth + 1, max),
+        treeCore: ripOutPaths(
+          responseBody,
+          oldTree,
+          builtinComments,
+          line,
+          depth + 1,
+          max
+        ),
         deletedOrder: -1,
         comment: setComment(line),
       }));
