@@ -81,185 +81,185 @@ const treeCore = [
   },
 ];
 
-const newCore = [
-  {
-    path: 'ex',
-    deletedOrder: -1,
-    comment: '',
-    treeCore: [
-      {
-        path: 'ex/aaa5.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-      {
-        path: 'ex/aaa6.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-      {
-        path: 'ex/aaa7.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-    ],
-  },
-];
+// const newCore = [
+//   {
+//     path: 'ex',
+//     deletedOrder: -1,
+//     comment: '',
+//     treeCore: [
+//       {
+//         path: 'ex/aaa5.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//       {
+//         path: 'ex/aaa6.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//       {
+//         path: 'ex/aaa7.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//     ],
+//   },
+// ];
 
-const newCore2 = [
-  {
-    path: 'ex',
-    deletedOrder: -1,
-    comment: '',
-    treeCore: [
-      {
-        path: 'aaa',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [
-          {
-            path: 'ex/aaa/aaa5.ts',
-            deletedOrder: -1,
-            comment: '',
-            treeCore: [],
-          },
-          {
-            path: 'ex/aaa/aaa6.ts',
-            deletedOrder: -1,
-            comment: '',
-            treeCore: [],
-          },
-          {
-            path: 'ex/aaa/aaa7.ts',
-            deletedOrder: -1,
-            comment: '',
-            treeCore: [],
-          },
-        ],
-      },
-    ],
-  },
-];
+// const newCore2 = [
+//   {
+//     path: 'ex',
+//     deletedOrder: -1,
+//     comment: '',
+//     treeCore: [
+//       {
+//         path: 'aaa',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [
+//           {
+//             path: 'ex/aaa/aaa5.ts',
+//             deletedOrder: -1,
+//             comment: '',
+//             treeCore: [],
+//           },
+//           {
+//             path: 'ex/aaa/aaa6.ts',
+//             deletedOrder: -1,
+//             comment: '',
+//             treeCore: [],
+//           },
+//           {
+//             path: 'ex/aaa/aaa7.ts',
+//             deletedOrder: -1,
+//             comment: '',
+//             treeCore: [],
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ];
 
-const newCore3 = [
-  {
-    path: 'ex',
-    deletedOrder: -1,
-    comment: '',
-    treeCore: [
-      {
-        path: 'ex/aaa5.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-      {
-        path: 'ex/aaa6.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-      {
-        path: 'ex/aaa7.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-      {
-        path: 'ex/aaa',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-    ],
-  },
-];
+// const newCore3 = [
+//   {
+//     path: 'ex',
+//     deletedOrder: -1,
+//     comment: '',
+//     treeCore: [
+//       {
+//         path: 'ex/aaa5.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//       {
+//         path: 'ex/aaa6.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//       {
+//         path: 'ex/aaa7.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//       {
+//         path: 'ex/aaa',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//     ],
+//   },
+// ];
 
-const newCore4 = [
-  {
-    path: 'ex',
-    deletedOrder: -1,
-    comment: '',
-    treeCore: [
-      {
-        path: 'ex/aaa5.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-      {
-        path: 'ex/aaa',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-    ],
-  },
-  {
-    path: 'ex2',
-    deletedOrder: -1,
-    comment: '',
-    treeCore: [
-      {
-        path: 'ex2/aaa6.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-      {
-        path: 'ex2/aaa2',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-    ],
-  },
-];
+// const newCore4 = [
+//   {
+//     path: 'ex',
+//     deletedOrder: -1,
+//     comment: '',
+//     treeCore: [
+//       {
+//         path: 'ex/aaa5.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//       {
+//         path: 'ex/aaa',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//     ],
+//   },
+//   {
+//     path: 'ex2',
+//     deletedOrder: -1,
+//     comment: '',
+//     treeCore: [
+//       {
+//         path: 'ex2/aaa6.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//       {
+//         path: 'ex2/aaa2',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//     ],
+//   },
+// ];
 
-const newCore5 = [
-  {
-    path: 'ex',
-    deletedOrder: -1,
-    comment: '',
-    treeCore: [
-      {
-        path: 'ex/rx',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [
-          {
-            path: 'ex/rx/tx',
-            deletedOrder: -1,
-            comment: '',
-            treeCore: [
-              {
-                path: 'ex/rx/tx/aaa.ts',
-                deletedOrder: -1,
-                comment: '',
-                treeCore: [],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        path: 'ex/aaa2.ts',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-      {
-        path: 'ex/yx',
-        deletedOrder: -1,
-        comment: '',
-        treeCore: [],
-      },
-    ],
-  },
-];
+// const newCore5 = [
+//   {
+//     path: 'ex',
+//     deletedOrder: -1,
+//     comment: '',
+//     treeCore: [
+//       {
+//         path: 'ex/rx',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [
+//           {
+//             path: 'ex/rx/tx',
+//             deletedOrder: -1,
+//             comment: '',
+//             treeCore: [
+//               {
+//                 path: 'ex/rx/tx/aaa.ts',
+//                 deletedOrder: -1,
+//                 comment: '',
+//                 treeCore: [],
+//               },
+//             ],
+//           },
+//         ],
+//       },
+//       {
+//         path: 'ex/aaa2.ts',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//       {
+//         path: 'ex/yx',
+//         deletedOrder: -1,
+//         comment: '',
+//         treeCore: [],
+//       },
+//     ],
+//   },
+// ];
 
 const resultwhole = [
   '📂 [ex](./ex)     # just a comment',
@@ -298,57 +298,57 @@ const resultrootsonly = [
   '📂 [doc222](./doc222) # testing',
 ];
 
-const newResult = [
-  '<details> <summary>📂 [ex](./ex)</summary>',
-  '├── 📄 [aaa5](./ex/aaa5.ts)',
-  '├── 📄 [aaa6](./ex/aaa6.ts)',
-  '├── 📄 [aaa7](./ex/aaa7.ts)',
-  '</details>',
-];
+// const newResult = [
+//   '<details> <summary>📂 [ex](./ex)</summary>',
+//   '├── 📄 [aaa5](./ex/aaa5.ts)',
+//   '├── 📄 [aaa6](./ex/aaa6.ts)',
+//   '├── 📄 [aaa7](./ex/aaa7.ts)',
+//   '</details>',
+// ];
 
-const newResult2 = [
-  '<details> <summary>📂 [ex](./ex)</summary>',
-  '├── <details> <summary>📂 [aaa](./ex/aaa)</summary>',
-  '│   ├── 📄 [aaa5](./ex/aaa/aaa5.ts)',
-  '│   ├── 📄 [aaa6](./ex/aaa/aaa6.ts)',
-  '│   ├── 📄 [aaa7](./ex/aaa/aaa7.ts)',
-  '</details>',
-  '</details>',
-];
+// const newResult2 = [
+//   '<details> <summary>📂 [ex](./ex)</summary>',
+//   '├── <details> <summary>📂 [aaa](./ex/aaa)</summary>',
+//   '│   ├── 📄 [aaa5](./ex/aaa/aaa5.ts)',
+//   '│   ├── 📄 [aaa6](./ex/aaa/aaa6.ts)',
+//   '│   ├── 📄 [aaa7](./ex/aaa/aaa7.ts)',
+//   '</details>',
+//   '</details>',
+// ];
 
-const newResult3 = [
-  '<details> <summary>📂 [ex](./ex)</summary>',
-  '├── 📄 [aaa5](./ex/aaa5.ts)',
-  '├── 📄 [aaa6](./ex/aaa6.ts)',
-  '├── 📄 [aaa7](./ex/aaa7.ts)',
-  '├── 📂 [aaa](./ex/aaa)',
-  '</details>',
-];
+// const newResult3 = [
+//   '<details> <summary>📂 [ex](./ex)</summary>',
+//   '├── 📄 [aaa5](./ex/aaa5.ts)',
+//   '├── 📄 [aaa6](./ex/aaa6.ts)',
+//   '├── 📄 [aaa7](./ex/aaa7.ts)',
+//   '├── 📂 [aaa](./ex/aaa)',
+//   '</details>',
+// ];
 
-const newResult4 = [
-  '<details> <summary>📂 [ex](./ex)</summary>',
-  '├── 📄 [aaa5](./ex/aaa5.ts)',
-  '├── 📂 [aaa](./ex/aaa)',
-  '</details>',
-  '<details> <summary>📂 [ex2](./ex2)</summary>',
-  '├── 📄 [aaa6](./ex2/aaa6.ts)',
-  '├── 📂 [aaa2](./ex2/aaa2)',
-  '</details>',
-];
+// const newResult4 = [
+//   '<details> <summary>📂 [ex](./ex)</summary>',
+//   '├── 📄 [aaa5](./ex/aaa5.ts)',
+//   '├── 📂 [aaa](./ex/aaa)',
+//   '</details>',
+//   '<details> <summary>📂 [ex2](./ex2)</summary>',
+//   '├── 📄 [aaa6](./ex2/aaa6.ts)',
+//   '├── 📂 [aaa2](./ex2/aaa2)',
+//   '</details>',
+// ];
 
-const newResult5 = [
-  '<details> <summary>📂 [ex](./ex)</summary>',
-  '<details> <summary>📂 [rx](./ex/rx)</summary>',
-  '<details> <summary>📂 [tx](./ex/rx/tx)</summary>',
-  '',
-  '├── 📄 [aaa](./ex/rx/tx/aaa.ts)',
-  '</details>',
-  '</details>',
-  '',
-  '├── 📄 [aaa2](./ex/aaa2.ts)<br/>',
-  '├── 📂 [yx](./ex/yx)',
-  '</details>',
-];
+// const newResult5 = [
+//   '<details> <summary>📂 [ex](./ex)</summary>',
+//   '<details> <summary>📂 [rx](./ex/rx)</summary>',
+//   '<details> <summary>📂 [tx](./ex/rx/tx)</summary>',
+//   '',
+//   '├── 📄 [aaa](./ex/rx/tx/aaa.ts)',
+//   '</details>',
+//   '</details>',
+//   '',
+//   '├── 📄 [aaa2](./ex/aaa2.ts)<br/>',
+//   '├── 📂 [yx](./ex/yx)',
+//   '</details>',
+// ];
 
 describe('Generate Tree', () => {
   it(' a tree containing file,folder,3 levels,deleted folders with comment and no comments ', () => {
@@ -363,24 +363,24 @@ describe('Generate Tree', () => {
     const newTreeCore = generateMarkDownTree(treeCore, FilterType.ROOT_ONLY);
     expect(newTreeCore.toString).to.equal(resultrootsonly.toString);
   });
-  it('folder and 3 files', () => {
-    const newTreeCore = generateMarkDownTree(newCore);
-    expect(newTreeCore.toString).to.equal(newResult.toString);
-  });
-  it('1 Folder ,1 Folder Nested, 3 Files Nested Nested', () => {
-    const newTreeCore = generateMarkDownTree(newCore2);
-    expect(newTreeCore.toString).to.equal(newResult2.toString);
-  });
-  it('1 Folder, 3 Files Nested, 1 Folder Nested.', () => {
-    const newTreeCore = generateMarkDownTree(newCore3);
-    expect(newTreeCore.toString).to.equal(newResult3.toString);
-  });
-  it('2 Folders, 1 Folder Nested in Each, 1 File Nested in Each.', () => {
-    const newTreeCore = generateMarkDownTree(newCore4);
-    expect(newTreeCore.toString).to.equal(newResult4.toString);
-  });
-  it('File nested in a folder, nested in a folder, nested in a folder -- a file and folder nested in the first folder', () => {
-    const newTreeCore = generateMarkDownTree(newCore5);
-    expect(newTreeCore.toString).to.equal(newResult5.toString);
-  });
+  // it('folder and 3 files', () => {
+  //   const newTreeCore = generateMarkDownTree(newCore);
+  //   expect(newTreeCore.toString).to.equal(newResult.toString);
+  // });
+  // it('1 Folder ,1 Folder Nested, 3 Files Nested Nested', () => {
+  //   const newTreeCore = generateMarkDownTree(newCore2);
+  //   expect(newTreeCore.toString).to.equal(newResult2.toString);
+  // });
+  // it('1 Folder, 3 Files Nested, 1 Folder Nested.', () => {
+  //   const newTreeCore = generateMarkDownTree(newCore3);
+  //   expect(newTreeCore.toString).to.equal(newResult3.toString);
+  // });
+  // it('2 Folders, 1 Folder Nested in Each, 1 File Nested in Each.', () => {
+  //   const newTreeCore = generateMarkDownTree(newCore4);
+  //   expect(newTreeCore.toString).to.equal(newResult4.toString);
+  // });
+  // it('File nested in a folder, nested in a folder, nested in a folder -- a file and folder nested in the first folder', () => {
+  //   const newTreeCore = generateMarkDownTree(newCore5);
+  //   expect(newTreeCore.toString).to.equal(newResult5.toString);
+  // });
 });
