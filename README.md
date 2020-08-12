@@ -1,141 +1,141 @@
 <big><pre>
 📜 [.eslintrc.js](./.eslintrc.js) 
-<details> <summary>📂 [.github](./.github)           # Markdown files that GitHub looks for, like changelogs and issue templates</summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [.github](./.github)           # Markdown files that GitHub looks for, like changelogs and issue templates</summary>
           
-📄 [FUNDING.yml](./.github/FUNDING.yml) </blockquote></details>
+📄 [FUNDING.yml](./.github/FUNDING.yml) </details>
               
 📜 [.gitignore](./.gitignore) 
 📄 [LICENSE](./LICENSE) 
 📄 [README.md](./README.md) 
 📄 [package-lock.json](./package-lock.json) 
 📄 [package.json](./package.json) 
-<details> <summary>📂 [public](./public)            # Supplemental assets or resources, or static files</summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [public](./public)            # Supplemental assets or resources, or static files</summary>
           
 📄 [favicon.ico](./public/favicon.ico) 
-📄 [index.html](./public/index.html) </blockquote></details>
+📄 [index.html](./public/index.html) </details>
               
-<details> <summary>📂 [src](./src)               # Source files</summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [src](./src)               # Source files</summary>
           
 📄 [App.tsx](./src/App.tsx) 
-<details> <summary>📂 [components](./src/components) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [components](./src/components) </summary>
           
 📄 [BadgesSection.tsx](./src/components/BadgesSection.tsx) 
 📄 [CommentSection.tsx](./src/components/CommentSection.tsx) 
 📄 [MarkdownDisplay.tsx](./src/components/MarkdownDisplay.tsx) 
 📄 [MarkdownDisplayLine.tsx](./src/components/MarkdownDisplayLine.tsx) 
 📄 [URLBox.tsx](./src/components/URLBox.tsx) 
-<details> <summary>📂 [reusable](./src/components/reusable) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [reusable](./src/components/reusable) </summary>
           
 📄 [Card.tsx](./src/components/reusable/Card.tsx) 
 📄 [CenteredCol.tsx](./src/components/reusable/CenteredCol.tsx) 
 📄 [CustomButton.tsx](./src/components/reusable/CustomButton.tsx) 
 📄 [CustomSecondaryButton.tsx](./src/components/reusable/CustomSecondaryButton.tsx) 
 📄 [Input.tsx](./src/components/reusable/Input.tsx) 
-📄 [TextArea.tsx](./src/components/reusable/TextArea.tsx) </blockquote></details></details>
+📄 [TextArea.tsx](./src/components/reusable/TextArea.tsx) </details></details>
               
-<details> <summary>📂 [images](./src/images) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [images](./src/images) </summary>
           
-📄 [Demo.gif](./src/images/Demo.gif) </blockquote></details>
+📄 [Demo.gif](./src/images/Demo.gif) </details>
               
 📄 [index.css](./src/index.css) 
 📄 [index.tsx](./src/index.tsx) 
 📄 [react-app-env.d.ts](./src/react-app-env.d.ts) 
-<details> <summary>📂 [tree](./src/tree) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [tree](./src/tree) </summary>
           
 📄 [constants.ts](./src/tree/constants.ts) 
 📄 [index.ts](./src/tree/index.ts) 
 📄 [languageWebsites.ts](./src/tree/languageWebsites.ts) 
-📄 [types.ts](./src/tree/types.ts) </blockquote></details>
+📄 [types.ts](./src/tree/types.ts) </details>
               
-<details> <summary>📂 [utils](./src/utils) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [utils](./src/utils) </summary>
           
 📄 [Switch.tsx](./src/utils/Switch.tsx) 
-<details> <summary>📂 [createNpmFormatting](./src/utils/createNpmFormatting) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [createNpmFormatting](./src/utils/createNpmFormatting) </summary>
           
 📄 [createNpmFormatting.ts](./src/utils/createNpmFormatting/createNpmFormatting.ts) 
-📄 [createNpmFormattingTest.ts](./src/utils/createNpmFormatting/createNpmFormattingTest.ts) </blockquote></details>
+📄 [createNpmFormattingTest.ts](./src/utils/createNpmFormatting/createNpmFormattingTest.ts) </details>
               
 📄 [deepCopyFunction.ts](./src/utils/deepCopyFunction.ts) 
-<details> <summary>📂 [deleteFileFromPath](./src/utils/deleteFileFromPath) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [deleteFileFromPath](./src/utils/deleteFileFromPath) </summary>
           
 📄 [deleteFileFromPath.ts](./src/utils/deleteFileFromPath/deleteFileFromPath.ts) 
-📄 [deleteFileFromPathTest.ts](./src/utils/deleteFileFromPath/deleteFileFromPathTest.ts) </blockquote></details>
+📄 [deleteFileFromPathTest.ts](./src/utils/deleteFileFromPath/deleteFileFromPathTest.ts) </details>
               
 📄 [filterChange.ts](./src/utils/filterChange.ts) 
-<details> <summary>📂 [formatLanguages](./src/utils/formatLanguages) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [formatLanguages](./src/utils/formatLanguages) </summary>
           
 📄 [formatLanguages.ts](./src/utils/formatLanguages/formatLanguages.ts) 
-📄 [formatLanguagesTest.ts](./src/utils/formatLanguages/formatLanguagesTest.ts) </blockquote></details>
+📄 [formatLanguagesTest.ts](./src/utils/formatLanguages/formatLanguagesTest.ts) </details>
               
 📄 [generateCoreTest.ts](./src/utils/generateCoreTest.ts) 
-<details> <summary>📂 [generateMarkDownTree](./src/utils/generateMarkDownTree) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [generateMarkDownTree](./src/utils/generateMarkDownTree) </summary>
           
 📄 [generateMarkDownTree.ts](./src/utils/generateMarkDownTree/generateMarkDownTree.ts) 
-📄 [generateMarkDownTreeTest.ts](./src/utils/generateMarkDownTree/generateMarkDownTreeTest.ts) </blockquote></details>
+📄 [generateMarkDownTreeTest.ts](./src/utils/generateMarkDownTree/generateMarkDownTreeTest.ts) </details>
               
-<details> <summary>📂 [getAutoGeneratedCommentForPath](./src/utils/getAutoGeneratedCommentForPath) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [getAutoGeneratedCommentForPath](./src/utils/getAutoGeneratedCommentForPath) </summary>
           
 📄 [getAutoGeneratedCommentForPath.ts](./src/utils/getAutoGeneratedCommentForPath/getAutoGeneratedCommentForPath.ts) 
-📄 [getAutoGeneratedCommentForPathtest.ts](./src/utils/getAutoGeneratedCommentForPath/getAutoGeneratedCommentForPathtest.ts) </blockquote></details>
+📄 [getAutoGeneratedCommentForPathtest.ts](./src/utils/getAutoGeneratedCommentForPath/getAutoGeneratedCommentForPathtest.ts) </details>
               
 📄 [getBuiltinComment.ts](./src/utils/getBuiltinComment.ts) 
-<details> <summary>📂 [getCopyToClipboardContents](./src/utils/getCopyToClipboardContents) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [getCopyToClipboardContents](./src/utils/getCopyToClipboardContents) </summary>
           
 📄 [getCopyToClipboardContents.ts](./src/utils/getCopyToClipboardContents/getCopyToClipboardContents.ts) 
-📄 [getCopyToClipboardContentsTest.ts](./src/utils/getCopyToClipboardContents/getCopyToClipboardContentsTest.ts) </blockquote></details>
+📄 [getCopyToClipboardContentsTest.ts](./src/utils/getCopyToClipboardContents/getCopyToClipboardContentsTest.ts) </details>
               
 📄 [getCoreFromTree.ts](./src/utils/getCoreFromTree.ts) 
-<details> <summary>📂 [getFileIconFromFileType](./src/utils/getFileIconFromFileType) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [getFileIconFromFileType](./src/utils/getFileIconFromFileType) </summary>
           
 📄 [getFileIconFromFileType.ts](./src/utils/getFileIconFromFileType/getFileIconFromFileType.ts) 
-📄 [getFileIconFromFileTypeTest.ts](./src/utils/getFileIconFromFileType/getFileIconFromFileTypeTest.ts) </blockquote></details>
+📄 [getFileIconFromFileTypeTest.ts](./src/utils/getFileIconFromFileType/getFileIconFromFileTypeTest.ts) </details>
               
-<details> <summary>📂 [getFileTypeFromPath](./src/utils/getFileTypeFromPath) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [getFileTypeFromPath](./src/utils/getFileTypeFromPath) </summary>
           
 📄 [getFileTypeFromPath.ts](./src/utils/getFileTypeFromPath/getFileTypeFromPath.ts) 
-📄 [getFileTypeFromPathTest.ts](./src/utils/getFileTypeFromPath/getFileTypeFromPathTest.ts) </blockquote></details>
+📄 [getFileTypeFromPathTest.ts](./src/utils/getFileTypeFromPath/getFileTypeFromPathTest.ts) </details>
               
-<details> <summary>📂 [getHyperLinkFromPath](./src/utils/getHyperLinkFromPath) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [getHyperLinkFromPath](./src/utils/getHyperLinkFromPath) </summary>
           
 📄 [getHyperLinkFromPath.ts](./src/utils/getHyperLinkFromPath/getHyperLinkFromPath.ts) 
-📄 [getHyperLinkFromPathtest.ts](./src/utils/getHyperLinkFromPath/getHyperLinkFromPathtest.ts) </blockquote></details>
+📄 [getHyperLinkFromPathtest.ts](./src/utils/getHyperLinkFromPath/getHyperLinkFromPathtest.ts) </details>
               
-<details> <summary>📂 [getLargestFileNameLengthInPath](./src/utils/getLargestFileNameLengthInPath) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [getLargestFileNameLengthInPath](./src/utils/getLargestFileNameLengthInPath) </summary>
           
 📄 [getLargestFileNameLengthInLevel.ts](./src/utils/getLargestFileNameLengthInPath/getLargestFileNameLengthInLevel.ts) 
-📄 [getLargestFileNameLengthInLevelTest.ts](./src/utils/getLargestFileNameLengthInPath/getLargestFileNameLengthInLevelTest.ts) </blockquote></details>
+📄 [getLargestFileNameLengthInLevelTest.ts](./src/utils/getLargestFileNameLengthInPath/getLargestFileNameLengthInLevelTest.ts) </details>
               
-<details> <summary>📂 [getOwnerAndRepoFromUrl](./src/utils/getOwnerAndRepoFromUrl) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [getOwnerAndRepoFromUrl](./src/utils/getOwnerAndRepoFromUrl) </summary>
           
 📄 [getOwnerAndRepoFromUrl.ts](./src/utils/getOwnerAndRepoFromUrl/getOwnerAndRepoFromUrl.ts) 
-📄 [getOwnerAndRepoFromUrlTest.ts](./src/utils/getOwnerAndRepoFromUrl/getOwnerAndRepoFromUrlTest.ts) </blockquote></details>
+📄 [getOwnerAndRepoFromUrlTest.ts](./src/utils/getOwnerAndRepoFromUrl/getOwnerAndRepoFromUrlTest.ts) </details>
               
 📄 [getPreviousTree.ts](./src/utils/getPreviousTree.ts) 
 📄 [getWebsiteForLanguage.ts](./src/utils/getWebsiteForLanguage.ts) 
-<details> <summary>📂 [repoToBadge](./src/utils/repoToBadge) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [repoToBadge](./src/utils/repoToBadge) </summary>
           
 📄 [repoToBadge.ts](./src/utils/repoToBadge/repoToBadge.ts) 
-📄 [repoToBadgeTest.ts](./src/utils/repoToBadge/repoToBadgeTest.ts) </blockquote></details>
+📄 [repoToBadgeTest.ts](./src/utils/repoToBadge/repoToBadgeTest.ts) </details>
               
-<details> <summary>📂 [selectFoldersOnly](./src/utils/selectFoldersOnly) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [selectFoldersOnly](./src/utils/selectFoldersOnly) </summary>
           
 📄 [selectFoldersOnly.ts](./src/utils/selectFoldersOnly/selectFoldersOnly.ts) 
-📄 [selectFoldersOnlyTest.ts](./src/utils/selectFoldersOnly/selectFoldersOnlyTest.ts) </blockquote></details>
+📄 [selectFoldersOnlyTest.ts](./src/utils/selectFoldersOnly/selectFoldersOnlyTest.ts) </details>
               
-<details> <summary>📂 [selectRootCores](./src/utils/selectRootCores) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [selectRootCores](./src/utils/selectRootCores) </summary>
           
 📄 [SelectRootCoresTest.ts](./src/utils/selectRootCores/SelectRootCoresTest.ts) 
-📄 [selectRootCores.ts](./src/utils/selectRootCores/selectRootCores.ts) </blockquote></details>
+📄 [selectRootCores.ts](./src/utils/selectRootCores/selectRootCores.ts) </details>
               
-<details> <summary>📂 [setCommentForPath](./src/utils/setCommentForPath) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [setCommentForPath](./src/utils/setCommentForPath) </summary>
           
 📄 [setCommentForPath.ts](./src/utils/setCommentForPath/setCommentForPath.ts) 
-📄 [setCommentForPathtest.ts](./src/utils/setCommentForPath/setCommentForPathtest.ts) </blockquote></details>
+📄 [setCommentForPathtest.ts](./src/utils/setCommentForPath/setCommentForPathtest.ts) </details>
               
-<details> <summary>📂 [undoDeletions](./src/utils/undoDeletions) </summary> <blockquote style="padding-bottom: 100px;">
+<details style="padding-left: 32px;"> <summary>📂 [undoDeletions](./src/utils/undoDeletions) </summary>
           
 📄 [undoDeletions.ts](./src/utils/undoDeletions/undoDeletions.ts) 
-📄 [undoDeletionsTest.ts](./src/utils/undoDeletions/undoDeletionsTest.ts) </blockquote></details></details></details>
+📄 [undoDeletionsTest.ts](./src/utils/undoDeletions/undoDeletionsTest.ts) </details></details></details>
               
 📄 [tsconfig.json](./tsconfig.json) 
 </pre></big>
