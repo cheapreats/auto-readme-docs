@@ -13,13 +13,13 @@
 📄 [index.html](./public/index.html) </blockquote></details>
 
 <details><summary>📂 [src](./src)               # Source files
-</summary><blockquote>📄 [App.tsx](./src/App.tsx) 
+</summary><blockquote>📄 [App.tsx](./src/App.tsx)<br/>
 <details><summary>📂 [components](./src/components) 
 </summary><blockquote>📄 [BadgesSection.tsx](./src/components/BadgesSection.tsx) 
 📄 [CommentSection.tsx](./src/components/CommentSection.tsx) 
 📄 [MarkdownDisplay.tsx](./src/components/MarkdownDisplay.tsx) 
 📄 [MarkdownDisplayLine.tsx](./src/components/MarkdownDisplayLine.tsx) 
-📄 [URLBox.tsx](./src/components/URLBox.tsx) 
+📄 [URLBox.tsx](./src/components/URLBox.tsx)<br/>
 <details><summary>📂 [reusable](./src/components/reusable) 
 </summary><blockquote>📄 [Card.tsx](./src/components/reusable/Card.tsx) 
 📄 [CenteredCol.tsx](./src/components/reusable/CenteredCol.tsx) 
@@ -41,7 +41,7 @@
 📄 [types.ts](./src/tree/types.ts) </blockquote></details>
 
 <details><summary>📂 [utils](./src/utils) 
-</summary><blockquote>📄 [Switch.tsx](./src/utils/Switch.tsx) 
+</summary><blockquote>📄 [Switch.tsx](./src/utils/Switch.tsx)<br/>
 <details><summary>📂 [createNpmFormatting](./src/utils/createNpmFormatting) 
 </summary><blockquote>📄 [createNpmFormatting.ts](./src/utils/createNpmFormatting/createNpmFormatting.ts) 
 📄 [createNpmFormattingTest.ts](./src/utils/createNpmFormatting/createNpmFormattingTest.ts) </blockquote></details>
