@@ -1,5 +1,5 @@
 <big><pre>
-📜 [.eslintrc.js](./.eslintrc.js) 
+📜 <a href="./.eslintrc.js">.eslintrc.js</a>
 <details><summary>📂 [.github](./.github)           # Markdown files that GitHub looks for, like changelogs and issue templates
 </summary><blockquote>📄 [FUNDING.yml](./.github/FUNDING.yml) </blockquote></details>
 
@@ -8,9 +8,9 @@
 📄 [README.md](./README.md) 
 📄 [package-lock.json](./package-lock.json) 
 📄 [package.json](./package.json) 
-<details><summary>📂 [public](./public)            # Supplemental assets or resources, or static files
-</summary><blockquote>📄 [favicon.ico](./public/favicon.ico) 
-📄 [index.html](./public/index.html) </blockquote></details>
+<details><summary>📂 <a href="./public">public</a>            # Supplemental assets or resources, or static files
+  </summary><blockquote>📄 <a href="./public/favicon.ico">favicon.ico</a>
+  📄 <a href="./public/index.html)">index.html</a> </blockquote></details>
 
 <details><summary>📂 [src](./src)               # Source files
 </summary><blockquote>📄 [App.tsx](./src/App.tsx)<br/>
