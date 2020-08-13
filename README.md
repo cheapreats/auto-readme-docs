@@ -9,8 +9,8 @@
 📄 [package-lock.json](./package-lock.json) 
 📄 [package.json](./package.json) 
 <details><summary>📂 <a href="./public">public</a>            # Supplemental assets or resources, or static files
-  </summary><blockquote>📄 <a href="./public/favicon.ico">favicon.ico</a>
-  📄 <a href="./public/index.html)">index.html</a> </blockquote></details>
+</summary><blockquote>📄 <a href="./public/favicon.ico">favicon.ico</a>
+📄 <a href="./public/index.html)">index.html</a> </blockquote></details>
 
 <details><summary>📂 [src](./src)               # Source files
 </summary><blockquote>📄 [App.tsx](./src/App.tsx)<br/>
