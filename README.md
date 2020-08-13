@@ -41,7 +41,9 @@
 📄 [types.ts](./src/tree/types.ts) </blockquote></details>
 
 <details><summary>📂 [utils](./src/utils) 
-</summary><blockquote>📄 [Switch.tsx](./src/utils/Switch.tsx) 
+</summary>
+  
+  <blockquote>📄 [Switch.tsx](./src/utils/Switch.tsx) 
 <details><summary>📂 [createNpmFormatting](./src/utils/createNpmFormatting) 
 </summary><blockquote>📄 [createNpmFormatting.ts](./src/utils/createNpmFormatting/createNpmFormatting.ts) 
 📄 [createNpmFormattingTest.ts](./src/utils/createNpmFormatting/createNpmFormattingTest.ts) </blockquote></details>
