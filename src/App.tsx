@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { ripOutPaths } from "./tree";
-import { GithubAPIResponseBody, NpmsResponseBody } from "./tree/types";
+import {
+  GithubAPIResponseBody,
+  NpmsResponseBody,
+  GithubData,
+} from "./tree/types";
 import MarkdownDisplay from "./components/MarkdownDisplay";
 import BadgesSection from "./components/BadgesSection";
 import URLBox from "./components/URLBox";
@@ -38,7 +42,7 @@ const App: React.FC = () => {
   const GITHUB_API_TREES_LANGUAGES = "GITHUB_API_TREES_LANGUAGES";
   const GITHUB_API_TREES_CONTRIBUTORS = "/contributors";
   const WITH_RECURSIVE_PARAMETER = "?recursive=true";
-
+  const NPM_API_VERSION2 = "https://api.npms.io/v2";
   const handleExampleGoButtonPress = async () => {
     const url = "https://github.com/cheapreats/auto-readme-docs";
     const pathArray = url.split("/");
@@ -83,9 +87,9 @@ const App: React.FC = () => {
 
       for (const key in resJSON) {
         const file = resJSON[key];
-        const filePath = file["path"];
+        const filePath = file[GithubData.PATH];
         if (filePath === README_PATH) {
-          const SHA = file["sha"];
+          const SHA = file[GithubData.SHA];
           const blobs = await fetch(
             GITHUB_API_URL_PREFIX +
               `${owner}/${repo}` +
@@ -93,7 +97,7 @@ const App: React.FC = () => {
               `/${SHA}`
           );
           const blobsJSON = await blobs.json();
-          const decodedBlobs = atob(blobsJSON["content"]);
+          const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
           const haveComments = decodedBlobs.match(COMMENTS_EXIST_REGEX);
 
           oldTree = getPreviousTree(haveComments);
@@ -106,7 +110,7 @@ const App: React.FC = () => {
     // npm badges
     try {
       const npmPackagesResponse = await fetch(
-        `https://api.npms.io/v2/search?q=${repo}`
+        NPM_API_VERSION2 + `/search?q=${repo}`
       );
       const npmPackagesResponseJSON = (await npmPackagesResponse.json()) as NpmsResponseBody;
       if (npmPackagesResponseJSON.total === 0) {
@@ -126,7 +130,8 @@ const App: React.FC = () => {
           GITHUB_API_COMMITS_ON_MASTER_SUFFIX
       );
       const resJSON = await res.json();
-      const treeSHA = resJSON["commit"]["tree"]["sha"];
+      const treeSHA =
+        resJSON[GithubData.COMMIT][GithubData.TREE][GithubData.SHA];
       const treeRes = await fetch(
         GITHUB_API_URL_PREFIX +
           `${owner}/${repo}` +
@@ -136,10 +141,10 @@ const App: React.FC = () => {
       );
       const treeJSON = await treeRes.json();
 
-      const numberOfItems = treeJSON["tree"].length;
+      const numberOfItems = treeJSON[GithubData.TREE].length;
 
       for (let index = 0; index < numberOfItems; index += 1) {
-        const item = treeJSON["tree"][index];
+        const item = treeJSON[GithubData.TREE][index];
         if (item.type == IS_FILE) {
           const SHA = item.sha;
           const path = item.path;
@@ -153,7 +158,7 @@ const App: React.FC = () => {
             .then((data) =>
               builtInComments.push({
                 path: path,
-                comment: atob(data["content"]),
+                comment: atob(data[GithubData.CONTENT]),
               })
             )
             .catch((error) => alert("Error" + error));

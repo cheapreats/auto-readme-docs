@@ -25,6 +25,14 @@ export enum FileType {
   LICENSE = "LICENSE",
 }
 
+export enum GithubData {
+  TREE = "tree",
+  CONTENT = "content",
+  SHA = "sha",
+  PATH = "path",
+  COMMIT = "commit",
+}
+
 export interface Core {
   path: string;
   comment: string;
