@@ -37,9 +37,15 @@ const App: React.FC = () => {
     await makeRequest(owner, repo);
   };
 
+  /** Updates the URL state when the content of URLBOX changes
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event
+   */
   const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setURL(e.target.value);
 
+  /**  Gets the owner and repository names out of url with every click and pesses them into make-request function
+   * @param {MouseEvent} event - The click event
+   */
   const handleGoButtonPress = async (event: MouseEvent) => {
     // Expecting a URL like 'https://github.com/${owner}/${repo}'
     const pathArray = url.split("/");
@@ -49,27 +55,35 @@ const App: React.FC = () => {
     await makeRequest(owner, repo);
   };
 
+  /**  Given the owner and repository names makes requests to API
+   * @param {String} owner - Name of the owner of repository
+   * @param {String} repo - Title of the Repository
+   */
+
   const makeRequest = async (owner: String, repo: String) => {
     let oldTree: pathAndComment[] | null = null;
     let builtInComments: pathAndComment[] = [];
 
     try {
-      const README = "README.md";
+      const README_PATH = "README.md";
+      const COMMENTS_EXIST_REGEX = /((\[.+)\]\(\.\/.+\)\s+# .+)/g;
+
       const res = await fetch(
         `https://api.github.com/repos/${owner}/${repo}/contents`
       );
       const resJSON = await res.json();
-      const commentsExistRegex = /((\[.+)\]\(\.\/.+\)\s+# .+)/g;
+
       for (const key in resJSON) {
         const file = resJSON[key];
-        if (file["path"] === README) {
+        const filePath = file["path"];
+        if (filePath === README_PATH) {
           const SHA = file["sha"];
           const blobs = await fetch(
             `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON["content"]);
-          const haveComments = decodedBlobs.match(commentsExistRegex);
+          const haveComments = decodedBlobs.match(COMMENTS_EXIST_REGEX);
 
           oldTree = getPreviousTree(haveComments);
         }
@@ -95,6 +109,7 @@ const App: React.FC = () => {
 
     // Tree structure
     try {
+      const IS_FILE = "blob";
       const res = await fetch(
         `https://api.github.com/repos/${owner}/${repo}/commits/master`
       );
@@ -105,19 +120,20 @@ const App: React.FC = () => {
       );
       const treeJSON = await treeRes.json();
 
-      const allItems = treeJSON["tree"].length;
+      const numberOfItems = treeJSON["tree"].length;
 
-      for (let index = 0; index < allItems; index += 1) {
+      for (let index = 0; index < numberOfItems; index += 1) {
         const item = treeJSON["tree"][index];
-        if (item.type == "blob") {
+        if (item.type == IS_FILE) {
           const SHA = item.sha;
+          const path = item.path;
           const blobs = await fetch(
             `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
           )
             .then((blobs) => blobs.json())
             .then((data) =>
               builtInComments.push({
-                path: item.path,
+                path: path,
                 comment: atob(data["content"]),
               })
             )
