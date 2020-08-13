@@ -1,8 +1,7 @@
 <big><pre>
 📜 [.eslintrc.js](./.eslintrc.js) 
 <details><summary>📂 [.github](./.github)           # Markdown files that GitHub looks for, like changelogs and issue templates
-</summary><blockquote>
-📄 [FUNDING.yml](./.github/FUNDING.yml) </blockquote></details>
+</summary><blockquote>📄 [FUNDING.yml](./.github/FUNDING.yml) </blockquote></details>
 
 📜 [.gitignore](./.gitignore) 
 📄 [LICENSE](./LICENSE) 
