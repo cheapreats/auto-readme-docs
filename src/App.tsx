@@ -81,7 +81,7 @@ const App: React.FC = () => {
 
     try {
       const res = await fetch(
-        GITHUB_API_URL_PREFIX + `${owner}/${repo}` + GITHUB_API_CONTENTS_SUFFIX
+        `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_CONTENTS_SUFFIX}`
       );
       const resJSON = await res.json();
 
@@ -91,10 +91,7 @@ const App: React.FC = () => {
         if (filePath === README_PATH) {
           const SHA = file[GithubData.SHA];
           const blobs = await fetch(
-            GITHUB_API_URL_PREFIX +
-              `${owner}/${repo}` +
-              GITHUB_API_BLOBS_SUFFIX +
-              `/${SHA}`
+            `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_BLOBS_SUFFIX}/${SHA}`
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
@@ -110,7 +107,7 @@ const App: React.FC = () => {
     // npm badges
     try {
       const npmPackagesResponse = await fetch(
-        NPM_API_VERSION2 + `/search?q=${repo}`
+        `${NPM_API_VERSION2}/search?q=${repo}`
       );
       const npmPackagesResponseJSON = (await npmPackagesResponse.json()) as NpmsResponseBody;
       if (npmPackagesResponseJSON.total === 0) {
@@ -125,19 +122,13 @@ const App: React.FC = () => {
     // Tree structure
     try {
       const res = await fetch(
-        GITHUB_API_URL_PREFIX +
-          `${owner}/${repo}` +
-          GITHUB_API_COMMITS_ON_MASTER_SUFFIX
+        `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_COMMITS_ON_MASTER_SUFFIX}`
       );
       const resJSON = await res.json();
       const treeSHA =
         resJSON[GithubData.COMMIT][GithubData.TREE][GithubData.SHA];
       const treeRes = await fetch(
-        GITHUB_API_URL_PREFIX +
-          `${owner}/${repo}` +
-          GITHUB_API_TREES_SUFFIX +
-          `/${treeSHA}` +
-          WITH_RECURSIVE_PARAMETER
+        `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_TREES_SUFFIX}/${treeSHA}${WITH_RECURSIVE_PARAMETER}`
       );
       const treeJSON = await treeRes.json();
 
@@ -149,10 +140,7 @@ const App: React.FC = () => {
           const SHA = item.sha;
           const path = item.path;
           const blobs = await fetch(
-            GITHUB_API_URL_PREFIX +
-              `${owner}/${repo}` +
-              GITHUB_API_BLOBS_SUFFIX +
-              `/${SHA}`
+            `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_BLOBS_SUFFIX}/${SHA}`
           )
             .then((blobs) => blobs.json())
             .then((data) =>
@@ -175,7 +163,7 @@ const App: React.FC = () => {
     // Languages
     try {
       const res = await fetch(
-        GITHUB_API_URL_PREFIX + `${owner}/${repo}` + GITHUB_API_TREES_LANGUAGES
+        `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_TREES_LANGUAGES}`
       );
       const resJSON = await res.json();
       setRepoLanguages(formatLanguages(resJSON));
@@ -186,9 +174,7 @@ const App: React.FC = () => {
     // Contributors
     try {
       const res = await fetch(
-        GITHUB_API_URL_PREFIX +
-          `${owner}/${repo}` +
-          GITHUB_API_TREES_CONTRIBUTORS
+        `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_TREES_CONTRIBUTORS}`
       );
       const resJSON = await res.json();
       console.log(resJSON);
