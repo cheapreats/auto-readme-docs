@@ -27,6 +27,17 @@ const App: React.FC = () => {
 
   const OWNER_IN_URL = 3;
   const REPO_IN_URL = 4;
+  const README_PATH = "README.md";
+  const COMMENTS_EXIST_REGEX = /((\[.+)\]\(\.\/.+\)\s+# .+)/g;
+  const IS_FILE = "blob";
+  const GITHUB_API_URL_PREFIX = "https://api.github.com/repos/";
+  const GITHUB_API_COMMITS_ON_MASTER_SUFFIX = "/commits/master";
+  const GITHUB_API_CONTENTS_SUFFIX = "/contents";
+  const GITHUB_API_BLOBS_SUFFIX = "/git/blobs";
+  const GITHUB_API_TREES_SUFFIX = "/git/trees";
+  const GITHUB_API_TREES_LANGUAGES = "GITHUB_API_TREES_LANGUAGES";
+  const GITHUB_API_TREES_CONTRIBUTORS = "/contributors";
+  const WITH_RECURSIVE_PARAMETER = "?recursive=true";
 
   const handleExampleGoButtonPress = async () => {
     const url = "https://github.com/cheapreats/auto-readme-docs";
@@ -65,11 +76,8 @@ const App: React.FC = () => {
     let builtInComments: pathAndComment[] = [];
 
     try {
-      const README_PATH = "README.md";
-      const COMMENTS_EXIST_REGEX = /((\[.+)\]\(\.\/.+\)\s+# .+)/g;
-
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/contents`
+        GITHUB_API_URL_PREFIX + `${owner}/${repo}` + GITHUB_API_CONTENTS_SUFFIX
       );
       const resJSON = await res.json();
 
@@ -79,7 +87,10 @@ const App: React.FC = () => {
         if (filePath === README_PATH) {
           const SHA = file["sha"];
           const blobs = await fetch(
-            `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
+            GITHUB_API_URL_PREFIX +
+              `${owner}/${repo}` +
+              GITHUB_API_BLOBS_SUFFIX +
+              `/${SHA}`
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON["content"]);
@@ -109,14 +120,19 @@ const App: React.FC = () => {
 
     // Tree structure
     try {
-      const IS_FILE = "blob";
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/commits/master`
+        GITHUB_API_URL_PREFIX +
+          `${owner}/${repo}` +
+          GITHUB_API_COMMITS_ON_MASTER_SUFFIX
       );
       const resJSON = await res.json();
       const treeSHA = resJSON["commit"]["tree"]["sha"];
       const treeRes = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSHA}?recursive=true`
+        GITHUB_API_URL_PREFIX +
+          `${owner}/${repo}` +
+          GITHUB_API_TREES_SUFFIX +
+          `/${treeSHA}` +
+          WITH_RECURSIVE_PARAMETER
       );
       const treeJSON = await treeRes.json();
 
@@ -128,7 +144,10 @@ const App: React.FC = () => {
           const SHA = item.sha;
           const path = item.path;
           const blobs = await fetch(
-            `https://api.github.com/repos/${owner}/${repo}/git/blobs/${SHA}`
+            GITHUB_API_URL_PREFIX +
+              `${owner}/${repo}` +
+              GITHUB_API_BLOBS_SUFFIX +
+              `/${SHA}`
           )
             .then((blobs) => blobs.json())
             .then((data) =>
@@ -151,7 +170,7 @@ const App: React.FC = () => {
     // Languages
     try {
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/languages`
+        GITHUB_API_URL_PREFIX + `${owner}/${repo}` + GITHUB_API_TREES_LANGUAGES
       );
       const resJSON = await res.json();
       setRepoLanguages(formatLanguages(resJSON));
@@ -162,7 +181,9 @@ const App: React.FC = () => {
     // Contributors
     try {
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/contributors`
+        GITHUB_API_URL_PREFIX +
+          `${owner}/${repo}` +
+          GITHUB_API_TREES_CONTRIBUTORS
       );
       const resJSON = await res.json();
       console.log(resJSON);
