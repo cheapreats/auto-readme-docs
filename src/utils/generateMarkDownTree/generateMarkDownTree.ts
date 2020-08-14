@@ -17,7 +17,15 @@ type IGetMarkDownTree = (
 
 let detailsToAdd = '';
 
-const addDetailsTag = (
+/** Finds the last item of a markdown folder and adds </blockquote> and
+ * </details> to detailsToAdd string so that it can be added to curLine
+ * @param {Core[]} motherTreeCore  - the original whole treeCore
+ * @param {Core[]} treeCore - the treeCore being analyzed for certain treePath
+ * @param {String} treePath - path of last file/folder in its wrapped folder
+ * @returns - doesn't return anything, adds closing blockquote and details tag
+ * to detailsToAdd
+*/
+const addBlockquoteDetailsTag = (
   motherTreeCore: Core[],
   treeCore: Core[],
   treePath: string,
@@ -38,12 +46,12 @@ const addDetailsTag = (
         ] === splitTreePath[splitTreePath.length - 1]
       ) {
         detailsToAdd += '</blockquote></details>';
-        addDetailsTag(motherTreeCore, motherTreeCore, treeCore[i].path);
+        addBlockquoteDetailsTag(motherTreeCore, motherTreeCore, treeCore[i].path);
       } else {
         break;
       }
     } else {
-      addDetailsTag(motherTreeCore, treeCore[i].treeCore, treePath);
+      addBlockquoteDetailsTag(motherTreeCore, treeCore[i].treeCore, treePath);
     }
   }
 };
@@ -55,7 +63,7 @@ const addDetailsTag = (
  * @param {Core[]} motherCore - The whole Tree Core including what is not going
  * to be shown in MarkdownTree
  * @returns {string} - the MarkDownTree without the deletedCore's
- */
+*/
 export const generateMarkDownTree: IGetMarkDownTree = (
   treeCore,
   filter = FilterType.NULL,
@@ -116,7 +124,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
         ) {
           curLine += `</summary><blockquote>${icon}${hyperLink} ${commentAlignment}${comment}`;
           if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
-            addDetailsTag(
+            addBlockquoteDetailsTag(
               motherCore,
               motherCore,
               deepClonedTreeCore[deepClonedTreeCore.length - 1].path,
@@ -129,7 +137,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
           curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
           if (deepClonedTreeCore && curDepth > 0) {
             if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
-              addDetailsTag(
+              addBlockquoteDetailsTag(
                 motherCore,
                 motherCore,
                 deepClonedTreeCore[deepClonedTreeCore.length - 1].path,
