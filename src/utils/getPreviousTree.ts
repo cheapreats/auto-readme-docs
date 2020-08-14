@@ -1,6 +1,6 @@
 import extractString from "./extractString";
 
-interface oldTree {
+interface pathAndComment {
   path: string | undefined;
   comment: string | undefined;
 }
@@ -13,11 +13,13 @@ const RIGHT_AFTER_PATH_ENDS = '">';
  * @param {string[]} haveComments  The exsiting treeCore in Readme File
  * @returns {Object[]} Object array of path and comment
  */
-export const getPreviousTree = (haveComments: string[] | null): oldTree[] => {
+export const getPreviousTree = (
+  haveComments: string[] | null
+): pathAndComment[] => {
   if (haveComments === null) {
     return [];
   }
-  const haveCommentsArray: oldTree[] = [];
+  const haveCommentsArray: pathAndComment[] = [];
   haveComments.map((line, key) => {
     const path = extractString(
       line,

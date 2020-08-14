@@ -60,16 +60,17 @@ const addBlockquoteDetailsTag = (
  * @param {Core[]} treeCore - the whole MarkDownTree
  * @param {Function} filter - extra Filters
  * @param {boolean} withAutoComments - if we want to produce automated comments or no
- * @param {Core[]} motherCore - The whole Tree Core including what is not going
- * to be shown in MarkdownTree
+ * @param {Core[]} motherCore - The whole Tree Core including what is not
+ * going to be shown in MarkdownTree
  * @returns {string} - the MarkDownTree without the deletedCore's
-*/
+ */
+
 export const generateMarkDownTree: IGetMarkDownTree = (
   treeCore,
   filter = FilterType.NULL,
   withAutoComments = true,
   motherCore = treeCore,
-) => {
+): string[] => {
   let deepClonedTreeCore: Core[] | null = deepCopyFunction(treeCore);
   let isFile = false;
   const outputAsLines: string[] = [];
@@ -88,7 +89,6 @@ export const generateMarkDownTree: IGetMarkDownTree = (
         } else {
           comment = '';
         }
-
         if (getCoreFromTree(motherCore, core.path).treeCore.length) {
           isFile = false;
         } else {
@@ -163,7 +163,6 @@ export const generateMarkDownTree: IGetMarkDownTree = (
       },
     );
   }
-
   return outputAsLines;
 };
 
