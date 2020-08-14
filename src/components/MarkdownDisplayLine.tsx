@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Core } from "../tree/types";
 import deleteFileFromPath from "../utils/deleteFileFromPath/deleteFileFromPath";
 import setCommentForPath from "../utils/setCommentForPath/setCommentForPath";
+import extractString from "../utils/extractString";
 import CommentSection from "./CommentSection";
 
 const LightBGColor = styled.div`
@@ -43,6 +44,12 @@ interface Props {
 }
 
 const EDIT_ICON = "✏";
+const RIGHT_BEFORE_COMMENT_STARTS = "<span># ";
+const RIGHT_AFTER_COMMENT_ENDS = "</span>";
+const RIGHT_BEFORE_FILENAME_STARTS = '">';
+const RIGHT_AFTER_FILENAME_ENDS = "</a>";
+const RIGHT_BEFORE_PATH_STARTS = '<a href="./';
+const RIGHT_AFTER_PATH_ENDS = '">';
 
 const MarkdownDisplayLine: React.FC<Props> = ({
   isOddNumberedLine,
@@ -50,66 +57,28 @@ const MarkdownDisplayLine: React.FC<Props> = ({
   treeCore,
   onChange = (): void => {},
 }) => {
-  /** Given a hyperlink, split the different parts of the input into different sections
-   * @param {string} hyperLink Hyperlink with pattern of [filename](./address/filename)
-   * @returns {Object} - Returns an Object of filename, and positions of start and end of the address
-   */
-  const splitParts = (hyperLink: string): Object => {
-    const RIGHT_BEFORE_ADDRESS_STARTS = "(./";
-    const RIGHT_AFTER_ADDRESS_ENDS = ")";
-
-    const startOfAddress =
-      content.indexOf(RIGHT_BEFORE_ADDRESS_STARTS) +
-      RIGHT_BEFORE_ADDRESS_STARTS.length;
-
-    const RIGHT_BEFORE_FILENAME_STARTS = "[";
-    const RIGHT_AFTER_FILENAME_ENDS = "]";
-    const fileName = content.substring(
-      content.indexOf(RIGHT_BEFORE_FILENAME_STARTS) + 1,
-      content.indexOf(
-        RIGHT_AFTER_FILENAME_ENDS,
-        startOfAddress - RIGHT_BEFORE_ADDRESS_STARTS.length - 1
-      )
-    );
-    const endOfAddress = content.indexOf(
-      fileName + RIGHT_AFTER_ADDRESS_ENDS,
-      startOfAddress
-    );
-    return {
-      startOfAddress: startOfAddress,
-      endOfAddress: endOfAddress,
-      fileName: fileName,
-    };
-  };
-
-  /** Given a hyperlink, using splitParts function rips out the path inside the link
-   * @param {string} hyperLink - Hyperlink with pattern of [filename](./address/filename)
+  /** Given a The string rips out the path inside The string
+   * @param {string} content - The string
    * @returns {string} - Returns the path from hyperlink
    */
-  const path = (hyperLink: string): string => {
-    const parts = splitParts(hyperLink);
-    return content.substring(
-      parts["startOfAddress"],
-      parts["endOfAddress"] + parts["fileName"].length
+  const getPath = (content: string): string => {
+    return extractString(
+      content,
+      RIGHT_BEFORE_PATH_STARTS,
+      RIGHT_AFTER_PATH_ENDS
     );
   };
 
-  /** Given a hyperlink, returns the comment inside the string
-   * @param {string} hyperLink - Hyperlink with pattern of [filename](./address/filename)
+  /** Given a string, returns the comment inside the string
+   * @param {string} content - The string
    * @returns {string} - Returns the path inside the hyperlink
    */
-  const getComment = (hyperLink: string): string => {
-    const commentSquare = "# ";
-    const parts = splitParts(hyperLink);
-    const oneCharAfterLastParathisis =
-      parts["endOfAddress"] + parts["fileName"].length + 1;
-    const linkEnds = content.substring(
-      oneCharAfterLastParathisis,
-      hyperLink.length
+  const getComment = (content: string): string => {
+    return extractString(
+      content,
+      RIGHT_BEFORE_COMMENT_STARTS,
+      RIGHT_AFTER_COMMENT_ENDS
     );
-    const withoutSpaces = linkEnds.trimStart();
-    const currentComment = withoutSpaces.substring(commentSquare.length);
-    return currentComment;
   };
 
   const [comment, setComment] = useState(getComment(content));
@@ -118,13 +87,12 @@ const MarkdownDisplayLine: React.FC<Props> = ({
     setComment(event.currentTarget.value);
   };
   const setNewComment = (): void => {
-    setCommentForPath(treeCore, path(content), comment);
-
+    setCommentForPath(treeCore, getPath(content), comment);
     setCommentVisibility(!commentVisibilty);
     onChange(treeCore);
   };
   const handleDeletion = () => {
-    deleteFileFromPath(treeCore, path(content));
+    deleteFileFromPath(treeCore, getPath(content));
     onChange(treeCore);
   };
 

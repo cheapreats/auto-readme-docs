@@ -51,7 +51,7 @@ export const setCommentForPath = (
     });
     const index = treeCore.findIndex((core) => core.path === path);
     if (index > -1) {
-      treeCore[index].comment = comment ? ` # ${comment}` : "";
+      treeCore[index].comment = comment ? `# ${comment}` : "";
     }
     return treeCore;
   }
