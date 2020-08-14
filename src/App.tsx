@@ -18,6 +18,8 @@ interface oldTree {
   comment: string | undefined;
 }
 
+const COMMENTS_EXIST_REGEX = /(<a href=".+">.github<\/a>).+(<span># .+<\/span>)/g;
+
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState("");
   const [repoLanguages, setRepoLanguages] = useState<string[]>([]);
@@ -58,7 +60,6 @@ const App: React.FC = () => {
         `https://api.github.com/repos/${owner}/${repo}/contents`
       );
       const resJSON = await res.json();
-      const commentsExistRegex = /((\[.+)\]\(\.\/.+\)\s+# .+)/g;
       for (const key in resJSON) {
         const file = resJSON[key];
         if (file["path"] === README) {
@@ -68,7 +69,7 @@ const App: React.FC = () => {
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON["content"]);
-          const haveComments = decodedBlobs.match(commentsExistRegex);
+          const haveComments = decodedBlobs.match(COMMENTS_EXIST_REGEX);
 
           oldTree = getPreviousTree(haveComments);
         }

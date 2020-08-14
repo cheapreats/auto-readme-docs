@@ -5,7 +5,6 @@ interface oldTree {
   comment: string | undefined;
 }
 
-const START_OF_PATH = "./";
 const START_OF_COMMENT = "# ";
 
 /** Given a responseBody, returns the maximum depth exist inside the tree
@@ -39,9 +38,7 @@ const ripOutPaths = (
     : findMaximumDepthLevel(responseBody);
 
   const setComment = (path) => {
-    const found = oldTree
-      ? oldTree.find((item) => item.path == START_OF_PATH + path)
-      : null;
+    const found = oldTree ? oldTree.find((item) => item.path == path) : null;
     if (found) {
       return START_OF_COMMENT + found.comment;
     } else {
