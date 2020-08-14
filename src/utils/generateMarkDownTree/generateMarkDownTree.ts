@@ -127,8 +127,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
                 motherCore,
                 deepClonedTreeCore[deepClonedTreeCore.length - 1].path
               );
-              curLine += `${detailsToAdd}
-`;
+              curLine += `${detailsToAdd}`;
               detailsToAdd = "";
             }
           }
