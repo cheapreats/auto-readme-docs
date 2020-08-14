@@ -44,6 +44,7 @@ const addBlockquoteDetailsTag = (
   const SPLIT_TREE_PATH = treePath.split("/");
   /* folder wrapping the file/folder that need's to have </details> tag added on to */
   const FOLDER_WRAPPING_FILE = SPLIT_TREE_PATH[SPLIT_TREE_PATH.length - 2];
+
   for (let i = 0; i < treeCore.length; i += 1) {
     const SPLIT_PARENT_CORE_PATH = treeCore[i].path.split("/");
     if (
@@ -122,9 +123,10 @@ export const generateMarkDownTree: IGetMarkDownTree = (
         let curLine = "";
         const spaces = longestFileName - deepestDirName.length;
         const commentAlignment = comment ? " ".repeat(spaces) : "";
+        const ROOT_CURDEPTH = 0;
         if (isFile === false && core.treeCore.length > 0) {
           if (
-            curDepth > 0 &&
+            curDepth > ROOT_CURDEPTH &&
             deepClonedTreeCore &&
             deepClonedTreeCore[0] === core
           ) {
@@ -133,8 +135,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
           curLine += `${DETAILS_TAG}${SUMMARY_TAG}${icon}${hyperLink} ${commentAlignment}${comment}`;
         } else if (
           deepClonedTreeCore &&
-          core.treeCore.length >= 0 &&
-          curDepth > 0 &&
+          curDepth > ROOT_CURDEPTH &&
           deepClonedTreeCore[0] === core
         ) {
           curLine += `${SUMMARY_CLOSING_TAG}${BLOCKQUOTE_TAG}${icon}${hyperLink} ${commentAlignment}${comment}`;
@@ -150,7 +151,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
           }
         } else {
           curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
-          if (deepClonedTreeCore && curDepth > 0) {
+          if (deepClonedTreeCore && curDepth > ROOT_CURDEPTH) {
             if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
               addBlockquoteDetailsTag(
                 motherCore,
