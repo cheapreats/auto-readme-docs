@@ -24,29 +24,35 @@ let detailsToAdd = '';
  * @param {String} treePath - path of last file/folder in its wrapped folder
  * @returns - doesn't return anything, adds closing blockquote and details tag
  * to detailsToAdd
-*/
+ */
 const addBlockquoteDetailsTag = (
   motherTreeCore: Core[],
   treeCore: Core[],
   treePath: string,
 ): void => {
-  const splitTreePath = treePath.split('/');
-  /* folder wrapping the the file/folder that need's to have </details> tag added on to */
-  const folderWrappingFile = splitTreePath[splitTreePath.length - 2];
+  const SPLIT_TREE_PATH = treePath.split('/');
+  /* folder wrapping the file/folder that need's to have </details> tag added on to */
+  const FOLDER_WRAPPING_FILE = SPLIT_TREE_PATH[SPLIT_TREE_PATH.length - 2];
 
   for (let i = 0; i < treeCore.length; i += 1) {
+    const SPLIT_PARENT_CORE_PATH = treeCore[i].path.split('/');
     if (
-      treeCore[i].path.split('/')[treeCore[i].path.split('/').length - 1]
-      === folderWrappingFile
+      SPLIT_PARENT_CORE_PATH[SPLIT_PARENT_CORE_PATH.length - 1]
+      === FOLDER_WRAPPING_FILE
     ) {
+      const SPLIT_CHILD_CORE_PATH = treeCore[i].treeCore[
+        treeCore[i].treeCore.length - 1
+      ].path.split('/');
       if (
-        treeCore[i].treeCore[treeCore[i].treeCore.length - 1].path.split('/')[
-          treeCore[i].treeCore[treeCore[i].treeCore.length - 1].path.split('/')
-            .length - 1
-        ] === splitTreePath[splitTreePath.length - 1]
+        SPLIT_CHILD_CORE_PATH[SPLIT_CHILD_CORE_PATH.length - 1]
+        === SPLIT_TREE_PATH[SPLIT_TREE_PATH.length - 1]
       ) {
         detailsToAdd += '</blockquote></details>';
-        addBlockquoteDetailsTag(motherTreeCore, motherTreeCore, treeCore[i].path);
+        addBlockquoteDetailsTag(
+          motherTreeCore,
+          motherTreeCore,
+          treeCore[i].path,
+        );
       } else {
         break;
       }
@@ -107,9 +113,10 @@ export const generateMarkDownTree: IGetMarkDownTree = (
         let curLine = '';
         const spaces = longestFileName - deepestDirName.length;
         const commentAlignment = comment ? ' '.repeat(spaces) : '';
+        const ROOT_CURDEPTH = 0;
         if (isFile === false && core.treeCore.length > 0) {
           if (
-            curDepth > 0
+            curDepth > ROOT_CURDEPTH
             && deepClonedTreeCore
             && deepClonedTreeCore[0] === core
           ) {
@@ -118,8 +125,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
           curLine += `<details><summary>${icon}${hyperLink} ${commentAlignment}${comment}`;
         } else if (
           deepClonedTreeCore
-          && core.treeCore.length >= 0
-          && curDepth > 0
+          && curDepth > ROOT_CURDEPTH
           && deepClonedTreeCore[0] === core
         ) {
           curLine += `</summary><blockquote>${icon}${hyperLink} ${commentAlignment}${comment}`;
@@ -135,7 +141,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
           }
         } else {
           curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
-          if (deepClonedTreeCore && curDepth > 0) {
+          if (deepClonedTreeCore && curDepth > ROOT_CURDEPTH) {
             if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
               addBlockquoteDetailsTag(
                 motherCore,
