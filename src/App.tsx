@@ -39,7 +39,7 @@ const App: React.FC = () => {
   const GITHUB_API_CONTENTS_SUFFIX = '/contents';
   const GITHUB_API_BLOBS_SUFFIX = '/git/blobs';
   const GITHUB_API_TREES_SUFFIX = '/git/trees';
-  const GITHUB_API_TREES_LANGUAGES = 'GITHUB_API_TREES_LANGUAGES';
+  const GITHUB_API_TREES_LANGUAGES = '/languages';
   const GITHUB_API_TREES_CONTRIBUTORS = '/contributors';
   const WITH_RECURSIVE_PARAMETER = '?recursive=true';
   const NPM_API_VERSION2 = 'https://api.npms.io/v2';
