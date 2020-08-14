@@ -16,6 +16,7 @@ import CustomSecondaryButton from "./components/reusable/CustomSecondaryButton";
 import CenteredCol from "./components/reusable/CenteredCol";
 import Card from "./components/reusable/Card";
 import getPreviousTree from "./utils/getPreviousTree";
+import tagWrap from "./utils/tagWrap";
 
 interface pathAndComment {
   path: string | undefined;
@@ -45,9 +46,7 @@ const App: React.FC = () => {
   const NPM_API_VERSION2 = "https://api.npms.io/v2";
   const EXAMPLE_URL = "https://github.com/cheapreats/auto-readme-docs";
   const BIG_TAG = "<big>";
-  const BIG_CLOSING_TAG = "</big>";
   const PRE_TAG = "<pre>";
-  const PRE_CLOSING_TAG = "</pre>";
 
   const handleExampleGoButtonPress = async () => {
     const pathArray = EXAMPLE_URL.split("/");
@@ -222,9 +221,11 @@ const App: React.FC = () => {
           <div className="row">
             <CenteredCol className="col">
               <CopyToClipboard
-                text={`${BIG_TAG}${PRE_TAG}\n${repoLanguages.join(
-                  "\n"
-                )}\n${PRE_CLOSING_TAG}${BIG_CLOSING_TAG}`}
+                text={tagWrap(
+                  tagWrap(`\n${repoLanguages.join("\n")}\n`, PRE_TAG),
+                  BIG_TAG
+                )}
+                // {`<big><pre>\n${repoLanguages.join('\n')}\n</pre></big>`}
               >
                 <CustomSecondaryButton
                   type="submit"
