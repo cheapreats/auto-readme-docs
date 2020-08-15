@@ -45,7 +45,9 @@ const App: React.FC = () => {
   const WITH_RECURSIVE_PARAMETER = "?recursive=true";
   const NPM_API_VERSION2 = "https://api.npms.io/v2";
   const EXAMPLE_URL = "https://github.com/cheapreats/auto-readme-docs";
+  // To make text larger / more readable comment
   const BIG_TAG = "<big>";
+  // To give horizontal scrolling on small devices
   const PRE_TAG = "<pre>";
 
   const handleExampleGoButtonPress = async () => {
@@ -225,7 +227,6 @@ const App: React.FC = () => {
                   tagWrap(`\n${repoLanguages.join("\n")}\n`, PRE_TAG),
                   BIG_TAG
                 )}
-                // {`<big><pre>\n${repoLanguages.join('\n')}\n</pre></big>`}
               >
                 <CustomSecondaryButton
                   type="submit"
