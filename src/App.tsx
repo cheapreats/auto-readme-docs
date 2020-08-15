@@ -1,21 +1,22 @@
 import React, { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import styled from "styled-components";
 import { ripOutPaths } from "./tree";
 import {
   GithubAPIResponseBody,
   NpmsResponseBody,
   GithubData,
+  Core,
 } from "./tree/types";
 import MarkdownDisplay from "./components/MarkdownDisplay";
 import BadgesSection from "./components/BadgesSection";
 import URLBox from "./components/URLBox";
-import { Core } from "./tree/types";
 import { formatLanguages } from "./utils/formatLanguages/formatLanguages";
 import CustomSecondaryButton from "./components/reusable/CustomSecondaryButton";
 import CenteredCol from "./components/reusable/CenteredCol";
 import Card from "./components/reusable/Card";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import styled from "styled-components";
 import getPreviousTree from "./utils/getPreviousTree";
+import tagWrap from "./utils/tagWrap";
 
 interface pathAndComment {
   path: string | undefined;
@@ -32,20 +33,25 @@ const App: React.FC = () => {
   const OWNER_IN_URL = 3;
   const REPO_IN_URL = 4;
   const README_PATH = "README.md";
-  const COMMENTS_EXIST_REGEX = /((\[.+)\]\(\.\/.+\)\s+# .+)/g;
+  const COMMENTS_EXIST_REGEX = /(<a href=".+">.github<\/a>).+(<span># .+<\/span>)/g;
   const IS_FILE = "blob";
   const GITHUB_API_URL_PREFIX = "https://api.github.com/repos/";
   const GITHUB_API_COMMITS_ON_MASTER_SUFFIX = "/commits/master";
   const GITHUB_API_CONTENTS_SUFFIX = "/contents";
   const GITHUB_API_BLOBS_SUFFIX = "/git/blobs";
   const GITHUB_API_TREES_SUFFIX = "/git/trees";
-  const GITHUB_API_TREES_LANGUAGES = "GITHUB_API_TREES_LANGUAGES";
+  const GITHUB_API_TREES_LANGUAGES = "/languages";
   const GITHUB_API_TREES_CONTRIBUTORS = "/contributors";
   const WITH_RECURSIVE_PARAMETER = "?recursive=true";
   const NPM_API_VERSION2 = "https://api.npms.io/v2";
+  const EXAMPLE_URL = "https://github.com/cheapreats/auto-readme-docs";
+  // To make text larger / more readable comment
+  const BIG_TAG = "<big>";
+  // To give horizontal scrolling on small devices
+  const PRE_TAG = "<pre>";
+
   const handleExampleGoButtonPress = async () => {
-    const url = "https://github.com/cheapreats/auto-readme-docs";
-    const pathArray = url.split("/");
+    const pathArray = EXAMPLE_URL.split("/");
     const owner = pathArray[OWNER_IN_URL];
     const repo = pathArray[REPO_IN_URL];
     setRepoName(repo);
@@ -58,7 +64,8 @@ const App: React.FC = () => {
   const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setURL(e.target.value);
 
-  /**  Gets the owner and repository names out of url with every click and pesses them into make-request function
+  /**  Gets the owner and repository names out of url with every click
+   * and pesses them into make-request function
    * @param {MouseEvent} event - The click event
    */
   const handleGoButtonPress = async (event: MouseEvent) => {
@@ -75,16 +82,15 @@ const App: React.FC = () => {
    * @param {String} repo - Title of the Repository
    */
 
-  const makeRequest = async (owner: String, repo: String) => {
+  const makeRequest = async (owner: string, repo: string) => {
     let oldTree: pathAndComment[] | null = null;
-    let builtInComments: pathAndComment[] = [];
+    const builtInComments: pathAndComment[] = [];
 
     try {
       const res = await fetch(
         `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_CONTENTS_SUFFIX}`
       );
       const resJSON = await res.json();
-
       for (const key in resJSON) {
         const file = resJSON[key];
         const filePath = file[GithubData.PATH];
@@ -101,7 +107,7 @@ const App: React.FC = () => {
         }
       }
     } catch (error) {
-      alert("Error" + error);
+      alert(`Error${error}`);
     }
 
     // npm badges
@@ -136,20 +142,20 @@ const App: React.FC = () => {
 
       for (let index = 0; index < numberOfItems; index += 1) {
         const item = treeJSON[GithubData.TREE][index];
-        if (item.type == IS_FILE) {
+        if (item.type === IS_FILE) {
           const SHA = item.sha;
-          const path = item.path;
+          const { path } = item;
           const blobs = await fetch(
             `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_BLOBS_SUFFIX}/${SHA}`
           )
             .then((blobs) => blobs.json())
             .then((data) =>
               builtInComments.push({
-                path: path,
+                path,
                 comment: atob(data[GithubData.CONTENT]),
               })
             )
-            .catch((error) => alert("Error" + error));
+            .catch((error) => alert(`Error${error}`));
         }
       }
 
@@ -157,7 +163,7 @@ const App: React.FC = () => {
         ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree, builtInComments)
       );
     } catch (error) {
-      alert("Error" + error);
+      alert(`Error${error}`);
     }
 
     // Languages
@@ -168,7 +174,7 @@ const App: React.FC = () => {
       const resJSON = await res.json();
       setRepoLanguages(formatLanguages(resJSON));
     } catch (error) {
-      alert("Error" + error);
+      alert(`Error${error}`);
     }
 
     // Contributors
@@ -179,7 +185,7 @@ const App: React.FC = () => {
       const resJSON = await res.json();
       console.log(resJSON);
     } catch (error) {
-      alert("Error" + error);
+      alert(`Error${error}`);
     }
   };
 
@@ -217,7 +223,10 @@ const App: React.FC = () => {
           <div className="row">
             <CenteredCol className="col">
               <CopyToClipboard
-                text={`<big><pre>\n${repoLanguages.join("\n")}\n</pre></big>`}
+                text={tagWrap(
+                  tagWrap(`\n${repoLanguages.join("\n")}\n`, PRE_TAG),
+                  BIG_TAG
+                )}
               >
                 <CustomSecondaryButton
                   type="submit"

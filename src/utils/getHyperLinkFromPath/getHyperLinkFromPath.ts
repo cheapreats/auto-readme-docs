@@ -10,7 +10,7 @@ export const getHyperLinkFromPath = (path: string): string => {
     const deepestDirName = curDepth
       ? path.substring(path.lastIndexOf("/") + 1)
       : path;
-    const hyperLink = `[${deepestDirName}](./${path})`;
+    const hyperLink = `<a href="./${path}">${deepestDirName}</a>`;
     return hyperLink;
   }
   throw new Error("Invalid Path!");

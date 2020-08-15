@@ -1,26 +1,36 @@
+import extractString from './extractString';
+
 interface pathAndComment {
   path: string | undefined;
   comment: string | undefined;
 }
-const PATH_SECTION_PATTERN = /(\(\.\/.+\))/g;
-const COMMENT_SECTION_PATTERN = /(# .+)/g;
+const RIGHT_BEFORE_COMMENT_STARTS = '<span># ';
+const RIGHT_AFTER_COMMENT_ENDS = '</span>';
+const RIGHT_BEFORE_PATH_STARTS = '<a href="./';
+const RIGHT_AFTER_PATH_ENDS = '">';
 
 /**  Will Divide The treecore into path and comment
  * @param {string[]} haveComments  The exsiting treeCore in Readme File
  * @returns {Object[]} Object array of path and comment
  */
 export const getPreviousTree = (
-  haveComments: string[] | null
+  haveComments: string[] | null,
 ): pathAndComment[] => {
   if (haveComments === null) {
     return [];
   }
   const haveCommentsArray: pathAndComment[] = [];
-  haveComments.map((line, key) => {
-    const firstHalf = line.match(PATH_SECTION_PATTERN)?.toString();
-    const secondHalf = line.match(COMMENT_SECTION_PATTERN)?.toString();
-    const path = firstHalf?.substring(1, firstHalf.length - 1);
-    const comment = secondHalf?.substring(2, secondHalf.length);
+  haveComments.map((line) => {
+    const path = extractString(
+      line,
+      RIGHT_BEFORE_PATH_STARTS,
+      RIGHT_AFTER_PATH_ENDS,
+    );
+    const comment = extractString(
+      line,
+      RIGHT_BEFORE_COMMENT_STARTS,
+      RIGHT_AFTER_COMMENT_ENDS,
+    );
     const haveCommentsObject = { path, comment };
     haveCommentsArray.push(haveCommentsObject);
   });

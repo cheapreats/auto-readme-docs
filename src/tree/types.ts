@@ -45,3 +45,9 @@ export enum FilterType {
   ROOT_ONLY,
   FOLDER_ONLY,
 }
+
+export enum WrapTagType {
+  OPEN,
+  CLOSE,
+  BOTH,
+}
