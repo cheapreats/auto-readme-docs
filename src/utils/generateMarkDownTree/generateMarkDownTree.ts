@@ -18,15 +18,12 @@ type IGetMarkDownTree = (
 
 let detailsToAdd = "";
 
-const SPAN_TAG = "<span>";
-const BLOCKQUOTE_TAG = "<blockquote>";
-const BLOCKQUOTE_CLOSING_TAG = "</blockquote>";
-
-const SUMMARY_TAG = "<summary>";
-const SUMMARY_CLOSING_TAG = "</summary>";
-
-const DETAILS_TAG = "<details>";
-const DETAILS_CLOSING_TAG = "</details>";
+const SPAN_TAG = "span";
+const BLOCKQUOTE_TAG = "blockquote";
+const SUMMARY_TAG = "summary";
+const DETAILS_TAG = "details";
+const IS_JUST_OPEN_TAG = true;
+const IS_JUST_CLOSE_TAG = true;
 
 /** Finds the last item of a markdown folder and adds </blockquote> and
  * </details> to detailsToAdd string so that it can be added to curLine
@@ -58,7 +55,13 @@ const addBlockquoteDetailsTag = (
         SPLIT_CHILD_CORE_PATH[SPLIT_CHILD_CORE_PATH.length - 1] ===
         SPLIT_TREE_PATH[SPLIT_TREE_PATH.length - 1]
       ) {
-        detailsToAdd += `${BLOCKQUOTE_CLOSING_TAG}${DETAILS_CLOSING_TAG}`;
+        detailsToAdd += tagWrap(
+          tagWrap("", BLOCKQUOTE_TAG, !IS_JUST_OPEN_TAG, IS_JUST_CLOSE_TAG),
+          DETAILS_TAG,
+          !IS_JUST_OPEN_TAG,
+          IS_JUST_CLOSE_TAG
+        );
+        console.log(detailsToAdd);
         addBlockquoteDetailsTag(
           motherTreeCore,
           motherTreeCore,
@@ -130,15 +133,31 @@ export const generateMarkDownTree: IGetMarkDownTree = (
             deepClonedTreeCore &&
             deepClonedTreeCore[0] === core
           ) {
-            curLine += `${SUMMARY_CLOSING_TAG}${BLOCKQUOTE_TAG}`;
+            curLine +=
+              tagWrap("", SUMMARY_TAG, !IS_JUST_OPEN_TAG, IS_JUST_CLOSE_TAG) +
+              tagWrap("", BLOCKQUOTE_TAG, IS_JUST_OPEN_TAG);
           }
-          curLine += `${DETAILS_TAG}${SUMMARY_TAG}${icon}${hyperLink} ${commentAlignment}${comment}`;
+          curLine += tagWrap(
+            tagWrap(
+              `${icon}${hyperLink} ${commentAlignment}${comment}`,
+              SUMMARY_TAG,
+              true
+            ),
+            DETAILS_TAG,
+            true
+          );
         } else if (
           deepClonedTreeCore &&
           curDepth > ROOT_CURDEPTH &&
           deepClonedTreeCore[0] === core
         ) {
-          curLine += `${SUMMARY_CLOSING_TAG}${BLOCKQUOTE_TAG}${icon}${hyperLink} ${commentAlignment}${comment}`;
+          curLine +=
+            tagWrap("", SUMMARY_TAG, !IS_JUST_OPEN_TAG, IS_JUST_CLOSE_TAG) +
+            tagWrap(
+              `${icon}${hyperLink} ${commentAlignment}${comment}`,
+              BLOCKQUOTE_TAG,
+              true
+            );
           if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
             addBlockquoteDetailsTag(
               motherCore,
