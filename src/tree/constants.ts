@@ -1,9 +1,9 @@
 export const symbols = {
-  branch: '├── ',
-  vertical: '│   ',
+  branch: "├── ",
+  vertical: "│   ",
 };
 
-const commentLeader = '#';
+const commentLeader = "#";
 const srcDirComment = `${commentLeader} Source files`;
 const testDirComment = `${commentLeader} Test functions and procedures (often run automatically)`;
 const toolsDirComment = `${commentLeader} Miscellaneous helpers and utilities`;
@@ -17,6 +17,14 @@ const circleciDirComment = `${commentLeader} Configurations for CI/CD jobs on th
 const githubDirComment = `${commentLeader} Markdown files that GitHub looks for, like changelogs and issue templates`;
 const androidDirComment = `${commentLeader} Native code generated for the Android platform`;
 const iosDirComment = `${commentLeader} Native code generated for the iOS platform`;
+
+const gitIgnoreLink = `https://git-scm.com/docs/gitignore`;
+const tsConfigLink = `https://www.typescriptlang.org/`;
+
+export const commonInfoLinks: Record<string, string> = {
+  "tsconfig.json": tsConfigLink,
+  ".gitignore": gitIgnoreLink,
+};
 
 export const commonDirComments: Record<string, string> = {
   // src dir variants
@@ -69,11 +77,11 @@ export const commonDirComments: Record<string, string> = {
   ios: iosDirComment,
 
   // .vscode dir variants
-  '.vscode': vscodeDirComment,
+  ".vscode": vscodeDirComment,
 
   // .circleci dir variants
-  '.circleci': circleciDirComment,
+  ".circleci": circleciDirComment,
 
   // .github dir variants
-  '.github': githubDirComment,
+  ".github": githubDirComment,
 };
