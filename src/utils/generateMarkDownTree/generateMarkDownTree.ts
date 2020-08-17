@@ -109,7 +109,6 @@ export const generateMarkDownTree: IGetMarkDownTree = (
         } else {
           isFile = true;
         }
-
         const hyperLink = getHyperLinkFromPath(path);
         const icon = getFileIconFromFileType(getFileTypeFromPath(path, isFile));
         // Find the number of '/' chars in the path
