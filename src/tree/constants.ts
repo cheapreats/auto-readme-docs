@@ -41,6 +41,7 @@ const gatsbyLink = "https://www.gatsbyjs.com/";
 const gemfileLink = "https://bundler.io/rationale.html";
 const gitattributesLink = "https://git-scm.com/docs/gitattributes";
 const gitIgnoreLink = `https://git-scm.com/docs/gitignore`;
+const gradleLink = "https://gradle.org/";
 const gulpfileLink = "https://gulpjs.com/";
 const jestjsLink = "https://jestjs.io/en/";
 const jsdocLink = "https://jsdoc.app/";
@@ -66,6 +67,7 @@ const prettierLink = "https://prettier.io/";
 const remotedebugLink =
   "https://nodejs.org/en/docs/guides/debugging-getting-started/";
 const rundotshLink = "http://run.sh/";
+const sentryLink = "https://sentry.io/welcome/";
 const serverjsLink = "https://serverjs.io/";
 const shrinkwrapLink =
   "https://docs.npmjs.com/configuring-npm/shrinkwrap-json.html";
@@ -139,6 +141,12 @@ export const commonInfoLinks: Record<string, string> = {
   "detox.config.json": detoxLink,
   Podfile: podfileLink,
   "Podfile.lock": podfileLink,
+  "build.gradle": gradleLink,
+  "gradle.properties": gradleLink,
+  gradlew: gradleLink,
+  "gradlew.bat": gradleLink,
+  "settings.gradle": gradleLink,
+  "sentry.properties": sentryLink,
 };
 
 export const commonDirComments: Record<string, string> = {
