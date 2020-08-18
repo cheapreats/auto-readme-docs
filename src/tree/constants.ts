@@ -23,6 +23,8 @@ const buckbuildLink = "https://buck.build/";
 const buildspecLink =
   "https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html";
 const cypressLink = "https://www.cypress.io/";
+const detoxLink =
+  "https://github.com/wix/Detox/blob/master/docs/APIRef.Configuration.md";
 const dockerLink = "https://docs.docker.com/";
 const dockerrunLink =
   "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/single-container-docker-configuration.html";
@@ -129,6 +131,11 @@ export const commonInfoLinks: Record<string, string> = {
   "cypress.json": cypressLink,
   "package-lock.json": packagelockjsonLink,
   "package.json": packagejsonLink,
+  ".detoxrc.js": detoxLink,
+  ".detoxrc.json": detoxLink,
+  ".detoxrc": detoxLink,
+  "detox.config.js": detoxLink,
+  "detox.config.json": detoxLink,
 };
 
 export const commonDirComments: Record<string, string> = {
