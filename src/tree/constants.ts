@@ -59,6 +59,7 @@ const npmschedulerLink = "https://www.npmjs.com/package/scheduler";
 const packagejsonLink = "https://docs.npmjs.com/files/package.json";
 const packagelockjsonLink =
   "https://docs.npmjs.com/configuring-npm/package-lock-json.html";
+const podfileLink = "https://guides.cocoapods.org/using/the-podfile.html";
 const prettierconfLink = "https://prettier.io/docs/en/configuration.html";
 const prettierignoreLink = "https://prettier.io/docs/en/ignore.html";
 const prettierLink = "https://prettier.io/";
@@ -136,6 +137,8 @@ export const commonInfoLinks: Record<string, string> = {
   ".detoxrc": detoxLink,
   "detox.config.js": detoxLink,
   "detox.config.json": detoxLink,
+  Podfile: podfileLink,
+  "Podfile.lock": podfileLink,
 };
 
 export const commonDirComments: Record<string, string> = {
