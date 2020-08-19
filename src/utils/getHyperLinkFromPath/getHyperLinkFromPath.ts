@@ -14,7 +14,7 @@ export const getHyperLinkFromPath = (path: string): string => {
       ? path.substring(path.lastIndexOf("/") + 1)
       : path;
     const info = getInfoLinks(deepestDirName)
-      ? `<a href="${getInfoLinks(deepestDirName)}">${INFO_ICON}</a>`
+      ? `<a href="${getInfoLinks(deepestDirName)}">${INFO_ICON}</a> `
       : "";
     const hyperLink = `${info}<a href="./${path}">${deepestDirName}</a>`;
     return hyperLink;
