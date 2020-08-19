@@ -42,15 +42,10 @@ We built this tool two solve two major issues and two minor issues:
 📄 <a href="./package.json">package.json</a> 
 <details><summary>📂 <a href="./public">public</a> 
 </summary><blockquote>📄 <a href="./public/favicon.ico">favicon.ico</a> 
-📄 <a href="./public/index.html">index.html</a> </blockquote></details>
-
-<details><summary>📂 <a href="./src">src</a> 
+📄 <a href="./public/index.html">index.html</a> </blockquote></details><details><summary>📂 <a href="./src">src</a> 
 </summary><blockquote>📄 <a href="./src/App.tsx">App.tsx</a> 
 <details><summary>📂 <a href="./src/components">components</a> 
-</summary><blockquote>📄 <a href="./src/components/BadgesSection.tsx">BadgesSection.tsx</a> 
-📄 <a href="./src/components/MarkdownDisplay.tsx">MarkdownDisplay.tsx</a> 
-📄 <a href="./src/components/MarkdownDisplayLine.tsx">MarkdownDisplayLine.tsx</a> 
-📄 <a href="./src/components/URLBox.tsx">URLBox.tsx</a> 
+</summary><blockquote>📄 <a href="./src/components/BadgesSection.tsx">BadgesSection.tsx</a> 📄 <a href="./src/components/MarkdownDisplay.tsx">MarkdownDisplay.tsx</a> 📄 <a href="./src/components/MarkdownDisplayLine.tsx">MarkdownDisplayLine.tsx</a> 📄 <a href="./src/components/URLBox.tsx">URLBox.tsx</a> 
 <details><summary>📂 <a href="./src/components/reusable">reusable</a> 
 </summary><blockquote>📄 <a href="./src/components/reusable/Card.tsx">Card.tsx</a> 
 📄 <a href="./src/components/reusable/CenteredCol.tsx">CenteredCol.tsx</a> 
@@ -67,9 +62,7 @@ We built this tool two solve two major issues and two minor issues:
 <details><summary>📂 <a href="./src/tree">tree</a> 
 </summary><blockquote>📄 <a href="./src/tree/constants.ts">constants.ts</a> 
 📄 <a href="./src/tree/index.ts">index.ts</a> 
-📄 <a href="./src/tree/types.ts">types.ts</a> </blockquote></details>
-
-<details><summary>📂 <a href="./src/utils">utils</a> 
+📄 <a href="./src/tree/types.ts">types.ts</a> </blockquote></details><details><summary>📂 <a href="./src/utils">utils</a> 
 </summary><blockquote>📄 <a href="./src/utils/repoToBadge.ts">repoToBadge.ts</a> </blockquote></details></blockquote></details>
 
 📄 <a href="https://www.typescriptlang.org/">ℹ️</a><a href="./tsconfig.json">tsconfig.json</a> 
