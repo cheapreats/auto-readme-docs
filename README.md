@@ -54,16 +54,11 @@ We built this tool two solve two major issues and two minor issues:
 📄 <a href="./src/components/reusable/Input.tsx">Input.tsx</a> </blockquote></details></blockquote></details>
 
 <details><summary>📂 <a href="./src/images">images</a> 
-</summary><blockquote>📄 <a href="./src/images/Demo.gif">Demo.gif</a> </blockquote></details>
-
-📄 <a href="./src/index.css">index.css</a> 
+</summary><blockquote>📄 <a href="./src/images/Demo.gif">Demo.gif</a> </blockquote></details>📄 <a href="./src/index.css">index.css</a> 
 📄 <a href="./src/index.tsx">index.tsx</a> 
 📄 <a href="./src/react-app-env.d.ts">react-app-env.d.ts</a> 
 <details><summary>📂 <a href="./src/tree">tree</a> 
 </summary><blockquote>📄 <a href="./src/tree/constants.ts">constants.ts</a> 
 📄 <a href="./src/tree/index.ts">index.ts</a> 
-📄 <a href="./src/tree/types.ts">types.ts</a> </blockquote></details><details><summary>📂 <a href="./src/utils">utils</a> 
-</summary><blockquote>📄 <a href="./src/utils/repoToBadge.ts">repoToBadge.ts</a> </blockquote></details></blockquote></details>
-
-📄 <a href="https://www.typescriptlang.org/">ℹ️</a><a href="./tsconfig.json">tsconfig.json</a> 
+📄 <a href="./src/tree/types.ts">types.ts</a> </blockquote></details><details><summary>📂 <a href="./src/utils">utils</a></summary><blockquote>📄 <a href="./src/utils/repoToBadge.ts">repoToBadge.ts</a> </blockquote></details></blockquote></details>📄 <a href="https://www.typescriptlang.org/">ℹ️</a><a href="./tsconfig.json">tsconfig.json</a> 
 </pre></big>
