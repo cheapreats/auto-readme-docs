@@ -23,6 +23,7 @@ export enum FileType {
   HIDDEN_FILE = "HIDDEN_FILE",
   CONFIG_FILE = "CONFIG_FILE",
   LICENSE = "LICENSE",
+  MD_FILE = "MD_FILE",
 }
 
 export enum GithubData {
