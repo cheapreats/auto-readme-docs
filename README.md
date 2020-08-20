@@ -34,11 +34,11 @@ We built this tool two solve two major issues and two minor issues:
 
 ## Example Output
 <big><pre>
-<summary>📜 <a href="https://eslint.org/">ℹ️</a> <a href="./.eslintrc.js">.eslintrc.js</a> </summary>
+<summary>⚙️ <a href="https://eslint.org/">ℹ️</a> <a href="./.eslintrc.js">.eslintrc.js</a> </summary>
 <details><summary>📂 <a href="./.github">.github</a> </summary>
-<blockquote>📄 <a href="./.github/FUNDING.yml">FUNDING.yml</a> <br /></blockquote></details><summary>📜 <a href="https://git-scm.com/docs/gitignore">ℹ️</a> <a href="./.gitignore">.gitignore</a> </summary>
+<blockquote>📄 <a href="./.github/FUNDING.yml">FUNDING.yml</a> <br /></blockquote></details><summary>⚙️ <a href="https://git-scm.com/docs/gitignore">ℹ️</a> <a href="./.gitignore">.gitignore</a> </summary>
 <summary>📄 <a href="./LICENSE">LICENSE</a> </summary>
-<summary>📄 <a href="./README.md">README.md</a> </summary>
+<summary>📜 <a href="./README.md">README.md</a> </summary>
 <summary>📄 <a href="https://docs.npmjs.com/configuring-npm/package-lock-json.html">ℹ️</a> <a href="./package-lock.json">package-lock.json</a> </summary>
 <summary>📄 <a href="https://docs.npmjs.com/files/package.json">ℹ️</a> <a href="./package.json">package.json</a> </summary>
 <details><summary>📂 <a href="./public">public</a> </summary>
