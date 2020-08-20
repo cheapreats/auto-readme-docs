@@ -1,5 +1,5 @@
     {
     "CollapsibleFolder":true,
-    "RegexKeyword":"Preview",
+    "RegexKeyword":"Pre",
     "Filter":"FilterType.NULL"
     }
