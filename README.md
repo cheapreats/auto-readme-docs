@@ -33,8 +33,7 @@ We built this tool two solve two major issues and two minor issues:
 - [Babel](https://babeljs.io/)
 
 ## Example Output
-<big><pre>
-<summary>📜 <a href="https://eslint.org/">ℹ️</a> <a href="./.eslintrc.js">.eslintrc.js</a> </summary>
+<big><pre><summary>📜 <a href="https://eslint.org/">ℹ️</a> <a href="./.eslintrc.js">.eslintrc.js</a> </summary>
 <details><summary>📂 <a href="./.github">.github</a> </summary>
 <blockquote>📄 <a href="./.github/FUNDING.yml">FUNDING.yml</a> <br /></blockquote></details><summary>📜 <a href="https://git-scm.com/docs/gitignore">ℹ️</a> <a href="./.gitignore">.gitignore</a> </summary>
 <summary>📄 <a href="./LICENSE">LICENSE</a> </summary>
