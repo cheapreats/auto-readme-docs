@@ -160,7 +160,8 @@ export const generateMarkDownTree: IGetMarkDownTree = (
             detailsToAdd = "";
           }
         } else {
-          curLine += `${icon}${hyperLink} ${commentAlignment}${comment}${BR_TAG}`;
+          curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
+          curLine = tagWrap(curLine, SUMMARY_TAG);
           if (deepClonedTreeCore && curDepth > ROOT_CURDEPTH) {
             if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
               addBlockquoteDetailsTag(

@@ -112,6 +112,3 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
 };
 
 export default MarkdownDisplay;
-// {`<big><pre>
-// \n${makeClipboardContent(clipboardContent.join("\n"))}\n
-//</pre></big>`}
