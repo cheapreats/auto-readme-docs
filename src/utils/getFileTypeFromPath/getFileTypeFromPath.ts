@@ -26,7 +26,11 @@ export const getFileTypeFromPath = (
         if (deepestDirName.endsWith(".md")) {
           return FileType.MD_FILE;
         } else {
-          return FileType.FILE;
+          if (deepestDirName === "LICENSE") {
+            return FileType.LICENSE;
+          } else {
+            return FileType.FILE;
+          }
         }
       }
     }
