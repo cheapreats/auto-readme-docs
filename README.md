@@ -36,7 +36,8 @@ We built this tool two solve two major issues and two minor issues:
 <big><pre>
 📜 <a href="https://eslint.org/">ℹ️</a> <a href="./.eslintrc.js">.eslintrc.js</a> <br />
 <details><summary>📂 <a href="./.github">.github</a> </summary>
-<blockquote>📄 <a href="./.github/FUNDING.yml">FUNDING.yml</a> </blockquote></details>📜 <a href="https://git-scm.com/docs/gitignore">ℹ️</a> <a href="./.gitignore">.gitignore</a> <br />
+<blockquote>📄 <a href="./.github/FUNDING.yml">FUNDING.yml</a> </blockquote></details><br />
+📜 <a href="https://git-scm.com/docs/gitignore">ℹ️</a> <a href="./.gitignore">.gitignore</a> <br />
 📄 <a href="./LICENSE">LICENSE</a> <br />
 📄 <a href="./README.md">README.md</a> <br />
 📄 <a href="https://docs.npmjs.com/configuring-npm/package-lock-json.html">ℹ️</a> <a href="./package-lock.json">package-lock.json</a> <br />
