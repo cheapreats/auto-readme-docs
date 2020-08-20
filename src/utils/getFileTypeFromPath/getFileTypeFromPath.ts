@@ -23,7 +23,11 @@ export const getFileTypeFromPath = (
       if (deepestDirName.startsWith(".")) {
         return FileType.CONFIG_FILE;
       } else {
-        return FileType.FILE;
+        if (deepestDirName.endsWith(".md")) {
+          return FileType.MD_FILE;
+        } else {
+          return FileType.FILE;
+        }
       }
     }
   } else {

@@ -3,7 +3,8 @@ import { FileType } from "../../tree/types";
 export enum Icon {
   FOLDER = "📂",
   FILE = "📄",
-  CONFIG_FILE = "📜",
+  CONFIG_FILE = "⚙️",
+  MD_FILE = "📜",
   LICENSE = "⚖️",
 }
 
