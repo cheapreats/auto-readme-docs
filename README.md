@@ -33,11 +33,11 @@ We built this tool two solve two major issues and two minor issues:
 - [Babel](https://babeljs.io/)
 
 # Config Values
-| Configuration     | Type                                       | Default Value   | Description                                   |   |
-|-------------------|--------------------------------------------|-----------------|-----------------------------------------------|---|
-| CollapsibleFolder | Boolean                                    | true            | Make folders collapsible                      |   |
-| RegexKeyword      | String                                     | 'Preview'       | Gets the comment in form of @keyword{comment} |   |
-| Filter            | FilterType { NULL, ROOT_ONLY, FOLDER_ONLY} | FilterType.NULL | Generate the tree through a filter            |   |
+| Configuration     | Type                                       | Default Value   | Description                                   |
+|-------------------|--------------------------------------------|-----------------|-----------------------------------------------|
+| CollapsibleFolder | Boolean                                    | true            | Make folders collapsible                      |
+| RegexKeyword      | String                                     | 'Preview'       | Gets the comment in form of @keyword{comment} |
+| Filter            | FilterType { NULL, ROOT_ONLY, FOLDER_ONLY} | FilterType.NULL | Generate the tree through a filter            |
 
 
 ## Example Output
