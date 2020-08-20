@@ -32,7 +32,16 @@ We built this tool two solve two major issues and two minor issues:
 - [CSS](https://www.w3schools.com/css/)
 - [Babel](https://babeljs.io/)
 
+# Config Values
+| Configuration     | Type                                       | Default Value   | Description                                   |   |
+|-------------------|--------------------------------------------|-----------------|-----------------------------------------------|---|
+| CollapsibleFolder | Boolean                                    | true            | Make folders collapsible                      |   |
+| RegexKeyword      | String                                     | 'Preview'       | Gets the comment in form of @keyword{comment} |   |
+| Filter            | FilterType { NULL, ROOT_ONLY, FOLDER_ONLY} | FilterType.NULL | Generate the tree through a filter            |   |
+
+
 ## Example Output
+
 <big><pre>
 <summary>⚙️ <a href="https://eslint.org/">ℹ️</a> <a href="./.eslintrc.js">.eslintrc.js</a> </summary>
 <details><summary>📂 <a href="./.github">.github</a> </summary>
