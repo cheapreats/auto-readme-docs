@@ -22,6 +22,7 @@ const SPAN_TAG = "span";
 const BLOCKQUOTE_TAG = "blockquote";
 const SUMMARY_TAG = "summary";
 const DETAILS_TAG = "details";
+const BR_TAG = "<br />";
 
 /** Finds the last item of a markdown folder and adds </blockquote> and
  * </details> to detailsToAdd string so that it can be added to curLine
@@ -128,15 +129,12 @@ export const generateMarkDownTree: IGetMarkDownTree = (
             deepClonedTreeCore &&
             deepClonedTreeCore[0] === core
           ) {
-            curLine +=
-              tagWrap("", SUMMARY_TAG, WrapTagType.CLOSE) +
-              tagWrap("", BLOCKQUOTE_TAG, WrapTagType.OPEN);
+            curLine += tagWrap("", BLOCKQUOTE_TAG, WrapTagType.OPEN);
           }
           curLine += tagWrap(
             tagWrap(
               `${icon}${hyperLink} ${commentAlignment}${comment}`,
-              SUMMARY_TAG,
-              WrapTagType.OPEN
+              SUMMARY_TAG
             ),
             DETAILS_TAG,
             WrapTagType.OPEN
@@ -147,24 +145,22 @@ export const generateMarkDownTree: IGetMarkDownTree = (
           deepClonedTreeCore[0] === core
         ) {
           curLine +=
-            tagWrap("", SUMMARY_TAG, WrapTagType.CLOSE) +
             tagWrap(
               `${icon}${hyperLink} ${commentAlignment}${comment}`,
               BLOCKQUOTE_TAG,
               WrapTagType.OPEN
-            );
+            ) + BR_TAG;
           if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
             addBlockquoteDetailsTag(
               motherCore,
               motherCore,
               deepClonedTreeCore[deepClonedTreeCore.length - 1].path
             );
-            curLine += `${detailsToAdd}
-`;
+            curLine += `${detailsToAdd}`;
             detailsToAdd = "";
           }
         } else {
-          curLine += `${icon}${hyperLink} ${commentAlignment}${comment}`;
+          curLine += `${icon}${hyperLink} ${commentAlignment}${comment}${BR_TAG}`;
           if (deepClonedTreeCore && curDepth > ROOT_CURDEPTH) {
             if (deepClonedTreeCore[deepClonedTreeCore.length - 1] === core) {
               addBlockquoteDetailsTag(
@@ -172,8 +168,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
                 motherCore,
                 deepClonedTreeCore[deepClonedTreeCore.length - 1].path
               );
-              curLine += `${detailsToAdd}
-`;
+              curLine += `${detailsToAdd}`;
               detailsToAdd = "";
             }
           }

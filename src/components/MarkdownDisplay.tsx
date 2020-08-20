@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import Card from './reusable/Card';
-import CenteredCol from './reusable/CenteredCol';
-import CustomSecondaryButton from './reusable/CustomSecondaryButton';
-import MarkdownDisplayLine from './MarkdownDisplayLine';
-import getCopyToClipboardContents from '../utils/getCopyToClipboardContents/getCopyToClipboardContents';
-import undoDeletions from '../utils/undoDeletions/undoDeletions';
-import { Switch } from '../utils/Switch';
-import filterChange from '../utils/filterChange';
+import React, { useState, useEffect } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import Card from "./reusable/Card";
+import CenteredCol from "./reusable/CenteredCol";
+import CustomSecondaryButton from "./reusable/CustomSecondaryButton";
+import MarkdownDisplayLine from "./MarkdownDisplayLine";
+import getCopyToClipboardContents from "../utils/getCopyToClipboardContents/getCopyToClipboardContents";
+import undoDeletions from "../utils/undoDeletions/undoDeletions";
+import { Switch } from "../utils/Switch";
+import filterChange from "../utils/filterChange";
+import tagWrap from "../utils/tagWrap";
+import { Core, FilterType } from "../tree/types";
 
-import { Core, FilterType } from '../tree/types';
+const DETAILS_CLOSING_TAG = "</details>";
+const BIG_TAG = "big";
+const PRE_TAG = "pre";
 
 interface Props {
   treeCore: Core[];
 }
+
+// delete any enter character after </details> tag
+const makeClipboardContent = (content) => {
+  return content.split(`${DETAILS_CLOSING_TAG}\n`).join(DETAILS_CLOSING_TAG);
+};
 
 const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
   const [filter, setFilter] = useState<FilterType>(FilterType.NULL);
@@ -23,7 +32,7 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
   }, [filter]);
 
   const [clipboardContent, setClipboardContent] = useState<string[]>(
-    getCopyToClipboardContents(treeCore, filter),
+    getCopyToClipboardContents(treeCore, filter)
   );
 
   return (
@@ -40,7 +49,7 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
           </h2>
         </div>
       </div>
-      <div className="col" style={{ margin: '-30px 0px 10px 0px' }}>
+      <div className="col" style={{ margin: "-30px 0px 10px 0px" }}>
         <CenteredCol>
           <Switch
             size={20}
@@ -73,7 +82,7 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
               key={line + i}
               onChange={() => {
                 setClipboardContent(
-                  getCopyToClipboardContents(treeCore, filter),
+                  getCopyToClipboardContents(treeCore, filter)
                 );
               }}
               isOddNumberedLine={i % 2 === 1}
@@ -86,7 +95,13 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
       <div className="row">
         <CenteredCol className="col">
           <CopyToClipboard
-            text={`<big><pre>\n${clipboardContent.join('\n')}\n</pre></big>`}
+            text={tagWrap(
+              tagWrap(
+                `\n${makeClipboardContent(clipboardContent.join("\n"))}\n`,
+                PRE_TAG
+              ),
+              BIG_TAG
+            )}
           >
             <CustomSecondaryButton type="submit" value="Copy to Clipboard" />
           </CopyToClipboard>
@@ -97,3 +112,6 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
 };
 
 export default MarkdownDisplay;
+// {`<big><pre>
+// \n${makeClipboardContent(clipboardContent.join("\n"))}\n
+//</pre></big>`}
