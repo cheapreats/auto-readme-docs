@@ -13,11 +13,14 @@ export const tagWrap = (
   state: WrapTagType = WrapTagType.BOTH
 ): string => {
   let wrappedText = `${text}`;
+  const openTag = tag ? `<${tag}>` : "";
+  const closeTag = tag ? `</${tag}>` : "";
+
   if (state !== WrapTagType.CLOSE) {
-    wrappedText = `<${tag}>${wrappedText}`;
+    wrappedText = `${openTag}${wrappedText}`;
   }
   if (state !== WrapTagType.OPEN) {
-    wrappedText = `${wrappedText}</${tag}>`;
+    wrappedText = `${wrappedText}${closeTag}`;
   }
 
   return wrappedText;

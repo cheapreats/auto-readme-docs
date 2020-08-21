@@ -29,7 +29,8 @@ export const generateTreeCore = (deepClonedTreeCore: Core[]): Core[] => {
  */
 export const getCopyToClipboardContents = (
   treeCore: Core[],
-  filter: FilterType = FilterType.NULL
+  filter: FilterType = FilterType.NULL,
+  isCollapsible: boolean = true
 ): string[] => {
   const deepClonedTreeCore = deepCopyFunction(treeCore);
   const visibleTreeCore: Core[] = generateTreeCore(deepClonedTreeCore);
@@ -37,7 +38,8 @@ export const getCopyToClipboardContents = (
     visibleTreeCore,
     filter,
     false,
-    treeCore
+    treeCore,
+    isCollapsible
   );
   return copyToClipboardContents;
 };

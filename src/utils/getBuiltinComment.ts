@@ -6,6 +6,7 @@ const START_COMMENT_IN_PROJECT = " # ";
 /**  Will get a builtin comment in format of @Preview{
  * comment } out of a file
  * @param {string} content  The content of the file
+ * @param {string} keyword  The Keyword to find the comments with
  * @returns {string} The comment
  */
 export const getBuiltinComment = (

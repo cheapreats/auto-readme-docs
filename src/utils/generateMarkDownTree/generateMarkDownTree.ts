@@ -14,7 +14,8 @@ type IGetMarkDownTree = (
   treeCore: Core[],
   filter?: FilterType,
   withAutoComments?: boolean,
-  motherCore?: Core[]
+  motherCore?: Core[],
+  isCollapsible?: boolean
 ) => string[];
 
 let detailsToAdd = "";
@@ -36,8 +37,10 @@ const BR_TAG = "<br />";
 const addBlockquoteDetailsTag = (
   motherTreeCore: Core[],
   treeCore: Core[],
-  treePath: string
+  treePath: string,
+  isCollapsible: boolean = true
 ): void => {
+  const detailstag = isCollapsible ? DETAILS_TAG : "";
   const SPLIT_TREE_PATH = treePath.split("/");
   /* folder wrapping the file/folder that need's to have </details> tag added on to */
   const FOLDER_WRAPPING_FILE = SPLIT_TREE_PATH[SPLIT_TREE_PATH.length - 2];
@@ -57,7 +60,7 @@ const addBlockquoteDetailsTag = (
       ) {
         detailsToAdd += tagWrap(
           tagWrap("", BLOCKQUOTE_TAG, WrapTagType.CLOSE),
-          DETAILS_TAG,
+          detailstag,
           WrapTagType.CLOSE
         );
         addBlockquoteDetailsTag(
@@ -73,21 +76,24 @@ const addBlockquoteDetailsTag = (
     }
   }
 };
+
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore - the whole MarkDownTree
  * @param {Function} filter - extra Filters
  * @param {boolean} withAutoComments - if we want to produce automated comments or no
  * @param {Core[]} motherCore - The whole Tree Core including what is not
  * going to be shown in MarkdownTree
+ * @param {boolean} isCollapsible - is it Collapsible folder
  * @returns {string} - the MarkDownTree without the deletedCore's
  */
-
 export const generateMarkDownTree: IGetMarkDownTree = (
   treeCore,
   filter = FilterType.NULL,
   withAutoComments = true,
-  motherCore = treeCore
+  motherCore = treeCore,
+  isCollapsible = true
 ): string[] => {
+  const detailstag = isCollapsible ? DETAILS_TAG : "";
   let deepClonedTreeCore: Core[] | null = deepCopyFunction(treeCore);
   let isFile = false;
   const outputAsLines: string[] = [];
@@ -140,7 +146,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
               `${icon}${hyperLink} ${commentAlignment}${comment}`,
               SUMMARY_TAG
             ),
-            DETAILS_TAG,
+            detailstag,
             WrapTagType.OPEN
           );
         } else if (
@@ -184,7 +190,8 @@ export const generateMarkDownTree: IGetMarkDownTree = (
             core.treeCore,
             filter,
             withAutoComments,
-            motherCore
+            motherCore,
+            isCollapsible
           );
           childrenTree.forEach((childCore) => {
             outputAsLines.push(childCore);

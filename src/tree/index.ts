@@ -24,6 +24,8 @@ const findMaximumDepthLevel = (responseBody: GithubAPIResponseBody): number => {
 /** Given a response, rip outs the different parts of the response and make a treeCore
  * @param {GithubAPIResponseBody} responseBody - Response from the api including all the information to make a treeCore
  * @param {pathAndComment[] | null} oldTree - An array of path and comments of old treeCore if it already exists in readme file
+ * @param {pathAndComment[]} builtinComments - Files and their Contents
+ * @param {string} regexKeyword - Keyword finding the builtin comments
  * @param {string} root - String of root folder for recursive search through the response body
  * @param {number} depth - Depth of the current input data for recursive search through the response body
  * @param {number} maxDepthLevel - Maximum existing depth of the whole response body to stop the process when reaching the last depth
@@ -33,7 +35,7 @@ const ripOutPaths = (
   responseBody: GithubAPIResponseBody,
   oldTree: pathAndComment[] | null = null,
   builtinComments: pathAndComment[],
-  regexKeyword,
+  regexKeyword: string,
   root = "",
   depth = 1,
   maxDepthLevel = 0
