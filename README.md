@@ -37,7 +37,7 @@ We built this tool two solve two major issues and two minor issues:
 |-------------------|--------------------------------------------|-----------------|-----------------------------------------------|
 | CollapsibleFolder | Boolean                                    | true            | Make folders collapsible                      |
 | RegexKeyword      | String                                     | 'Preview'       | Gets the comment in form of @keyword{comment} |
-| Filter            | FilterType { NULL, ROOT_ONLY, FOLDER_ONLY} | FilterType.NULL | Generate the tree through a filter            |
+| Filter            | FilterType { NULL, ROOT_ONLY, FOLDER_ONLY} | NULL            | Generate the tree through a filter            |
 
 
 ## Example Output
