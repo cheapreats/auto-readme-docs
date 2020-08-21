@@ -6,6 +6,7 @@ import getFileTypeFromPath from "../getFileTypeFromPath/getFileTypeFromPath";
 import { Core, FilterType, WrapTagType } from "../../tree/types";
 import { deepCopyFunction } from "../deepCopyFunction";
 import selectRootCores from "../selectRootCores/selectRootCores";
+import selectFoldersOnly from "../selectFoldersOnly/selectFoldersOnly";
 import getCoreFromTree from "../getCoreFromTree";
 import tagWrap from "../tagWrap";
 
@@ -92,6 +93,9 @@ export const generateMarkDownTree: IGetMarkDownTree = (
   const outputAsLines: string[] = [];
   if (filter === FilterType.ROOT_ONLY) {
     deepClonedTreeCore = selectRootCores(deepClonedTreeCore);
+  }
+  if (filter === FilterType.FOLDER_ONLY) {
+    deepClonedTreeCore = selectFoldersOnly(deepClonedTreeCore);
   }
   if (deepClonedTreeCore) {
     deepClonedTreeCore.forEach(

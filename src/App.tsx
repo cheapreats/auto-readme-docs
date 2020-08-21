@@ -60,6 +60,7 @@ const App: React.FC = () => {
     RegexKeyword: "Preview",
     Filter: "FilterType.NULL",
   };
+
   const handleExampleGoButtonPress = async () => {
     const pathArray = EXAMPLE_URL.split("/");
     const owner = pathArray[OWNER_IN_URL];
@@ -112,7 +113,6 @@ const App: React.FC = () => {
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
           config = JSON.parse(decodedBlobs);
-          console.log("file content", config);
           try {
             await configDispatch({
               type: useConfigurationActions.UPDATE_STATE,
@@ -121,7 +121,6 @@ const App: React.FC = () => {
           } catch (e) {
             console.log(e);
           }
-          console.log("Dispatch Update", configState);
         }
       }
     } catch (error) {

@@ -12,7 +12,6 @@ export const getBuiltinComment = (
   content: string,
   keyword: string = "Preview"
 ): string => {
-  console.log("KEY :", keyword);
   const startKeyWord = `${BEG_OF_FILE_COMMENT_PATTERN}${keyword}${START_OF_COMMENT}`;
   const startOFComment = content.indexOf(startKeyWord);
   const endOfComment = content.indexOf(

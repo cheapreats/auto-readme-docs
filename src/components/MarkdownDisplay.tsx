@@ -10,6 +10,10 @@ import { Switch } from "../utils/Switch";
 import filterChange from "../utils/filterChange";
 import tagWrap from "../utils/tagWrap";
 import { Core, FilterType } from "../tree/types";
+import {
+  useConfigurationContext,
+  useConfigurationActions,
+} from "../contexts/configuration/ConfigurationContext";
 
 const DETAILS_CLOSING_TAG = "</details>";
 const BIG_TAG = "big";
@@ -26,13 +30,17 @@ const makeClipboardContent = (content) => {
 
 const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
   const [filter, setFilter] = useState<FilterType>(FilterType.NULL);
+  const [configState, configDispatch] = useConfigurationContext();
+
   useEffect(() => {
     // Update the document title using the browser API
-    setClipboardContent(getCopyToClipboardContents(treeCore, filter));
+    setClipboardContent(
+      getCopyToClipboardContents(treeCore, configState.Filter as FilterType)
+    );
   }, [filter]);
 
   const [clipboardContent, setClipboardContent] = useState<string[]>(
-    getCopyToClipboardContents(treeCore, filter)
+    getCopyToClipboardContents(treeCore, configState.Filter as FilterType)
   );
 
   return (
@@ -55,6 +63,12 @@ const MarkdownDisplay: React.FC<Props> = ({ treeCore }): React.ReactElement => {
             size={20}
             onChange={({ target }) => {
               setFilter(filterChange(target));
+              let config = configState;
+              config.Filter = filter;
+              configDispatch({
+                type: useConfigurationActions.UPDATE_STATE,
+                payload: config,
+              });
             }}
           />
         </CenteredCol>

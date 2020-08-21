@@ -42,9 +42,9 @@ export interface Core {
 }
 
 export enum FilterType {
-  NULL,
-  ROOT_ONLY,
-  FOLDER_ONLY,
+  NULL = "NULL",
+  ROOT_ONLY = "ROOT_ONLY",
+  FOLDER_ONLY = "FOLDER_ONLY",
 }
 
 export enum WrapTagType {

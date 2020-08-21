@@ -30,11 +30,6 @@ const ConfigurationDispatchContext = React.createContext<
   Dispatch<ConfigurationReducerAction> | undefined
 >(undefined);
 
-type UPDATE_CONFIGURATION = {
-  type: useConfigurationActions.UPDATE_CONFIGURATION;
-  payload: IConfigurationState;
-};
-
 type UPDATE_STATE = {
   type: useConfigurationActions.UPDATE_STATE;
   payload: IConfigurationState;
@@ -45,18 +40,13 @@ type RESET_STATE = {
   payload: IConfigurationState;
 };
 
-type ConfigurationReducerAction =
-  | UPDATE_CONFIGURATION
-  | UPDATE_STATE
-  | RESET_STATE;
+type ConfigurationReducerAction = UPDATE_STATE | RESET_STATE;
 
 const ConfigurationReducer = (
   state: IConfigurationState,
   action: ConfigurationReducerAction
 ) => {
   switch (action.type) {
-    case useConfigurationActions.UPDATE_CONFIGURATION:
-      return { ...state, ...action.payload };
     case useConfigurationActions.UPDATE_STATE:
       return { ...state, ...action.payload };
     case useConfigurationActions.RESET_STATE:
