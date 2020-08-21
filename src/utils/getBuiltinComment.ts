@@ -1,6 +1,3 @@
-import { useConfigurationContext } from "../contexts/configuration/ConfigurationContext";
-// const [configState, configDispatch] = useConfigurationContext();
-
 const BEG_OF_FILE_COMMENT_PATTERN = "@";
 const START_OF_COMMENT = "{";
 const END_OF_FILE_COMMENT_PATTERN = "}";
@@ -18,7 +15,10 @@ export const getBuiltinComment = (
   console.log("KEY :", keyword);
   const startKeyWord = `${BEG_OF_FILE_COMMENT_PATTERN}${keyword}${START_OF_COMMENT}`;
   const startOFComment = content.indexOf(startKeyWord);
-  const endOfComment = content.indexOf(END_OF_FILE_COMMENT_PATTERN);
+  const endOfComment = content.indexOf(
+    END_OF_FILE_COMMENT_PATTERN,
+    startOFComment
+  );
   if (startOFComment > -1 && endOfComment > -1) {
     const comment = content.substring(
       startOFComment + startKeyWord.length,

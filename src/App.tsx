@@ -55,6 +55,11 @@ const App: React.FC = () => {
   // To give horizontal scrolling on small devices
   const PRE_TAG = "<pre>";
 
+  let config = {
+    CollapsibleFolder: true,
+    RegexKeyword: "Preview",
+    Filter: "FilterType.NULL",
+  };
   const handleExampleGoButtonPress = async () => {
     const pathArray = EXAMPLE_URL.split("/");
     const owner = pathArray[OWNER_IN_URL];
@@ -106,10 +111,10 @@ const App: React.FC = () => {
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
-          const config = JSON.parse(decodedBlobs);
+          config = JSON.parse(decodedBlobs);
           console.log("file content", config);
           try {
-            configDispatch({
+            await configDispatch({
               type: useConfigurationActions.UPDATE_STATE,
               payload: config,
             });
@@ -201,7 +206,7 @@ const App: React.FC = () => {
           treeJSON as GithubAPIResponseBody,
           oldTree,
           builtInComments,
-          configState.RegexKeyword
+          config.RegexKeyword
         )
       );
     } catch (error) {
