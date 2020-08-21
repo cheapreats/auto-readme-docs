@@ -31,6 +31,7 @@ const BR_TAG = "<br />";
  * @param {Core[]} motherTreeCore  - the original whole treeCore
  * @param {Core[]} treeCore - the treeCore being analyzed for certain treePath
  * @param {String} treePath - path of last file/folder in its wrapped folder
+ * @param {String} isCollapsible - is it in collapsible folder format
  * @returns - doesn't return anything, adds closing blockquote and details tag
  * to detailsToAdd
  */
