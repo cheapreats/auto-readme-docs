@@ -108,12 +108,14 @@ const App: React.FC = () => {
           const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
           const config = JSON.parse(decodedBlobs);
           console.log("file content", config);
-
-          await configDispatch({
-            type: useConfigurationActions.UPDATE_CONFIGURATION,
-            payload: config,
-          });
-
+          try {
+            configDispatch({
+              type: useConfigurationActions.UPDATE_STATE,
+              payload: config,
+            });
+          } catch (e) {
+            console.log(e);
+          }
           console.log("Dispatch Update", configState);
         }
       }

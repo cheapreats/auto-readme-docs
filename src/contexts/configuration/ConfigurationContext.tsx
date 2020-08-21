@@ -56,7 +56,7 @@ const ConfigurationReducer = (
 ) => {
   switch (action.type) {
     case useConfigurationActions.UPDATE_CONFIGURATION:
-      return { ...state, showMigrationDeprecationPopup: action.payload };
+      return { ...state, ...action.payload };
     case useConfigurationActions.UPDATE_STATE:
       return { ...state, ...action.payload };
     case useConfigurationActions.RESET_STATE:

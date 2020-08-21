@@ -10,7 +10,7 @@ const extractString = (
   afterEnds: string
 ): string => {
   const start = content.indexOf(beforeStart) + beforeStart.length;
-  const end = content.indexOf(afterEnds);
+  const end = content.indexOf(afterEnds, start);
   let section = "";
   if (start > -1 && end > -1) {
     section = content.substring(start, end);
