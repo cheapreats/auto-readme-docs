@@ -7,11 +7,11 @@ import {
   NpmsResponseBody,
   GithubData,
   Core,
-  FilterType,
 } from "./tree/types";
 import {
   useConfigurationContext,
   useConfigurationActions,
+  initialState,
 } from "./contexts/configuration/ConfigurationContext";
 import MarkdownDisplay from "./components/MarkdownDisplay";
 import BadgesSection from "./components/BadgesSection";
@@ -57,11 +57,7 @@ const App: React.FC = () => {
   // To give horizontal scrolling on small devices
   const PRE_TAG = "<pre>";
 
-  let config = {
-    CollapsibleFolder: true,
-    RegexKeyword: "Preview",
-    Filter: "NULL",
-  };
+  let config = initialState;
 
   const handleExampleGoButtonPress = async () => {
     const pathArray = EXAMPLE_URL.split("/");

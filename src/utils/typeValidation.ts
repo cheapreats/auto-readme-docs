@@ -12,6 +12,7 @@ const TRUE_VALUE = "true";
 const FALSE_VALUE = "false";
 const START_OF_STRING = '"';
 const END_OF_STRING = '"';
+const FIRST_OCCURANCE = 0;
 
 /** Gets a string in Json format and see if value is valid according to the type
  * @param {string} text whole text
@@ -34,7 +35,7 @@ export const typeValidation = (
   let value = text.substring(endOfField + AFTER_FIELD.length, endOfValue);
 
   if (value.endsWith(EXTRA_COMMA)) {
-    value = value.slice(0, value.length - 1);
+    value = value.slice(FIRST_OCCURANCE, value.length - EXTRA_COMMA.length);
   }
 
   if (field === FILTER_TYPE) {

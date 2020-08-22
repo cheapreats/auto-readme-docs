@@ -17,7 +17,7 @@ interface IConfigurationContextProviderProps {
   children: React.ReactNode;
 }
 
-const initialState = {
+export const initialState = {
   CollapsibleFolder: true,
   RegexKeyword: "Preview",
   Filter: "NULL",
