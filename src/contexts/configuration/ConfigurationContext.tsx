@@ -20,7 +20,7 @@ interface IConfigurationContextProviderProps {
 const initialState = {
   CollapsibleFolder: true,
   RegexKeyword: "Preview",
-  Filter: "FilterType.NULL",
+  Filter: "NULL",
 };
 
 const ConfigurationStateContext = React.createContext<

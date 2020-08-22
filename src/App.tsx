@@ -7,6 +7,7 @@ import {
   NpmsResponseBody,
   GithubData,
   Core,
+  FilterType,
 } from "./tree/types";
 import {
   useConfigurationContext,
@@ -21,6 +22,7 @@ import CenteredCol from "./components/reusable/CenteredCol";
 import Card from "./components/reusable/Card";
 import getPreviousTree from "./utils/getPreviousTree";
 import tagWrap from "./utils/tagWrap";
+import typeValidation from "./utils/typeValidation";
 
 interface pathAndComment {
   path: string | undefined;
@@ -58,7 +60,7 @@ const App: React.FC = () => {
   let config = {
     CollapsibleFolder: true,
     RegexKeyword: "Preview",
-    Filter: "FilterType.NULL",
+    Filter: "NULL",
   };
 
   const handleExampleGoButtonPress = async () => {
@@ -112,14 +114,24 @@ const App: React.FC = () => {
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
-          config = JSON.parse(decodedBlobs);
+          for (let field in config) {
+            if (
+              typeValidation(decodedBlobs, field, typeof config[field]) !== null
+            ) {
+              config[field] = typeValidation(
+                decodedBlobs,
+                field,
+                typeof config[field]
+              );
+            }
+          }
           try {
             await configDispatch({
               type: useConfigurationActions.UPDATE_STATE,
               payload: config,
             });
           } catch (e) {
-            console.log(e);
+            console.log("ERROR! :", e);
           }
         }
       }
