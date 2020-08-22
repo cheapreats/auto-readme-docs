@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import styled from "styled-components";
 import { ripOutPaths } from "./tree";
@@ -8,6 +8,11 @@ import {
   GithubData,
   Core,
 } from "./tree/types";
+import {
+  useConfigurationContext,
+  useConfigurationActions,
+  initialState,
+} from "./contexts/configuration/ConfigurationContext";
 import MarkdownDisplay from "./components/MarkdownDisplay";
 import BadgesSection from "./components/BadgesSection";
 import URLBox from "./components/URLBox";
@@ -17,6 +22,7 @@ import CenteredCol from "./components/reusable/CenteredCol";
 import Card from "./components/reusable/Card";
 import getPreviousTree from "./utils/getPreviousTree";
 import tagWrap from "./utils/tagWrap";
+import typeValidation from "./utils/typeValidation";
 
 interface pathAndComment {
   path: string | undefined;
@@ -29,10 +35,11 @@ const App: React.FC = () => {
   const [isNpmBadgeVisible, setNpmBadgeVisible] = useState(false);
   const [url, setURL] = useState("");
   const [treeCore, setTreeCore] = useState<Core[]>([]);
-
+  const [configState, configDispatch] = useConfigurationContext();
   const OWNER_IN_URL = 3;
   const REPO_IN_URL = 4;
   const README_PATH = "README.md";
+  const README_CONFIG_PATH = "readme.config.js";
   const COMMENTS_EXIST_REGEX = /(<a href=".+">.github<\/a>).+(<span># .+<\/span>)/g;
   const IS_FILE = "blob";
   const GITHUB_API_URL_PREFIX = "https://api.github.com/repos/";
@@ -49,6 +56,8 @@ const App: React.FC = () => {
   const BIG_TAG = "<big>";
   // To give horizontal scrolling on small devices
   const PRE_TAG = "<pre>";
+
+  let config = initialState;
 
   const handleExampleGoButtonPress = async () => {
     const pathArray = EXAMPLE_URL.split("/");
@@ -85,6 +94,46 @@ const App: React.FC = () => {
   const makeRequest = async (owner: string, repo: string) => {
     let oldTree: pathAndComment[] | null = null;
     const builtInComments: pathAndComment[] = [];
+
+    try {
+      const res = await fetch(
+        `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_CONTENTS_SUFFIX}`
+      );
+      const resJSON = await res.json();
+      for (const key in resJSON) {
+        const file = resJSON[key];
+        const filePath = file[GithubData.PATH];
+        if (filePath === README_CONFIG_PATH) {
+          const SHA = file[GithubData.SHA];
+          const blobs = await fetch(
+            `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_BLOBS_SUFFIX}/${SHA}`
+          );
+          const blobsJSON = await blobs.json();
+          const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
+          for (let field in config) {
+            if (
+              typeValidation(decodedBlobs, field, typeof config[field]) !== null
+            ) {
+              config[field] = typeValidation(
+                decodedBlobs,
+                field,
+                typeof config[field]
+              );
+            }
+          }
+          try {
+            await configDispatch({
+              type: useConfigurationActions.UPDATE_STATE,
+              payload: config,
+            });
+          } catch (e) {
+            console.log("ERROR! :", e);
+          }
+        }
+      }
+    } catch (error) {
+      alert(`Error${error}`);
+    }
 
     try {
       const res = await fetch(
@@ -160,7 +209,12 @@ const App: React.FC = () => {
       }
 
       setTreeCore(
-        ripOutPaths(treeJSON as GithubAPIResponseBody, oldTree, builtInComments)
+        ripOutPaths(
+          treeJSON as GithubAPIResponseBody,
+          oldTree,
+          builtInComments,
+          config.RegexKeyword
+        )
       );
     } catch (error) {
       alert(`Error${error}`);

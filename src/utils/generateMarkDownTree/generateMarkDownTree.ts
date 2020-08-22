@@ -6,6 +6,7 @@ import getFileTypeFromPath from "../getFileTypeFromPath/getFileTypeFromPath";
 import { Core, FilterType, WrapTagType } from "../../tree/types";
 import { deepCopyFunction } from "../deepCopyFunction";
 import selectRootCores from "../selectRootCores/selectRootCores";
+import selectFoldersOnly from "../selectFoldersOnly/selectFoldersOnly";
 import getCoreFromTree from "../getCoreFromTree";
 import tagWrap from "../tagWrap";
 
@@ -13,7 +14,8 @@ type IGetMarkDownTree = (
   treeCore: Core[],
   filter?: FilterType,
   withAutoComments?: boolean,
-  motherCore?: Core[]
+  motherCore?: Core[],
+  isCollapsible?: boolean
 ) => string[];
 
 let detailsToAdd = "";
@@ -29,14 +31,17 @@ const BR_TAG = "<br />";
  * @param {Core[]} motherTreeCore  - the original whole treeCore
  * @param {Core[]} treeCore - the treeCore being analyzed for certain treePath
  * @param {String} treePath - path of last file/folder in its wrapped folder
+ * @param {String} isCollapsible - is it in collapsible folder format
  * @returns - doesn't return anything, adds closing blockquote and details tag
  * to detailsToAdd
  */
 const addBlockquoteDetailsTag = (
   motherTreeCore: Core[],
   treeCore: Core[],
-  treePath: string
+  treePath: string,
+  isCollapsible: boolean = true
 ): void => {
+  const detailstag = isCollapsible ? DETAILS_TAG : "";
   const SPLIT_TREE_PATH = treePath.split("/");
   /* folder wrapping the file/folder that need's to have </details> tag added on to */
   const FOLDER_WRAPPING_FILE = SPLIT_TREE_PATH[SPLIT_TREE_PATH.length - 2];
@@ -56,7 +61,7 @@ const addBlockquoteDetailsTag = (
       ) {
         detailsToAdd += tagWrap(
           tagWrap("", BLOCKQUOTE_TAG, WrapTagType.CLOSE),
-          DETAILS_TAG,
+          detailstag,
           WrapTagType.CLOSE
         );
         addBlockquoteDetailsTag(
@@ -72,26 +77,32 @@ const addBlockquoteDetailsTag = (
     }
   }
 };
+
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore - the whole MarkDownTree
  * @param {Function} filter - extra Filters
  * @param {boolean} withAutoComments - if we want to produce automated comments or no
  * @param {Core[]} motherCore - The whole Tree Core including what is not
  * going to be shown in MarkdownTree
+ * @param {boolean} isCollapsible - is it Collapsible folder
  * @returns {string} - the MarkDownTree without the deletedCore's
  */
-
 export const generateMarkDownTree: IGetMarkDownTree = (
   treeCore,
   filter = FilterType.NULL,
   withAutoComments = true,
-  motherCore = treeCore
+  motherCore = treeCore,
+  isCollapsible = true
 ): string[] => {
+  const detailstag = isCollapsible ? DETAILS_TAG : "";
   let deepClonedTreeCore: Core[] | null = deepCopyFunction(treeCore);
   let isFile = false;
   const outputAsLines: string[] = [];
   if (filter === FilterType.ROOT_ONLY) {
     deepClonedTreeCore = selectRootCores(deepClonedTreeCore);
+  }
+  if (filter === FilterType.FOLDER_ONLY) {
+    deepClonedTreeCore = selectFoldersOnly(deepClonedTreeCore);
   }
   if (deepClonedTreeCore) {
     deepClonedTreeCore.forEach(
@@ -136,7 +147,7 @@ export const generateMarkDownTree: IGetMarkDownTree = (
               `${icon}${hyperLink} ${commentAlignment}${comment}`,
               SUMMARY_TAG
             ),
-            DETAILS_TAG,
+            detailstag,
             WrapTagType.OPEN
           );
         } else if (
@@ -180,7 +191,8 @@ export const generateMarkDownTree: IGetMarkDownTree = (
             core.treeCore,
             filter,
             withAutoComments,
-            motherCore
+            motherCore,
+            isCollapsible
           );
           childrenTree.forEach((childCore) => {
             outputAsLines.push(childCore);

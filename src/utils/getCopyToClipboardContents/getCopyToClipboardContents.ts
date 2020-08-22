@@ -25,11 +25,13 @@ export const generateTreeCore = (deepClonedTreeCore: Core[]): Core[] => {
 /**  Will be the MarkDownTree without the deletedCore's (Any core with deletedOrder > -1)
  * @param {Core[]} treeCore - the whole MarkDownTree
  * @param {FilterType} filter - the type of the filter to generate the tree
+ * @param {boolean} isCollapsible - is it in collapsible format
  * @returns {string} - the MarkDownTree without the deletedCore's
  */
 export const getCopyToClipboardContents = (
   treeCore: Core[],
-  filter: FilterType = FilterType.NULL
+  filter: FilterType = FilterType.NULL,
+  isCollapsible: boolean = true
 ): string[] => {
   const deepClonedTreeCore = deepCopyFunction(treeCore);
   const visibleTreeCore: Core[] = generateTreeCore(deepClonedTreeCore);
@@ -37,7 +39,8 @@ export const getCopyToClipboardContents = (
     visibleTreeCore,
     filter,
     false,
-    treeCore
+    treeCore,
+    isCollapsible
   );
   return copyToClipboardContents;
 };

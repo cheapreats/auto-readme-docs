@@ -1,4 +1,4 @@
-import { FilterType } from '../tree/types';
+import { FilterType } from "../tree/types";
 
 /**  Will be the MarkDownTree with only Folders
  * @param {Event} target  The whole MarkDownTree

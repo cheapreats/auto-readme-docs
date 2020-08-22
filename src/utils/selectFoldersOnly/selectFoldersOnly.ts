@@ -9,9 +9,9 @@ const typeToShow = FileType.FOLDER;
  */
 const generateTreeCore = (treeCore: Core[]): Core[] => {
   const foldersOnlyAsLines: Core[] = [];
-
   treeCore.forEach((core) => {
-    const coreType = getFileTypeFromPath(core.path, !core.treeCore);
+    const isFile = core.treeCore.length ? false : true;
+    const coreType = getFileTypeFromPath(core.path, isFile);
     if (coreType === typeToShow) {
       if (core.treeCore) {
         core.treeCore = generateTreeCore(core.treeCore);
@@ -26,7 +26,7 @@ const generateTreeCore = (treeCore: Core[]): Core[] => {
  * @param {Core[]} treeCore  The whole MarkDownTree
  * @returns {Core[] | null} the TreeCore with only Folders
  */
-export const selectFoldersOnly = (treeCore: Core[]): Core[] | null => {
+export const selectFoldersOnly = (treeCore: Core[] | null): Core[] | null => {
   if (treeCore) {
     const foldersOnly: Core[] = generateTreeCore(treeCore);
     return foldersOnly;

@@ -1,12 +1,14 @@
-import { GithubAPIResponseBody, GithubAPIFileObject, Core } from './types';
-import getBuiltinComment from '../utils/getBuiltinComment';
+import { GithubAPIResponseBody, GithubAPIFileObject, Core } from "./types";
+import getBuiltinComment from "../utils/getBuiltinComment";
+// import { useConfigurationContext } from "../contexts/configuration/ConfigurationContext";
+// const [configState, configDispatch] = useConfigurationContext();
 
 interface pathAndComment {
   path: string | undefined;
   comment: string | undefined;
 }
 
-const START_OF_COMMENT = '# ';
+const START_OF_COMMENT = "# ";
 
 /** Given a responseBody, returns the maximum depth exist inside the tree
  * @param {GithubAPIResponseBody} responseBody - Response from the api including all the information to make a treeCore
@@ -14,7 +16,7 @@ const START_OF_COMMENT = '# ';
  */
 const findMaximumDepthLevel = (responseBody: GithubAPIResponseBody): number => {
   const depthLevels = responseBody.tree.map(
-    (file: GithubAPIFileObject) => file.path.split('/').length,
+    (file: GithubAPIFileObject) => file.path.split("/").length
   );
   return Math.max(...depthLevels);
 };
@@ -22,6 +24,8 @@ const findMaximumDepthLevel = (responseBody: GithubAPIResponseBody): number => {
 /** Given a response, rip outs the different parts of the response and make a treeCore
  * @param {GithubAPIResponseBody} responseBody - Response from the api including all the information to make a treeCore
  * @param {pathAndComment[] | null} oldTree - An array of path and comments of old treeCore if it already exists in readme file
+ * @param {pathAndComment[]} builtinComments - Files and their Contents
+ * @param {string} regexKeyword - Keyword finding the builtin comments
  * @param {string} root - String of root folder for recursive search through the response body
  * @param {number} depth - Depth of the current input data for recursive search through the response body
  * @param {number} maxDepthLevel - Maximum existing depth of the whole response body to stop the process when reaching the last depth
@@ -31,9 +35,10 @@ const ripOutPaths = (
   responseBody: GithubAPIResponseBody,
   oldTree: pathAndComment[] | null = null,
   builtinComments: pathAndComment[],
-  root = '',
+  regexKeyword: string,
+  root = "",
   depth = 1,
-  maxDepthLevel = 0,
+  maxDepthLevel = 0
 ): Core[] => {
   const max = maxDepthLevel || findMaximumDepthLevel(responseBody);
 
@@ -42,10 +47,13 @@ const ripOutPaths = (
    * @returns {string} - Builtin comment for the core
    */
   const findBuiltinComment = (path) => {
-    let builtinComment = '';
+    let builtinComment = "";
     const foundBuiltinItem = builtinComments.find((item) => item.path === path);
     if (foundBuiltinItem?.comment) {
-      builtinComment = getBuiltinComment(foundBuiltinItem.comment);
+      builtinComment = getBuiltinComment(
+        foundBuiltinItem.comment,
+        regexKeyword
+      );
     }
     return builtinComment;
   };
@@ -55,7 +63,7 @@ const ripOutPaths = (
    * @returns {string} - Old comment for the core
    */
   const findOldComment = (path) => {
-    let oldComment = '';
+    let oldComment = "";
     const foundOldItem = oldTree
       ? oldTree.find((item) => item.path === path)
       : null;
@@ -77,13 +85,13 @@ const ripOutPaths = (
     if (findOldComment(path)) {
       return findOldComment(path);
     }
-    return '';
+    return "";
   };
 
   if (depth < max + 1) {
     const item = responseBody.tree
       .map((file: GithubAPIFileObject) => file.path) // Isolate the path from each object
-      .filter((path: string) => path.split('/').length === depth) // Remove paths that are not in current depth
+      .filter((path: string) => path.split("/").length === depth) // Remove paths that are not in current depth
       .filter((path: string) => path.startsWith(root))
       // Remove paths that doesn't begin with the current root folder
       .map((line) => ({
@@ -92,9 +100,10 @@ const ripOutPaths = (
           responseBody,
           oldTree,
           builtinComments,
+          regexKeyword,
           line,
           depth + 1,
-          max,
+          max
         ),
         deletedOrder: -1,
         comment: setComment(line),
