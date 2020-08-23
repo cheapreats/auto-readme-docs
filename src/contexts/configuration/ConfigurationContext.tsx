@@ -5,6 +5,7 @@ export interface IConfigurationState {
   CollapsibleFolder: boolean;
   RegexKeyword: string;
   Filter: string;
+  APPLICATION_NAME: string;
 }
 
 export enum useConfigurationActions {
@@ -21,6 +22,7 @@ export const initialState = {
   CollapsibleFolder: true,
   RegexKeyword: "Preview",
   Filter: "NULL",
+  APPLICATION_NAME: "",
 };
 
 const ConfigurationStateContext = React.createContext<

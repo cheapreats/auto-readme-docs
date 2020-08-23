@@ -82,6 +82,7 @@ const App: React.FC = () => {
     const pathArray = url.split("/");
     const owner = pathArray[OWNER_IN_URL];
     const repo = pathArray[REPO_IN_URL];
+    config.APPLICATION_NAME = repo;
     setRepoName(repo);
     await makeRequest(owner, repo);
   };
@@ -251,7 +252,17 @@ const App: React.FC = () => {
         onClick={handleGoButtonPress}
         onDefaultClick={handleExampleGoButtonPress}
       />
+      {configState.APPLICATION_NAME.length !== 0 && (
+        <Card>
+          <div className="row">
+            <div className="col">
+              <h2>{configState.APPLICATION_NAME}</h2>
+            </div>
+          </div>
+        </Card>
+      )}
       {repoName !== "" && isNpmBadgeVisible && <BadgesSection url={repoName} />}
+
       {repoLanguages.length !== 0 && (
         <Card>
           <div className="row">
