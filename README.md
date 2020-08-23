@@ -38,7 +38,7 @@ We built this tool two solve two major issues and two minor issues:
 | CollapsibleFolder | Boolean                                    | true            | Make folders collapsible                      |
 | RegexKeyword      | String                                     | 'Preview'       | Gets the comment in form of @keyword{comment} |
 | Filter            | FilterType { NULL, ROOT_ONLY, FOLDER_ONLY} | NULL            | Generate the tree through a filter            |
-
+| APPLICATION_NAME  | string                                     | {repo name}     | Title of the application                      |
 
 ## Example Output
 
