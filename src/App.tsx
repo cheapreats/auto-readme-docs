@@ -56,6 +56,10 @@ const App: React.FC = () => {
   const BIG_TAG = "<big>";
   // To give horizontal scrolling on small devices
   const PRE_TAG = "<pre>";
+  const GOOGLEPLAY_BADGE =
+    "https://lh3.googleusercontent.com/cjsqrWQKJQp9RFO7-hJ9AfpKzbUb_Y84vXfjlP0iRHBvladwAfXih984olktDhPnFqyZ0nu9A5jvFwOEQPXzv7hr3ce3QVsLN8kQ2Ao=s0";
+  const IOSSTORE_BADGE =
+    "https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg";
 
   let config = initialState;
 
@@ -259,6 +263,31 @@ const App: React.FC = () => {
               <h2>{configState.APPLICATION_NAME}</h2>
             </div>
           </div>
+          {config.GooglePlayLink && (
+            <div>
+              <div className="row">
+                <ContentSection>
+                  <a href={config.GooglePlayLink}>
+                    <img src={GOOGLEPLAY_BADGE} alt="GooglePlay" height="50" />
+                  </a>
+                </ContentSection>
+              </div>
+              <br />
+            </div>
+          )}
+
+          {config.IOSStoreLink && (
+            <div>
+              <div className="row">
+                <ContentSection>
+                  <a href={config.IOSStoreLink}>
+                    <img src={IOSSTORE_BADGE} alt="IOSStore" height="50" />
+                  </a>
+                </ContentSection>
+              </div>
+              <br />
+            </div>
+          )}
         </Card>
       )}
       {repoName !== "" && isNpmBadgeVisible && <BadgesSection url={repoName} />}
@@ -325,5 +354,7 @@ const DarkBGColor = styled.div`
   background: #212428;
   font-family: "Source Code Pro", monospace;
 `;
+
+const BadgeDisplay = styled.div``;
 
 const ContentSection = styled.div``;

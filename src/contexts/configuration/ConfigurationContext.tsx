@@ -6,6 +6,8 @@ export interface IConfigurationState {
   RegexKeyword: string;
   Filter: string;
   APPLICATION_NAME: string;
+  GooglePlayLink: string;
+  IOSStoreLink: string;
 }
 
 export enum useConfigurationActions {
@@ -23,6 +25,8 @@ export const initialState = {
   RegexKeyword: "Preview",
   Filter: "NULL",
   APPLICATION_NAME: "",
+  GooglePlayLink: "",
+  IOSStoreLink: "",
 };
 
 const ConfigurationStateContext = React.createContext<
