@@ -8,6 +8,7 @@ export interface IConfigurationState {
   APPLICATION_NAME: string;
   GooglePlayLink: string;
   IOSStoreLink: string;
+  RepoLogo: string,
 }
 
 export enum useConfigurationActions {
@@ -27,6 +28,7 @@ export const initialState = {
   APPLICATION_NAME: "",
   GooglePlayLink: "",
   IOSStoreLink: "",
+  RepoLogo: "https://cdn.afterdawn.fi/v3/news/original/github-logo.png",
 };
 
 const ConfigurationStateContext = React.createContext<

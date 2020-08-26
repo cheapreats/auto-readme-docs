@@ -288,6 +288,17 @@ const App: React.FC = () => {
               <br />
             </div>
           )}
+
+          {config.RepoLogo && (
+            <div>
+              <div className="row">
+                <ContentSection>
+                  <img src={config.RepoLogo} alt="RepoLogo" height="50" />
+                </ContentSection>
+              </div>
+              <br />
+            </div>
+          )}
         </Card>
       )}
       {repoName !== "" && isNpmBadgeVisible && <BadgesSection url={repoName} />}
