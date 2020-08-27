@@ -28,7 +28,7 @@ export const initialState = {
   APPLICATION_NAME: "",
   GooglePlayLink: "",
   IOSStoreLink: "",
-  RepoLogo: "https://cdn.afterdawn.fi/v3/news/original/github-logo.png",
+  RepoLogo: "",
 };
 
 const ConfigurationStateContext = React.createContext<
