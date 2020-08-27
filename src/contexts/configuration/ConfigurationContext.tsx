@@ -8,8 +8,36 @@ export interface IConfigurationState {
   APPLICATION_NAME: string;
   GooglePlayLink: string;
   IOSStoreLink: string;
+  AuthorConfigs: AuthorConfigs;
+}
+export interface AuthorConfigs {
+  onlyOwner: boolean; // the info of only the repo owner
+  AuthorInfo: AuthorInfo; // Informations of the Author(s)
+}
+export interface AuthorInfo {
+  WithName: boolean; // name of the Author
+  WithPicture: boolean; // picture of the Author
+  WithContributions: boolean; // number of Contributions
+  WithEmail: boolean; // Email of the Author
+  WithLocation: boolean; // Location of the Author
+  WithTwitterUsername: boolean; // Author's Twitter Username
+  WithNumberOfRepos: boolean; // Number of Repositories of the Author
 }
 
+const initialAuthorInfo = {
+  WithName: true,
+  WithPicture: true,
+  WithContributions: true,
+  WithEmail: false,
+  WithLocation: false,
+  WithTwitterUsername: false,
+  WithNumberOfRepos: false,
+};
+
+const initialAuthorConfig = {
+  onlyOwner: false,
+  AuthorInfo: initialAuthorInfo,
+};
 export enum useConfigurationActions {
   UPDATE_STATE,
   UPDATE_CONFIGURATION,
@@ -27,6 +55,7 @@ export const initialState = {
   APPLICATION_NAME: "",
   GooglePlayLink: "",
   IOSStoreLink: "",
+  AuthorConfigs: initialAuthorConfig,
 };
 
 const ConfigurationStateContext = React.createContext<
