@@ -2,5 +2,5 @@
     "CollapsibleFolder":true,
     "RegexKeyword":"Preview",
     "Filter":"NULL",
-    "RepoLogo":"https://cdn.afterdawn.fi/v3/news/original/github-logo.png"
+    "RepoLogo":"https://og.github.com/octicons/octicons@1200x630.png"
     }
