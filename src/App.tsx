@@ -16,13 +16,14 @@ import {
 import MarkdownDisplay from "./components/MarkdownDisplay";
 import BadgesSection from "./components/BadgesSection";
 import URLBox from "./components/URLBox";
+import AuthorsSection from "./components/AuthorsSection";
 import { formatLanguages } from "./utils/formatLanguages/formatLanguages";
 import CustomSecondaryButton from "./components/reusable/CustomSecondaryButton";
 import CenteredCol from "./components/reusable/CenteredCol";
 import Card from "./components/reusable/Card";
 import getPreviousTree from "./utils/getPreviousTree";
 import tagWrap from "./utils/tagWrap";
-import typeValidation from "./utils/typeValidation";
+import { updateConfig } from "./utils/updateConfig";
 
 interface pathAndComment {
   path: string | undefined;
@@ -31,7 +32,9 @@ interface pathAndComment {
 
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
   const [repoLanguages, setRepoLanguages] = useState<string[]>([]);
+  const [contributors, setContributors] = useState<object[]>([]);
   const [isNpmBadgeVisible, setNpmBadgeVisible] = useState(false);
   const [url, setURL] = useState("");
   const [treeCore, setTreeCore] = useState<Core[]>([]);
@@ -88,6 +91,7 @@ const App: React.FC = () => {
     const repo = pathArray[REPO_IN_URL];
     config.APPLICATION_NAME = repo;
     setRepoName(repo);
+    setOwnerName(owner);
     await makeRequest(owner, repo);
   };
 
@@ -115,17 +119,8 @@ const App: React.FC = () => {
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
-          for (let field in config) {
-            if (
-              typeValidation(decodedBlobs, field, typeof config[field]) !== null
-            ) {
-              config[field] = typeValidation(
-                decodedBlobs,
-                field,
-                typeof config[field]
-              );
-            }
-          }
+
+          config = updateConfig(decodedBlobs, config);
           try {
             await configDispatch({
               type: useConfigurationActions.UPDATE_STATE,
@@ -156,7 +151,6 @@ const App: React.FC = () => {
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
           const haveComments = decodedBlobs.match(COMMENTS_EXIST_REGEX);
-
           oldTree = getPreviousTree(haveComments);
         }
       }
@@ -194,24 +188,24 @@ const App: React.FC = () => {
 
       const numberOfItems = treeJSON[GithubData.TREE].length;
 
-      for (let index = 0; index < numberOfItems; index += 1) {
-        const item = treeJSON[GithubData.TREE][index];
-        if (item.type === IS_FILE) {
-          const SHA = item.sha;
-          const { path } = item;
-          const blobs = await fetch(
-            `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_BLOBS_SUFFIX}/${SHA}`
-          )
-            .then((blobs) => blobs.json())
-            .then((data) =>
-              builtInComments.push({
-                path,
-                comment: atob(data[GithubData.CONTENT]),
-              })
-            )
-            .catch((error) => alert(`Error${error}`));
-        }
-      }
+      // for (let index = 0; index < numberOfItems; index += 1) {
+      //   const item = treeJSON[GithubData.TREE][index];
+      //   if (item.type === IS_FILE) {
+      //     const SHA = item.sha;
+      //     const { path } = item;
+      //     const blobs = await fetch(
+      //       `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_BLOBS_SUFFIX}/${SHA}`
+      //     )
+      //       .then((blobs) => blobs.json())
+      //       .then((data) =>
+      //         builtInComments.push({
+      //           path,
+      //           comment: atob(data[GithubData.CONTENT]),
+      //         })
+      //       )
+      //       .catch((error) => alert(`Error${error}`));
+      //   }
+      // }
 
       setTreeCore(
         ripOutPaths(
@@ -241,8 +235,24 @@ const App: React.FC = () => {
       const res = await fetch(
         `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_TREES_CONTRIBUTORS}`
       );
+      let userDetails: object[] = [];
+      const needsDetails =
+        config.AuthorConfigs.AuthorInfo.WithEmail ||
+        config.AuthorConfigs.AuthorInfo.WithLocation ||
+        config.AuthorConfigs.AuthorInfo.WithNumberOfRepos ||
+        config.AuthorConfigs.AuthorInfo.WithTwitterUsername;
       const resJSON = await res.json();
-      console.log(resJSON);
+      if (needsDetails) {
+        for (let user in resJSON) {
+          const resp = await fetch(`${resJSON[user]["url"]}`);
+          const respJSON = await resp.json();
+          userDetails.push(respJSON);
+        }
+      }
+      const allAuthorinfos = resJSON.map((item, i) =>
+        Object.assign({}, item, userDetails[i])
+      );
+      setContributors(allAuthorinfos);
     } catch (error) {
       alert(`Error${error}`);
     }
@@ -303,6 +313,13 @@ const App: React.FC = () => {
       )}
       {repoName !== "" && isNpmBadgeVisible && <BadgesSection url={repoName} />}
 
+      {contributors.length > 0 && (
+        <AuthorsSection
+          config={config}
+          contributors={contributors}
+          ownersName={ownerName}
+        />
+      )}
       {repoLanguages.length !== 0 && (
         <Card>
           <div className="row">
@@ -365,7 +382,5 @@ const DarkBGColor = styled.div`
   background: #212428;
   font-family: "Source Code Pro", monospace;
 `;
-
-const BadgeDisplay = styled.div``;
 
 const ContentSection = styled.div``;

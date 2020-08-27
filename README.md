@@ -33,12 +33,22 @@ We built this tool two solve two major issues and two minor issues:
 - [Babel](https://babeljs.io/)
 
 # Config Values
-| Configuration     | Type                                       | Default Value   | Description                                   |
-|-------------------|--------------------------------------------|-----------------|-----------------------------------------------|
-| CollapsibleFolder | Boolean                                    | true            | Make folders collapsible                      |
-| RegexKeyword      | String                                     | 'Preview'       | Gets the comment in form of @keyword{comment} |
-| Filter            | FilterType { NULL, ROOT_ONLY, FOLDER_ONLY} | NULL            | Generate the tree through a filter            |
-| APPLICATION_NAME  | String                                     | {repo name}     | Title of the application                      |
+| Configuration       | Type                                                                                                    | Default Value   | Description                                   |
+|---------------------|---------------------------------------------------------------------------------------------------------|-----------------|-----------------------------------------------|
+| CollapsibleFolder   | Boolean                                                                                                 | true            | Make folders collapsible                      |
+| RegexKeyword        | String                                                                                                  | 'Preview'       | Gets the comment in form of @keyword{comment} |
+| Filter              | FilterType {<br>NULL,<br>ROOT_ONLY,<br>FOLDER_ONLY}                                                     | FilterType.NULL | Generate the tree through a filter            |
+| AuthorConfigs       | {onlyOwner:boolean, AuthorInfo:Authorinfo}                                                              | onlyOwner=false | If we only want owner info and which infos    |
+| AuthorInfo          | WithName,WithPicture,WithContributions,WithEmail,<br>WithLocation,WithTwitterUsername,WithNumberOfRepos |                 | Which Information of Authors to show          |
+| WithName            | Boolean                                                                                                 | true            | Authors Login Name                            |
+| WithPicture         | Boolean                                                                                                 | true            | Authors Picture                               |
+| WithContributions   | Boolean                                                                                                 | true            | Number of Author's Contributions              |
+| WithEmail           | Boolean                                                                                                 | false           | Authors Email                                 |
+| WithLocation        | Boolean                                                                                                 | false           | Authors Location                              |
+| WithTwitterUsername | Boolean                                                                                                 | false           | Authors Twitter Link                          |
+| WithNumberOfRepos   | Boolean                                                                                                 | false           | Authors public Repo Number                    |
+| GooglePlayLink      | String                                                                                                  | ""              | GooglePlay Link URL                           |
+| IOSStoreLink        | String                                                                                                  | ""              | IOS Store Link URL                            |
 
 ## Example Output
 

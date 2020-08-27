@@ -7,6 +7,7 @@ const EXTRA_COMMA = ",";
 const FILTER_TYPE = "Filter";
 const BOOLEAN_TYPE = "boolean";
 const STRING_TYPE = "string";
+const OBJECT_TYPE = "object";
 const NUMBER_TYPE = "number";
 const TRUE_VALUE = "true";
 const FALSE_VALUE = "false";
@@ -33,7 +34,7 @@ export const typeValidation = (
     return null;
   }
   let value = text.substring(endOfField + AFTER_FIELD.length, endOfValue);
-
+  let fieldName = text.substring(endOfField + AFTER_FIELD.length, endOfValue);
   if (value.endsWith(EXTRA_COMMA)) {
     value = value.slice(FIRST_OCCURANCE, value.length - EXTRA_COMMA.length);
   }
@@ -62,6 +63,8 @@ export const typeValidation = (
       if (isNumber(value)) {
         return value;
       }
+    case OBJECT_TYPE:
+      typeValidation(value, field, type);
   }
   return null;
 };
