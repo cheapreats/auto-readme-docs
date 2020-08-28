@@ -8,6 +8,7 @@ export interface IConfigurationState {
   APPLICATION_NAME: string;
   GooglePlayLink: string;
   IOSStoreLink: string;
+  RepoLogo: string,
   AuthorConfigs: AuthorConfigs;
 }
 export interface AuthorConfigs {
@@ -55,6 +56,7 @@ export const initialState = {
   APPLICATION_NAME: "",
   GooglePlayLink: "",
   IOSStoreLink: "",
+  RepoLogo: "",
   AuthorConfigs: initialAuthorConfig,
 };
 
