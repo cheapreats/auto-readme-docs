@@ -6,7 +6,7 @@ const SPACE_CHAR_REGEX = /\s/g;
 const NUMBERSIGN_CHAR_REGEX = /#/g;
 const ENTER_CHAR_REGEX = /\n/g;
 const DASH_CHAR = "-";
-const SPACE_CHAR = " ";
+const TWO_SPACE_CHAR = "  ";
 const EMPTY_CHAR = "";
 const START_OF_CONTENT = "# ";
 const END_OF_CONTENT = "\n";
@@ -29,7 +29,7 @@ export const createTOC = (readmeContent: string): string[] => {
       const contentWithNoSpace = content.replace(SPACE_CHAR_REGEX, DASH_CHAR);
       const replacedNumbersignsContent = headerInContent.replace(
         NUMBERSIGN_CHAR_REGEX,
-        SPACE_CHAR
+        TWO_SPACE_CHAR
       );
       const noEnterContent = replacedNumbersignsContent.replace(
         ENTER_CHAR_REGEX,
