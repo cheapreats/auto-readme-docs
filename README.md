@@ -63,6 +63,7 @@ We built this tool two solve two major issues and two minor issues:
 | WithNumberOfRepos   | Boolean                                                                                                 | false           | Authors public Repo Number                    |
 | GooglePlayLink      | String                                                                                                  | ""              | GooglePlay Link URL                           |
 | IOSStoreLink        | String                                                                                                  | ""              | IOS Store Link URL                            |
+| WithTableOfContent  | boolean                                                                                                  | true              | is there Table of Content?               |
 
 ## Example Output
 
