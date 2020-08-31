@@ -24,6 +24,8 @@ import Card from "./components/reusable/Card";
 import getPreviousTree from "./utils/getPreviousTree";
 import tagWrap from "./utils/tagWrap";
 import { updateConfig } from "./utils/updateConfig";
+import createTOC from "./utils/createTOC";
+import TOCSection from "./components/TOCSection";
 
 interface pathAndComment {
   path: string | undefined;
@@ -39,6 +41,7 @@ const App: React.FC = () => {
   const [url, setURL] = useState("");
   const [treeCore, setTreeCore] = useState<Core[]>([]);
   const [configState, configDispatch] = useConfigurationContext();
+  const [tableOfContent, setTableOfContent] = useState<string[]>([]);
   const OWNER_IN_URL = 3;
   const REPO_IN_URL = 4;
   const README_PATH = "README.md";
@@ -150,6 +153,9 @@ const App: React.FC = () => {
           );
           const blobsJSON = await blobs.json();
           const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
+          if (config.WithTableOfContent) {
+            setTableOfContent(createTOC(decodedBlobs));
+          }
           const haveComments = decodedBlobs.match(COMMENTS_EXIST_REGEX);
           oldTree = getPreviousTree(haveComments);
         }
@@ -359,6 +365,7 @@ const App: React.FC = () => {
           </div>
         </Card>
       )}
+      {config.WithTableOfContent && <TOCSection content={tableOfContent} />}
       {treeCore.length !== 0 && <MarkdownDisplay treeCore={treeCore} />}
     </div>
   );
