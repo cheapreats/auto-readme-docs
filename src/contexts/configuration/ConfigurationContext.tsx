@@ -8,8 +8,9 @@ export interface IConfigurationState {
   APPLICATION_NAME: string;
   GooglePlayLink: string;
   IOSStoreLink: string;
-  RepoLogo: string,
+  RepoLogo: string;
   AuthorConfigs: AuthorConfigs;
+  WithTableOfContent: boolean;
 }
 export interface AuthorConfigs {
   onlyOwner: boolean; // the info of only the repo owner
@@ -58,6 +59,7 @@ export const initialState = {
   IOSStoreLink: "",
   RepoLogo: "",
   AuthorConfigs: initialAuthorConfig,
+  WithTableOfContent: true,
 };
 
 const ConfigurationStateContext = React.createContext<
