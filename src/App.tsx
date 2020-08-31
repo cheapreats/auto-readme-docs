@@ -26,6 +26,7 @@ import tagWrap from "./utils/tagWrap";
 import { updateConfig } from "./utils/updateConfig";
 import createTOC from "./utils/createTOC";
 import TOCSection from "./components/TOCSection";
+import GetAlternateColorRow from "./components/reusable/getAlternateColorRow";
 
 interface pathAndComment {
   path: string | undefined;
@@ -335,17 +336,7 @@ const App: React.FC = () => {
           </div>
           <div className="row">
             <div className="col">
-              {repoLanguages.map((line, i) =>
-                i % 2 === 1 ? (
-                  <DarkBGColor>
-                    <ContentSection>{line}</ContentSection>
-                  </DarkBGColor>
-                ) : (
-                  <LightBGColor>
-                    <ContentSection>{line}</ContentSection>
-                  </LightBGColor>
-                )
-              )}
+              <GetAlternateColorRow content={repoLanguages} />
             </div>
           </div>
           <div className="row">

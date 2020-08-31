@@ -4,6 +4,7 @@ import Card from "./reusable/Card";
 import CenteredCol from "./reusable/CenteredCol";
 import CustomSecondaryButton from "./reusable/CustomSecondaryButton";
 import styled from "styled-components";
+import GetAlternateColorRow from "./reusable/getAlternateColorRow";
 
 interface Props {
   content: string[];
@@ -18,21 +19,7 @@ const TOCSection: React.FC<Props> = ({ content }): React.ReactElement => {
         </div>
       </div>
       <div className="col" style={{ margin: "-30px 0px 10px 0px" }}></div>
-      <div className="row">
-        <div className="col">
-          {content.map((line, i) =>
-            i % 2 === 1 ? (
-              <DarkBGColor>
-                <ContentSection>{line}</ContentSection>
-              </DarkBGColor>
-            ) : (
-              <LightBGColor>
-                <ContentSection>{line}</ContentSection>
-              </LightBGColor>
-            )
-          )}
-        </div>
-      </div>
+      <GetAlternateColorRow content={content} />
       <div className="row">
         <CenteredCol className="col">
           <CopyToClipboard text={`\n${content.join("\n")}\n`}>
