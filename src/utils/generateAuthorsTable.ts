@@ -44,6 +44,10 @@ const NO_VALUE = "";
 
 let detailsToAdd = "";
 
+/**  gets a value and returns another value in case its null
+ * @param {any} value - any value
+ * @returns {any} - the value incase its null or not
+ */
 const returnValue = (value) => {
   if (value === null) {
     return NO_VALUE;
