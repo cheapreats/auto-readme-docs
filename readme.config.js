@@ -11,7 +11,6 @@
                         "WithLocation":true,
                         "WithTwitter":true
                       }
-                      "onlyOwner":true,
-                          "TableDesign":"CellDesign",
+                      "TableDesign":"CellDesign",
     }
     }
