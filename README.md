@@ -9,6 +9,7 @@
          * [Major Issues](#Major-Issues)
          * [Minor Issues](#Minor-Issues)
    * [Technologies](#Technologies)
+   * [Authors Table](#Authors-Table)
    * [Config Values](#Config-Values)
      * [Example Output](#Example-Output)
    
