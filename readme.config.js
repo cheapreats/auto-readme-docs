@@ -9,7 +9,8 @@
                         "WithName":true,
                         "WithEmail":true,
                         "WithLocation":true,
-                        "WithTwitter":true
+                        "WithTwitter":true,
+                            "WithNumberOfRepos":true
                       },
                       "TableDesign":"CELL_DESIGN",
     }
