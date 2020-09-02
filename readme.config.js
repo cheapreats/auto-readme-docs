@@ -4,7 +4,7 @@
     "Filter":"NULL",
         "AuthorConfigs": {
                       "AuthorInfo":{
-                        "WithPicture":false,
+                        "WithPicture":true,
                         "WithContributions":true,
                         "WithName":true,
                         "WithEmail":true,
