@@ -10,7 +10,7 @@
                         "WithEmail":true,
                         "WithLocation":true,
                         "WithTwitter":true
-                      }
+                      },
                       "TableDesign":"CELL_DESIGN",
     }
     }
