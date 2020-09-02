@@ -1,10 +1,11 @@
 import { isNumber } from "util";
-import { FilterType } from "../tree/types";
+import { FilterType, AuthorTableType } from "../tree/types";
 
 const AFTER_FIELD = '":';
 const AFTER_VALUE = "\n";
 const EXTRA_COMMA = ",";
 const FILTER_TYPE = "Filter";
+const AUTHOR_TABLE_TYPE = "TableDesign";
 const BOOLEAN_TYPE = "boolean";
 const STRING_TYPE = "string";
 const OBJECT_TYPE = "object";
@@ -38,9 +39,15 @@ export const typeValidation = (
   if (value.endsWith(EXTRA_COMMA)) {
     value = value.slice(FIRST_OCCURANCE, value.length - EXTRA_COMMA.length);
   }
-
   if (field === FILTER_TYPE) {
     if (value.slice(1, value.length - 1) in FilterType) {
+      return value.slice(1, value.length - 1);
+    } else {
+      return null;
+    }
+  }
+  if (field === AUTHOR_TABLE_TYPE) {
+    if (value.slice(1, value.length - 1) in AuthorTableType) {
       return value.slice(1, value.length - 1);
     } else {
       return null;
