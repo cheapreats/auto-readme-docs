@@ -52,7 +52,8 @@ We built this tool two solve two major issues and two minor issues:
 | CollapsibleFolder   | Boolean                                                                                                 | true            | Make folders collapsible                      |
 | RegexKeyword        | String                                                                                                  | 'Preview'       | Gets the comment in form of @keyword{comment} |
 | Filter              | FilterType {<br>NULL,<br>ROOT_ONLY,<br>FOLDER_ONLY}                                                     | FilterType.NULL | Generate the tree through a filter            |
-| AuthorConfigs       | {onlyOwner:boolean, AuthorInfo:Authorinfo}                                                              | onlyOwner=false | If we only want owner info and which infos    |
+| AuthorConfigs       | {onlyOwner:boolean, AuthorInfo:Authorinfo,TableDesign:TableDesign}                                      | onlyOwner=false | If we only want owner info and which infos    |
+| TableDesign         | {VERTICAL, CELL_DESIGN}                                                                                 | VERTICAL       | Design Style of Table                            |
 | AuthorInfo          | WithName,WithPicture,WithContributions,WithEmail,<br>WithLocation,WithTwitterUsername,WithNumberOfRepos |                 | Which Information of Authors to show          |
 | WithName            | Boolean                                                                                                 | true            | Authors Login Name                            |
 | WithPicture         | Boolean                                                                                                 | true            | Authors Picture                               |
@@ -64,6 +65,7 @@ We built this tool two solve two major issues and two minor issues:
 | GooglePlayLink      | String                                                                                                  | ""              | GooglePlay Link URL                           |
 | IOSStoreLink        | String                                                                                                  | ""              | IOS Store Link URL                            |
 | WithTableOfContent  | boolean                                                                                                  | true              | is there Table of Content?               |
+
 
 ## Example Output
 
