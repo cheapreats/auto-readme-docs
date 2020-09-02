@@ -11,6 +11,6 @@
                         "WithLocation":true,
                         "WithTwitter":true
                       }
-                      "TableDesign":"CellDesign",
+                      "TableDesign":"CELL_DESIGN",
     }
     }
