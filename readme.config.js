@@ -2,5 +2,16 @@
     "CollapsibleFolder":true,
     "RegexKeyword":"Preview",
     "Filter":"NULL",
-    "RepoLogo":""
+        "AuthorConfigs": {
+                      "AuthorInfo":{
+                        "WithPicture":false,
+                        "WithContributions":true,
+                        "WithName":true,
+                        "WithEmail":true,
+                        "WithLocation":true,
+                        "WithTwitter":true
+                      }
+                      "onlyOwner":true,
+                          "TableDesign":"CellDesign",
+    }
     }
