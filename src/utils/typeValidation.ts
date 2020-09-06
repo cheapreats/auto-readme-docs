@@ -39,16 +39,34 @@ export const typeValidation = (
   if (value.endsWith(EXTRA_COMMA)) {
     value = value.slice(FIRST_OCCURANCE, value.length - EXTRA_COMMA.length);
   }
+
   if (field === FILTER_TYPE) {
-    if (value.slice(1, value.length - 1) in FilterType) {
-      return value.slice(1, value.length - 1);
+    if (
+      value.slice(
+        START_OF_STRING.length,
+        value.length - END_OF_STRING.length
+      ) in FilterType
+    ) {
+      return value.slice(
+        START_OF_STRING.length,
+        value.length - END_OF_STRING.length
+      );
     } else {
       return null;
     }
   }
+
   if (field === AUTHOR_TABLE_TYPE) {
-    if (value.slice(1, value.length - 1) in AuthorTableType) {
-      return value.slice(1, value.length - 1);
+    if (
+      value.slice(
+        START_OF_STRING.length,
+        value.length - END_OF_STRING.length
+      ) in AuthorTableType
+    ) {
+      return value.slice(
+        START_OF_STRING.length,
+        value.length - END_OF_STRING.length
+      );
     } else {
       return null;
     }
@@ -64,7 +82,10 @@ export const typeValidation = (
       }
     case STRING_TYPE:
       if (value.startsWith(START_OF_STRING) && value.endsWith(END_OF_STRING)) {
-        return value.slice(1, value.length - 1);
+        return value.slice(
+          START_OF_STRING.length,
+          value.length - END_OF_STRING.length
+        );
       }
     case NUMBER_TYPE:
       if (isNumber(value)) {
