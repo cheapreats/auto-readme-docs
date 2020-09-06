@@ -139,9 +139,11 @@ const AuthorsSection: React.FC<Props> = ({
                     {contributer[WITH_CONTRIBUTIONS_FIELD]}
                   </td>
                 )}
-                <td align={ALIGN_TD}>
-                  {contributer[WITH_NUMBER_OF_REPOS_FIELD]}
-                </td>
+                {config.AuthorConfigs.AuthorInfo.WithNumberOfRepos && (
+                  <td align={ALIGN_TD}>
+                    {contributer[WITH_NUMBER_OF_REPOS_FIELD]}
+                  </td>
+                )}
                 {config.AuthorConfigs.AuthorInfo.WithTwitterUsername && (
                   <td>
                     <a href={contributer[WITH_TWITTER_USERNAME_FIELD]}>
