@@ -42,20 +42,6 @@ const TWITTER_PICTURE =
   "https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/twitter_circle-512.png";
 const NO_VALUE = "";
 
-let detailsToAdd = "";
-
-/**  gets a value and returns another value in case its null
- * @param {any} value - any value
- * @returns {any} - the value incase its null or not
- */
-const returnValue = (value) => {
-  if (value === null) {
-    return NO_VALUE;
-  } else {
-    return value;
-  }
-};
-
 /**  Generates the details of the Table in rows in Vertical mode
  * @param {object[]} contributors - list of contributors and related data
  * @param {IConfigurationState} config - configuration states
@@ -81,27 +67,24 @@ const generateRow = (contributer, config) => {
     row = tagWrap(row, TD_TAG, WrapTagType.CLOSE);
   }
   if (config.AuthorConfigs.AuthorInfo.WithEmail) {
-    row += `<td align=${ALIGN_TD}>${returnValue(
-      contributer[WITH_EMAIL_FIELD]
-    )}`;
+    row += `<td align=${ALIGN_TD}>${contributer[WITH_EMAIL_FIELD] ?? NO_VALUE}`;
     row = tagWrap(row, TD_TAG, WrapTagType.CLOSE);
   }
   if (config.AuthorConfigs.AuthorInfo.WithLocation) {
-    row += `<td align=${ALIGN_TD}>${returnValue(
-      contributer[WITH_LOCATION_FIELD]
-    )}`;
+    const location = contributer[WITH_LOCATION_FIELD] ?? NO_VALUE;
+    row += `<td align=${ALIGN_TD}>${location}`;
     row = tagWrap(row, TD_TAG, WrapTagType.CLOSE);
   }
   if (config.AuthorConfigs.AuthorInfo.WithContributions) {
-    row += `<td align=${ALIGN_TD}>${returnValue(
-      contributer[WITH_CONTRIBUTIONS_FIELD]
-    )}`;
+    row += `<td align=${ALIGN_TD}>${
+      contributer[WITH_CONTRIBUTIONS_FIELD] ?? NO_VALUE
+    }`;
     row = tagWrap(row, TD_TAG, WrapTagType.CLOSE);
   }
   if (config.AuthorConfigs.AuthorInfo.WithNumberOfRepos) {
-    row += `<td align=${ALIGN_TD}>${returnValue(
-      contributer[WITH_NUMBER_OF_REPOS_FIELD]
-    )}`;
+    row += `<td align=${ALIGN_TD}>${
+      contributer[WITH_NUMBER_OF_REPOS_FIELD] ?? NO_VALUE
+    }`;
     row = tagWrap(row, TD_TAG, WrapTagType.CLOSE);
   }
   if (config.AuthorConfigs.AuthorInfo.WithTwitterUsername) {
@@ -122,6 +105,7 @@ const generateRow = (contributer, config) => {
  */
 const generateCell = (contributer, config) => {
   let cell = `<td align=${ALIGN_TD}>`;
+
   if (config.AuthorConfigs.AuthorInfo.WithPicture) {
     cell += `<a href=${contributer[USER_LINK_FIELD]}><img src=${contributer[WITH_PICTURE_FIELD]}width=${IMAGE_SIZE}/>`;
     cell = tagWrap(cell, A_TAG, WrapTagType.CLOSE);
@@ -136,24 +120,27 @@ const generateCell = (contributer, config) => {
     cell = tagWrap(cell, A_TAG, WrapTagType.CLOSE);
     cell += BR_TAG;
   }
-  if (config.AuthorConfigs.AuthorInfo.WithEmail) {
-    cell += `${returnValue(contributer[WITH_EMAIL_FIELD])}${BR_TAG}`;
-  }
 
-  if (config.AuthorConfigs.AuthorInfo.WithLocation) {
-    cell += `${returnValue(contributer[WITH_LOCATION_FIELD])}${BR_TAG}`;
-  }
+  cell += config.AuthorConfigs.AuthorInfo.WithEmail
+    ? `${contributer[WITH_EMAIL_FIELD] ?? NO_VALUE}${BR_TAG}`
+    : "";
 
-  if (config.AuthorConfigs.AuthorInfo.WithContributions) {
-    cell += `${CONTRIBUTIONS_TITLE} ${returnValue(
-      contributer[WITH_CONTRIBUTIONS_FIELD]
-    )}${BR_TAG}`;
-  }
-  if (config.AuthorConfigs.AuthorInfo.WithNumberOfRepos) {
-    cell += `${REPOS_TITLE} ${returnValue(
-      contributer[WITH_NUMBER_OF_REPOS_FIELD]
-    )}${BR_TAG}`;
-  }
+  cell += config.AuthorConfigs.AuthorInfo.WithLocation
+    ? `${contributer[WITH_LOCATION_FIELD] ?? NO_VALUE}${BR_TAG}`
+    : "";
+
+  cell += config.AuthorConfigs.AuthorInfo.WithContributions
+    ? `${CONTRIBUTIONS_TITLE} ${
+        contributer[WITH_CONTRIBUTIONS_FIELD] ?? NO_VALUE
+      }${BR_TAG}`
+    : "";
+
+  cell += config.AuthorConfigs.AuthorInfo.WithNumberOfRepos
+    ? `${REPOS_TITLE} ${
+        contributer[WITH_NUMBER_OF_REPOS_FIELD] ?? NO_VALUE
+      }${BR_TAG}`
+    : "";
+
   if (config.AuthorConfigs.AuthorInfo.WithTwitterUsername) {
     cell += `<a href=${contributer[WITH_TWITTER_USERNAME_FIELD]}>${TWITTER_ICON}`;
     cell = tagWrap(cell, A_TAG, WrapTagType.CLOSE);
