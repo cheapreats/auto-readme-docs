@@ -52,3 +52,8 @@ export enum WrapTagType {
   CLOSE,
   BOTH,
 }
+
+export enum AuthorTableType {
+  VERTICAL = "VERTICAL",
+  CELL_DESIGN = "CELL_DESIGN",
+}

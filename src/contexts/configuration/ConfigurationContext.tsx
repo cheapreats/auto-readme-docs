@@ -1,5 +1,6 @@
 import React, { useContext, useReducer } from "react";
 import { Dispatch } from "react";
+import { AuthorTableType } from "../../tree/types";
 
 export interface IConfigurationState {
   CollapsibleFolder: boolean;
@@ -15,6 +16,7 @@ export interface IConfigurationState {
 export interface AuthorConfigs {
   onlyOwner: boolean; // the info of only the repo owner
   AuthorInfo: AuthorInfo; // Informations of the Author(s)
+  TableDesign: string; // Style of the Table for copying in clipboard
 }
 export interface AuthorInfo {
   WithName: boolean; // name of the Author
@@ -39,6 +41,7 @@ const initialAuthorInfo = {
 const initialAuthorConfig = {
   onlyOwner: false,
   AuthorInfo: initialAuthorInfo,
+  TableDesign: "Vertical",
 };
 export enum useConfigurationActions {
   UPDATE_STATE,

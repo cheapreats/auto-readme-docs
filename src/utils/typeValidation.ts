@@ -1,10 +1,11 @@
 import { isNumber } from "util";
-import { FilterType } from "../tree/types";
+import { FilterType, AuthorTableType } from "../tree/types";
 
 const AFTER_FIELD = '":';
 const AFTER_VALUE = "\n";
 const EXTRA_COMMA = ",";
 const FILTER_TYPE = "Filter";
+const AUTHOR_TABLE_TYPE = "TableDesign";
 const BOOLEAN_TYPE = "boolean";
 const STRING_TYPE = "string";
 const OBJECT_TYPE = "object";
@@ -40,8 +41,32 @@ export const typeValidation = (
   }
 
   if (field === FILTER_TYPE) {
-    if (value.slice(1, value.length - 1) in FilterType) {
-      return value.slice(1, value.length - 1);
+    if (
+      value.slice(
+        START_OF_STRING.length,
+        value.length - END_OF_STRING.length
+      ) in FilterType
+    ) {
+      return value.slice(
+        START_OF_STRING.length,
+        value.length - END_OF_STRING.length
+      );
+    } else {
+      return null;
+    }
+  }
+
+  if (field === AUTHOR_TABLE_TYPE) {
+    if (
+      value.slice(
+        START_OF_STRING.length,
+        value.length - END_OF_STRING.length
+      ) in AuthorTableType
+    ) {
+      return value.slice(
+        START_OF_STRING.length,
+        value.length - END_OF_STRING.length
+      );
     } else {
       return null;
     }
@@ -57,7 +82,10 @@ export const typeValidation = (
       }
     case STRING_TYPE:
       if (value.startsWith(START_OF_STRING) && value.endsWith(END_OF_STRING)) {
-        return value.slice(1, value.length - 1);
+        return value.slice(
+          START_OF_STRING.length,
+          value.length - END_OF_STRING.length
+        );
       }
     case NUMBER_TYPE:
       if (isNumber(value)) {

@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "./reusable/Card";
 import { IConfigurationState } from "../contexts/configuration/ConfigurationContext";
+import CustomSecondaryButton from "../components/reusable/CustomSecondaryButton";
+import CenteredCol from "../components/reusable/CenteredCol";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import generateAuthorsTable from "../utils/generateAuthorsTable";
 
 const USER_LINK_FIELD = "html_url";
 const WITH_LOGIN_FIELD = "login";
@@ -90,9 +94,11 @@ const AuthorsSection: React.FC<Props> = ({
                       {contributer[WITH_CONTRIBUTIONS_FIELD]}
                     </td>
                   )}
-                  <td align={ALIGN_TD}>
-                    {contributer[WITH_NUMBER_OF_REPOS_FIELD]}
-                  </td>
+                  {config.AuthorConfigs.AuthorInfo.WithNumberOfRepos && (
+                    <td align={ALIGN_TD}>
+                      {contributer[WITH_NUMBER_OF_REPOS_FIELD]}
+                    </td>
+                  )}
                   {config.AuthorConfigs.AuthorInfo.WithTwitterUsername && (
                     <td>
                       <a href={contributer[WITH_TWITTER_USERNAME_FIELD]}>
@@ -133,9 +139,11 @@ const AuthorsSection: React.FC<Props> = ({
                     {contributer[WITH_CONTRIBUTIONS_FIELD]}
                   </td>
                 )}
-                <td align={ALIGN_TD}>
-                  {contributer[WITH_NUMBER_OF_REPOS_FIELD]}
-                </td>
+                {config.AuthorConfigs.AuthorInfo.WithNumberOfRepos && (
+                  <td align={ALIGN_TD}>
+                    {contributer[WITH_NUMBER_OF_REPOS_FIELD]}
+                  </td>
+                )}
                 {config.AuthorConfigs.AuthorInfo.WithTwitterUsername && (
                   <td>
                     <a href={contributer[WITH_TWITTER_USERNAME_FIELD]}>
@@ -146,6 +154,19 @@ const AuthorsSection: React.FC<Props> = ({
               </tr>
             ))}
         </table>
+      </div>
+      <div className="row">
+        <CenteredCol className="col">
+          <CopyToClipboard
+            text={`\n${generateAuthorsTable(
+              config,
+              contributors,
+              ownersName
+            )}\n`}
+          >
+            <CustomSecondaryButton type="submit" value="Copy to Clipboard" />
+          </CopyToClipboard>
+        </CenteredCol>
       </div>
     </Card>
   );
