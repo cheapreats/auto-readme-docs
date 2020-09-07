@@ -280,6 +280,13 @@ const App: React.FC = () => {
               <h2>{configState.APPLICATION_NAME}</h2>
             </div>
           </div>
+          {config.AppDescription && (
+            <div className="row">
+              <div className="col">
+                <p>{configState.AppDescription}</p>
+              </div>
+            </div>
+          )}
           {config.GooglePlayLink && (
             <div>
               <div className="row">
@@ -363,5 +370,22 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+const LightBGColor = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem;
+  background: #2b303b;
+  background: rgba(85, 73, 89, 0.2);
+  font-family: "Source Code Pro", monospace;
+`;
+
+const DarkBGColor = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem;
+  background: #212428;
+  font-family: "Source Code Pro", monospace;
+`;
 
 const ContentSection = styled.div``;
