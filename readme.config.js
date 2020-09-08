@@ -13,5 +13,5 @@
                         "WithNumberOfRepos":true
                       },
                       "TableDesign":"CELL_DESIGN",
-    },
+    }
     }
