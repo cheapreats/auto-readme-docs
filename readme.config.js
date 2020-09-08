@@ -14,5 +14,4 @@
                       },
                       "TableDesign":"CELL_DESIGN",
     },
-    "AppDescription": "",
     }
