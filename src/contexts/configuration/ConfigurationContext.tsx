@@ -12,6 +12,7 @@ export interface IConfigurationState {
   RepoLogo: string;
   AuthorConfigs: AuthorConfigs;
   WithTableOfContent: boolean;
+  IncludePackageCommands: boolean;
 }
 export interface AuthorConfigs {
   onlyOwner: boolean; // the info of only the repo owner
@@ -63,6 +64,7 @@ export const initialState = {
   RepoLogo: "",
   AuthorConfigs: initialAuthorConfig,
   WithTableOfContent: true,
+  IncludePackageCommands: true,
 };
 
 const ConfigurationStateContext = React.createContext<
