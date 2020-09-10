@@ -296,6 +296,13 @@ const App: React.FC = () => {
               <h2>{configState.APPLICATION_NAME}</h2>
             </div>
           </div>
+          {config.AppDescription && (
+            <div className="row">
+              <div className="col">
+                <p>{configState.AppDescription}</p>
+              </div>
+            </div>
+          )}
           {config.GooglePlayLink && (
             <div>
               <div className="row">
