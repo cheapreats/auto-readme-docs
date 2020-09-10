@@ -14,13 +14,13 @@ const TR_TAG = "tr";
 export const tableGenerator = (headers: string[], data: object[]): string => {
   let table = "";
 
-  headers.forEach((header) => (table += tagWrap(header, TH_TAG)));
+  headers.map((header, index) => (table += tagWrap(header, TH_TAG)));
   table = tagWrap(table, TR_TAG);
 
-  data.forEach((line) => {
+  data.map((line, index) => {
     let row = "";
     const keys = Object.keys(line);
-    keys.forEach((key) => {
+    keys.map((key, index) => {
       row += tagWrap(line[key], TD_TAG);
     });
     if (row) {
