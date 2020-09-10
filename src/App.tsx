@@ -23,6 +23,8 @@ import CenteredCol from "./components/reusable/CenteredCol";
 import Card from "./components/reusable/Card";
 import getPreviousTree from "./utils/getPreviousTree";
 import tagWrap from "./utils/tagWrap";
+import generateCommandTable from "./utils/generateCommandTable";
+
 import { updateConfig } from "./utils/updateConfig";
 import createTOC from "./utils/createTOC";
 import TOCSection from "./components/TOCSection";
@@ -43,9 +45,11 @@ const App: React.FC = () => {
   const [treeCore, setTreeCore] = useState<Core[]>([]);
   const [configState, configDispatch] = useConfigurationContext();
   const [tableOfContent, setTableOfContent] = useState<string[]>([]);
+  const [tableOfCommands, setTableOfCommands] = useState<string>("");
   const OWNER_IN_URL = 3;
   const REPO_IN_URL = 4;
   const README_PATH = "README.md";
+  const PACKAGEJSON_PATH = "package.json";
   const README_CONFIG_PATH = "readme.config.js";
   const COMMENTS_EXIST_REGEX = /(<a href=".+">.github<\/a>).+(<span># .+<\/span>)/g;
   const IS_FILE = "blob";
@@ -159,6 +163,18 @@ const App: React.FC = () => {
           }
           const haveComments = decodedBlobs.match(COMMENTS_EXIST_REGEX);
           oldTree = getPreviousTree(haveComments);
+        }
+
+        if (config.IncludePackageCommands) {
+          if (filePath === PACKAGEJSON_PATH) {
+            const SHA = file[GithubData.SHA];
+            const blobs = await fetch(
+              `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_BLOBS_SUFFIX}/${SHA}`
+            );
+            const blobsJSON = await blobs.json();
+            const decodedBlobs = atob(blobsJSON[GithubData.CONTENT]);
+            setTableOfCommands(generateCommandTable(decodedBlobs));
+          }
         }
       }
     } catch (error) {
@@ -363,7 +379,32 @@ const App: React.FC = () => {
           </div>
         </Card>
       )}
-      {config.WithTableOfContent && <TOCSection content={tableOfContent} />}
+      {config.WithTableOfContent && tableOfContent.length > 0 && (
+        <TOCSection content={tableOfContent} />
+      )}
+      {config.IncludePackageCommands && tableOfCommands && (
+        <Card>
+          <div className="row">
+            <div className="col">
+              <h2>Table of Commands</h2>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">{tableOfCommands}</div>
+          </div>
+          <div className="row">
+            <CenteredCol className="col">
+              <CopyToClipboard text={`\n${tableOfCommands}\n`}>
+                <CustomSecondaryButton
+                  type="submit"
+                  value="Copy to Clipboard"
+                />
+              </CopyToClipboard>
+            </CenteredCol>
+          </div>
+        </Card>
+      )}
+
       {treeCore.length !== 0 && <MarkdownDisplay treeCore={treeCore} />}
     </div>
   );

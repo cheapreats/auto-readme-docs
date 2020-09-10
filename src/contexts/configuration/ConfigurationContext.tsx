@@ -12,6 +12,7 @@ export interface IConfigurationState {
   RepoLogo: string;
   AuthorConfigs: AuthorConfigs;
   WithTableOfContent: boolean;
+  IncludePackageCommands: boolean;
   AppDescription: string;
 }
 export interface AuthorConfigs {
@@ -64,6 +65,7 @@ export const initialState = {
   RepoLogo: "",
   AuthorConfigs: initialAuthorConfig,
   WithTableOfContent: true,
+  IncludePackageCommands: true,
   AppDescription: "",
 };
 
