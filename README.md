@@ -70,7 +70,7 @@ We built this tool two solve two major issues and two minor issues:
 | GooglePlayLink      | String                                                                                                  | ""              | GooglePlay Link URL                           |
 | IOSStoreLink        | String                                                                                                  | ""              | IOS Store Link URL                            |
 | WithTableOfContent  | boolean                                                                                                  | true              | is there Table of Content?               |
-| IncludePackageCommands | boolean                                                                                                  | true              | Table of commands from package.json with '/*command*/: description'               |
+| IncludePackageCommands | boolean                                                                                                  | true              | Table of commands from package.json in "/*command*/: description" format               |
 
 
 
