@@ -1,6 +1,4 @@
 
- <a href="./LICENSE">MIT License</a>
-
 # Table Of Contents
    * [Table Of Contents](#Table-Of-Contents)
    * [Automatic Project Structures for README's](#Automatic-Project-Structures-for-README's)
