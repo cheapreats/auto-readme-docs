@@ -241,6 +241,7 @@ const App: React.FC = () => {
       const treeJSON = await treeRes.json();
 
       const numberOfItems = treeJSON[GithubData.TREE].length;
+      // TODO: Revist when auth is complete
 
       // for (let index = 0; index < numberOfItems; index += 1) {
       //   const item = treeJSON[GithubData.TREE][index];
@@ -292,6 +293,8 @@ const App: React.FC = () => {
         );
         const resJSON = await res.json();
         setLicense(resJSON[GITHUB_API_LICENSES_PREFIX].name);
+        // TODO: Revist when auth is complete
+
         // if (resJSON) {
         //   const LicenseExist = resJSON[GITHUB_API_LICENSES_PREFIX].key;
         // }
