@@ -14,7 +14,11 @@ export interface IConfigurationState {
   WithTableOfContent: boolean;
   IncludePackageCommands: boolean;
   AppDescription: string;
+  License: string;
+  Backers: string[];
+  Sponsors: string[];
 }
+
 export interface AuthorConfigs {
   onlyOwner: boolean; // the info of only the repo owner
   AuthorInfo: AuthorInfo; // Informations of the Author(s)
@@ -67,6 +71,9 @@ export const initialState = {
   WithTableOfContent: true,
   IncludePackageCommands: true,
   AppDescription: "",
+  License: "",
+  Backers: [],
+  Sponsors: [],
 };
 
 const ConfigurationStateContext = React.createContext<

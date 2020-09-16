@@ -6,6 +6,8 @@ const AFTER_VALUE = "\n";
 const EXTRA_COMMA = ",";
 const FILTER_TYPE = "Filter";
 const AUTHOR_TABLE_TYPE = "TableDesign";
+const BACKERS_TYPE = "Backers";
+const SPONSORS_TYPE = "Sponsors";
 const BOOLEAN_TYPE = "boolean";
 const STRING_TYPE = "string";
 const OBJECT_TYPE = "object";
@@ -14,7 +16,27 @@ const TRUE_VALUE = "true";
 const FALSE_VALUE = "false";
 const START_OF_STRING = '"';
 const END_OF_STRING = '"';
+const START_OF_ARRAY = "[";
+const END_OF_ARRAY = "]";
 const FIRST_OCCURANCE = 0;
+
+/** Validates Array Value
+ * @param {string} value Value in sring form
+ * @returns {string} returns the value in form of an array
+ */
+const validateArray = (value) => {
+  let array = value.split(EXTRA_COMMA);
+  array[FIRST_OCCURANCE] = array[FIRST_OCCURANCE].slice(START_OF_ARRAY.length);
+  array[array.length - END_OF_ARRAY.length] = array[
+    array.length - END_OF_ARRAY.length
+  ].slice(FIRST_OCCURANCE, -END_OF_ARRAY.length);
+  const output = array.map((element) => {
+    element = element.slice(START_OF_STRING.length);
+    element = element.slice(FIRST_OCCURANCE, -END_OF_ARRAY.length);
+    return element;
+  });
+  return output;
+};
 
 /** Gets a string in Json format and see if value is valid according to the type
  * @param {string} text whole text
@@ -35,9 +57,11 @@ export const typeValidation = (
     return null;
   }
   let value = text.substring(endOfField + AFTER_FIELD.length, endOfValue);
-  let fieldName = text.substring(endOfField + AFTER_FIELD.length, endOfValue);
   if (value.endsWith(EXTRA_COMMA)) {
     value = value.slice(FIRST_OCCURANCE, value.length - EXTRA_COMMA.length);
+  }
+  if (field === BACKERS_TYPE || field === SPONSORS_TYPE) {
+    return validateArray(value);
   }
 
   if (field === FILTER_TYPE) {

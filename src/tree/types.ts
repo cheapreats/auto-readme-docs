@@ -17,6 +17,16 @@ export interface NpmsResponseBody {
   total: number;
 }
 
+export interface pathAndComment {
+  path: string | undefined;
+  comment: string | undefined;
+}
+export interface LinkedImageType {
+  name: string;
+  image: string;
+  url: string;
+}
+
 export enum FileType {
   FOLDER = "FOLDER",
   FILE = "FILE",
