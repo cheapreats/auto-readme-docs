@@ -107,7 +107,7 @@ const generateCell = (contributer, config) => {
   let cell = `<td align=${ALIGN_TD}>`;
 
   if (config.AuthorConfigs.AuthorInfo.WithPicture) {
-    cell += `<a href=${contributer[USER_LINK_FIELD]}><img src=${contributer[WITH_PICTURE_FIELD]}width=${IMAGE_SIZE}/>`;
+    cell += `<a href=${contributer[USER_LINK_FIELD]}><img src=${contributer[WITH_PICTURE_FIELD]} width=${IMAGE_SIZE}/>`;
     cell = tagWrap(cell, A_TAG, WrapTagType.CLOSE);
     cell += BR_TAG;
   }

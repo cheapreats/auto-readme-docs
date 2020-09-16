@@ -7,6 +7,8 @@ import {
   NpmsResponseBody,
   GithubData,
   Core,
+  pathAndComment,
+  LinkedImageType,
 } from "./tree/types";
 import {
   useConfigurationContext,
@@ -24,28 +26,31 @@ import Card from "./components/reusable/Card";
 import getPreviousTree from "./utils/getPreviousTree";
 import tagWrap from "./utils/tagWrap";
 import generateCommandTable from "./utils/generateCommandTable";
-
+import asyncForEach from "./utils/asyncForEach";
 import { updateConfig } from "./utils/updateConfig";
 import createTOC from "./utils/createTOC";
 import TOCSection from "./components/TOCSection";
+import LicenseSection from "./components/LicenseSection";
+import LinkedImageSection from "./components/LinkedImageSection";
 import GetAlternateColorRow from "./components/reusable/getAlternateColorRow";
-
-interface pathAndComment {
-  path: string | undefined;
-  comment: string | undefined;
-}
 
 const App: React.FC = () => {
   const [repoName, setRepoName] = useState("");
   const [ownerName, setOwnerName] = useState("");
+  const [license, setLicense] = useState("");
   const [repoLanguages, setRepoLanguages] = useState<string[]>([]);
   const [contributors, setContributors] = useState<object[]>([]);
+  const [backers, setBackers] = useState<LinkedImageType[]>([]);
+  const [sponsors, setSponsors] = useState<LinkedImageType[]>([]);
   const [isNpmBadgeVisible, setNpmBadgeVisible] = useState(false);
   const [url, setURL] = useState("");
   const [treeCore, setTreeCore] = useState<Core[]>([]);
   const [configState, configDispatch] = useConfigurationContext();
   const [tableOfContent, setTableOfContent] = useState<string[]>([]);
   const [tableOfCommands, setTableOfCommands] = useState<string>("");
+  const BACKERS_HEADER = "Backers";
+  const SPONSORS_HEADER = "Sponsors";
+
   const OWNER_IN_URL = 3;
   const REPO_IN_URL = 4;
   const README_PATH = "README.md";
@@ -53,13 +58,19 @@ const App: React.FC = () => {
   const README_CONFIG_PATH = "readme.config.js";
   const COMMENTS_EXIST_REGEX = /(<a href=".+">.github<\/a>).+(<span># .+<\/span>)/g;
   const IS_FILE = "blob";
+  const CONTENT_FIELD = "content";
   const GITHUB_API_URL_PREFIX = "https://api.github.com/repos/";
+  const GITHUB_API_USER_PREFIX = "https://api.github.com/users/";
   const GITHUB_API_COMMITS_ON_MASTER_SUFFIX = "/commits/master";
   const GITHUB_API_CONTENTS_SUFFIX = "/contents";
   const GITHUB_API_BLOBS_SUFFIX = "/git/blobs";
   const GITHUB_API_TREES_SUFFIX = "/git/trees";
   const GITHUB_API_TREES_LANGUAGES = "/languages";
   const GITHUB_API_TREES_CONTRIBUTORS = "/contributors";
+  const GITHUB_API_LICENSES_PREFIX = "license";
+  const GITHUB_API_LICENSES = "https://api.github.com/licenses/";
+  const BODY_FIELD = "body";
+  const URL_FIELD = "url";
   const WITH_RECURSIVE_PARAMETER = "?recursive=true";
   const NPM_API_VERSION2 = "https://api.npms.io/v2";
   const EXAMPLE_URL = "https://github.com/cheapreats/auto-readme-docs";
@@ -73,6 +84,26 @@ const App: React.FC = () => {
     "https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg";
 
   let config = initialState;
+  useEffect(() => {
+    const setAsyncData = (list, stateSetter) => {
+      let detailsArray = new Array();
+      asyncForEach(list, async (item) => {
+        await fetch(`${GITHUB_API_USER_PREFIX}${item}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const itemDetail = {
+              name: data.login,
+              image: data.avatar_url,
+              url: data.html_url,
+            };
+            detailsArray.push(itemDetail);
+          });
+      }).then(() => stateSetter(detailsArray));
+    };
+
+    setAsyncData(config.Backers, setBackers);
+    setAsyncData(config.Sponsors, setSponsors);
+  }, [config.Backers, config.Sponsors]);
 
   const handleExampleGoButtonPress = async () => {
     const pathArray = EXAMPLE_URL.split("/");
@@ -210,6 +241,7 @@ const App: React.FC = () => {
       const treeJSON = await treeRes.json();
 
       const numberOfItems = treeJSON[GithubData.TREE].length;
+      // TODO: Revist when auth is complete
 
       // for (let index = 0; index < numberOfItems; index += 1) {
       //   const item = treeJSON[GithubData.TREE][index];
@@ -253,6 +285,56 @@ const App: React.FC = () => {
       alert(`Error${error}`);
     }
 
+    // License
+    try {
+      if (config.License) {
+        const res = await fetch(
+          `${GITHUB_API_URL_PREFIX}${owner}/${repo}/${GITHUB_API_LICENSES_PREFIX}`
+        );
+        const resJSON = await res.json();
+        setLicense(resJSON[GITHUB_API_LICENSES_PREFIX].name);
+        // TODO: Revist when auth is complete
+
+        // if (resJSON) {
+        //   const LicenseExist = resJSON[GITHUB_API_LICENSES_PREFIX].key;
+        // }
+        // if (config.License === LicenseExist) {
+        //   setLicense(atob(resJSON[CONTENT_FIELD]));
+        // } else {
+        //   console.log(resJSON);
+        // }
+
+        // const res = await fetch(`${GITHUB_API_LICENSES}${config.License}`);
+
+        // setLicense(resJSON);
+        // setLicense({
+        //   name: resJSON[LICENSE_FIELD].name,
+        //   url: resJSON[LICENSE_FIELD].html_url,
+        // });
+      }
+    } catch (error) {
+      // let res = await fetch(`${GITHUB_API_LICENSES}${config.License}`);
+      // let resJSON = await res.json();
+      // let content = resJSON[BODY_FIELD];
+      // content = content.replace("[fullname]", ownerName);
+      // const date = new Date();
+      // content = content.replace("[year]", date.getFullYear().toString());
+      // const data = {
+      //   message: "my commit message",
+      //   content: "bXkgbmV3IGZpbGUgY29udGVudHM=",
+      //   path: "LICENSE.txt",
+      //   committer: {
+      //     name: "",
+      //     email: "",
+      //   },
+      // };
+      // res = await fetch(
+      //   `${GITHUB_API_URL_PREFIX}${owner}/${repo}${GITHUB_API_CONTENTS_SUFFIX}/LICENSE.txt`,
+      //   { method: "POST", body: JSON.stringify(data) }
+      // );
+      // console.log(res);
+    }
+
     // Contributors
     try {
       const res = await fetch(
@@ -267,14 +349,16 @@ const App: React.FC = () => {
       const resJSON = await res.json();
       if (needsDetails) {
         for (let user in resJSON) {
-          const resp = await fetch(`${resJSON[user]["url"]}`);
+          const resp = await fetch(`${resJSON[user][URL_FIELD]}`);
           const respJSON = await resp.json();
           userDetails.push(respJSON);
         }
       }
+
       const allAuthorinfos = resJSON.map((item, i) =>
         Object.assign({}, item, userDetails[i])
       );
+
       setContributors(allAuthorinfos);
     } catch (error) {
       alert(`Error${error}`);
@@ -342,7 +426,6 @@ const App: React.FC = () => {
         </Card>
       )}
       {repoName !== "" && isNpmBadgeVisible && <BadgesSection url={repoName} />}
-
       {contributors.length > 0 && (
         <AuthorsSection
           config={config}
@@ -382,6 +465,14 @@ const App: React.FC = () => {
       {config.WithTableOfContent && tableOfContent.length > 0 && (
         <TOCSection content={tableOfContent} />
       )}
+      {config.License && license && <LicenseSection content={license} />}
+      {config.Backers && backers.length > 0 && (
+        <LinkedImageSection content={backers} header={BACKERS_HEADER} />
+      )}
+      {config.Sponsors && sponsors.length > 0 && (
+        <LinkedImageSection content={sponsors} header={SPONSORS_HEADER} />
+      )}
+
       {config.IncludePackageCommands && tableOfCommands && (
         <Card>
           <div className="row">
@@ -404,7 +495,6 @@ const App: React.FC = () => {
           </div>
         </Card>
       )}
-
       {treeCore.length !== 0 && <MarkdownDisplay treeCore={treeCore} />}
     </div>
   );
